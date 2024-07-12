@@ -25,13 +25,7 @@ public:
     ~Register() {};
 
     uint32_t get_value() const { return value; };
-    void set_value(uint32_t new_value) 
-    { 
-        value = new_value;
-        if (callback) {
-            callback(name, value);
-        }
-    };
+    void set_value(uint32_t new_value) { value = new_value; };
     uint64_t get_address() { return address; };
     std::string get_name() { return name; };
 
