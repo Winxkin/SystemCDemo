@@ -5,6 +5,7 @@
 #include <tlm_utils/simple_initiator_socket.h>
 #include <tlm_utils/simple_target_socket.h>
 #include "bus.h"
+#include "DummyMaster.h"
 
 using namespace sc_core;
 using namespace std;
@@ -42,32 +43,27 @@ public:
 class Target : public sc_core::sc_module {
 public:
     tlm_utils::simple_target_socket<Target,32> target_socket;
+    
+    std::string m_name;
 
-    SC_CTOR(Target) : target_socket("target_socket") {
+    Target(sc_core::sc_module_name name) :
+        sc_core::sc_module(name),
+        m_name(name),
+        target_socket("target_socket")
+    {
         target_socket.register_b_transport(this, &Target::b_transport);
     }
 
     void b_transport(tlm::tlm_generic_payload& trans, sc_time& delay) {
         // Handle transaction
-        std::cout << "Target: Received transaction with address 0x" << std::hex << trans.get_address() << std::dec << std::endl;
+        uint32_t data = 0;
+        std::memcpy(&data, trans.get_data_ptr(), sizeof(data));
+        std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
         trans.set_response_status(tlm::TLM_OK_RESPONSE);
     }
 };
 
-class Targett : public sc_core::sc_module {
-public:
-    tlm_utils::simple_target_socket<Targett, 32> target_socket;
 
-    SC_CTOR(Targett) : target_socket("target_socket") {
-        target_socket.register_b_transport(this, &Targett::b_transport);
-    }
-
-    void b_transport(tlm::tlm_generic_payload& trans, sc_time& delay) {
-        // Handle transaction
-        std::cout << "Targett: Received transaction with address 0x" << std::hex << trans.get_address() << std::dec << std::endl;
-        trans.set_response_status(tlm::TLM_OK_RESPONSE);
-    }
-};
 
 // Hello_world is module name
 SC_MODULE(hello_world) {
@@ -85,23 +81,53 @@ int sc_main(int argc, char* argv[]) {
     hello_world hello("HELLO");
     // Print the hello world
     hello.say_hello();
-    BUS<APB,10> bus("bus_APB");
+    BUS<APB,4> bus("bus_APB");
+    DummyMaster<32> m_dummymaster("dummy_master");
+
+    m_dummymaster.initiator_socket.bind(bus.target_sockets);
 
     Initiator Initiator1("Initiator1");
-    Initiator Initiator2("Initiator2");
+    
+    Initiator1.initiator_socket.bind(bus.target_sockets);
+    //Initiator Initiator2("Initiator2");
     Target Target1("Target1");
-    Targett Target2("Target2");
+    Target Target2("Target2");
     Target Target3("Target3");
     Target Target4("Target4");
 
-    Initiator1.initiator_socket.bind(bus.target_sockets);
-    Initiator2.initiator_socket.bind(bus.target_sockets);
     bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(Target1.target_socket);
     bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(Target2.target_socket);
     bus.mapping_target_sockets(2, 0x2000,0x1000).bind(Target3.target_socket);
-    bus.mapping_target_sockets(3, 0x4000, 0x1000).bind(Target4.target_socket);
+    bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(Target4.target_socket);
 
-    Initiator1.thread_process();
+    sc_core::sc_start();
+
+    m_dummymaster.Write_reg(0x0000, 0x11);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x0100, 0x11);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x1000, 0x22);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x1200, 0x22);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x2000, 0x33);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x2200, 0x33);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x3000, 0x44);
+    sc_core::sc_start(100, sc_core::SC_NS);
+
+    m_dummymaster.Write_reg(0x3300, 0x44);
+    sc_core::sc_start(100, sc_core::SC_NS);
+    
+
+    std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_seconds() << "SC_SEC" << std::endl;
 
     return(0);
 }

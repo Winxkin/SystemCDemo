@@ -26,7 +26,7 @@ template<unsigned int BUSWIDTH = 32, unsigned int NUM_TS = 10>
 class BUS : public sc_core::sc_module
 {
 public:
-	tlm_utils::simple_target_socket<BUS, BUSWIDTH> target_sockets;
+	tlm_utils::multi_passthrough_target_socket<BUS, BUSWIDTH> target_sockets;
 
 private:
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH> initiator_sockets[NUM_TS];
@@ -41,7 +41,7 @@ private:
 
 	std::vector<address> address_mapping;
 
-	void b_transport(tlm::tlm_generic_payload& trans, sc_core::sc_time& delay)
+	void b_transport(int id, tlm::tlm_generic_payload& trans, sc_core::sc_time& delay)
 	{
 		unsigned int address = trans.get_address();
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
