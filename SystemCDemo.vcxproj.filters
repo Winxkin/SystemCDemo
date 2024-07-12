@@ -26,5 +26,8 @@
     <ClInclude Include="DummyMaster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Registerif.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

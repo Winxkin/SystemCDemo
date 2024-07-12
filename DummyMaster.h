@@ -15,6 +15,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include "Registerif.h"
 
 template<unsigned int BUSWIDTH = 32>
 class DummyMaster : public sc_core::sc_module
@@ -39,7 +40,7 @@ public:
 		sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
 		trans.set_command(tlm::TLM_WRITE_COMMAND);
 		trans.set_address(addr);
-		trans.set_data_length(4);
+		trans.set_data_length(sizeof(data));
 		trans.set_data_ptr(_data);
 		trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
@@ -54,8 +55,33 @@ public:
 		}
 	}
 
-	uint32_t Read_reg(unsigned int addr)
+	unsigned int Read_reg(unsigned int addr)
 	{
+		tlm::tlm_generic_payload trans;
+		unsigned int data;
+		sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+
+		trans.set_command(tlm::TLM_READ_COMMAND);
+		trans.set_address(addr);
+		trans.set_data_ptr(reinterpret_cast<unsigned char*>(&data));
+		trans.set_data_length(sizeof(data));
+		trans.set_streaming_width(sizeof(data)); // = data_length to indicate no streaming
+		trans.set_byte_enable_ptr(0); // 0 indicates unused
+		trans.set_dmi_allowed(false); // DMI not allowed
+		trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
+
+		std::cout << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+		initiator_socket->b_transport(trans, delay);
+		// Check the response status
+		if (trans.is_response_error()) {
+			SC_REPORT_ERROR("TLM-2", "Response error from b_transport");
+			return -1;
+		}
+		else {
+			// Print the read value
+			std::cout << m_name << ": Read data: 0x" << std::hex << data << std::endl;
+			return data;
+		}
 
 	}
 

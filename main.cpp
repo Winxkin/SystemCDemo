@@ -57,9 +57,25 @@ public:
     void b_transport(tlm::tlm_generic_payload& trans, sc_time& delay) {
         // Handle transaction
         uint32_t data = 0;
-        std::memcpy(&data, trans.get_data_ptr(), sizeof(data));
-        std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
-        trans.set_response_status(tlm::TLM_OK_RESPONSE);
+
+        switch (trans.get_command()) {
+        case tlm::TLM_WRITE_COMMAND:
+        {
+            std::memcpy(&data, trans.get_data_ptr(), sizeof(data));
+            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
+            trans.set_response_status(tlm::TLM_OK_RESPONSE);
+        }
+        case tlm::TLM_READ_COMMAND:
+        {
+            unsigned int data = 0x11223344;
+            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
+            std::memcpy(trans.get_data_ptr(), &data, trans.get_data_length());
+            trans.set_response_status(tlm::TLM_OK_RESPONSE);
+            break;
+        }
+        default:
+            break;
+        }
     }
 };
 
@@ -126,6 +142,10 @@ int sc_main(int argc, char* argv[]) {
     m_dummymaster.Write_reg(0x3300, 0x44);
     sc_core::sc_start(100, sc_core::SC_NS);
     
+    m_dummymaster.Read_reg(0x0000);
+    m_dummymaster.Read_reg(0x1000);
+    m_dummymaster.Read_reg(0x2000);
+    m_dummymaster.Read_reg(0x3000);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_seconds() << "SC_SEC" << std::endl;
 
