@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="bus.h" />
     <ClInclude Include="DummyMaster.h" />
+    <ClInclude Include="DummySlave.h" />
     <ClInclude Include="Registerif.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

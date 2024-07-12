@@ -16,6 +16,8 @@
 class Register {
 public:
 
+    using Callback = std::function<void(const std::string&, uint32_t)>;
+
     Register() {};
     Register(std::string name, uint64_t address, uint32_t init)
         : name(name), address(address), value(init) {};
@@ -23,19 +25,33 @@ public:
     ~Register() {};
 
     uint32_t get_value() const { return value; };
-    void set_value(uint32_t new_value) { value = new_value; };
+    void set_value(uint32_t new_value) 
+    { 
+        value = new_value;
+        if (callback) {
+            callback(name, value);
+        }
+    };
     uint64_t get_address() { return address; };
     std::string get_name() { return name; };
 
     Register& operator=(uint32_t new_value) {
         value = new_value;
+        if (callback) {
+            callback(name, value);
+        }
         return *this;
+    }
+
+    void set_callback(Callback cb) {
+        callback = cb;
     }
 
 private:
     std::string name;
     uint64_t address;
     uint32_t value;
+    Callback callback;
 };
 
 // Class to manage a collection of registers
@@ -72,7 +88,7 @@ public:
     void update_register(uint64_t address, uint32_t value) {
         for (auto& reg : registers) {
             if (reg.second.get_address() == address) {
-                reg.second.set_value(value);
+                reg.second = value;
                 printf("Register %s change to value -> [%X] \n", reg.second.get_name().c_str(), reg.second.get_value());
                 return;
             }
@@ -90,6 +106,13 @@ public:
         }
 
     };
+
+    void set_register_callback(const std::string& name, Register::Callback cb) {
+        if (registers.find(name) == registers.end()) {
+            throw std::runtime_error("Register not found");
+        }
+        registers[name].set_callback(cb);
+    }
 
 public:
     std::map<std::string, Register> registers;

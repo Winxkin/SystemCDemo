@@ -29,5 +29,8 @@
     <ClInclude Include="Registerif.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DummySlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

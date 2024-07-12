@@ -6,6 +6,7 @@
 #include <tlm_utils/simple_target_socket.h>
 #include "bus.h"
 #include "DummyMaster.h"
+#include "DummySlave.h"
 
 using namespace sc_core;
 using namespace std;
@@ -97,7 +98,7 @@ int sc_main(int argc, char* argv[]) {
     hello_world hello("HELLO");
     // Print the hello world
     hello.say_hello();
-    BUS<APB,4> bus("bus_APB");
+    BUS<APB,5> bus("bus_APB");
     DummyMaster<32> m_dummymaster("dummy_master");
 
     m_dummymaster.initiator_socket.bind(bus.target_sockets);
@@ -111,10 +112,15 @@ int sc_main(int argc, char* argv[]) {
     Target Target3("Target3");
     Target Target4("Target4");
 
+    DummySlave m_dummyslave("Dummy_slave");
+
     bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(Target1.target_socket);
     bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(Target2.target_socket);
     bus.mapping_target_sockets(2, 0x2000,0x1000).bind(Target3.target_socket);
     bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(Target4.target_socket);
+    bus.mapping_target_sockets(4, 0x4000, 0x1000).bind(m_dummyslave.target_socket);
+
+    m_dummyslave.initiator_socket.bind(bus.target_sockets);
 
     sc_core::sc_start();
 
@@ -146,6 +152,8 @@ int sc_main(int argc, char* argv[]) {
     m_dummymaster.Read_reg(0x1000);
     m_dummymaster.Read_reg(0x2000);
     m_dummymaster.Read_reg(0x3000);
+
+    m_dummymaster.Write_reg(0x4000, 0x1);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_seconds() << "SC_SEC" << std::endl;
 
