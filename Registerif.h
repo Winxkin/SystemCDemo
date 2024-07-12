@@ -16,7 +16,7 @@
 class Register {
 public:
 
-    using Callback = std::function<void(const std::string&, uint32_t)>;
+    using Callback = std::function<void(const std::string&, uint32_t, uint32_t)>;
 
     Register() {};
     Register(std::string name, uint64_t address, uint32_t init)
@@ -30,9 +30,10 @@ public:
     std::string get_name() { return name; };
 
     Register& operator=(uint32_t new_value) {
+        uint32_t old_value = value;
         value = new_value;
         if (callback) {
-            callback(name, value);
+            callback(name, value, old_value);
         }
         return *this;
     }

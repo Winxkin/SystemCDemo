@@ -28,10 +28,10 @@ private:
     void InitializeRegister()
     {
         regs.add_register("DummySlave_RESULT", 0x00, 0);
-        regs.set_register_callback("DummySlave_RESULT", std::bind(&DummySlave::cb_DummySlave_RESULT, this, std::placeholders::_1, std::placeholders::_2));
+        regs.set_register_callback("DummySlave_RESULT", std::bind(&DummySlave::cb_DummySlave_RESULT, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
     }
 
-    void cb_DummySlave_RESULT(const std::string& name, uint32_t value)
+    void cb_DummySlave_RESULT(const std::string& name, uint32_t value , uint32_t old_value)
     {
         if (name == "DummySlave_RESULT")
         {
