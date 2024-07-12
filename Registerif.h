@@ -88,8 +88,10 @@ public:
     void update_register(uint64_t address, uint32_t value) {
         for (auto& reg : registers) {
             if (reg.second.get_address() == address) {
+                std::cout << "Register " << reg.second.get_name()
+                    << " changed to value -> [0x" << std::hex << value << "]"
+                    << std::dec << std::endl;
                 reg.second = value;
-                printf("Register %s change to value -> [%X] \n", reg.second.get_name().c_str(), reg.second.get_value());
                 return;
             }
         }

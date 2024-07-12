@@ -153,7 +153,7 @@ int sc_main(int argc, char* argv[]) {
     m_dummymaster.Read_reg(0x2000);
     m_dummymaster.Read_reg(0x3000);
 
-    m_dummymaster.Write_reg(0x4000, 0x1);
+    m_dummymaster.Write_reg(0x4000, 0xff);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_seconds() << "SC_SEC" << std::endl;
 

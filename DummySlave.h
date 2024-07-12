@@ -74,7 +74,8 @@ public:
         {   
             unsigned int wdata = 0;
             std::memcpy(&wdata, trans.get_data_ptr(), sizeof(wdata));
-            regs[trans.get_address()] = wdata;
+            //regs[trans.get_address()] = wdata;
+            regs.update_register(trans.get_address(), wdata);
             std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
             trans.set_response_status(tlm::TLM_OK_RESPONSE);
         }
