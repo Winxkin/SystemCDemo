@@ -28,14 +28,14 @@ public:
             trans.set_data_length(4);
             trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-            std::cout << "Initiator: Sending transaction with address 0x" << std::hex << i * 0x1000 << std::dec << std::endl;
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]"  << "Initiator: Sending transaction with address 0x" << std::hex << i * 0x1000 << std::dec << std::endl;
             initiator_socket->b_transport(trans, delay);
 
             if (trans.is_response_error()) {
-                std::cout << "Initiator: Transaction failed with response status: " << trans.get_response_string() << std::endl;
+                std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]"  << "Initiator: Transaction failed with response status: " << trans.get_response_string() << std::endl;
             }
             else {
-                std::cout << "Initiator: Transaction succeeded" << std::endl;
+                std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]"  << "Initiator: Transaction succeeded" << std::endl;
             }
         }
     }
@@ -63,13 +63,13 @@ public:
         case tlm::TLM_WRITE_COMMAND:
         {
             std::memcpy(&data, trans.get_data_ptr(), sizeof(data));
-            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
             trans.set_response_status(tlm::TLM_OK_RESPONSE);
         }
         case tlm::TLM_READ_COMMAND:
         {
             unsigned int data = 0x11223344;
-            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]"  << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
             std::memcpy(trans.get_data_ptr(), &data, trans.get_data_length());
             trans.set_response_status(tlm::TLM_OK_RESPONSE);
             break;
@@ -98,6 +98,8 @@ int sc_main(int argc, char* argv[]) {
     hello_world hello("HELLO");
     // Print the hello world
     hello.say_hello();
+    
+    
     BUS<APB,5> bus("bus_APB");
     DummyMaster<32> m_dummymaster("dummy_master");
 
@@ -116,7 +118,7 @@ int sc_main(int argc, char* argv[]) {
 
     bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(Target1.target_socket);
     bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(Target2.target_socket);
-    bus.mapping_target_sockets(2, 0x2000,0x1000).bind(Target3.target_socket);
+    bus.mapping_target_sockets(2, 0x2000, 0x1000).bind(Target3.target_socket);
     bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(Target4.target_socket);
     bus.mapping_target_sockets(4, 0x4000, 0x1000).bind(m_dummyslave.target_socket);
 
@@ -125,37 +127,37 @@ int sc_main(int argc, char* argv[]) {
     sc_core::sc_start();
 
     m_dummymaster.Write_reg(0x0000, 0x11);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    sc_core::sc_start(12, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x0100, 0x11);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x0100, 0x11);
+    //sc_core::sc_start(11, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x1000, 0x22);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x1000, 0x22);
+    //sc_core::sc_start(11, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x1200, 0x22);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x1200, 0x22);
+    //sc_core::sc_start(11, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x2000, 0x33);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x2000, 0x33);
+    //sc_core::sc_start(5, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x2200, 0x33);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x2200, 0x33);
+    //sc_core::sc_start(5, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x3000, 0x44);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x3000, 0x44);
+    //sc_core::sc_start(5, sc_core::SC_NS);
 
-    m_dummymaster.Write_reg(0x3300, 0x44);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.Write_reg(0x3300, 0x44);
+    //sc_core::sc_start(5, sc_core::SC_NS);
     
-    m_dummymaster.Read_reg(0x0000);
-    m_dummymaster.Read_reg(0x1000);
-    m_dummymaster.Read_reg(0x2000);
-    m_dummymaster.Read_reg(0x3000);
+    //m_dummymaster.Read_reg(0x0000);
+    //m_dummymaster.Read_reg(0x1000);
+    //m_dummymaster.Read_reg(0x2000);
+    //m_dummymaster.Read_reg(0x3000);
 
-    m_dummymaster.Write_reg(0x4000, 0xff);
+    //m_dummymaster.Write_reg(0x4000, 0xff);
 
-    std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_seconds() << "SC_SEC" << std::endl;
-
+    std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
+    
     return(0);
 }

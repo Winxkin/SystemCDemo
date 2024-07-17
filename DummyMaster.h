@@ -44,14 +44,14 @@ public:
 		trans.set_data_ptr(_data);
 		trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-		std::cout << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+		std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
 		initiator_socket->b_transport(trans, delay);
 
 		if (trans.is_response_error()) {
-			std::cout << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
 		}
 		else {
-			std::cout << m_name << ": Transaction succeeded" << std::endl;
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
 		}
 	}
 
@@ -70,7 +70,7 @@ public:
 		trans.set_dmi_allowed(false); // DMI not allowed
 		trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-		std::cout << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+		std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
 		initiator_socket->b_transport(trans, delay);
 		// Check the response status
 		if (trans.is_response_error()) {
@@ -79,7 +79,7 @@ public:
 		}
 		else {
 			// Print the read value
-			std::cout << m_name << ": Read data: 0x" << std::hex << data << std::endl;
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Read data: 0x" << std::hex << data << std::endl;
 			return data;
 		}
 
