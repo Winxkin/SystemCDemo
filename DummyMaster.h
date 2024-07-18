@@ -16,6 +16,7 @@
 #include <iostream>
 #include <cstdint>
 #include "Registerif.h"
+#include "bus.h"
 
 template<unsigned int BUSWIDTH = 32>
 class DummyMaster : public sc_core::sc_module
@@ -84,6 +85,63 @@ public:
 		}
 
 	}
+
+	void SendTransaction(unsigned int addr, uint32_t data, tlm::tlm_command cmd)
+	{
+		switch (cmd) {
+		case tlm::TLM_WRITE_COMMAND:
+		{
+			tlm::tlm_generic_payload trans;
+			unsigned char* _data = reinterpret_cast<unsigned char*>(&data);
+			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+			trans.set_command(tlm::TLM_WRITE_COMMAND);
+			trans.set_address(addr);
+			trans.set_data_length(sizeof(data));
+			trans.set_data_ptr(_data);
+			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
+
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			initiator_socket->b_transport(trans, delay);
+
+			if (trans.is_response_error()) {
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+			}
+			else {
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
+			}
+			break;
+		}
+		case tlm::TLM_READ_COMMAND:
+		{
+			tlm::tlm_generic_payload trans;
+			unsigned int data;
+			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+
+			trans.set_command(tlm::TLM_READ_COMMAND);
+			trans.set_address(addr);
+			trans.set_data_ptr(reinterpret_cast<unsigned char*>(&data));
+			trans.set_data_length(sizeof(data));
+			trans.set_streaming_width(sizeof(data)); // = data_length to indicate no streaming
+			trans.set_byte_enable_ptr(0); // 0 indicates unused
+			trans.set_dmi_allowed(false); // DMI not allowed
+			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
+
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			initiator_socket->b_transport(trans, delay);
+			// Check the response status
+			if (trans.is_response_error()) {
+				SC_REPORT_ERROR("TLM-2", "Response error from b_transport");
+			}
+			else {
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
+			}
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	
 
 };
 

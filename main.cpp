@@ -81,81 +81,13 @@ public:
 };
 
 
-
-// Hello_world is module name
-SC_MODULE(hello_world) {
-    SC_CTOR(hello_world) {
-        // Nothing in constructor 
-    }
-    void say_hello() {
-        //Print "Hello World" to the console.
-        cout << "Hello World.\n";
-    }
-};
-
 // sc_main in top level function like in C++ main
 int sc_main(int argc, char* argv[]) {
-    hello_world hello("HELLO");
-    // Print the hello world
-    hello.say_hello();
-    
-    
+
+    sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_NS);
+
     BUS<APB,5> bus("bus_APB");
-    DummyMaster<32> m_dummymaster("dummy_master");
-
-    m_dummymaster.initiator_socket.bind(bus.target_sockets);
-
-    Initiator Initiator1("Initiator1");
-    
-    Initiator1.initiator_socket.bind(bus.target_sockets);
-    //Initiator Initiator2("Initiator2");
-    Target Target1("Target1");
-    Target Target2("Target2");
-    Target Target3("Target3");
-    Target Target4("Target4");
-
-    DummySlave m_dummyslave("Dummy_slave");
-
-    bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(Target1.target_socket);
-    bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(Target2.target_socket);
-    bus.mapping_target_sockets(2, 0x2000, 0x1000).bind(Target3.target_socket);
-    bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(Target4.target_socket);
-    bus.mapping_target_sockets(4, 0x4000, 0x1000).bind(m_dummyslave.target_socket);
-
-    m_dummyslave.initiator_socket.bind(bus.target_sockets);
-
-    sc_core::sc_start();
-
-    m_dummymaster.Write_reg(0x0000, 0x11);
-    sc_core::sc_start(12, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x0100, 0x11);
-    //sc_core::sc_start(11, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x1000, 0x22);
-    //sc_core::sc_start(11, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x1200, 0x22);
-    //sc_core::sc_start(11, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x2000, 0x33);
-    //sc_core::sc_start(5, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x2200, 0x33);
-    //sc_core::sc_start(5, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x3000, 0x44);
-    //sc_core::sc_start(5, sc_core::SC_NS);
-
-    //m_dummymaster.Write_reg(0x3300, 0x44);
-    //sc_core::sc_start(5, sc_core::SC_NS);
-    
-    //m_dummymaster.Read_reg(0x0000);
-    //m_dummymaster.Read_reg(0x1000);
-    //m_dummymaster.Read_reg(0x2000);
-    //m_dummymaster.Read_reg(0x3000);
-
-    //m_dummymaster.Write_reg(0x4000, 0xff);
+    bus.m_clk(sysclk);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
     
