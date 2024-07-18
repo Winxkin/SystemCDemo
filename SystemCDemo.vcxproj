@@ -144,6 +144,7 @@
     <ClInclude Include="DummySlave.h" />
     <ClInclude Include="memory.h" />
     <ClInclude Include="Registerif.h" />
+    <ClInclude Include="target.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
