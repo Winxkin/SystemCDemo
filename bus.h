@@ -1,4 +1,5 @@
-/*
+ /*
+ *	Description: Implementation the bus MMI with clock synchronization
  *	Author: Huan Nguyen-Duy
  *  Date: 11/07/2024
  */
@@ -45,16 +46,13 @@ public:
 private:
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH> initiator_sockets[NUM_TS];
 
-	unsigned int div_index;
-
-	// variable
 	std::string m_name;
-
-	// arbitration
-	sc_core::sc_event e_forward_tran;
+	unsigned int div_index;
 	unsigned int socket_index;
-	tlm::tlm_generic_payload current_trans;
 	bool Bus_lock;
+	bool m_clkmonitor;
+	sc_core::sc_event e_forward_tran;
+	tlm::tlm_generic_payload current_trans;
 	
 	struct address
 	{
@@ -67,6 +65,16 @@ private:
 
 private:
 
+	/*
+	* copy_tlm_generic_payload
+	* 
+	* Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload
+	* 
+	* @param des Reference to destination TLM generic payload
+	* 
+	* @param src Reference to source TLM generic payload
+	* 
+	*/
 	void copy_tlm_generic_payload(tlm::tlm_generic_payload& des, tlm::tlm_generic_payload& src)
 	{
 		des.set_command(src.get_command());
@@ -84,11 +92,17 @@ private:
 	}
 
 	/*
-	* The method use to monitor clock cycles
+	* synchronize_cycles
+	* 
+	* Implementation the method to monitor clock cycles
+	* 
 	*/
 	void synchronize_cycles()
 	{
-		//std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+		if (m_clkmonitor)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+		}
 	}
 
 	
@@ -96,6 +110,12 @@ private:
 		Thread handles forward transaction
 	*/
 
+	/*
+	* foward_transaction_process
+	*
+	* Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator 
+	*
+	*/
 	void foward_transaction_process()
 	{
 		while (true)
@@ -136,7 +156,17 @@ private:
 		}
 	}
 
-	// TS sockets
+	/*
+	* TS_handle_begin_req
+	* 
+	* Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id
+	* 
+	* @param trans Reference to the generic payload object containing the transaction details
+	*              such as command, address, and data.
+	* 
+	* @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	*              and may be updated by the function. 
+	*/
 	void TS_handle_begin_req(tlm::tlm_generic_payload& trans, sc_core::sc_time& delay)
 	{
 		unsigned int address = trans.get_address();
@@ -166,7 +196,25 @@ private:
 		Define the functions to handle for Bus Initiator sockets
 	*/
 
-	// IS socket
+	/*
+	 * nb_transport_bw
+	 *
+	 * Implements the non-blocking backward transport interface for the nitiator.
+	 *
+	 * @param trans Reference to the generic payload object containing the transaction details
+	 *              such as command, address, and data.
+	 *
+	 * @param phase Reference to the transaction phase. The current phase of the transaction,
+	 *              which may be updated by the function.
+	 *
+	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	 *              and may be updated by the function.
+	 *
+	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
+	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
+	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
+	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
+	 */
 	tlm::tlm_sync_enum nb_transport_bw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
 		switch (phase)
 		{
@@ -178,7 +226,7 @@ private:
 		}
 		case tlm::END_REQ:
 		{
-			// Handle END_REQ phase (shouldn't happen here)
+			// Handle END_REQ phase
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "END_REQ received" << std::endl;
 			tlm::tlm_phase bw_phase = tlm::END_REQ;
 			target_sockets->nb_transport_bw(trans, bw_phase, delay);
@@ -196,13 +244,34 @@ private:
 		Define the functions to handle for Bus Target socket
 	*/
 
-	//TS socket
+	/*
+	 * nb_transport_fw
+	 *
+	 * Implements the non-blocking forward transport interface for the target.
+	 *
+	 * @param id    Integer identifier to distinguish between multiple initiators or channels.
+	 *
+	 * @param trans Reference to the generic payload object containing the transaction details
+	 *              such as command, address, and data.
+	 *
+	 * @param phase Reference to the transaction phase. The current phase of the transaction,
+	 *              which may be updated by the function.
+	 *
+	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	 *              and may be updated by the function.
+	 *
+	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
+	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
+	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
+	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
+	 */
 	tlm::tlm_sync_enum nb_transport_fw(int id, tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay)
 	{
 		switch (phase)
 		{
 		case tlm::BEGIN_REQ:
 		{
+			// Handle BEGIN_REQ phase
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) BEGIN_REQ received" << std::endl;
 			if (!Bus_lock)
 			{
@@ -213,6 +282,7 @@ private:
 			}
 			else
 			{
+				// Handle END_REQ phase
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " is locked, ignore transaction !" << std::endl;
 				return tlm::TLM_COMPLETED;
 			}
@@ -236,12 +306,20 @@ private:
 
 
 public:
-	BUS(sc_core::sc_module_name name) :
+	/*
+	* BUS constructor
+	* 
+	* @param name Reference to sc_module name
+	* 
+	* @param enclkmonitor To enable clock monitor through print message when the posedge clock event is triggered 
+	*/
+	BUS(sc_core::sc_module_name name, bool enclkmonitor) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_sockets("target_socket")
 		, Bus_lock(false)
 		, socket_index(0)
+		, m_clkmonitor(enclkmonitor)
 	{
 		// Registration nb_transport_fw for target socket
 		target_sockets.register_nb_transport_fw(this, &BUS::nb_transport_fw);
@@ -284,11 +362,26 @@ public:
 		}
 	};
 
+	/*
+	* BUS destructor
+	*/
 	~BUS()
 	{
 	};
 
-	// Using to get corresponding Initiator socket with address mapping
+	/*
+	* mapping_target_sockets
+	* 
+	* Implement the registration socket address range for target socket
+	* 
+	* @param _id   The id number of target socket in bus memory mapping I/O
+	* 
+	* @param _addr The base address of target socket that is registered into bus memory mapping I/O
+	* 
+	* @param _size the range of address space
+	* 
+	* @return tlm_utils::simple_initiator_socket is the initiator socket with id registration used to bind with the corresponding target socket
+	*/
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _id, unsigned int _addr, unsigned int _size)
 	{
 
