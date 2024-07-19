@@ -25,7 +25,17 @@ typedef enum
 	APB = 32
 } BUS_TYPE;
 
-template<unsigned int BUSWIDTH = 32, unsigned int NUM_TS = 10>
+typedef enum
+{
+	D8BIT = 0,
+	D16BIT = 1,
+	D32BIT = 2,
+	D64BIT = 3,
+	D128BIT = 4
+
+} DATAWIDTH;
+
+template<unsigned int BUSWIDTH = 32, unsigned int NUM_TS = 10, unsigned int DATA_WIDTH = D8BIT>
 class BUS : public sc_core::sc_module
 {
 public:
@@ -35,13 +45,13 @@ public:
 private:
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH> initiator_sockets[NUM_TS];
 
-
+	unsigned int div_index;
 
 	// variable
 	std::string m_name;
-	sc_core::sc_event e_forward_tran;
-	
 
+	// arbitration
+	sc_core::sc_event e_forward_tran;
 	unsigned int socket_index;
 	tlm::tlm_generic_payload current_trans;
 	bool Bus_lock;
@@ -78,7 +88,7 @@ private:
 	*/
 	void synchronize_cycles()
 	{
-		std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+		//std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
 	}
 
 	
@@ -98,15 +108,29 @@ private:
 			/*
 				Synchronization with clock cycles, 1 byte data = 1 clock cycle
 			*/
-			for (unsigned int i = 0; i <= current_trans.get_data_length(); i++)
+			unsigned int num_cycles = (current_trans.get_data_length() / div_index) + 1;		// Note: 1 cycle clock for address transfering
+			for (unsigned int i = 0; i < num_cycles; i++)
 			{
-				wait(m_clk.posedge_event()); // Synchronizing with each clock cycle 1 byte data transfer = 1 cycle
+				wait(m_clk.posedge_event()); // Synchronizing with each clock cycle
+				if (i == 0)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Bus) (Address Phase) accepting address 0x" << std::hex
+						<< current_trans.get_address() << std::endl;
+				}
+				else
+				{
+					if (current_trans.is_write())
+					{
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
+							<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[(num_cycles - 1) - i] << std::endl;
+					}
+				}
 			}
 			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
-				<< " Fowarding transaction to target socket with address " << address_mapping[socket_index].addr << std::endl;
+				<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[socket_index].addr << std::endl;
 
 			status = initiator_sockets[socket_index]->nb_transport_fw(current_trans, fw_phase, delay);
 		}
@@ -235,6 +259,29 @@ public:
 		SC_METHOD(synchronize_cycles);
 		sensitive << m_clk.pos();	// Synchronizing with posdge clock
 		dont_initialize();
+
+		// Setting data width
+		switch (DATA_WIDTH)
+		{
+		case D8BIT:
+			div_index = 1;
+			break;
+		case D16BIT:
+			div_index = 2;
+			break;
+		case D32BIT:
+			div_index = 4;
+			break;
+		case D64BIT:
+			div_index = 8;
+			break;
+		case D128BIT:
+			div_index = 16;
+			break;
+		default:
+			div_index = 1;
+			break;
+		}
 	};
 
 	~BUS()

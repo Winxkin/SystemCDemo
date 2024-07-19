@@ -91,7 +91,8 @@ public:
 			trans.set_data_ptr(_data);
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr 
+				<< "	,data: 0x" << std::hex << data << std::endl;
 			
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
@@ -115,7 +116,7 @@ public:
 			trans.set_dmi_allowed(false); // DMI not allowed
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			status = initiator_socket->nb_transport_fw(trans, phase, delay);

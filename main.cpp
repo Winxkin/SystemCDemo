@@ -48,21 +48,35 @@ int sc_main(int argc, char* argv[]) {
 
     sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_NS);
 
-    BUS<APB,1> bus("bus_APB");
+    BUS<APB,4> bus("bus_APB");
     bus.m_clk(sysclk);
     DummyMaster<32> m_dummymaster("DummyMaster");
-    Target target("Target");
+    Target target1("Target1");
+    Target target2("Target2");
+    Target target3("Target3");
+    Target target4("Target4");
     m_dummymaster.initiator_socket.bind(bus.target_sockets);
-    bus.mapping_target_sockets(0, 0x000, 0x1000).bind(target.target_socket);
+    bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(target1.target_socket);
+    bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(target2.target_socket);
+    bus.mapping_target_sockets(2, 0x2000, 0x1000).bind(target3.target_socket);
+    bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(target4.target_socket);
 
     sc_core::sc_start(100, sc_core::SC_NS);
 
-    m_dummymaster.SentTransaction(0x000, 0x11223344, tlm::TLM_WRITE_COMMAND);
-
+    m_dummymaster.SentTransaction(0x0000, 0x11223344, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(10, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x0000, 0x55667788, tlm::TLM_WRITE_COMMAND);
+    //m_dummymaster.SentTransaction(0x0000, 0x0, tlm::TLM_READ_COMMAND);
     sc_core::sc_start(100, sc_core::SC_NS);
 
-    m_dummymaster.SentTransaction(0x000, 0x11223344, tlm::TLM_READ_COMMAND);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.SentTransaction(0x0000, 0x0, tlm::TLM_READ_COMMAND);
+    //sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.SentTransaction(0x1000, 0x22334455, tlm::TLM_WRITE_COMMAND);
+    //sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.SentTransaction(0x2000, 0x22334455, tlm::TLM_WRITE_COMMAND);
+    //sc_core::sc_start(100, sc_core::SC_NS);
+    //m_dummymaster.SentTransaction(0x3000, 0x22334455, tlm::TLM_WRITE_COMMAND);
+    //sc_core::sc_start(100, sc_core::SC_NS);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
     
