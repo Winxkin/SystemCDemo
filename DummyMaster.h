@@ -23,7 +23,6 @@ class DummyMaster : public sc_core::sc_module
 {
 private:
 	std::string m_name;
-	tlm::tlm_generic_payload current_trans;
 	
 	struct localdata
 	{
@@ -211,7 +210,7 @@ public:
 	}
 
 	/*
-	 * SentTransaction
+	 * Sentcustomtransaction
 	 *
 	 * Implements the sent a custom transaction to bus MMIO
 	 *
