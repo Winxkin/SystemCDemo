@@ -105,6 +105,12 @@ private:
 public:
 	tlm_utils::simple_initiator_socket<DummyMaster, BUSWIDTH> initiator_socket;
 
+	/*
+	 * DummyMaster
+	 *
+	 * The constructor of DummyMaster
+	 *
+	 */
 	DummyMaster(sc_core::sc_module_name name) :
 		 sc_core::sc_module(name)
 		 , initiator_socket("initiator_socket")
@@ -113,11 +119,27 @@ public:
 			initiator_socket.register_nb_transport_bw(this, &DummyMaster::nb_transport_bw);
 		 }
 
+	/*
+	 * get_received_data
+	 * 
+	 * Using to get data from the returned transaction
+	 *
+	 * @return the array of data
+	 * 
+	 */
 	unsigned char* get_received_data()
 	{
 		return tempdata.m_data;
 	}
 
+	/*
+	 * get_received_data
+	 *
+	 * Using to get data from the returned transaction
+	 *
+	 * @return the 32-bit data
+	 *
+	 */
 	unsigned int get_received_32bit_data()
 	{
 		return *reinterpret_cast<unsigned int*>(tempdata.m_data);
