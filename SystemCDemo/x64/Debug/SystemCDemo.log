@@ -1,6 +1,6 @@
 ﻿  main.cpp
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\bus.h(146,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\bus.h(172,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   SystemCDemo.vcxproj -> D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\x64\Debug\SystemCDemo.exe

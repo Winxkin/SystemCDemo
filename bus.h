@@ -142,7 +142,7 @@ private:
 					if (current_trans.is_write())
 					{
 						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
-							<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[(num_cycles - 1) - i] << std::endl;
+							<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[i-1] << std::endl;
 					}
 				}
 			}

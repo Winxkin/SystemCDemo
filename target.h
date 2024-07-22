@@ -37,7 +37,7 @@ private:
 			}
 			case tlm::TLM_READ_COMMAND:
 			{
-				unsigned int data = 0x44332211;
+				unsigned int data = 0x11223344;
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << std::endl;
 				std::memcpy(trans.get_data_ptr(), &data, trans.get_data_length());
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
