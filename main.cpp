@@ -4,10 +4,10 @@
 #include <iostream>
 #include <tlm_utils/simple_initiator_socket.h>
 #include <tlm_utils/simple_target_socket.h>
-#include "bus.h"
-#include "DummyMaster.h"
-#include "DummySlave.h"
-#include "target.h"
+#include "common/bus.h"
+#include "common/DummyMaster.h"
+#include "common/DummySlave.h"
+#include "common/target.h"
 
 using namespace sc_core;
 using namespace std;

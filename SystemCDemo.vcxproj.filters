@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{631c14bb-bfd8-401f-8f27-03be2ba34685}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -20,22 +23,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bus.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\target.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="DummyMaster.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\Registerif.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="Registerif.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\memory.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="DummySlave.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\DummySlave.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="memory.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\DummyMaster.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="target.h">
+    <ClInclude Include="common\bus.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="top.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

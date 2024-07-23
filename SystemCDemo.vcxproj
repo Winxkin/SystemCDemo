@@ -139,12 +139,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bus.h" />
-    <ClInclude Include="DummyMaster.h" />
-    <ClInclude Include="DummySlave.h" />
-    <ClInclude Include="memory.h" />
-    <ClInclude Include="Registerif.h" />
-    <ClInclude Include="target.h" />
+    <ClInclude Include="common\bus.h" />
+    <ClInclude Include="common\DummyMaster.h" />
+    <ClInclude Include="common\DummySlave.h" />
+    <ClInclude Include="common\memory.h" />
+    <ClInclude Include="common\Registerif.h" />
+    <ClInclude Include="common\target.h" />
+    <ClInclude Include="top.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
