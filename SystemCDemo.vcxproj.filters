@@ -16,6 +16,9 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{631c14bb-bfd8-401f-8f27-03be2ba34685}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\models">
+      <UniqueIdentifier>{073bf26b-f23f-4379-a4f0-ebd33b44b888}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

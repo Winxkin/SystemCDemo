@@ -8,6 +8,7 @@
 #include "common/DummyMaster.h"
 #include "common/DummySlave.h"
 #include "common/target.h"
+#include "common/memory.h"
 
 using namespace sc_core;
 using namespace std;
@@ -48,30 +49,38 @@ int sc_main(int argc, char* argv[]) {
 
     sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_NS);
 
-    BUS<APB,4> bus("bus_APB", false);
+    BUS<APB,5> bus("bus_APB", false);
     bus.m_clk(sysclk);
     DummyMaster<32> m_dummymaster("DummyMaster");
     Target target1("Target1");
     Target target2("Target2");
     Target target3("Target3");
     Target target4("Target4");
+    RAM ram("ram1", 1024);
     m_dummymaster.initiator_socket.bind(bus.target_sockets);
     bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(target1.target_socket);
     bus.mapping_target_sockets(1, 0x1000, 0x1000).bind(target2.target_socket);
     bus.mapping_target_sockets(2, 0x2000, 0x1000).bind(target3.target_socket);
     bus.mapping_target_sockets(3, 0x3000, 0x1000).bind(target4.target_socket);
+    bus.mapping_target_sockets(4, 0x4000, 0x3000).bind(ram.socket);
 
     sc_core::sc_start(100, sc_core::SC_NS);
-
+    
     unsigned char* dta = new unsigned char[255];
 
     for (unsigned int i = 0; i < 255; i++)
     {
         dta[i] = i;
     }
+    m_dummymaster.Sentcustomtransaction(0x4000, dta, 255, tlm::TLM_WRITE_COMMAND);
 
-    m_dummymaster.Sentcustomtransaction(0x000, dta, 255, tlm::TLM_WRITE_COMMAND);
-    sc_core::sc_start(20000, sc_core::SC_NS);
+    sc_core::sc_start(10000, sc_core::SC_NS);
+
+    ram.dump_memory(0, 1024);
+    unsigned char* readdata = new unsigned char[8];
+    m_dummymaster.Sentcustomtransaction(0x4000, readdata, 8, tlm::TLM_READ_COMMAND);
+    sc_core::sc_start(100, sc_core::SC_NS);
+    readdata = m_dummymaster.get_received_data();
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
     

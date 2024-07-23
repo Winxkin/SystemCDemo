@@ -15,49 +15,103 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include <iomanip>
 
 template<unsigned int BUSWIDTH = 32>
-class Memory : public sc_core::sc_module
+class RAM : public sc_core::sc_module
 {
 private:
-    
+    unsigned char* data;
+    sc_dt::uint64 size;
+	std::string m_name;
 
 public:
-	tlm_utils::simple_target_socket<DummySlave, BUSWIDTH> target_socket;
+    tlm_utils::simple_target_socket<RAM, BUSWIDTH> socket;
 
-    Memory(sc_core::sc_module_name name) :
-        sc_core::sc_module(name),
-        m_name(name),
-        target_socket("target_socket")
-    {
-        target_socket.register_b_transport(this, &DummySlave::b_transport);
+    RAM(sc_core::sc_module_name name, sc_dt::uint64 size) :
+        sc_module(name)
+		, m_name(name)
+        , socket("socket")
+        , size(size) 
+	{
+        socket.register_nb_transport_fw(this, &RAM::nb_transport_fw);
+        data = new unsigned char[size];
+		for (unsigned int i = 0; i < size; i++)
+		{
+			data[i] = 0x0;
+		}
     }
 
-    void b_transport(tlm::tlm_generic_payload& trans, sc_core::sc_time& delay) {
-        // Handle transaction
+	~RAM() {
+		delete[] data;
+	}
 
-        switch (trans.get_command()) {
-        case tlm::TLM_WRITE_COMMAND:
-        {
-            unsigned int wdata = 0;
-            std::memcpy(&wdata, trans.get_data_ptr(), sizeof(wdata));
-            
-            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
-            trans.set_response_status(tlm::TLM_OK_RESPONSE);
-        }
-        case tlm::TLM_READ_COMMAND:
-        {
-            unsigned int rdata = 0;
-            
-            std::cout << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << rdata << std::dec << std::endl;
-            std::memcpy(trans.get_data_ptr(), &rdata, trans.get_data_length());
-            trans.set_response_status(tlm::TLM_OK_RESPONSE);
-            break;
-        }
-        default:
-            break;
-        }
-    }
+	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) 
+	{
+		tlm::tlm_phase next_phase = tlm::END_REQ;
+
+		switch (phase)
+		{
+		case tlm::BEGIN_REQ:
+		{
+			// Handle BEGIN_REQ phase
+
+			// Check size 
+			if (trans.get_address() + trans.get_data_length() > size)
+			{
+				trans.set_response_status(tlm::TLM_ADDRESS_ERROR_RESPONSE); // return respond error.
+				std::cout << m_name << "	Error: Out of range size !" << std::endl;
+			}
+			else
+			{
+				// handling data
+				switch (trans.get_command()) {
+				case tlm::TLM_WRITE_COMMAND:
+				{
+					memcpy(&data[trans.get_address()], trans.get_data_ptr(), trans.get_data_length());
+					break;
+				}
+				case tlm::TLM_READ_COMMAND:
+				{
+					memcpy(trans.get_data_ptr(), &data[trans.get_address()], trans.get_data_length());
+					break;
+				}
+				default:
+					break;
+				}
+			}
+			/*
+				Return data and END_REQ to bus
+			*/
+			socket->nb_transport_bw(trans, next_phase, delay);
+
+		}
+		case tlm::END_REQ:
+		{
+			// Handle END_REQ phase (shouldn't happen here)
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			break;
+		}
+		default:
+			break;
+		}
+		return tlm::TLM_ACCEPTED;
+	}
+
+	void dump_memory(sc_dt::uint64 offset, unsigned int len) {
+		if (offset + len > size) {
+			std::cerr << m_name << "	Error: Address out of bounds" << std::endl;
+			return;
+		}
+
+		for (unsigned int i = 0; i < len; i += 8) {
+			std::cout << "[" << std::hex << std::setw(8) << std::setfill('0') << offset + i << "] ";
+			for (unsigned int j = 0; j < 8 && (i + j) < len; ++j) {
+				std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(data[offset + i + j]) << " ";
+			}
+			std::cout << std::endl;
+		}
+	}
 
 };
 #endif
