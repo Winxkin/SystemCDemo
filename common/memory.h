@@ -36,10 +36,7 @@ public:
 	{
         socket.register_nb_transport_fw(this, &RAM::nb_transport_fw);
         data = new unsigned char[size];
-		for (unsigned int i = 0; i < size; i++)
-		{
-			data[i] = 0x0;
-		}
+		std::memset(data, 0, size);
     }
 
 	~RAM() {

@@ -47,5 +47,8 @@
     <ClInclude Include="top.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DMAC.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
