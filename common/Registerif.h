@@ -27,9 +27,17 @@ public:
     ~Register() {};
 
     uint32_t get_value() const { return value; };
-    void set_value(uint32_t new_value) { value = new_value & mask; };
+    void set_value(uint32_t new_value) 
+    {   
+        uint32_t old_value = value;
+        value = new_value & mask;
+        if (callback) {
+            callback(name, value, old_value, mask, ch);
+        }
+    };
     void set_value(uint32_t new_value, bool not_mask)
     {
+        uint32_t old_value = value;
         if (not_mask)
         {
             value = new_value;
@@ -37,6 +45,9 @@ public:
         else
         {
             value = new_value & mask;
+        }
+        if (callback) {
+            callback(name, value, old_value, mask, ch);
         }
     };
     uint64_t get_address() { return address; };

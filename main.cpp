@@ -45,6 +45,7 @@ public:
 
 
 // sc_main in top level function like in C++ main
+/*
 int sc_main(int argc, char* argv[]) {
 
     sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_NS);
@@ -85,4 +86,57 @@ int sc_main(int argc, char* argv[]) {
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
     
     return(0);
+}
+*/
+
+SC_MODULE(MyModule) {
+    sc_in<bool> sig_a;
+    sc_in<bool> sig_b;
+
+    SC_CTOR(MyModule) {
+        SC_METHOD(monitor_signals);
+        sensitive << sig_a << sig_b; // Sensitive to both signals
+    }
+
+    void monitor_signals() {
+        std::cout << "monitor_signals called at time " << sc_time_stamp() << std::endl;
+        std::cout << "sig_a: " << sig_a.read() << ", sig_b: " << sig_b.read() << std::endl;
+    }
+};
+
+int sc_main(int argc, char* argv[]) {
+    sc_signal<bool> signal_a, signal_b;
+
+    MyModule my_module("my_module");
+    my_module.sig_a(signal_a);
+    my_module.sig_b(signal_b);
+
+    // Initialize signals
+    signal_a = false;
+    signal_b = false;
+
+    sc_start(1, SC_NS);
+
+    // Change both signals at the same time
+    signal_a = true;
+    signal_b = true;
+
+    sc_start(1, SC_NS);
+
+    signal_a = true;
+    signal_b = false;
+
+    sc_start(1, SC_NS);
+
+    signal_a = false;
+    signal_b = true;
+
+    sc_start(1, SC_NS);
+
+    signal_a = false;
+    signal_b = false;
+
+    sc_start(1, SC_NS);
+
+    return 0;
 }

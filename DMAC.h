@@ -17,6 +17,7 @@
 #include <cstdint>
 #include "Registerif.h"
 
+// Notice: DMA Controller supports maximum 256 channels
 #define DMA_MAX_CH 256
 
 /*Define register address*/
@@ -37,9 +38,15 @@ class DMAC : public sc_core::sc_module {
 
 private:
 	std::string m_name;
-	unsigned int num_ch;
 	RegisterInterface regs;
-
+	unsigned int current_ch;
+	unsigned int current_reg_req_ch;
+	std::string current_reg_req_name;
+	bool is_running;
+	bool is_testmode;
+	sc_core::sc_event e_DMA_request;
+	sc_core::sc_event e_DMA_run;
+	sc_core::sc_event e_DMA_run_done;
 private:
 	/*
 	 * nb_transport_fw
@@ -170,32 +177,124 @@ private:
 	/* Call back register */
 	void cb_DMAREQ(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
+		// Request DMA operation in here
+		if (!is_running)
+		{
+			is_testmode = true;
+			current_reg_req_ch = ch;
+			current_reg_req_name = name;
+			e_DMA_request.notify();
+		}
 	}
 
 	void cb_DMAACK(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
+		// Set DMA ACK signals in here
 	}
 
 	void cb_DMAINT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
+		// Set Interrupt signals in here
 	}
 
+	/* SC_METHOD and SC_THREAD are defined in here */
+	void mth_request_signals()
+	{
+		// SC_THREAD is triggered only one at the same simulation time
+		if (!is_running)
+		{
+			e_DMA_request.notify();
+		}
+	}
 
+	void thr_priority_process()
+	{
+		while (true)
+		{
+			// waiting to next cycle
+			wait(e_DMA_request);
+			wait(clk.posedge_event());
+			is_running = true;
+			if (!is_testmode)
+			{
+				for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
+					if (DMA_req[i].read()) {
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+						current_ch = i;
+						e_DMA_run.notify();	// Bus delay simulation time
+						wait(e_DMA_run_done);
+						// continuting with next channels
+						i = 0;
+					}
+				}
+			}
+			else
+			{
+				// using register
+				uint32_t value = regs[current_reg_req_name].get_value();
+				for (unsigned int i = 0; i < 32; i++)
+				{
+					if ((value >> i) & 0x01)
+					{
+						e_DMA_run.notify();	// Bus delay simulation time
+						wait(e_DMA_run_done);
+						// continuting with next channels
+						regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
+					}
+				}
+			}
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
+			is_running = false;
+			is_testmode = false;
+			
+		}
+	}
+
+	void thr_DMA_run_process()
+	{
+		while (true)
+		{
+			wait(e_DMA_run);
+
+			e_DMA_run_done.notify();
+		}
+	}
 
 public:
 	tlm_utils::simple_target_socket<DMAC, BUSWIDTH> target_socket;
 	tlm_utils::simple_initiator_socket<DMAC, BUSWIDTH> initiator_socket;
+	sc_core::sc_out<bool> DMA_ack[DMA_MAX_CH];
+	sc_core::sc_in<bool> DMA_req[DMA_MAX_CH];
+	sc_core::sc_out<bool> DMA_int[DMA_MAX_CH];
+	sc_core::sc_in<bool> clk;
+	sc_core::sc_in<bool> rst;
+
 
 	DMAC(sc_core::sc_module_name name) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_socket("target_socket")
 		, initiator_socket("initiator_socket")
+		, current_ch(0)
+		, is_running(false)
+		, is_testmode(false)
 	{
 		target_socket.register_nb_transport_fw(this, &DMAC::nb_transport_fw);
 		initiator_socket.register_nb_transport_bw(this, &DMAC::nb_transport_bw);
-
+		// initialization registers
 		init_registers();
+		// Registration Method and thread
+		SC_METHOD(mth_request_signals)
+		for (int i = 0; i < DMA_MAX_CH; ++i) 
+		{
+			sensitive << DMA_req[i]; // Register each input port with the SC_METHOD
+		}
+
+		SC_THREAD(thr_priority_process);
+		sensitive << e_DMA_request;
+
+		SC_THREAD(thr_DMA_run_process);
+		sensitive << e_DMA_run;
 	};
 
 	~DMAC() {};
