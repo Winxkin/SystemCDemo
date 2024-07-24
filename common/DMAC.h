@@ -197,6 +197,7 @@ private:
 		// Set Interrupt signals in here
 	}
 
+
 	/* SC_METHOD and SC_THREAD are defined in here */
 	void mth_request_signals()
 	{
@@ -217,14 +218,25 @@ private:
 			is_running = true;
 			if (!is_testmode)
 			{
+				// using ports to trigger DMAC
 				for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
 					if (DMA_req[i].read()) {
 						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
 						current_ch = i;
 						e_DMA_run.notify();	// Bus delay simulation time
 						wait(e_DMA_run_done);
+						
+						// set output port
+						wait(clk.posedge_event());
+						DMA_ack[i].write(true);
+						DMA_int[i].write(true);
+						wait(clk.posedge_event());
+						DMA_ack[i].write(true);
+						DMA_int[i].write(true);
+
 						// continuting with next channels
-						i = 0;
+						// reset loop
+						i = 0; 
 					}
 				}
 			}
@@ -242,6 +254,7 @@ private:
 							wait(e_DMA_run_done);
 							// continuting with next channels
 							regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
+							regs[DMAINT(current_reg_req_ch)] = (0x01 << i) | regs[DMAINT(current_reg_req_ch)].get_value();
 						}
 					}
 					else
