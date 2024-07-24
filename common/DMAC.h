@@ -234,12 +234,19 @@ private:
 				uint32_t value = regs[current_reg_req_name].get_value();
 				for (unsigned int i = 0; i < 32; i++)
 				{
-					if ((value >> i) & 0x01)
+					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
 					{
-						e_DMA_run.notify();	// Bus delay simulation time
-						wait(e_DMA_run_done);
-						// continuting with next channels
-						regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
+						if ((value >> i) & 0x01)
+						{
+							e_DMA_run.notify();	// Bus delay simulation time
+							wait(e_DMA_run_done);
+							// continuting with next channels
+							regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
+						}
+					}
+					else
+					{
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA channel " << i* current_reg_req_ch << " is not enable" << std::endl;
 					}
 				}
 			}
