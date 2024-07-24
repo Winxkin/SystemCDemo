@@ -230,7 +230,7 @@ private:
 			}
 			else
 			{
-				// using register
+				// using register to trigger DMAC
 				uint32_t value = regs[current_reg_req_name].get_value();
 				for (unsigned int i = 0; i < 32; i++)
 				{

@@ -140,12 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\bus.h" />
+    <ClInclude Include="common\DMAC.h" />
     <ClInclude Include="common\DummyMaster.h" />
     <ClInclude Include="common\DummySlave.h" />
     <ClInclude Include="common\memory.h" />
     <ClInclude Include="common\Registerif.h" />
     <ClInclude Include="common\target.h" />
-    <ClInclude Include="DMAC.h" />
     <ClInclude Include="top.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
