@@ -186,8 +186,8 @@ private:
 				}
 				case tlm::TLM_WRITE_COMMAND:
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from "
-						<< regs[DMASRCADDR(current_ch)].get_value() << " to " << regs[DMADESADDR(current_ch)].get_value() << std::endl;
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
+						<< regs[DMASRCADDR(current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(current_ch)].get_value() << std::endl;
 
 					e_DMA_run_done.notify();
 					break;
