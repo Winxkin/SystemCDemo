@@ -18,9 +18,11 @@ public:
 
     using Callback = std::function<void(const std::string&, uint32_t, uint32_t, uint32_t, uint32_t)>;
 
-    Register() {};
+    Register() : ch(0), init_val(0)
+    {};
+
     Register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch)
-        : name(name), address(address), value(init), mask(mask), ch(ch)
+        : name(name), address(address), value(init), mask(mask), ch(ch), init_val(init)
     {
     };
 
@@ -35,6 +37,7 @@ public:
             callback(name, value, old_value, mask, ch);
         }
     };
+
     void set_value(uint32_t new_value, bool not_mask)
     {
         uint32_t old_value = value;
@@ -50,7 +53,14 @@ public:
             callback(name, value, old_value, mask, ch);
         }
     };
+
+    void reset()
+    {
+        value = init_val;
+    }
+
     uint64_t get_address() { return address; };
+
     std::string get_name() { return name; };
 
     Register& operator=(uint32_t new_value) {
@@ -71,7 +81,8 @@ private:
     uint64_t address;
     uint32_t value;
     uint32_t mask;  // Using to perform read or write permission 
-    uint32_t ch;
+    const uint32_t ch;
+    const uint32_t init_val;
     Callback callback;
 };
 
@@ -80,9 +91,11 @@ class RegisterInterface {
 public:
     void add_register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch) {
         registers.emplace(name, Register(name, address, init, mask, ch));
+        /*
         std::cout << "[Adding new register]   Register name: [" << registers[name].get_name()
             << "], address [" << std::hex << registers[name].get_address()
             << "], initialize value [" << std::hex << registers[name].get_value() << "]" << std::endl;
+        */
     };
 
     // The operator to get register by name for example this->reg[name]
@@ -119,6 +132,14 @@ public:
         throw std::runtime_error("Register with the given address not found");
     };
 
+    void reset_regs()
+    {
+        for (auto& reg : registers)
+        {
+            reg.second.reset();
+        }
+    }
+
     void dump_registers()
     {
         for (auto& reg : registers)
@@ -137,7 +158,7 @@ public:
         registers[name].set_callback(cb);
     }
 
-public:
+private:
     std::map<std::string, Register> registers;
 };
 

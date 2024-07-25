@@ -53,6 +53,7 @@ private:
 	bool m_clkmonitor;
 	sc_core::sc_event e_forward_tran;
 	tlm::tlm_generic_payload current_trans;
+	int current_ts_id;
 	
 	struct address
 	{
@@ -167,10 +168,11 @@ private:
 	* @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
 	*              and may be updated by the function. 
 	*/
-	void TS_handle_begin_req(tlm::tlm_generic_payload& trans, sc_core::sc_time& delay)
+	void TS_handle_begin_req(int id, tlm::tlm_generic_payload& trans, sc_core::sc_time& delay)
 	{
 		unsigned int address = trans.get_address();
 		bool decode_addr_status = false;
+		current_ts_id = id;
 
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
 		{
@@ -229,7 +231,7 @@ private:
 			// Handle END_REQ phase
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "END_REQ received" << std::endl;
 			tlm::tlm_phase bw_phase = tlm::END_REQ;
-			target_sockets->nb_transport_bw(trans, bw_phase, delay);
+			target_sockets[current_ts_id]->nb_transport_bw(trans, bw_phase, delay);
 			Bus_lock = false;
 			break;
 		}
@@ -277,7 +279,7 @@ private:
 			{
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " detect transaction" << std::endl;
 				this->Bus_lock = true;
-				TS_handle_begin_req(trans, delay);
+				TS_handle_begin_req(id, trans, delay);
 				return tlm::TLM_ACCEPTED;
 			}
 			else

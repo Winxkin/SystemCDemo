@@ -47,7 +47,25 @@ private:
 	sc_core::sc_event e_DMA_request;
 	sc_core::sc_event e_DMA_run;
 	sc_core::sc_event e_DMA_run_done;
+	sc_core::sc_event e_DMA_forward;
+	tlm::tlm_generic_payload current_trans;
 private:
+	void copy_tlm_generic_payload(tlm::tlm_generic_payload& des, tlm::tlm_generic_payload& src)
+	{
+		des.set_command(src.get_command());
+		des.set_address(src.get_address());
+		des.set_data_length(src.get_data_length());
+
+		unsigned char* data = new unsigned char[src.get_data_length()];
+		std::memcpy(data, src.get_data_ptr(), src.get_data_length());
+		des.set_data_ptr(data);
+
+		des.set_response_status(src.get_response_status());
+		des.set_streaming_width(src.get_streaming_width());
+		des.set_byte_enable_ptr(src.get_byte_enable_ptr());
+		des.set_dmi_allowed(src.is_dmi_allowed());
+	}
+
 	/*
 	 * nb_transport_fw
 	 *
@@ -73,6 +91,7 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) BEGIN_REQ received" << std::endl;
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
 			{
@@ -102,6 +121,7 @@ private:
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) END_REQ received" << std::endl;
 			break;
 		}
 		default:
@@ -135,11 +155,47 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) BEGIN_REQ received" << std::endl;
 			break;
 		}
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) END_REQ received" << std::endl;
+
+			if (trans.is_response_error()) {
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+			}
+			else
+			{
+				switch (trans.get_command()) {
+				case tlm::TLM_READ_COMMAND:
+				{
+					// Change the address of transaction to destination address
+					copy_tlm_generic_payload(current_trans, trans);
+					current_trans.set_address(regs[DMADESADDR(current_ch)].get_value());
+					current_trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
+					current_trans.set_command(tlm::TLM_WRITE_COMMAND);
+
+					// Sending transaction to destination address
+					//status = initiator_socket->nb_transport_fw(trans, fw_phase, delay);	// Error because the nb_transport_bw is not done and the bus is locked
+
+					e_DMA_forward.notify(sc_core::SC_ZERO_TIME);
+
+					break;
+				}
+				case tlm::TLM_WRITE_COMMAND:
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from "
+						<< regs[DMASRCADDR(current_ch)].get_value() << " to " << regs[DMADESADDR(current_ch)].get_value() << std::endl;
+
+					e_DMA_run_done.notify();
+					break;
+				}
+				default:
+					break;
+				}
+			}
 			break;
 		}
 		default:
@@ -152,23 +208,23 @@ private:
 	{
 		for (unsigned int i = 0; i < DMA_MAX_CH; i++)
 		{
-			regs.add_register("DMADESADDR" + std::string(i), DMADESADDR(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMASRCADDR" + std::string(i), DMASRCADDR(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMADATALENGTH" + std::string(i), DMADATALENGTH(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMADESADDR" + std::to_string(i), DMADESADDR(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMASRCADDR" + std::to_string(i), DMASRCADDR(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMADATALENGTH" + std::to_string(i), DMADATALENGTH(i), 0x00, 0xFFFF, i);
 		}
 		for (unsigned int i = 0; i < (DMA_MAX_CH/32); i++)
 		{
-			regs.add_register("DMAREQ" + std::string(i), DMAREQ(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMAACK" + std::string(i), DMAACK(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMAINT" + std::string(i), DMAINT(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMACHEN" + std::string(i), DMACHEN(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMAREQ" + std::to_string(i), DMAREQ(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMAACK" + std::to_string(i), DMAACK(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMAINT" + std::to_string(i), DMAINT(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMACHEN" + std::to_string(i), DMACHEN(i), 0x00, 0xFFFF, i);
 			
 			// Registration call back function
-			regs.set_register_callback("DMAREQ" + std::string(i), std::bind(&DMAC::cb_DMAREQ, this,
+			regs.set_register_callback("DMAREQ" + std::to_string(i), std::bind(&DMAC::cb_DMAREQ, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-			regs.set_register_callback("DMAACK" + std::string(i), std::bind(&DMAC::cb_DMAACK, this,
+			regs.set_register_callback("DMAACK" + std::to_string(i), std::bind(&DMAC::cb_DMAACK, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-			regs.set_register_callback("DMAINT" + std::string(i), std::bind(&DMAC::cb_DMAINT, this,
+			regs.set_register_callback("DMAINT" + std::to_string(i), std::bind(&DMAC::cb_DMAINT, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 		}
 
@@ -199,6 +255,18 @@ private:
 
 
 	/* SC_METHOD and SC_THREAD are defined in here */
+	
+	void mth_reset()
+	{
+		current_ch = 0;
+		is_running = false;
+		is_testmode = false;
+		regs.reset_regs();
+		current_reg_req_ch = 0;
+		current_reg_req_name.clear();
+	}
+
+
 	void mth_request_signals()
 	{
 		// SC_THREAD is triggered only one at the same simulation time
@@ -220,23 +288,25 @@ private:
 			{
 				// using ports to trigger DMAC
 				for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
-					if (DMA_req[i].read()) {
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
-						current_ch = i;
-						e_DMA_run.notify();	// Bus delay simulation time
-						wait(e_DMA_run_done);
-						
-						// set output port
-						wait(clk.posedge_event());
-						DMA_ack[i].write(true);
-						DMA_int[i].write(true);
-						wait(clk.posedge_event());
-						DMA_ack[i].write(true);
-						DMA_int[i].write(true);
+					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
+					{
+						if (DMA_req[i].read()) {
+							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+							current_ch = i;
+							e_DMA_run.notify();	// Bus delay simulation time
+							wait(e_DMA_run_done);
 
-						// continuting with next channels
-						// reset loop
-						i = 0; 
+							// set output port
+							wait(clk.posedge_event());
+							DMA_ack[i].write(true);
+							DMA_int[i].write(true);
+							wait(clk.posedge_event());
+							DMA_ack[i].write(false);
+							DMA_int[i].write(false);
+
+							// continuting with next channels
+							// reset loop
+						}
 					}
 				}
 			}
@@ -257,10 +327,6 @@ private:
 							regs[DMAINT(current_reg_req_ch)] = (0x01 << i) | regs[DMAINT(current_reg_req_ch)].get_value();
 						}
 					}
-					else
-					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA channel " << i* current_reg_req_ch << " is not enable" << std::endl;
-					}
 				}
 			}
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
@@ -275,8 +341,41 @@ private:
 		while (true)
 		{
 			wait(e_DMA_run);
+			// DMA operation in here
+			/*
+				Initiator socket -> request trans -> get return data trans
+			*/
+			tlm::tlm_generic_payload trans;
+			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+			unsigned char* data = new unsigned char[regs[DMADATALENGTH(current_ch)].get_value()];
+			// Configuration transaction
+			trans.set_command(tlm::TLM_READ_COMMAND);
+			trans.set_address(regs[DMASRCADDR(current_ch)].get_value());
+			trans.set_data_ptr(data);
+			trans.set_data_length(regs[DMADATALENGTH(current_ch)].get_value());
+			trans.set_streaming_width(regs[DMADATALENGTH(current_ch)].get_value()); // = data_length to indicate no streaming
+			trans.set_byte_enable_ptr(0); // 0 indicates unused
+			trans.set_dmi_allowed(false); // DMI not allowed
+			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-			e_DMA_run_done.notify();
+			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
+			tlm::tlm_sync_enum status;
+
+			status = initiator_socket->nb_transport_fw(trans, fw_phase, delay);
+
+
+		}
+	}
+
+	void thr_DMA_forward_process()
+	{
+		while (true)
+		{
+			wait(e_DMA_forward);
+			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
+			tlm::tlm_sync_enum status;
+			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+			status = initiator_socket->nb_transport_fw(current_trans, fw_phase, delay);
 		}
 	}
 
@@ -304,17 +403,24 @@ public:
 		// initialization registers
 		init_registers();
 		// Registration Method and thread
-		SC_METHOD(mth_request_signals)
+		SC_METHOD(mth_request_signals);
 		for (int i = 0; i < DMA_MAX_CH; ++i) 
 		{
 			sensitive << DMA_req[i]; // Register each input port with the SC_METHOD
 		}
+		dont_initialize();
+
+		SC_THREAD(mth_reset);
+		sensitive << rst;
 
 		SC_THREAD(thr_priority_process);
 		sensitive << e_DMA_request;
 
 		SC_THREAD(thr_DMA_run_process);
 		sensitive << e_DMA_run;
+
+		SC_THREAD(thr_DMA_forward_process);
+		sensitive << e_DMA_forward;
 	};
 
 	~DMAC() {};
