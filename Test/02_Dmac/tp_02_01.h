@@ -13,7 +13,7 @@ inline bool tp_02_01_test01(SoCPlatform &SoC)
 
     std::cout << "Running test case:  tp_02_01_test01" << std::endl;
 
-    SoC.m_dummymaster.SentTransaction(REG_DMACHEN(0), 0xffffffff, tlm::TLM_WRITE_COMMAND);
+    SoC.m_dummymaster.SentTransaction(REG_DMACHEN(0), 0xffff, tlm::TLM_WRITE_COMMAND);
     sc_core::sc_start(5, sc_core::SC_NS);
 
     // Define DMA source address, destination address for each channel

@@ -45,7 +45,7 @@ public:
 	sc_core::sc_in<bool> rst;
 
 private:
-	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH> initiator_sockets[NUM_TS];
+	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>initiator_sockets[NUM_TS];
 
 	std::string m_name;
 	unsigned int div_index;
@@ -434,6 +434,9 @@ public:
 	*/
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)
 	{
+		unsigned int id = bind_count_id;
+		// Increasing binding id
+		bind_count_id = bind_count_id + 1;
 
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
 		{
@@ -443,13 +446,10 @@ public:
 			}
 		}
 
-		address newaddress = { bind_count_id, _addr, _size };
+		address newaddress = { id, _addr, _size };
 		address_mapping.push_back(newaddress);
 
-		// Increasing binding id
-		bind_count_id = bind_count_id + 1;
-
-		return initiator_sockets[bind_count_id];
+		return initiator_sockets[id];
 	};
 
 };

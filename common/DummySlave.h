@@ -29,6 +29,10 @@ private:
 	std::map<std::string, sc_core::sc_out<bool>*> output_ports;
 
 private:
+	std::map<std::string, bool> input_val_ports;
+	std::map<std::string, bool> output_val_ports;
+
+private:
 
 	void end_of_elaboration() override {
 		// Set up sensitivity list for monitoring inputs
@@ -41,7 +45,12 @@ private:
 
 	void monitor_inputs()
 	{
-
+		for (const auto& pair : input_ports) {
+			if (pair.second->read() != input_val_ports[pair.first])
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Port " << pair.first << " has changed, value: " << pair.second->read() << std::endl;
+			}
+		}
 	}
 
 
@@ -80,8 +89,8 @@ private:
 
 public:
     tlm_utils::simple_target_socket<DummySlave, BUSWIDTH> target_socket;
-	sc_core::sc_in clk;
-	sc_core::sc_in rst;
+	sc_core::sc_in<bool> clk;
+	sc_core::sc_in<bool> rst;
 
 
     DummySlave(sc_core::sc_module_name name, bool message = false) :
@@ -96,14 +105,18 @@ public:
     }
 
 	// Method to add ports to the maps
-	void bind_input_port(const string& name, sc_in<bool>& in_port) {
-		input_ports[name] = &in_port;
+	sc_core::sc_in<bool>* add_input_port(const std::string& name) {
+		input_ports[name] = new sc_core::sc_in<bool>();
+		input_val_ports[name] = false;
+		return input_ports[name];
 	}
 
-	void bind_output_port(const string& name, sc_out<bool>& out_port) {
-		output_ports[name] = &out_port;
+	// Method to add ports to the maps
+	sc_core::sc_out<bool>* add_output_port(const std::string& name) {
+		output_ports[name] = new sc_core::sc_out<bool>();
+		output_val_ports[name] = false;
+		return output_ports[name];
 	}
-
 
 
 };

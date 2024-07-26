@@ -63,6 +63,8 @@ private:
 		m_bus.m_clk(sysclk);
 		m_dmac.clk.bind(sysclk);
 		m_dummymaster.clk.bind(sysclk);
+		m_dummyslave.clk.bind(sysclk);
+		m_dummyslave.rst(rst);
 
 		// binding reset
 		m_dummymaster.rst.bind(rst);
@@ -74,7 +76,14 @@ private:
 			m_dmac.DMA_req[i].bind(dma_req[i]);
 			m_dmac.DMA_int[i].bind(dma_int[i]);
 			m_dmac.DMA_ack[i].bind(dma_ack[i]);
+
+			// add ports to dummy slave
+			m_dummyslave.add_input_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
+			m_dummyslave.add_input_port("DMA_int" + std::to_string(i))->bind(dma_int[i]);
+			m_dummyslave.add_input_port("DMA_ack" + std::to_string(i))->bind(dma_ack[i]);
 		}
+		
+		
 	}
 
 public: // public models
@@ -82,7 +91,7 @@ public: // public models
 	DummySlave<32> m_dummyslave;
 
 private: // Private models
-	BUS<APB,6> m_bus;
+	BUS<APB,7> m_bus;
 	DMAC<32> m_dmac;
 	Target<32> m_target1;
 	Target<32> m_target2;
