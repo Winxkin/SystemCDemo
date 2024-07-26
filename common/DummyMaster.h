@@ -31,7 +31,7 @@ private:
 	};
 
 	localdata tempdata;
-
+	sc_core::sc_event e_reset;
 
 private:
 
@@ -117,8 +117,26 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
+	void resetsystem()
+	{
+		e_reset.notify();
+	}
+
+	void reset_process()
+	{
+		while (true)
+		{
+			wait(e_reset);
+			rst.write(true);
+			wait(clk.posedge_event());
+			rst.write(false);
+		}
+	}
+
 public:
 	tlm_utils::simple_initiator_socket<DummyMaster, BUSWIDTH> initiator_socket;
+	sc_core::sc_in<bool> clk;
+	sc_core::sc_out<bool> rst;
 
 	/*
 	 * DummyMaster
@@ -133,6 +151,9 @@ public:
 		 , m_message(message)
 		 {
 			initiator_socket.register_nb_transport_bw(this, &DummyMaster::nb_transport_bw);
+
+			SC_THREAD(reset_process);
+			sensitive << e_reset;
 		 }
 
 	/*

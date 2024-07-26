@@ -31,7 +31,7 @@
 #define DMAREQ(i)		 (0xC00 + 0x04*(i))			// 0xC00	->	0xC20
 #define DMAACK(i)		 (0xC20 + 0x04*(i))			// 0xC20	->	0xC40
 #define DMAINT(i)		 (0xC40 + 0x04*(i))			// 0xC40	->	0xC60
-#define DMACHEN(i)		 (0xC60 + 0x04*(i))			// 0xC60	->	0xC80
+#define DMACHEN(i)		 (0xC60 + 0x04*(i))			// 0xC60	->	0xC80 
 
 
 template<unsigned int BUSWIDTH = 32>
@@ -178,7 +178,7 @@ private:
 					current_trans.set_address(regs[DMADESADDR(current_ch)].get_value());
 					current_trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 					current_trans.set_command(tlm::TLM_WRITE_COMMAND);
-					e_DMA_forward.notify(sc_core::SC_ZERO_TIME);
+					e_DMA_forward.notify();
 
 					break;
 				}
@@ -247,16 +247,19 @@ private:
 	
 	void mth_reset()
 	{
-		current_ch = 0;
-		is_running = false;
-		is_testmode = false;
-		regs.reset_regs();
-		current_reg_req_ch = 0;
-		current_reg_req_name.clear();
-		e_DMA_forward.cancel();
-		e_DMA_request.cancel();
-		e_DMA_run.cancel();
-		e_DMA_run_done.cancel();
+		if (rst.read())
+		{
+			current_ch = 0;
+			is_running = false;
+			is_testmode = false;
+			regs.reset_regs();
+			current_reg_req_ch = 0;
+			current_reg_req_name.clear();
+			e_DMA_forward.cancel();
+			e_DMA_request.cancel();
+			e_DMA_run.cancel();
+			e_DMA_run_done.cancel();
+		}
 	}
 
 
@@ -372,8 +375,6 @@ private:
 			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			status = initiator_socket->nb_transport_fw(trans, fw_phase, delay);
-
-
 		}
 	}
 

@@ -42,6 +42,7 @@ class BUS : public sc_core::sc_module
 public:
 	tlm_utils::multi_passthrough_target_socket<BUS, BUSWIDTH> target_sockets;
 	sc_clk_in m_clk;
+	sc_core::sc_in<bool> rst;
 
 private:
 	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH> initiator_sockets[NUM_TS];
@@ -66,6 +67,18 @@ private:
 	std::vector<address> address_mapping;
 
 private:
+
+	void mth_reset()
+	{
+		if (rst.read())
+		{
+			e_forward_tran.cancel();
+			current_trans.reset();
+			Bus_lock = false;
+			div_index = 0;
+			socket_index = 0;
+		}
+	}
 
 	/*
 	* copy_tlm_generic_payload
@@ -365,6 +378,9 @@ public:
 		// define thread and method
 		SC_THREAD(foward_transaction_process);
 		sensitive << e_forward_tran;
+
+		SC_METHOD(mth_reset);
+		sensitive << rst;
 
 		SC_METHOD(synchronize_cycles);
 		sensitive << m_clk.pos();	// Synchronizing with posdge clock
