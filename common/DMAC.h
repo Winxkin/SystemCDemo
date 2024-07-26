@@ -29,9 +29,9 @@
 
 /* i from 0 to 7 */
 #define DMAREQ(i)		 (0xC00 + 0x04*(i))			// 0xC00	->	0xC20
-#define DMAACK(i)		 (0x1000 + 0x04*(i))		// 0xC20	->	0xC40
-#define DMAINT(i)		 (0x1400 + 0x04*(i))		// 0xC40	->	0xC60
-#define DMACHEN(i)		 (0xC00 + 0x04*(i))			// 0xC60	->	0xC80
+#define DMAACK(i)		 (0xC20 + 0x04*(i))			// 0xC20	->	0xC40
+#define DMAINT(i)		 (0xC40 + 0x04*(i))			// 0xC40	->	0xC60
+#define DMACHEN(i)		 (0xC60 + 0x04*(i))			// 0xC60	->	0xC80
 
 
 template<unsigned int BUSWIDTH = 32>
@@ -220,12 +220,6 @@ private:
 			// Registration call back function
 			regs.set_register_callback("DMAREQ" + std::to_string(i), std::bind(&DMAC::cb_DMAREQ, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-			regs.set_register_callback("DMAACK" + std::to_string(i), std::bind(&DMAC::cb_DMAACK, this,
-				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-			regs.set_register_callback("DMAINT" + std::to_string(i), std::bind(&DMAC::cb_DMAINT, this,
-				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-			regs.set_register_callback("DMACHEN" + std::to_string(i), std::bind(&DMAC::cb_DMACHEN, this,
-				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 		}
 
 	}
@@ -241,23 +235,12 @@ private:
 			current_reg_req_name = name;
 			e_DMA_request.notify();
 		}
+		else
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
+		}
 	}
 
-	void cb_DMAACK(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
-	{
-		// Set DMA ACK signals in here
-	}
-
-	void cb_DMAINT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
-	{
-		// Set Interrupt signals in here
-	}
-
-	void cb_DMACHEN(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
-	{
-		// Set Interrupt signals in here
-		
-	}
 
 
 	/* SC_METHOD and SC_THREAD are defined in here */
@@ -344,6 +327,8 @@ private:
 					{
 						if ((value >> i) & 0x01)
 						{
+							// set current channel
+							current_ch = (current_reg_req_ch == 0) ? i : (i * current_reg_req_ch);
 							e_DMA_run.notify();	// Bus delay simulation time
 							is_running = true;
 							wait(e_DMA_run_done);
@@ -355,6 +340,7 @@ private:
 				}
 			}
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
+			// releasing flags
 			is_running = false;
 			is_testmode = false;
 			
