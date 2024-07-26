@@ -25,21 +25,33 @@ private:
 			// Handle BEGIN_REQ phase
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
 
-			uint32_t data = 0;
+			unsigned char* data = new unsigned char[trans.get_data_length()];
 
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
 			{
-				std::memcpy(&data, trans.get_data_ptr(), sizeof(data));
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << data << std::dec << std::endl;
+				std::memcpy(data, trans.get_data_ptr(), trans.get_data_length());
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() 
+					<< " data: ";
+				
+				for (unsigned int i = 0; i < trans.get_data_length(); i++)
+				{
+					std::cout << " [0x" << std::hex << (unsigned int)data[i] << "]";
+				}
+				std::cout << std::endl;
+
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
 			}
 			case tlm::TLM_READ_COMMAND:
 			{
-				unsigned int data = 0x11223344;
+				for (unsigned int i = 0; i < trans.get_data_length(); i++)
+				{
+					data[i] = (unsigned char) i;
+				}
+
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << std::endl;
-				std::memcpy(trans.get_data_ptr(), &data, trans.get_data_length());
+				std::memcpy(trans.get_data_ptr(), data, trans.get_data_length());
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
 			}

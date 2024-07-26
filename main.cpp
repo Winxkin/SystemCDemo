@@ -49,20 +49,21 @@ public:
 
 int sc_main(int argc, char* argv[]) {
 
-    sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_NS);
+    sc_core::sc_clock sysclk("sysclk", 10, sc_core::SC_PS);
     sc_signal<bool> rst;
     sc_signal<bool> dma_req[256];
     sc_signal<bool> dma_ack[256];
     sc_signal<bool> dma_int[256];
 
 
-    BUS<APB,3> bus("bus_APB", false);
+    BUS<APB,6> bus("bus_APB", false);
     bus.m_clk(sysclk);
     DummyMaster<32> m_dummymaster("DummyMaster");
     DMAC<32> m_dmac("Dmac");
 
     m_dmac.clk.bind(sysclk);
     m_dmac.rst.bind(rst);
+
 
     for (unsigned int i = 0; i < 256; i++)
     {
@@ -71,7 +72,15 @@ int sc_main(int argc, char* argv[]) {
         m_dmac.DMA_ack[i].bind(dma_ack[i]);
     }
 
+    for (unsigned int i = 0; i < 256; i++)
+    {
+        dma_req[i].write(false);
+    }
+
     Target target1("Target1");
+    Target target2("Target2");
+    Target target3("Target3");
+    Target target4("Target4");
     RAM ram("ram1", 1024);
     m_dummymaster.initiator_socket.bind(bus.target_sockets);
     m_dmac.initiator_socket.bind(bus.target_sockets);
@@ -79,8 +88,11 @@ int sc_main(int argc, char* argv[]) {
     bus.mapping_target_sockets(0, 0x0000, 0x1000).bind(target1.target_socket);
     bus.mapping_target_sockets(1, 0x2000, 0x3000).bind(ram.socket);
     bus.mapping_target_sockets(2, 0x5000, 0x1000).bind(m_dmac.target_socket);
+    bus.mapping_target_sockets(3, 0x6000, 0x1000).bind(target2.target_socket);
+    bus.mapping_target_sockets(4, 0x7000, 0x1000).bind(target3.target_socket);
+    bus.mapping_target_sockets(5, 0x8000, 0x1000).bind(target4.target_socket);
 
-    sc_core::sc_start(100, sc_core::SC_NS);
+    sc_core::sc_start(5, sc_core::SC_NS);
     
     unsigned char* dta = new unsigned char[32];
 
@@ -88,25 +100,108 @@ int sc_main(int argc, char* argv[]) {
     {
         dta[i] = i;
     }
-    m_dummymaster.Sentcustomtransaction(0x2000, dta, 32, tlm::TLM_WRITE_COMMAND);
+    //m_dummymaster.Sentcustomtransaction(0x2000, dta, 32, tlm::TLM_WRITE_COMMAND);
 
-    sc_core::sc_start(10000, sc_core::SC_NS);
+   // sc_core::sc_start(10000, sc_core::SC_NS);
 
     // ram.dump_memory(0, 1024);
     
-    sc_core::sc_start(100, sc_core::SC_NS);
-    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(0), 0x2004, tlm::TLM_WRITE_COMMAND);
-    sc_core::sc_start(100, sc_core::SC_NS);
-    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(0), 0x0000, tlm::TLM_WRITE_COMMAND);
-    sc_core::sc_start(100, sc_core::SC_NS);
-    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(0), 0x04, tlm::TLM_WRITE_COMMAND);
-    sc_core::sc_start(100, sc_core::SC_NS);
-    m_dummymaster.SentTransaction(0x5000 + DMACHEN(0), 0x01, tlm::TLM_WRITE_COMMAND);
-    sc_core::sc_start(100, sc_core::SC_NS);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(1), 0x0000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(1), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(1), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMACHEN(0), 0xffffffff, tlm::TLM_WRITE_COMMAND);
 
-    dma_req->write(true);
-    sc_core::sc_start(1000, sc_core::SC_NS);
 
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(2), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(2), 0x0000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(2), 32*4, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(10), 0x6000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(10), 0x2000 + 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(10), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(11), 0x7000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(11), 0x2000 + 2*32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(11), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(20), 0x8000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(20), 0x2000 + 3*32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(20), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    dma_req[1].write(true);
+    //dma_req[2].write(true);
+    dma_req[10].write(true);
+    dma_req[11].write(true);
+    dma_req[20].write(true);
+
+    sc_core::sc_start(100, sc_core::SC_NS);
+    ram.dump_memory(0x0000, 32*4);
+    dma_req[1].write(false);
+    //dma_req[2].write(true);
+    dma_req[10].write(false);
+    dma_req[11].write(false);
+    dma_req[20].write(false);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(10), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(10), 0x6000 + 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(10), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(11), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(11), 0x7000 + 2 * 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(11), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(20), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(20), 0x8000 + 3 * 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(20), 32, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMASRCADDR(1), 0x2000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADESADDR(1), 0x0000, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+    m_dummymaster.SentTransaction(0x5000 + DMADATALENGTH(1), 32, tlm::TLM_WRITE_COMMAND);
+
+    sc_core::sc_start(5, sc_core::SC_NS);
+    dma_req[1].write(true);
+    //dma_req[2].write(true);
+    dma_req[10].write(true);
+    dma_req[11].write(true);
+    dma_req[20].write(true);
+    sc_core::sc_start(20, sc_core::SC_PS);
+    dma_req[2].write(true);
+    sc_core::sc_start(100, sc_core::SC_NS);
+    ram.dump_memory(0x0000, 32 * 4);
 
     std::cout << "Simulation Time: " << sc_core::sc_time_stamp().to_default_time_units() << "SC_NS" << std::endl;
     

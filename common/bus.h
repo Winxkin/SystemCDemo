@@ -51,6 +51,7 @@ private:
 	unsigned int socket_index;
 	bool Bus_lock;
 	bool m_clkmonitor;
+	bool m_message;
 	sc_core::sc_event e_forward_tran;
 	tlm::tlm_generic_payload current_trans;
 	int current_ts_id;
@@ -100,7 +101,7 @@ private:
 	*/
 	void synchronize_cycles()
 	{
-		if (m_clkmonitor)
+		if (m_clkmonitor && m_message)
 		{
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
 		}
@@ -135,23 +136,33 @@ private:
 				wait(m_clk.posedge_event()); // Synchronizing with each clock cycle
 				if (i == 0)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Bus) (Address Phase) accepting address 0x" << std::hex
-						<< current_trans.get_address() << std::endl;
+					if (m_message)
+					{
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Bus) (Address Phase) accepting address 0x" << std::hex
+							<< current_trans.get_address() << std::endl;
+					}
 				}
 				else
 				{
 					if (current_trans.is_write())
 					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
-							<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[i-1] << std::endl;
+						if (m_message)
+						{
+							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
+								<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[i - 1] << std::endl;
+						}
 					}
 				}
 			}
 			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
-				<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[socket_index].addr << std::endl;
+
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
+					<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[socket_index].addr << std::endl;
+			}
 
 			status = initiator_sockets[socket_index]->nb_transport_fw(current_trans, fw_phase, delay);
 		}
@@ -223,13 +234,19 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "BEGIN_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "BEGIN_REQ received" << std::endl;
+			}
 			break;
 		}
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "END_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "END_REQ received" << std::endl;
+			}
 			tlm::tlm_phase bw_phase = tlm::END_REQ;
 			target_sockets[current_ts_id]->nb_transport_bw(trans, bw_phase, delay);
 			Bus_lock = false;
@@ -274,10 +291,16 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) BEGIN_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) BEGIN_REQ received" << std::endl;
+			}
 			if (!Bus_lock)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " detect transaction" << std::endl;
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " detect transaction" << std::endl;
+				}
 				this->Bus_lock = true;
 				TS_handle_begin_req(id, trans, delay);
 				return tlm::TLM_ACCEPTED;
@@ -285,14 +308,20 @@ private:
 			else
 			{
 				// Handle END_REQ phase
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " is locked, ignore transaction !" << std::endl;
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " is locked, ignore transaction !" << std::endl;
+				}
 				return tlm::TLM_COMPLETED;
 			}
 			break;
 		}
 		case tlm::END_REQ:
 		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) END_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) END_REQ received" << std::endl;
+			}
 			tlm::tlm_phase fw_phase = tlm::END_REQ;
 			tlm::tlm_sync_enum status;
 			Bus_lock = false;
@@ -315,13 +344,14 @@ public:
 	* 
 	* @param enclkmonitor To enable clock monitor through print message when the posedge clock event is triggered 
 	*/
-	BUS(sc_core::sc_module_name name, bool enclkmonitor) :
+	BUS(sc_core::sc_module_name name, bool enclkmonitor = false, bool message = false) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_sockets("target_socket")
 		, Bus_lock(false)
 		, socket_index(0)
 		, m_clkmonitor(enclkmonitor)
+		, m_message(message)
 	{
 		// Registration nb_transport_fw for target socket
 		target_sockets.register_nb_transport_fw(this, &BUS::nb_transport_fw);

@@ -23,7 +23,7 @@ class DummyMaster : public sc_core::sc_module
 {
 private:
 	std::string m_name;
-	
+	bool m_message;
 	struct localdata
 	{
 		unsigned char* m_data;
@@ -60,15 +60,24 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	BEGIN_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	BEGIN_REQ received" << std::endl;
+			}
 			break;
 		}
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	END_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	END_REQ received" << std::endl;
+			}
 			if (trans.is_response_error()) {
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+				}
 			}
 			else {
 				switch (trans.get_command()) {
@@ -78,10 +87,14 @@ private:
 					std::memcpy(tempdata.m_data, trans.get_data_ptr(), trans.get_data_length());
 
 					// dump message
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received data: ";
-					for (unsigned int i = 0; i < trans.get_data_length(); i++)
+					if (m_message)
 					{
-						std::cout << "[0x"  << std:: hex << (unsigned int)tempdata.m_data[i] << "]	";
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received data: ";
+
+						for (unsigned int i = 0; i < trans.get_data_length(); i++)
+						{
+							std::cout << "[0x" << std::hex << (unsigned int)tempdata.m_data[i] << "]	";
+						}
 					}
 					std::cout << std::endl;
 
@@ -91,7 +104,10 @@ private:
 				default:
 					break;
 				}
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
+				}
 			}
 			break;
 		}
@@ -110,10 +126,11 @@ public:
 	 * The constructor of DummyMaster
 	 *
 	 */
-	DummyMaster(sc_core::sc_module_name name) :
+	DummyMaster(sc_core::sc_module_name name, bool message = false) :
 		 sc_core::sc_module(name)
 		 , initiator_socket("initiator_socket")
 		 , m_name(name)
+		 , m_message(message)
 		 {
 			initiator_socket.register_nb_transport_bw(this, &DummyMaster::nb_transport_bw);
 		 }
@@ -171,9 +188,11 @@ public:
 			trans.set_data_length(sizeof(data));
 			trans.set_data_ptr(_data);
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
-
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr 
-				<< "	,data: 0x" << std::hex << data << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr
+					<< "	,data: 0x" << std::hex << data << std::endl;
+			}
 			
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
@@ -196,8 +215,10 @@ public:
 			trans.set_byte_enable_ptr(0); // 0 indicates unused
 			trans.set_dmi_allowed(false); // DMI not allowed
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
-
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			status = initiator_socket->nb_transport_fw(trans, phase, delay);
@@ -238,8 +259,10 @@ public:
 			trans.set_data_ptr(data);
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr << std::endl;
-
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr << std::endl;
+			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			status = initiator_socket->nb_transport_fw(trans, phase, delay);
@@ -260,8 +283,10 @@ public:
 			trans.set_byte_enable_ptr(0); // 0 indicates unused
 			trans.set_dmi_allowed(false); // DMI not allowed
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
-
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
 			status = initiator_socket->nb_transport_fw(trans, phase, delay);

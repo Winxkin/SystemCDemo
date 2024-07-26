@@ -122,7 +122,7 @@ public:
     void update_register(uint64_t address, uint32_t value) {
         for (auto& reg : registers) {
             if (reg.second.get_address() == address) {
-                std::cout << "Register " << reg.second.get_name()
+                std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << reg.second.get_name()
                     << " changed to value -> [0x" << std::hex << value << "]"
                     << std::dec << std::endl;
                 reg.second = value;
@@ -144,7 +144,7 @@ public:
     {
         for (auto& reg : registers)
         {
-            std::cout << "[dump]  Register " << reg.second.get_name()
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" "[dump]  Register " << reg.second.get_name()
                 << ", address: [" << std::hex << reg.second.get_address()
                 << "] value: [" << std::hex << reg.second.get_value() << "]" << std::endl;
         }

@@ -14,6 +14,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <list>
 #include <cstdint>
 #include "Registerif.h"
 
@@ -49,6 +50,7 @@ private:
 	sc_core::sc_event e_DMA_run_done;
 	sc_core::sc_event e_DMA_forward;
 	tlm::tlm_generic_payload current_trans;
+	std::list<unsigned int> port_req_ids;
 private:
 	void copy_tlm_generic_payload(tlm::tlm_generic_payload& des, tlm::tlm_generic_payload& src)
 	{
@@ -176,10 +178,6 @@ private:
 					current_trans.set_address(regs[DMADESADDR(current_ch)].get_value());
 					current_trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 					current_trans.set_command(tlm::TLM_WRITE_COMMAND);
-
-					// Sending transaction to destination address
-					//status = initiator_socket->nb_transport_fw(trans, fw_phase, delay);	// Error because the nb_transport_bw is not done and the bus is locked
-
 					e_DMA_forward.notify(sc_core::SC_ZERO_TIME);
 
 					break;
@@ -188,7 +186,7 @@ private:
 				{
 					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
 						<< regs[DMASRCADDR(current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(current_ch)].get_value() << std::endl;
-
+					// Notifying DMA operation done !
 					e_DMA_run_done.notify();
 					break;
 				}
@@ -208,16 +206,16 @@ private:
 	{
 		for (unsigned int i = 0; i < DMA_MAX_CH; i++)
 		{
-			regs.add_register("DMADESADDR" + std::to_string(i), DMADESADDR(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMASRCADDR" + std::to_string(i), DMASRCADDR(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMADATALENGTH" + std::to_string(i), DMADATALENGTH(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMADESADDR" + std::to_string(i), DMADESADDR(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMASRCADDR" + std::to_string(i), DMASRCADDR(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMADATALENGTH" + std::to_string(i), DMADATALENGTH(i), 0x00, 0xFFFFFFFF, i);
 		}
 		for (unsigned int i = 0; i < (DMA_MAX_CH/32); i++)
 		{
-			regs.add_register("DMAREQ" + std::to_string(i), DMAREQ(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMAACK" + std::to_string(i), DMAACK(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMAINT" + std::to_string(i), DMAINT(i), 0x00, 0xFFFF, i);
-			regs.add_register("DMACHEN" + std::to_string(i), DMACHEN(i), 0x00, 0xFFFF, i);
+			regs.add_register("DMAREQ" + std::to_string(i), DMAREQ(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMAACK" + std::to_string(i), DMAACK(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMAINT" + std::to_string(i), DMAINT(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMACHEN" + std::to_string(i), DMACHEN(i), 0x00, 0xFFFFFFFF, i);
 			
 			// Registration call back function
 			regs.set_register_callback("DMAREQ" + std::to_string(i), std::bind(&DMAC::cb_DMAREQ, this,
@@ -225,6 +223,8 @@ private:
 			regs.set_register_callback("DMAACK" + std::to_string(i), std::bind(&DMAC::cb_DMAACK, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 			regs.set_register_callback("DMAINT" + std::to_string(i), std::bind(&DMAC::cb_DMAINT, this,
+				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
+			regs.set_register_callback("DMACHEN" + std::to_string(i), std::bind(&DMAC::cb_DMACHEN, this,
 				std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 		}
 
@@ -253,6 +253,12 @@ private:
 		// Set Interrupt signals in here
 	}
 
+	void cb_DMACHEN(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
+	{
+		// Set Interrupt signals in here
+		
+	}
+
 
 	/* SC_METHOD and SC_THREAD are defined in here */
 	
@@ -264,6 +270,10 @@ private:
 		regs.reset_regs();
 		current_reg_req_ch = 0;
 		current_reg_req_name.clear();
+		e_DMA_forward.cancel();
+		e_DMA_request.cancel();
+		e_DMA_run.cancel();
+		e_DMA_run_done.cancel();
 	}
 
 
@@ -272,7 +282,25 @@ private:
 		// SC_THREAD is triggered only one at the same simulation time
 		if (!is_running)
 		{
-			e_DMA_request.notify();
+			for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
+				bool is_enable = (bool)((regs[DMACHEN(i / 32)].get_value() >> i) & 0x01);
+				if (is_enable)
+				{
+					if (DMA_req[i].read())
+					{
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+						port_req_ids.push_back(i);
+					}
+				}
+			}
+			if (!port_req_ids.empty())
+			{
+				e_DMA_request.notify();
+			}
+		}
+		else
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
 		}
 	}
 
@@ -283,37 +311,33 @@ private:
 			// waiting to next cycle
 			wait(e_DMA_request);
 			wait(clk.posedge_event());
-			is_running = true;
 			if (!is_testmode)
 			{
 				// using ports to trigger DMAC
-				for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
-					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
-					{
-						if (DMA_req[i].read()) {
-							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
-							current_ch = i;
-							e_DMA_run.notify();	// Bus delay simulation time
-							wait(e_DMA_run_done);
+				while (!port_req_ids.empty())
+				{
+					current_ch = port_req_ids.front();
+					port_req_ids.pop_front(); // removing request id from list
+					e_DMA_run.notify();	// Bus delay simulation time
+					is_running = true;
+					wait(e_DMA_run_done);
 
-							// set output port
-							wait(clk.posedge_event());
-							DMA_ack[i].write(true);
-							DMA_int[i].write(true);
-							wait(clk.posedge_event());
-							DMA_ack[i].write(false);
-							DMA_int[i].write(false);
-
-							// continuting with next channels
-							// reset loop
-						}
-					}
+					// set output ack and int port
+					wait(clk.posedge_event());
+					DMA_ack[current_ch].write(true);
+					DMA_int[current_ch].write(true);
+					wait(clk.posedge_event());
+					DMA_ack[current_ch].write(false);
+					DMA_int[current_ch].write(false);
+					// continuting with next channels
 				}
+				
 			}
 			else
 			{
 				// using register to trigger DMAC
 				uint32_t value = regs[current_reg_req_name].get_value();
+				is_running = true;
 				for (unsigned int i = 0; i < 32; i++)
 				{
 					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
@@ -321,6 +345,7 @@ private:
 						if ((value >> i) & 0x01)
 						{
 							e_DMA_run.notify();	// Bus delay simulation time
+							is_running = true;
 							wait(e_DMA_run_done);
 							// continuting with next channels
 							regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
@@ -357,10 +382,9 @@ private:
 			trans.set_byte_enable_ptr(0); // 0 indicates unused
 			trans.set_dmi_allowed(false); // DMI not allowed
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
-
+			// Sending transaction using initiator socket
 			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
-
 			status = initiator_socket->nb_transport_fw(trans, fw_phase, delay);
 
 
@@ -371,6 +395,7 @@ private:
 	{
 		while (true)
 		{
+			// waiting when receiving data from slave
 			wait(e_DMA_forward);
 			tlm::tlm_phase fw_phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
