@@ -64,7 +64,7 @@ private:
 			*/
 			tlm::tlm_phase next_phase = tlm::END_REQ;
 			target_socket->nb_transport_bw(trans, next_phase, delay);
-
+			break;
 		}
 		case tlm::END_REQ:
 		{

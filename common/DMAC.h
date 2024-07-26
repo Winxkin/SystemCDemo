@@ -39,6 +39,7 @@ class DMAC : public sc_core::sc_module {
 
 private:
 	std::string m_name;
+	bool m_message;
 	RegisterInterface regs;
 	unsigned int current_ch;
 	unsigned int current_reg_req_ch;
@@ -93,14 +94,20 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) BEGIN_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) BEGIN_REQ received" << std::endl;
+			}
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
 			{
 				unsigned int wdata = 0;
 				std::memcpy(&wdata, trans.get_data_ptr(), sizeof(wdata));
 				regs.update_register(trans.get_address(), wdata);
-				// std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+				}
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
 			}
@@ -123,7 +130,10 @@ private:
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) END_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) END_REQ received" << std::endl;
+			}
 			break;
 		}
 		default:
@@ -157,16 +167,25 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) BEGIN_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) BEGIN_REQ received" << std::endl;
+			}
 			break;
 		}
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) END_REQ received" << std::endl;
-
-			if (trans.is_response_error()) {
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) END_REQ received" << std::endl;
+			}
+			if (trans.is_response_error()) 
+			{
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+				}
 			}
 			else
 			{
@@ -184,8 +203,11 @@ private:
 				}
 				case tlm::TLM_WRITE_COMMAND:
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
-						<< regs[DMASRCADDR(current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(current_ch)].get_value() << std::endl;
+					if (m_message)
+					{
+						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
+							<< regs[DMASRCADDR(current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(current_ch)].get_value() << std::endl;
+					}
 					// Notifying DMA operation done !
 					e_DMA_run_done.notify();
 					break;
@@ -237,7 +259,11 @@ private:
 		}
 		else
 		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
+
+			}
 		}
 	}
 
@@ -274,7 +300,10 @@ private:
 				{
 					if (DMA_req[i].read())
 					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+						if (m_message)
+						{
+							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+						}
 						port_req_ids.push_back(i);
 					}
 				}
@@ -286,7 +315,11 @@ private:
 		}
 		else
 		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
+
+			}
 		}
 	}
 
@@ -342,7 +375,10 @@ private:
 					}
 				}
 			}
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
+			}
 			// releasing flags
 			is_running = false;
 			is_testmode = false;
@@ -401,9 +437,10 @@ public:
 	sc_core::sc_in<bool> rst;
 
 
-	DMAC(sc_core::sc_module_name name) :
+	DMAC(sc_core::sc_module_name name, bool message = false) :
 		sc_core::sc_module(name)
 		, m_name(name)
+		, m_message(message)
 		, target_socket("target_socket")
 		, initiator_socket("initiator_socket")
 		, current_ch(0)

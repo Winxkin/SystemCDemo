@@ -22,77 +22,89 @@ class DummySlave : public sc_core::sc_module
 {
 private:
     std::string m_name;
+	bool m_message;
     RegisterInterface regs;
 
+	std::map<std::string, sc_core::sc_in<bool>*> input_ports;
+	std::map<std::string, sc_core::sc_out<bool>*> output_ports;
+
 private:
+
+	void end_of_elaboration() override {
+		// Set up sensitivity list for monitoring inputs
+		SC_METHOD(monitor_inputs);
+		for (auto& pair : input_ports) {
+			sensitive << *pair.second;
+		}
+		dont_initialize();
+	}
+
+	void monitor_inputs()
+	{
+
+	}
+
+
     void InitializeRegister()
     {
-        regs.add_register("DummySlave_RESULT", 0x00, 0, 0x01);
-        regs.set_register_callback("DummySlave_RESULT", std::bind(&DummySlave::cb_DummySlave_RESULT, this, 
-            std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
+       
     }
 
-    void cb_DummySlave_RESULT(const std::string& name, uint32_t value , uint32_t old_value, uint32_t mask, uint32_t ch)
-    {
-        if (name == "DummySlave_RESULT")
-        {
-            if (value == 0x0)
-            {
-                std::cout << "-----------------------\n";
-                std::cout << "      TM is Pass       \n";
-                std::cout << "-----------------------\n";
-                exit(0);
-            }
-            else
-            {
-                std::cout << "-----------------------\n";
-                std::cout << "      TM is Fail       \n";
-                std::cout << "-----------------------\n";
-                exit(0);
-            }
-        }
-    }
+	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
+		switch (phase)
+		{
+		case tlm::BEGIN_REQ:
+		{
+			// Handle BEGIN_REQ phase
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
+			}
+			break;
+		}
+		case tlm::END_REQ:
+		{
+			// Handle END_REQ phase (shouldn't happen here)
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			}
+			break;
+		}
+		default:
+			break;
+		}
+		return tlm::TLM_ACCEPTED;
+	}
 
 
 public:
-    tlm_utils::simple_initiator_socket<DummySlave, BUSWIDTH> initiator_socket;
     tlm_utils::simple_target_socket<DummySlave, BUSWIDTH> target_socket;
+	sc_core::sc_in clk;
+	sc_core::sc_in rst;
 
-    DummySlave(sc_core::sc_module_name name) :
-        sc_core::sc_module(name),
-        m_name(name),
-        target_socket("target_socket")
+
+    DummySlave(sc_core::sc_module_name name, bool message = false) :
+        sc_core::sc_module(name)
+		,m_message(message)
+        ,m_name(name)
+        ,target_socket("target_socket")
     {
-        target_socket.register_b_transport(this, &DummySlave::b_transport);
+        target_socket.register_nb_transport_fw(this, &DummySlave::nb_transport_fw);
         InitializeRegister();
+
     }
 
-    void b_transport(tlm::tlm_generic_payload& trans, sc_core::sc_time& delay) {
-        // Handle transaction
+	// Method to add ports to the maps
+	void bind_input_port(const string& name, sc_in<bool>& in_port) {
+		input_ports[name] = &in_port;
+	}
 
-        switch (trans.get_command()) {
-        case tlm::TLM_WRITE_COMMAND:
-        {   
-            unsigned int wdata = 0;
-            std::memcpy(&wdata, trans.get_data_ptr(), sizeof(wdata));
-            //regs[trans.get_address()] = wdata;
-            regs.update_register(trans.get_address(), wdata);
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
-            trans.set_response_status(tlm::TLM_OK_RESPONSE);
-        }
-        case tlm::TLM_READ_COMMAND:
-        {
-            unsigned int rdata = 0;
-            rdata =(unsigned int)regs[trans.get_address()].get_value();
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << rdata << std::dec << std::endl;
-            std::memcpy(trans.get_data_ptr(), &rdata, trans.get_data_length());
-            trans.set_response_status(tlm::TLM_OK_RESPONSE);
-            break;
-        }
-        default:
-            break;
-        }
-    }
+	void bind_output_port(const string& name, sc_out<bool>& out_port) {
+		output_ports[name] = &out_port;
+	}
+
+
 
 };
 

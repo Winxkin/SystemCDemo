@@ -10,20 +10,22 @@
 #include <iostream>
 #include <tlm_utils/simple_initiator_socket.h>
 #include <tlm_utils/simple_target_socket.h>
-#include "common/bus.h"
-#include "common/DummyMaster.h"
-#include "common/DummySlave.h"
-#include "common/target.h"
-#include "common/memory.h"
-#include "common/DMAC.h"
+#include "../common/bus.h"
+#include "../common/DummyMaster.h"
+#include "../common/DummySlave.h"
+#include "../common/target.h"
+#include "../common/memory.h"
+#include "../common/DMAC.h"
+
 
 class SoCPlatform : public sc_core::sc_module
 {
 public:
 	SoCPlatform(sc_core::sc_module_name name) :
 		sc_core::sc_module(name)
-		, m_dummymaster("DummyMaster")
-		, m_dmac("Dmac")
+		, m_dummymaster("DummyMaster", false)
+		, m_dummyslave("DummySlave", false)
+		, m_dmac("Dmac", false)
 		, m_bus("bus_mmio", false)
 		, sysclk("sysclk", 10, sc_core::SC_PS)
 		, m_target1("Target1")
@@ -45,12 +47,13 @@ private:
 		m_dmac.initiator_socket.bind(m_bus.target_sockets);
 
 		// Binding target sockets into bus MMIO
-		m_bus.mapping_target_sockets(0, 0x0000, 0x3000).bind(m_ram.socket);
-		m_bus.mapping_target_sockets(1, 0x3000, 0x1000).bind(m_dmac.target_socket);
-		m_bus.mapping_target_sockets(2, 0x4000, 0x1000).bind(m_target1.target_socket);
-		m_bus.mapping_target_sockets(3, 0x5000, 0x1000).bind(m_target2.target_socket);
-		m_bus.mapping_target_sockets(4, 0x6000, 0x1000).bind(m_target3.target_socket);
-		m_bus.mapping_target_sockets(5, 0x7000, 0x1000).bind(m_target4.target_socket);
+		m_bus.mapping_target_sockets(0x0000, 0x3000).bind(m_ram.socket);
+		m_bus.mapping_target_sockets(0x3000, 0x1000).bind(m_dummyslave.target_socket);
+		m_bus.mapping_target_sockets(0x4000, 0x1000).bind(m_dmac.target_socket);
+		m_bus.mapping_target_sockets(0x5000, 0x1000).bind(m_target1.target_socket);
+		m_bus.mapping_target_sockets(0x6000, 0x1000).bind(m_target2.target_socket);
+		m_bus.mapping_target_sockets(0x7000, 0x1000).bind(m_target3.target_socket);
+		m_bus.mapping_target_sockets(0x8000, 0x1000).bind(m_target4.target_socket);
 
 	}
 
@@ -76,8 +79,9 @@ private:
 
 public: // public models
 	DummyMaster<32> m_dummymaster;
+	DummySlave<32> m_dummyslave;
 
-public: // Private models
+private: // Private models
 	BUS<APB,6> m_bus;
 	DMAC<32> m_dmac;
 	Target<32> m_target1;
@@ -86,7 +90,7 @@ public: // Private models
 	Target<32> m_target4;
 	RAM<32> m_ram;
 
-public: // Define signals
+private: // Define signals
 
 	sc_core::sc_clock sysclk;
 	sc_core::sc_signal<bool> rst;

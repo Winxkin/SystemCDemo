@@ -19,10 +19,28 @@
     <Filter Include="Header Files\models">
       <UniqueIdentifier>{073bf26b-f23f-4379-a4f0-ebd33b44b888}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SocPlatform">
+      <UniqueIdentifier>{a3242f69-daa8-447c-ba0d-a939ac452a9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\test">
+      <UniqueIdentifier>{b29b1f2a-63ed-42c0-bd14-dbe1d12f1b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\test\01_bus">
+      <UniqueIdentifier>{8d93e463-e43a-4624-9d3e-3fd5163383f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\test\02_dmac">
+      <UniqueIdentifier>{4db7c4a5-b1d8-403f-a7ab-2f09a8a4849c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\01_Bus\tp_01_01.h">
+      <Filter>Header Files\test\01_bus</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\02_Dmac\tp_02_01.h">
+      <Filter>Header Files\test\02_dmac</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,11 +62,17 @@
     <ClInclude Include="common\bus.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="top.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="common\DMAC.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="SocPlatform\top.h">
+      <Filter>Header Files\SocPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="SocPlatform\IO.h">
+      <Filter>Header Files\SocPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\02_Dmac\Register.h">
+      <Filter>Header Files\test\02_dmac</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

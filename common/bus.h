@@ -55,7 +55,8 @@ private:
 	bool m_message;
 	sc_core::sc_event e_forward_tran;
 	tlm::tlm_generic_payload current_trans;
-	int current_ts_id;
+	unsigned int current_ts_id;
+	unsigned int bind_count_id;
 	
 	struct address
 	{
@@ -365,6 +366,7 @@ public:
 		, socket_index(0)
 		, m_clkmonitor(enclkmonitor)
 		, m_message(message)
+		, bind_count_id(0)
 	{
 		// Registration nb_transport_fw for target socket
 		target_sockets.register_nb_transport_fw(this, &BUS::nb_transport_fw);
@@ -430,7 +432,7 @@ public:
 	* 
 	* @return tlm_utils::simple_initiator_socket is the initiator socket with id registration used to bind with the corresponding target socket
 	*/
-	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _id, unsigned int _addr, unsigned int _size)
+	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)
 	{
 
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
@@ -441,10 +443,13 @@ public:
 			}
 		}
 
-		address newaddress = { _id, _addr, _size };
+		address newaddress = { bind_count_id, _addr, _size };
 		address_mapping.push_back(newaddress);
 
-		return initiator_sockets[_id];
+		// Increasing binding id
+		bind_count_id = bind_count_id + 1;
+
+		return initiator_sockets[bind_count_id];
 	};
 
 };
