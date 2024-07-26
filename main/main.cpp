@@ -1,5 +1,5 @@
 // All systemc modules should include systemc.h header file
-#include "test/02_Dmac/tp_02_01.h"
+#include "../test/02_Dmac/tp_02_01.h"
 
 // sc_main in top level function like in C++ main
 

@@ -23,6 +23,7 @@ class DummySlave : public sc_core::sc_module
 private:
     std::string m_name;
 	bool m_message;
+	bool is_monitor_ports;
     RegisterInterface regs;
 
 	std::map<std::string, sc_core::sc_in<bool>*> input_ports;
@@ -48,7 +49,12 @@ private:
 		for (const auto& pair : input_ports) {
 			if (pair.second->read() != input_val_ports[pair.first])
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Port " << pair.first << " has changed, value: " << pair.second->read() << std::endl;
+				input_val_ports[pair.first] = pair.second->read();
+				if (is_monitor_ports)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Port " << pair.first << " has changed, value: " << pair.second->read() << std::endl;
+
+				}
 			}
 		}
 	}
@@ -96,6 +102,7 @@ public:
     DummySlave(sc_core::sc_module_name name, bool message = false) :
         sc_core::sc_module(name)
 		,m_message(message)
+		,is_monitor_ports(false)
         ,m_name(name)
         ,target_socket("target_socket")
     {
@@ -116,6 +123,16 @@ public:
 		output_ports[name] = new sc_core::sc_out<bool>();
 		output_val_ports[name] = false;
 		return output_ports[name];
+	}
+
+	void set_output_ports(const std::string& name, bool value)
+	{
+		output_ports[name]->write(value);
+	}
+
+	void monitor_ports(bool is_enable)
+	{
+		is_monitor_ports = is_enable;
 	}
 
 

@@ -16,6 +16,7 @@
 #include "../common/target.h"
 #include "../common/memory.h"
 #include "../common/DMAC.h"
+#include "IO.h"
 
 
 class SoCPlatform : public sc_core::sc_module
@@ -27,12 +28,12 @@ public:
 		, m_dummyslave("DummySlave", false)
 		, m_dmac("Dmac", false)
 		, m_bus("bus_mmio", false)
-		, sysclk("sysclk", 10, sc_core::SC_PS)
+		, m_sysclk("systemCLK", 10, sc_core::SC_PS)
 		, m_target1("Target1")
 		, m_target2("Target2")
 		, m_target3("Target3")
 		, m_target4("Target4")
-		, m_ram("ram1", 0x3000)
+		, m_ram1("ram1", 0x3000, false)
 		{
 			do_signals_binding();
 			do_bus_binding();
@@ -47,29 +48,29 @@ private:
 		m_dmac.initiator_socket.bind(m_bus.target_sockets);
 
 		// Binding target sockets into bus MMIO
-		m_bus.mapping_target_sockets(0x0000, 0x3000).bind(m_ram.socket);
-		m_bus.mapping_target_sockets(0x3000, 0x1000).bind(m_dummyslave.target_socket);
-		m_bus.mapping_target_sockets(0x4000, 0x1000).bind(m_dmac.target_socket);
-		m_bus.mapping_target_sockets(0x5000, 0x1000).bind(m_target1.target_socket);
-		m_bus.mapping_target_sockets(0x6000, 0x1000).bind(m_target2.target_socket);
-		m_bus.mapping_target_sockets(0x7000, 0x1000).bind(m_target3.target_socket);
-		m_bus.mapping_target_sockets(0x8000, 0x1000).bind(m_target4.target_socket);
+		m_bus.mapping_target_sockets(BASE_RAM1,	SIZE_RAM1).bind(m_ram1.socket);
+		m_bus.mapping_target_sockets(BASE_DUMMYSLAVE, SIZE_DUMMYSLAVE).bind(m_dummyslave.target_socket);
+		m_bus.mapping_target_sockets(BASE_DMAC,	SIZE_DMAC).bind(m_dmac.target_socket);
+		m_bus.mapping_target_sockets(BASE_TARGET1, SIZE_TARGET1).bind(m_target1.target_socket);
+		m_bus.mapping_target_sockets(BASE_TARGET2, SIZE_TARGET2).bind(m_target2.target_socket);
+		m_bus.mapping_target_sockets(BASE_TARGET3, SIZE_TARGET3).bind(m_target3.target_socket);
+		m_bus.mapping_target_sockets(BASE_TARGET4, SIZE_TARGET4).bind(m_target4.target_socket);
 
 	}
 
 	void do_signals_binding()
 	{
 		// binding system clock
-		m_bus.m_clk(sysclk);
-		m_dmac.clk.bind(sysclk);
-		m_dummymaster.clk.bind(sysclk);
-		m_dummyslave.clk.bind(sysclk);
-		m_dummyslave.rst(rst);
+		m_bus.m_clk(m_sysclk);
+		m_dmac.clk.bind(m_sysclk);
+		m_dummymaster.clk.bind(m_sysclk);
+		m_dummyslave.clk.bind(m_sysclk);
+		m_dummyslave.rst(m_sysrst);
 
 		// binding reset
-		m_dummymaster.rst.bind(rst);
-		m_bus.rst.bind(rst);
-		m_dmac.rst.bind(rst);
+		m_dummymaster.rst.bind(m_sysrst);
+		m_bus.rst.bind(m_sysrst);
+		m_dmac.rst.bind(m_sysrst);
 		
 		for (unsigned int i = 0; i < 256; i++)
 		{
@@ -81,30 +82,76 @@ private:
 			m_dummyslave.add_input_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
 			m_dummyslave.add_input_port("DMA_int" + std::to_string(i))->bind(dma_int[i]);
 			m_dummyslave.add_input_port("DMA_ack" + std::to_string(i))->bind(dma_ack[i]);
+
+			m_dummyslave.add_output_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
 		}
 		
 		
 	}
 
-public: // public models
-	DummyMaster<32> m_dummymaster;
-	DummySlave<32> m_dummyslave;
+public:
+
+	// RAM model
+	void dump_memory(const std::string& name, sc_dt::uint64 offset, unsigned int len)
+	{
+		if (name == m_ram1.get_name())
+		{
+			m_ram1.dump_memory(offset, len);
+		}
+	}
+
+	// DummySlave model
+	void monitor_ports(bool is_enable)
+	{
+		m_dummyslave.monitor_ports(is_enable);
+	}
+
+	void set_output_ports(const std::string& name, bool value)
+	{
+		m_dummyslave.set_output_ports(name, value);
+	}
+
+	// DummyMaster model
+	unsigned char* get_received_data()
+	{
+		return m_dummymaster.get_received_data();
+	}
+
+	unsigned int get_received_32bit_data()
+	{
+		return m_dummymaster.get_received_32bit_data();
+	}
+
+	
+	void SentTransaction(unsigned int addr, uint32_t data, tlm::tlm_command cmd)
+	{
+		m_dummymaster.SentTransaction(addr, data, cmd);
+	}
+
+	void Sentcustomtransaction(unsigned int addr, unsigned char* data, unsigned int data_length, tlm::tlm_command cmd)
+	{
+		m_dummymaster.Sentcustomtransaction(addr, data, data_length, cmd);
+	}
+
 
 private: // Private models
-	BUS<APB,7> m_bus;
+	DummyMaster<32> m_dummymaster;
+	DummySlave<32> m_dummyslave;
+	BUS<APB> m_bus;
 	DMAC<32> m_dmac;
 	Target<32> m_target1;
 	Target<32> m_target2;
 	Target<32> m_target3;
 	Target<32> m_target4;
-	RAM<32> m_ram;
+	RAM<32> m_ram1;
 
 private: // Define signals
 
-	sc_core::sc_clock sysclk;
-	sc_core::sc_signal<bool> rst;
+	sc_core::sc_clock m_sysclk;
+	sc_core::sc_signal<bool> m_sysrst;
 	sc_core::sc_signal<bool> dma_req[256];
 	sc_core::sc_signal<bool> dma_ack[256];
 	sc_core::sc_signal<bool> dma_int[256];
+
 };
 #endif

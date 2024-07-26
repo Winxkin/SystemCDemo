@@ -310,6 +310,7 @@ private:
 			}
 			if (!port_req_ids.empty())
 			{
+				is_running = true;
 				e_DMA_request.notify();
 			}
 		}
@@ -338,7 +339,6 @@ private:
 					current_ch = port_req_ids.front();
 					port_req_ids.pop_front(); // removing request id from list
 					e_DMA_run.notify();	// Bus delay simulation time
-					is_running = true;
 					wait(e_DMA_run_done);
 
 					// set output ack and int port
@@ -356,7 +356,6 @@ private:
 			{
 				// using register to trigger DMAC
 				uint32_t value = regs[current_reg_req_name].get_value();
-				is_running = true;
 				for (unsigned int i = 0; i < 32; i++)
 				{
 					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
@@ -364,9 +363,9 @@ private:
 						if ((value >> i) & 0x01)
 						{
 							// set current channel
+							is_running = true;
 							current_ch = (current_reg_req_ch == 0) ? i : (i * current_reg_req_ch);
 							e_DMA_run.notify();	// Bus delay simulation time
-							is_running = true;
 							wait(e_DMA_run_done);
 							// continuting with next channels
 							regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();

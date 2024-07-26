@@ -24,15 +24,16 @@ private:
     unsigned char* data;
     sc_dt::uint64 size;
 	std::string m_name;
-
+	bool m_message;
 public:
     tlm_utils::simple_target_socket<RAM, BUSWIDTH> socket;
 
-    RAM(sc_core::sc_module_name name, sc_dt::uint64 size) :
+    RAM(sc_core::sc_module_name name, sc_dt::uint64 size, bool message = false) :
         sc_module(name)
 		, m_name(name)
         , socket("socket")
-        , size(size) 
+        , size(size)
+		, m_message(message)
 	{
         socket.register_nb_transport_fw(this, &RAM::nb_transport_fw);
         data = new unsigned char[size];
@@ -86,7 +87,10 @@ public:
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			}
 			break;
 		}
 		default:
@@ -108,6 +112,11 @@ public:
 			}
 			std::cout << std::endl;
 		}
+	}
+
+	std::string get_name()
+	{
+		return m_name;
 	}
 
 };

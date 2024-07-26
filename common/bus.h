@@ -36,7 +36,7 @@ typedef enum
 
 } DATAWIDTH;
 
-template<unsigned int BUSWIDTH = 32, unsigned int NUM_TS = 10, unsigned int DATA_WIDTH = D8BIT>
+template<unsigned int BUSWIDTH = 32, unsigned int DATA_WIDTH = D8BIT>
 class BUS : public sc_core::sc_module
 {
 public:
@@ -45,7 +45,7 @@ public:
 	sc_core::sc_in<bool> rst;
 
 private:
-	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>initiator_sockets[NUM_TS];
+	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH> initiator_sockets;
 
 	std::string m_name;
 	unsigned int div_index;
@@ -242,7 +242,7 @@ private:
 	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
 	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
 	 */
-	tlm::tlm_sync_enum nb_transport_bw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
+	tlm::tlm_sync_enum nb_transport_bw(int id, tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
 		switch (phase)
 		{
 		case tlm::BEGIN_REQ:
@@ -372,10 +372,7 @@ public:
 		target_sockets.register_nb_transport_fw(this, &BUS::nb_transport_fw);
 
 		// Registratiob nb_transport_bw for Initiator sockets
-		for (unsigned int i = 0; i < NUM_TS; i++)
-		{
-			initiator_sockets[i].register_nb_transport_bw(this, &BUS::nb_transport_bw);
-		}
+		initiator_sockets.register_nb_transport_bw(this, &BUS::nb_transport_bw);
 
 		// define thread and method
 		SC_THREAD(foward_transaction_process);
@@ -432,7 +429,7 @@ public:
 	* 
 	* @return tlm_utils::simple_initiator_socket is the initiator socket with id registration used to bind with the corresponding target socket
 	*/
-	tlm_utils::simple_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)
+	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)
 	{
 		unsigned int id = bind_count_id;
 		// Increasing binding id
@@ -449,7 +446,7 @@ public:
 		address newaddress = { id, _addr, _size };
 		address_mapping.push_back(newaddress);
 
-		return initiator_sockets[id];
+		return initiator_sockets;
 	};
 
 };
