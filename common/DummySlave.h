@@ -27,6 +27,10 @@ private:
 	bool m_message;
 	bool is_monitor_ports;
     RegisterInterface regs;
+	bool cur_is_pos;
+	bool cur_triggered_val;
+	std::string cur_port_name;
+	sc_core::sc_event e_triggerd_port;
 
 	std::map<std::string, sc_core::sc_in<bool>*> input_ports;
 	std::map<std::string, sc_core::sc_out<bool>*> output_ports;
@@ -149,6 +153,25 @@ private:
 		}
 	}
 
+	/* Thread handling */
+
+	void thr_triggered_port_process()
+	{
+		while (true)
+		{
+			wait(e_triggerd_port);
+			if (cur_is_pos)
+			{
+				wait(clk.posedge_event());
+			}
+			else
+			{
+				wait(clk.negedge_event());
+			}
+			output_ports[cur_port_name]->write(!cur_triggered_val);
+		}
+	}
+
 public:
     tlm_utils::simple_target_socket<DummySlave, BUSWIDTH> target_socket;
 	sc_core::sc_in<bool> clk;
@@ -161,10 +184,14 @@ public:
 		,is_monitor_ports(false)
         ,m_name(name)
         ,target_socket("target_socket")
+		, cur_is_pos(true)
+		, cur_triggered_val(false)
     {
         target_socket.register_nb_transport_fw(this, &DummySlave::nb_transport_fw);
 		init_registers();
 
+		SC_THREAD(thr_triggered_port_process);
+		sensitive << e_triggerd_port;
     }
 
 	// Method to add ports to the maps
@@ -184,6 +211,14 @@ public:
 	void set_output_ports(const std::string& name, bool value)
 	{
 		output_ports[name]->write(value);
+	}
+
+	void trigger_output_ports(const std::string& name, bool high_level, bool is_pos)
+	{
+		output_ports[name]->write(high_level);
+		cur_triggered_val = high_level;
+		cur_port_name = name;
+		cur_is_pos = is_pos;
 	}
 
 	bool read_input_ports(const std::string& name)

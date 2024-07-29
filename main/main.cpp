@@ -7,10 +7,9 @@
 int sc_main(int argc, char* argv[]) {
 
     SoCPlatform m_SoCPlatform("SoCPlatform");
-    sc_core::sc_start(10, sc_core::SC_NS);
 
     // Running test case here
-    tp_03_01(m_SoCPlatform);
+    tp_04_01(m_SoCPlatform);
 
     return 0;
 }

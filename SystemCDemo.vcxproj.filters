@@ -43,6 +43,15 @@
     <Filter Include="Header Files\test\03_Adder">
       <UniqueIdentifier>{bc78c25d-5afc-4291-9590-d6a09203cbc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\models\Counter">
+      <UniqueIdentifier>{16f0e039-64e9-4dde-861b-ecdf3dc58e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models\Counter">
+      <UniqueIdentifier>{2b2e65eb-2e03-49fa-867b-81a4c2bee214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\test\04_Counter">
+      <UniqueIdentifier>{c6e7e202-fa64-4561-b6a4-efd03ed2a248}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
@@ -56,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="models\Adder\src\full_adder_full_adder.cpp">
       <Filter>Source Files\models\Adder</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Counter\src\counter_counter.cpp">
+      <Filter>Source Files\models\Counter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +118,15 @@
     </ClInclude>
     <ClInclude Include="Test\03_Adder\tp_03_01.h">
       <Filter>Header Files\test\03_Adder</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Counter\Counter_wrapper.h">
+      <Filter>Header Files\models\Counter</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Counter\inc\counter_counter.h">
+      <Filter>Header Files\models\Counter</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\04_Counter\tp_04_01.h">
+      <Filter>Header Files\test\04_Counter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

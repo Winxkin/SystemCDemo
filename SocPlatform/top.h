@@ -18,6 +18,7 @@
 #include "DMAC.h"
 #include "IO.h"
 #include "Adder/Adder_wrapper.h"
+#include "Counter/Counter_wrapper.h"
 
 
 class SoCPlatform : public sc_core::sc_module
@@ -36,6 +37,7 @@ public:
 		, m_target4("Target4")
 		, m_ram1("ram1", 0x3000, false)
 		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
+		, m_wrapper_counter("wrapper_counter", true)
 		{
 			do_signals_binding();
 			do_bus_binding();
@@ -58,7 +60,7 @@ private:
 		m_bus.mapping_target_sockets(BASE_TARGET3, SIZE_TARGET3).bind(m_target3.target_socket);
 		m_bus.mapping_target_sockets(BASE_TARGET4, SIZE_TARGET4).bind(m_target4.target_socket);
 		m_bus.mapping_target_sockets(BASE_FOUR_BIT_ADDER, SIZE_FOUR_BIT_ADDER).bind(m_wrapper_four_bit_adder.target_socket);
-
+		m_bus.mapping_target_sockets(BASE_COUNTER, SIZE_COUNTER).bind(m_wrapper_counter.target_socket);
 	}
 
 	void do_signals_binding()
@@ -69,6 +71,8 @@ private:
 		m_dummymaster.clk.bind(m_sysclk);
 		m_dummyslave.clk.bind(m_sysclk);
 		m_dummyslave.rst(m_sysrst);
+		m_wrapper_counter.m_clk(m_sysclk);
+
 
 		// binding reset
 		m_dummymaster.rst.bind(m_sysrst);
@@ -85,12 +89,14 @@ private:
 			m_dummyslave.add_input_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
 			m_dummyslave.add_input_port("DMA_int" + std::to_string(i))->bind(dma_int[i]);
 			m_dummyslave.add_input_port("DMA_ack" + std::to_string(i))->bind(dma_ack[i]);
-
 			m_dummyslave.add_output_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
 		}
 
-		/* Adder four bit*/
-
+		/* Counter */
+		m_wrapper_counter.m_clear(counter_clear);
+		m_wrapper_counter.m_load(counter_load);
+		m_dummyslave.add_output_port("counter_clear")->bind(counter_clear);
+		m_dummyslave.add_output_port("counter_load")->bind(counter_load);
 		
 		
 	}
@@ -115,6 +121,11 @@ public:
 	void set_output_ports(const std::string& name, bool value)
 	{
 		m_dummyslave.set_output_ports(name, value);
+	}
+
+	void trigger_output_ports(const std::string& name, bool high_level, bool is_pos)
+	{
+		m_dummyslave.trigger_output_ports(name, high_level, is_pos);
 	}
 
 	bool read_input_ports(const std::string& name)
@@ -156,6 +167,7 @@ private: // Private models
 	Target<32> m_target4;
 	RAM<32> m_ram1;
 	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
+	wrapper_counter<32> m_wrapper_counter;
 private: // Define signals
 
 	sc_core::sc_clock m_sysclk;
@@ -163,6 +175,8 @@ private: // Define signals
 	sc_core::sc_signal<bool> dma_req[256];
 	sc_core::sc_signal<bool> dma_ack[256];
 	sc_core::sc_signal<bool> dma_int[256];
+	sc_core::sc_signal<bool> counter_load;
+	sc_core::sc_signal<bool> counter_clear;
 
 };
 #endif

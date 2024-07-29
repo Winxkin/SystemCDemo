@@ -27,8 +27,12 @@
 /* To Define register address for DummySlave*/
 #define REG_DUMMYRESULT		 (BASE_DUMMYSLAVE + 0x00)
 
-/* To Define register for */
+/* To Define register for ADDER*/
 #define REG_ADDERINPUT		 (BASE_FOUR_BIT_ADDER + 0x00)
 #define REG_ADDEROUTPUT		 (BASE_FOUR_BIT_ADDER + 0x04)
+
+/* To Define register for */
+#define REG_COUNTERINPUT		 (BASE_COUNTER + 0x00)
+#define REG_COUNTEROUTPUT		 (BASE_COUNTER + 0x04)
 
 #endif

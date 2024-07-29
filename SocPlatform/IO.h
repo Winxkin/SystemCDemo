@@ -17,6 +17,7 @@
 #define BASE_TARGET3		0x7000
 #define BASE_TARGET4		0x8000
 #define BASE_FOUR_BIT_ADDER 0x9000
+#define BASE_COUNTER		0x10000
 
 /*To define size*/
 #define SIZE_RAM1			0x3000
@@ -27,6 +28,7 @@
 #define SIZE_TARGET3		0x1000
 #define SIZE_TARGET4		0x1000
 #define SIZE_FOUR_BIT_ADDER 0x1000
+#define SIZE_COUNTER		0x1000
 
 
 #endif
