@@ -24,8 +24,11 @@
 #define REG_DMAINT(i)		 (BASE_DMAC + 0xC40 + 0x04*(i))			// 0xC40	->	0xC60
 #define REG_DMACHEN(i)		 (BASE_DMAC + 0xC60 + 0x04*(i))			// 0xC60	->	0xC80 
 
-/*Define register address for DummySlave*/
+/* To Define register address for DummySlave*/
 #define REG_DUMMYRESULT		 (BASE_DUMMYSLAVE + 0x00)
 
+/* To Define register for */
+#define REG_ADDERINPUT		 (BASE_FOUR_BIT_ADDER + 0x00)
+#define REG_ADDEROUTPUT		 (BASE_FOUR_BIT_ADDER + 0x04)
 
 #endif

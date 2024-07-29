@@ -31,6 +31,18 @@
     <Filter Include="Header Files\test\02_dmac">
       <UniqueIdentifier>{4db7c4a5-b1d8-403f-a7ab-2f09a8a4849c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\models">
+      <UniqueIdentifier>{40f5a126-7ed4-4d52-ae92-fc1e922ff195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\models\Adder">
+      <UniqueIdentifier>{50f75197-ae54-43d0-88bb-7b8c13d58bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models\Adder">
+      <UniqueIdentifier>{b5e46070-14c1-4b98-9b49-9bb8a80210e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\test\03_Adder">
+      <UniqueIdentifier>{bc78c25d-5afc-4291-9590-d6a09203cbc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
@@ -41,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="main\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Adder\src\full_adder_full_adder.cpp">
+      <Filter>Source Files\models\Adder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +94,18 @@
     </ClInclude>
     <ClInclude Include="Test\Register.h">
       <Filter>Header Files\test</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Adder\inc\adder_four_bit_adder.h">
+      <Filter>Header Files\models\Adder</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Adder\inc\full_adder_full_adder.h">
+      <Filter>Header Files\models\Adder</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Adder\Adder_wrapper.h">
+      <Filter>Header Files\models\Adder</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\03_Adder\tp_03_01.h">
+      <Filter>Header Files\test\03_Adder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

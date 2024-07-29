@@ -17,6 +17,7 @@
 #include "memory.h"
 #include "DMAC.h"
 #include "IO.h"
+#include "Adder/Adder_wrapper.h"
 
 
 class SoCPlatform : public sc_core::sc_module
@@ -34,6 +35,7 @@ public:
 		, m_target3("Target3")
 		, m_target4("Target4")
 		, m_ram1("ram1", 0x3000, false)
+		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
 		{
 			do_signals_binding();
 			do_bus_binding();
@@ -55,6 +57,7 @@ private:
 		m_bus.mapping_target_sockets(BASE_TARGET2, SIZE_TARGET2).bind(m_target2.target_socket);
 		m_bus.mapping_target_sockets(BASE_TARGET3, SIZE_TARGET3).bind(m_target3.target_socket);
 		m_bus.mapping_target_sockets(BASE_TARGET4, SIZE_TARGET4).bind(m_target4.target_socket);
+		m_bus.mapping_target_sockets(BASE_FOUR_BIT_ADDER, SIZE_FOUR_BIT_ADDER).bind(m_wrapper_four_bit_adder.target_socket);
 
 	}
 
@@ -85,6 +88,9 @@ private:
 
 			m_dummyslave.add_output_port("DMA_req" + std::to_string(i))->bind(dma_req[i]);
 		}
+
+		/* Adder four bit*/
+
 		
 		
 	}
@@ -149,7 +155,7 @@ private: // Private models
 	Target<32> m_target3;
 	Target<32> m_target4;
 	RAM<32> m_ram1;
-
+	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
 private: // Define signals
 
 	sc_core::sc_clock m_sysclk;

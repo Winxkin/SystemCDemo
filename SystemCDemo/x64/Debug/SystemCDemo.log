@@ -2,18 +2,22 @@
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,37): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'uint32_t', possible loss of data
 D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  full_adder_full_adder.cpp
   tp_01_01.h
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,37): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'uint32_t', possible loss of data
 D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   tp_02_01.h
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,37): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'uint32_t', possible loss of data
 D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
 D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...

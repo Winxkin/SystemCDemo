@@ -145,7 +145,7 @@ private:
 				std::cout << "-----------------------\n";
 			}
 			std::cout << "Total simulation time: " << sc_core::sc_time_stamp().to_double() << "NS" << std::endl;
-			exit(0);
+			sc_core::sc_stop(); // To stop systemC kernel simulation
 		}
 	}
 
