@@ -10,7 +10,7 @@ int sc_main(int argc, char* argv[]) {
     sc_core::sc_start(10, sc_core::SC_NS);
 
     // Running test case here
-    tp_02_01_test01(m_SoCPlatform);
+    tp_02_01_test02(m_SoCPlatform);
 
     return 0;
 }

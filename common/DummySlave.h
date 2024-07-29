@@ -94,6 +94,9 @@ private:
 			}
 			case tlm::TLM_READ_COMMAND:
 			{
+				unsigned int value = regs[trans.get_address()].get_value();
+				unsigned char* cvalue = reinterpret_cast<unsigned char*>(&value);
+				memcpy(trans.get_data_ptr(), cvalue, trans.get_data_length());
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
 			}
