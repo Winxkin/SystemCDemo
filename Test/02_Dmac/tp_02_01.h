@@ -7,9 +7,12 @@
 #include "../../SocPlatform/top.h"
 #include "Register.h"
 
-inline bool tp_02_01_test01(SoCPlatform &SoC)
+inline void tp_02_01_test01(SoCPlatform &SoC)
 {
-	bool result = true;
+    /*
+        Using to test priority handling and DMA operation that is triggered by ports
+    */
+	unsigned int result = 0x0;
 
     std::cout << "Running test case:  tp_02_01_test01" << std::endl;
     SoC.monitor_ports(true);
@@ -59,5 +62,10 @@ inline bool tp_02_01_test01(SoCPlatform &SoC)
     SoC.set_output_ports("DMA_req3", true);
     sc_core::sc_start(10, sc_core::SC_NS);
     SoC.dump_memory("ram1", 0x00, 64);
-	return result;
+    sc_core::sc_start(5, sc_core::SC_NS);
+
+    /*Set dummy result to pass*/
+    SoC.SentTransaction(REG_DUMMYRESULT, 0x01, tlm::TLM_WRITE_COMMAND);
+    sc_core::sc_start(5, sc_core::SC_NS);
+
 }

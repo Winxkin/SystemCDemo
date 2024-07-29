@@ -136,7 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main\main.cpp" />
     <ClCompile Include="Test\01_Bus\tp_01_01.h" />
     <ClCompile Include="Test\02_Dmac\tp_02_01.h" />
   </ItemGroup>

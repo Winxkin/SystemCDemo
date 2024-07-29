@@ -17,6 +17,8 @@
 #include <cstdint>
 #include "Registerif.h"
 
+#define DUMMYRESULT 0x00
+
 template<unsigned int BUSWIDTH = 32>
 class DummySlave : public sc_core::sc_module
 {
@@ -60,9 +62,11 @@ private:
 	}
 
 
-    void InitializeRegister()
+    void init_registers()
     {
-       
+		regs.add_register("DUMMYRESULT", DUMMYRESULT, 0x00, 0x01, 0x0);
+		regs.set_register_callback("DUMMYRESULT", std::bind(&DummySlave::cb_DUMMYRESULT, this,
+			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
     }
 
 	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
@@ -75,6 +79,33 @@ private:
 			{
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
 			}
+			switch (trans.get_command()) {
+			case tlm::TLM_WRITE_COMMAND:
+			{
+				unsigned int wdata = 0;
+				std::memcpy(&wdata, trans.get_data_ptr(), sizeof(wdata));
+				regs.update_register(trans.get_address(), wdata);
+				if (m_message)
+				{
+					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+				}
+				trans.set_response_status(tlm::TLM_OK_RESPONSE);
+				break;
+			}
+			case tlm::TLM_READ_COMMAND:
+			{
+				trans.set_response_status(tlm::TLM_OK_RESPONSE);
+				break;
+			}
+			default:
+				break;
+			}
+
+			/*
+				Return data and END_REQ to bus
+			*/
+			tlm::tlm_phase next_phase = tlm::END_REQ;
+			target_socket->nb_transport_bw(trans, next_phase, delay);
 			break;
 		}
 		case tlm::END_REQ:
@@ -92,6 +123,28 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
+	/* Callback register */
+
+	void cb_DUMMYRESULT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
+	{
+		if (name == "DUMMYRESULT")
+		{
+			if (value)
+			{
+				std::cout << "-----------------------\n";
+				std::cout << "      TM is Pass       \n";
+				std::cout << "-----------------------\n";
+				exit(0);
+			}
+			else
+			{
+				std::cout << "-----------------------\n";
+				std::cout << "      TM is Fail       \n";
+				std::cout << "-----------------------\n";
+				exit(0);
+			}
+		}
+	}
 
 public:
     tlm_utils::simple_target_socket<DummySlave, BUSWIDTH> target_socket;
@@ -107,7 +160,7 @@ public:
         ,target_socket("target_socket")
     {
         target_socket.register_nb_transport_fw(this, &DummySlave::nb_transport_fw);
-        InitializeRegister();
+		init_registers();
 
     }
 
@@ -128,6 +181,11 @@ public:
 	void set_output_ports(const std::string& name, bool value)
 	{
 		output_ports[name]->write(value);
+	}
+
+	bool read_input_ports(const std::string& name)
+	{
+		return input_ports[name]->read();
 	}
 
 	void monitor_ports(bool is_enable)

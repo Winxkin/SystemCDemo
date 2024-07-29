@@ -33,14 +33,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
       <Filter>Header Files\test\01_bus</Filter>
     </ClCompile>
     <ClCompile Include="Test\02_Dmac\tp_02_01.h">
       <Filter>Header Files\test\02_dmac</Filter>
+    </ClCompile>
+    <ClCompile Include="main\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

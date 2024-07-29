@@ -111,6 +111,11 @@ public:
 		m_dummyslave.set_output_ports(name, value);
 	}
 
+	bool read_input_ports(const std::string& name)
+	{
+		return m_dummyslave.read_input_ports(name);
+	}
+
 	// DummyMaster model
 	unsigned char* get_received_data()
 	{
