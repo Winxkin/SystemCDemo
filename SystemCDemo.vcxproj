@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\HuanNguyen\Viettel\Libs\systemc\src;$(IncludePath)</IncludePath>
+    <IncludePath>D:\HuanNguyen\Viettel\Libs\systemc\src;.\main;.\common;.\SocPlatform;.\Test;$(IncludePath)</IncludePath>
     <LibraryPath>D:\HuanNguyen\Viettel\Libs\systemc\msvc16\SystemC\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -150,7 +150,9 @@
     <ClInclude Include="common\target.h" />
     <ClInclude Include="SocPlatform\IO.h" />
     <ClInclude Include="SocPlatform\top.h" />
-    <ClInclude Include="Test\02_Dmac\Register.h" />
+    <ClInclude Include="Test\02_Dmac\tp_02_02.h" />
+    <ClInclude Include="Test\Register.h" />
+    <ClInclude Include="Test\TestList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

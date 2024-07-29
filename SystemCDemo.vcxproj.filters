@@ -71,8 +71,14 @@
     <ClInclude Include="SocPlatform\IO.h">
       <Filter>Header Files\SocPlatform</Filter>
     </ClInclude>
-    <ClInclude Include="Test\02_Dmac\Register.h">
+    <ClInclude Include="Test\02_Dmac\tp_02_02.h">
       <Filter>Header Files\test\02_dmac</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestList.h">
+      <Filter>Header Files\test</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Register.h">
+      <Filter>Header Files\test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

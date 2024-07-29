@@ -9,6 +9,9 @@
 #define _REGISTER_H
 #include "../../SocPlatform/IO.h"
 
+#define PASS 0x01
+#define FAIL 0x00
+
  /*Define register address for DMAC*/
  /* i from 0 to 255 */
 #define REG_DMADESADDR(i)	 (BASE_DMAC + 0x00 + 0x04*(i))			// 0x000	->	0x400

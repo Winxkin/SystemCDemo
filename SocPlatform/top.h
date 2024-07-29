@@ -10,12 +10,12 @@
 #include <iostream>
 #include <tlm_utils/simple_initiator_socket.h>
 #include <tlm_utils/simple_target_socket.h>
-#include "../common/bus.h"
-#include "../common/DummyMaster.h"
-#include "../common/DummySlave.h"
-#include "../common/target.h"
-#include "../common/memory.h"
-#include "../common/DMAC.h"
+#include "bus.h"
+#include "DummyMaster.h"
+#include "DummySlave.h"
+#include "target.h"
+#include "memory.h"
+#include "DMAC.h"
 #include "IO.h"
 
 
