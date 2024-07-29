@@ -134,15 +134,15 @@ private:
 				std::cout << "-----------------------\n";
 				std::cout << "      TM is Pass       \n";
 				std::cout << "-----------------------\n";
-				exit(0);
 			}
 			else
 			{
 				std::cout << "-----------------------\n";
 				std::cout << "      TM is Fail       \n";
 				std::cout << "-----------------------\n";
-				exit(0);
 			}
+			std::cout << "Total simulation time: " << sc_core::sc_time_stamp().to_double() << "NS" << std::endl;
+			exit(0);
 		}
 	}
 
