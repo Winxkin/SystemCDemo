@@ -31,8 +31,12 @@
 #define REG_ADDERINPUT		 (BASE_FOUR_BIT_ADDER + 0x00)
 #define REG_ADDEROUTPUT		 (BASE_FOUR_BIT_ADDER + 0x04)
 
-/* To Define register for */
+/* To Define register for Counter*/
 #define REG_COUNTERINPUT		 (BASE_COUNTER + 0x00)
 #define REG_COUNTEROUTPUT		 (BASE_COUNTER + 0x04)
+
+/* To Define register for Uart*/
+#define REG_UARTINPUT		 (BASE_UART + 0x00)
+#define REG_UARTOUTPUT		 (BASE_UART + 0x04)
 
 #endif
