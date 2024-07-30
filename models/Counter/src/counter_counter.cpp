@@ -28,7 +28,10 @@ void counter::always_process_12()
 		}
 		else
 		{
-			countval = countval.read() + 1;
+			if (start.read())
+			{
+				countval = countval.read() + 1;
+			}
 		}
 	}
 }

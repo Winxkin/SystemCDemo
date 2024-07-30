@@ -1,1 +1,52 @@
-﻿
+﻿  main.cpp
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\Uart_wrapper.h(153,24): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Counter\Counter_wrapper.h(139,23): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,20): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(397,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(400,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+  full_adder_full_adder.cpp
+  counter_counter.cpp
+  address_decode_address_decode.cpp
+  clock_divider_clock_divider.cpp
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\src\clock_divider_clock_divider.cpp(63,2): warning C4102: 'clk_div': unreferenced label
+  control_operation_control_operation.cpp
+  cpu_interface_cpu_interface.cpp
+  serial_interface_serial_interface.cpp
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\src\serial_interface_serial_interface.cpp(32,37): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\src\serial_interface_serial_interface.cpp(38,2): warning C4102: 'conv': unreferenced label
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(397,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(400,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+  status_registers_status_registers.cpp
+  uart_top_uart_top.cpp
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(397,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(400,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+  xmit_rcv_control_xmit_rcv_control.cpp
+  tp_01_01.h
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\Uart_wrapper.h(153,24): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Counter\Counter_wrapper.h(139,23): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,20): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(397,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(400,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+  tp_02_01.h
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_initiator_socket.h(125,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(294,35): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(197,77): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\Uart_wrapper.h(153,24): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Counter\Counter_wrapper.h(139,23): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Adder\Adder_wrapper.h(140,20): warning C4244: 'initializing': conversion from 'sc_dt::uint_type' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\common\bus.h(198,24): warning C4244: 'initializing': conversion from 'sc_dt::uint64' to 'unsigned int', possible loss of data
+D:\HuanNguyen\Viettel\Libs\systemc\src\tlm_utils\multi_passthrough_target_socket.h(105,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(397,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h(400,47): warning C4244: 'argument': conversion from 'sc_dt::uint_type' to 'int', possible loss of data
+  Generating Code...
+  SystemCDemo.vcxproj -> D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\x64\Debug\SystemCDemo.exe

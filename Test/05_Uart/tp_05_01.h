@@ -6,6 +6,4 @@ inline void tp_05_01(SoCPlatform& SoC)
 {
     
 
-    
-
 }

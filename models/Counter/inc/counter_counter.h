@@ -21,6 +21,7 @@ SC_MODULE(counter)
 	sc_in<bool>	clock;
 	sc_in<bool>	load;
 	sc_in<bool>	clear;
+	sc_in<bool> start;
 	sc_in<sc_uint<8> >	din;
 	sc_out<sc_uint<8> >	dout;
 

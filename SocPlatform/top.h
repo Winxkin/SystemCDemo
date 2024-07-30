@@ -32,14 +32,14 @@ public:
 		, m_dummyslave("DummySlave", false)
 		, m_dmac("Dmac", false)
 		, m_bus("bus_mmio", false)
-		, m_sysclk("systemCLK", 10, sc_core::SC_PS)
+		, m_sysclk("systemCLK", 10, sc_core::SC_NS)	// 100MHz 
 		, m_target1("Target1")
 		, m_target2("Target2")
 		, m_target3("Target3")
 		, m_target4("Target4")
 		, m_ram1("ram1", 0x3000, false)
 		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
-		, m_wrapper_counter("wrapper_counter", false)
+		, m_wrapper_counter("wrapper_counter", true)
 		, m_wrapper_uart("wrapper_uart",true)
 		{
 			do_signals_binding();
@@ -101,8 +101,10 @@ private:
 		/* Counter */
 		m_wrapper_counter.m_clear(counter_clear);
 		m_wrapper_counter.m_load(counter_load);
+		m_wrapper_counter.m_start(counter_start);
 		m_dummyslave.add_output_port("counter_clear")->bind(counter_clear);
 		m_dummyslave.add_output_port("counter_load")->bind(counter_load);
+		m_dummyslave.add_output_port("counter_start")->bind(counter_start);
 
 		/* UART */
 		m_wrapper_uart.m_nrw(uart_nrw);
@@ -202,14 +204,15 @@ private: // Define signals
 	/* Counter */
 	sc_core::sc_signal<bool> counter_load;
 	sc_core::sc_signal<bool> counter_clear;
+	sc_core::sc_signal<bool> counter_start;
 
 	/* UART */
-	sc_signal<bool>	uart_nrw;
-	sc_signal<bool>	uart_cs;
-	sc_signal<bool>	uart_sin;
+	sc_core::sc_signal<bool>	uart_nrw;
+	sc_core::sc_signal<bool>	uart_cs;
+	sc_core::sc_signal<bool>	uart_sin;
 
-	sc_signal<bool>	uart_int2;
-	sc_signal<bool>	uart_sout;
+	sc_core::sc_signal<bool>	uart_int2;
+	sc_core::sc_signal<bool>	uart_sout;
 
 };
 #endif

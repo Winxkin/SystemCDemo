@@ -32,6 +32,7 @@ private:
 	sc_signal<bool>	clock;
 	sc_signal<bool>	load;
 	sc_signal<bool>	clear;
+	sc_signal<bool>	start;
 	sc_signal<sc_uint<8> >	din;
 	sc_signal<sc_uint<8> >	dout;
 
@@ -39,6 +40,7 @@ public:
 	sc_in<bool> m_clk;
 	sc_in<bool> m_load;
 	sc_in<bool> m_clear;
+	sc_in<bool> m_start;
 private:
 	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
 		switch (phase)
@@ -102,6 +104,7 @@ private:
 		m_counter.clear(clear);
 		m_counter.din(din);
 		m_counter.dout(dout);
+		m_counter.start(start);
 	}
 
 	void init_register()
@@ -146,6 +149,7 @@ private:
 		load.write(m_load.read());
 		clear.write(m_clear.read());
 		clock.write(m_clk.read());
+		start.write(m_start.read());
 	}
 
 
@@ -168,10 +172,11 @@ public:
 		sensitive << dout;
 
 		SC_METHOD(input_handling);
-		sensitive << m_load << m_clear << m_clk;
+		sensitive << m_load << m_clear << m_start << m_clk;
 
 		load.write(true);
 		clear.write(false);
+		start.write(false);
 	};
 };
 
