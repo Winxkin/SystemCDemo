@@ -128,5 +128,8 @@
     <ClInclude Include="Test\04_Counter\tp_04_01.h">
       <Filter>Header Files\test\04_Counter</Filter>
     </ClInclude>
+    <ClInclude Include="common\Inverter.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

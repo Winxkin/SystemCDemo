@@ -147,6 +147,7 @@
     <ClInclude Include="common\DMAC.h" />
     <ClInclude Include="common\DummyMaster.h" />
     <ClInclude Include="common\DummySlave.h" />
+    <ClInclude Include="common\Inverter.h" />
     <ClInclude Include="common\memory.h" />
     <ClInclude Include="common\Registerif.h" />
     <ClInclude Include="common\target.h" />

@@ -17,6 +17,7 @@
 #include "memory.h"
 #include "DMAC.h"
 #include "IO.h"
+#include "Inverter.h"
 #include "Adder/Adder_wrapper.h"
 #include "Counter/Counter_wrapper.h"
 
@@ -38,6 +39,7 @@ public:
 		, m_ram1("ram1", 0x3000, false)
 		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
 		, m_wrapper_counter("wrapper_counter", true)
+		, m_Inverter("Inverter")
 		{
 			do_signals_binding();
 			do_bus_binding();
@@ -65,6 +67,10 @@ private:
 
 	void do_signals_binding()
 	{
+		// convert reset signal
+		m_Inverter.in(m_sysrst);
+		m_Inverter.out(m_nsysrst);
+
 		// binding system clock
 		m_bus.m_clk(m_sysclk);
 		m_dmac.clk.bind(m_sysclk);
@@ -168,10 +174,15 @@ private: // Private models
 	RAM<32> m_ram1;
 	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
 	wrapper_counter<32> m_wrapper_counter;
+
+private: // private gate
+	Inverter m_Inverter;
+
 private: // Define signals
 
 	sc_core::sc_clock m_sysclk;
 	sc_core::sc_signal<bool> m_sysrst;
+	sc_core::sc_signal<bool> m_nsysrst;
 	sc_core::sc_signal<bool> dma_req[256];
 	sc_core::sc_signal<bool> dma_ack[256];
 	sc_core::sc_signal<bool> dma_int[256];
