@@ -52,6 +52,12 @@
     <Filter Include="Header Files\test\04_Counter">
       <UniqueIdentifier>{c6e7e202-fa64-4561-b6a4-efd03ed2a248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\models\Uart">
+      <UniqueIdentifier>{3b45b2d1-3001-4fbf-be38-4f2bd5c26954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\models\Uart">
+      <UniqueIdentifier>{611b4e17-1b6e-4b7f-bd3d-b8aea3e4742d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
@@ -68,6 +74,30 @@
     </ClCompile>
     <ClCompile Include="models\Counter\src\counter_counter.cpp">
       <Filter>Source Files\models\Counter</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\address_decode_address_decode.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\clock_divider_clock_divider.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\control_operation_control_operation.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\cpu_interface_cpu_interface.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\serial_interface_serial_interface.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\status_registers_status_registers.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\uart_top_uart_top.cpp">
+      <Filter>Source Files\models\Uart</Filter>
+    </ClCompile>
+    <ClCompile Include="models\Uart\src\xmit_rcv_control_xmit_rcv_control.cpp">
+      <Filter>Source Files\models\Uart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +160,33 @@
     </ClInclude>
     <ClInclude Include="common\Inverter.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\address_decode_address_decode.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\clock_divider_clock_divider.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\control_operation_control_operation.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\cpu_interface_cpu_interface.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\serial_interface_serial_interface.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\status_registers_status_registers.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\uart_top_uart_top.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h">
+      <Filter>Header Files\models\Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="models\Uart\Uart_wrapper.h">
+      <Filter>Header Files\models\Uart</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

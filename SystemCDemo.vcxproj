@@ -139,6 +139,14 @@
     <ClCompile Include="main\main.cpp" />
     <ClCompile Include="models\Adder\src\full_adder_full_adder.cpp" />
     <ClCompile Include="models\Counter\src\counter_counter.cpp" />
+    <ClCompile Include="models\Uart\src\address_decode_address_decode.cpp" />
+    <ClCompile Include="models\Uart\src\clock_divider_clock_divider.cpp" />
+    <ClCompile Include="models\Uart\src\control_operation_control_operation.cpp" />
+    <ClCompile Include="models\Uart\src\cpu_interface_cpu_interface.cpp" />
+    <ClCompile Include="models\Uart\src\serial_interface_serial_interface.cpp" />
+    <ClCompile Include="models\Uart\src\status_registers_status_registers.cpp" />
+    <ClCompile Include="models\Uart\src\uart_top_uart_top.cpp" />
+    <ClCompile Include="models\Uart\src\xmit_rcv_control_xmit_rcv_control.cpp" />
     <ClCompile Include="Test\01_Bus\tp_01_01.h" />
     <ClCompile Include="Test\02_Dmac\tp_02_01.h" />
   </ItemGroup>
@@ -156,6 +164,15 @@
     <ClInclude Include="models\Adder\inc\full_adder_full_adder.h" />
     <ClInclude Include="models\Counter\Counter_wrapper.h" />
     <ClInclude Include="models\Counter\inc\counter_counter.h" />
+    <ClInclude Include="models\Uart\inc\address_decode_address_decode.h" />
+    <ClInclude Include="models\Uart\inc\clock_divider_clock_divider.h" />
+    <ClInclude Include="models\Uart\inc\control_operation_control_operation.h" />
+    <ClInclude Include="models\Uart\inc\cpu_interface_cpu_interface.h" />
+    <ClInclude Include="models\Uart\inc\serial_interface_serial_interface.h" />
+    <ClInclude Include="models\Uart\inc\status_registers_status_registers.h" />
+    <ClInclude Include="models\Uart\inc\uart_top_uart_top.h" />
+    <ClInclude Include="models\Uart\inc\xmit_rcv_control_xmit_rcv_control.h" />
+    <ClInclude Include="models\Uart\Uart_wrapper.h" />
     <ClInclude Include="SocPlatform\IO.h" />
     <ClInclude Include="SocPlatform\top.h" />
     <ClInclude Include="Test\02_Dmac\tp_02_02.h" />

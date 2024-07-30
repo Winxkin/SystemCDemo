@@ -20,6 +20,7 @@
 #include "Inverter.h"
 #include "Adder/Adder_wrapper.h"
 #include "Counter/Counter_wrapper.h"
+#include "Uart/Uart_wrapper.h"
 
 
 class SoCPlatform : public sc_core::sc_module
@@ -38,8 +39,8 @@ public:
 		, m_target4("Target4")
 		, m_ram1("ram1", 0x3000, false)
 		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
-		, m_wrapper_counter("wrapper_counter", true)
-		, m_Inverter("Inverter")
+		, m_wrapper_counter("wrapper_counter", false)
+		, m_wrapper_uart("wrapper_uart",true)
 		{
 			do_signals_binding();
 			do_bus_binding();
@@ -63,14 +64,12 @@ private:
 		m_bus.mapping_target_sockets(BASE_TARGET4, SIZE_TARGET4).bind(m_target4.target_socket);
 		m_bus.mapping_target_sockets(BASE_FOUR_BIT_ADDER, SIZE_FOUR_BIT_ADDER).bind(m_wrapper_four_bit_adder.target_socket);
 		m_bus.mapping_target_sockets(BASE_COUNTER, SIZE_COUNTER).bind(m_wrapper_counter.target_socket);
+		m_bus.mapping_target_sockets(BASE_UART, SIZE_UART).bind(m_wrapper_uart.target_socket);
 	}
 
 	void do_signals_binding()
 	{
-		// convert reset signal
-		m_Inverter.in(m_sysrst);
-		m_Inverter.out(m_nsysrst);
-
+		m_dummyslave.add_input_port("system_reset")->bind(m_sysrst);
 		// binding system clock
 		m_bus.m_clk(m_sysclk);
 		m_dmac.clk.bind(m_sysclk);
@@ -78,12 +77,13 @@ private:
 		m_dummyslave.clk.bind(m_sysclk);
 		m_dummyslave.rst(m_sysrst);
 		m_wrapper_counter.m_clk(m_sysclk);
-
+		m_wrapper_uart.m_clk(m_sysclk);
 
 		// binding reset
 		m_dummymaster.rst.bind(m_sysrst);
 		m_bus.rst.bind(m_sysrst);
 		m_dmac.rst.bind(m_sysrst);
+		m_wrapper_uart.m_rst(m_sysrst);
 		
 		for (unsigned int i = 0; i < 256; i++)
 		{
@@ -103,6 +103,19 @@ private:
 		m_wrapper_counter.m_load(counter_load);
 		m_dummyslave.add_output_port("counter_clear")->bind(counter_clear);
 		m_dummyslave.add_output_port("counter_load")->bind(counter_load);
+
+		/* UART */
+		m_wrapper_uart.m_nrw(uart_nrw);
+		m_wrapper_uart.m_cs(uart_cs);
+		m_wrapper_uart.m_sin(uart_sin);
+		m_wrapper_uart.m_int2(uart_int2);
+		m_wrapper_uart.m_sout(uart_sout);
+		m_dummyslave.add_output_port("uart_nrw")->bind(uart_nrw);
+		m_dummyslave.add_output_port("uart_cs")->bind(uart_cs);
+		m_dummyslave.add_output_port("uart_sin")->bind(uart_sin);
+		m_dummyslave.add_input_port("uart_int2")->bind(uart_int2);
+		m_dummyslave.add_input_port("uart_sout")->bind(uart_sout);
+
 		
 		
 	}
@@ -174,20 +187,29 @@ private: // Private models
 	RAM<32> m_ram1;
 	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
 	wrapper_counter<32> m_wrapper_counter;
-
-private: // private gate
-	Inverter m_Inverter;
+	wrapper_uart<32> m_wrapper_uart;
 
 private: // Define signals
 
 	sc_core::sc_clock m_sysclk;
 	sc_core::sc_signal<bool> m_sysrst;
-	sc_core::sc_signal<bool> m_nsysrst;
+
+	/* DMAC */
 	sc_core::sc_signal<bool> dma_req[256];
 	sc_core::sc_signal<bool> dma_ack[256];
 	sc_core::sc_signal<bool> dma_int[256];
+
+	/* Counter */
 	sc_core::sc_signal<bool> counter_load;
 	sc_core::sc_signal<bool> counter_clear;
+
+	/* UART */
+	sc_signal<bool>	uart_nrw;
+	sc_signal<bool>	uart_cs;
+	sc_signal<bool>	uart_sin;
+
+	sc_signal<bool>	uart_int2;
+	sc_signal<bool>	uart_sout;
 
 };
 #endif

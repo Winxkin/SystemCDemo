@@ -2,6 +2,14 @@ d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\vc143.pdb
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\vc143.idb
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\tp_02_01.obj
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\tp_01_01.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\xmit_rcv_control_xmit_rcv_control.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\uart_top_uart_top.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\status_registers_status_registers.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\serial_interface_serial_interface.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\cpu_interface_cpu_interface.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\control_operation_control_operation.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\clock_divider_clock_divider.obj
+d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\address_decode_address_decode.obj
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\counter_counter.obj
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\full_adder_full_adder.obj
 d:\huannguyen\viettel\systemcdesign\systemcdemo\systemcdemo\x64\debug\main.obj

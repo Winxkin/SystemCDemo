@@ -1,8 +1,8 @@
 #pragma once
-#ifndef _COUNTER_WRAPPER_H
-#define _COUNTER_WRAPPER_H
+#ifndef _UART_WRAPPER_H
+#define _UART_WRAPPER_H
 
-#include "inc/counter_counter.h"
+#include "inc/uart_top_uart_top.h"
 #include <systemc>
 #include <tlm>
 #include <tlm_utils/simple_initiator_socket.h>
@@ -14,31 +14,43 @@
 #include <iostream>
 #include <cstdint>
 
-#define COUNTERINPUT	(0x00 + 0x00)
-#define COUNTEROUTPUT	(0x00 + 0x04)
-
+#define UARTINPUT	(0x00 + 0x00)
+#define UARTOUTPUT	(0x00 + 0x04)
 
 template<unsigned int BUSWIDTH = 32>
-class wrapper_counter : sc_module
+class wrapper_uart : sc_module
 {
 private:
 	std::string m_name;
-	counter m_counter;
 	RegisterInterface regs;
 	bool m_message;
+	uart_top m_uart;
 
 private:
-	/* Counter */
-	sc_signal<bool>	clock;
-	sc_signal<bool>	load;
-	sc_signal<bool>	clear;
-	sc_signal<sc_uint<8> >	din;
-	sc_signal<sc_uint<8> >	dout;
+	/* UART interface */
+	// input
+	sc_signal<sc_uint<3> >	addr;
+	sc_signal<bool>	clk;
+	sc_signal<bool>	cs;
+	sc_signal<sc_uint<8> >	data_in;
+	sc_signal<bool>	nrw;
+	sc_signal<bool>	rst;
+	sc_signal<bool>	sin;
 
+	// output
+	sc_signal<sc_uint<8> >	data_out;
+	sc_signal<bool>	int2;
+	sc_signal<bool>	sout;
 public:
-	sc_in<bool> m_clk;
-	sc_in<bool> m_load;
-	sc_in<bool> m_clear;
+	/* Wrapper uart interface */
+	sc_in<bool>	m_clk;
+	sc_in<bool>	m_rst;
+	sc_in<bool>	m_nrw;
+	sc_in<bool>	m_cs;
+	sc_in<bool>	m_sin;
+
+	sc_out<bool>	m_int2;
+	sc_out<bool>	m_sout;
 private:
 	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
 		switch (phase)
@@ -96,82 +108,91 @@ private:
 
 	void binding_inout()
 	{
-		// binding signal to sub-model
-		m_counter.clock(clock);
-		m_counter.load(load);
-		m_counter.clear(clear);
-		m_counter.din(din);
-		m_counter.dout(dout);
+		// in
+		m_uart.addr(addr);
+		m_uart.clk(clk);
+		m_uart.cs(cs);
+		m_uart.data_in(data_in);
+		m_uart.nrw(nrw);
+		m_uart.rst(rst);
+		m_uart.sin(rst);
+		//out
+		m_uart.data_out(data_out);
+		m_uart.int2(int2);
+		m_uart.sout(sout);
 	}
 
 	void init_register()
 	{
-		regs.add_register("COUNTERINPUT", COUNTERINPUT, 0x00, 0x00ff, 0x0); // RW permission 
-		regs.add_register("COUNTEROUTPUT", COUNTEROUTPUT, 0x00, 0x00, 0x0); // R only
-		/*Define callback*/
-		regs.set_register_callback("COUNTERINPUT", std::bind(&wrapper_counter::cb_COUNTERINPUT, this,
+		regs.add_register("UARTINPUT", UARTINPUT, 0x00, 0x07ff, 0x0); // RW permission 
+		regs.add_register("UARTOUTPUT", UARTOUTPUT, 0x00, 0x0000, 0x0); // R only
+		regs.set_register_callback("UARTINPUT", std::bind(&wrapper_uart::cb_UARTINPUT, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 	}
 
 	/* Call back register */
-	void cb_COUNTERINPUT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
+	void cb_UARTINPUT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
 		/* Register COUNTERINPUT definition
-		*	bit 0 -> 7 : input din
+		*	bit 0 -> 7 : input data_in
+		*   bit 8 -> 10 : input addr
 		*/
-		if (name == "COUNTERINPUT")
-		{
-			sc_dt::sc_uint<8> _din = value & 0xff;
-			din.write(din);
-		}
+		sc_dt::sc_uint<8> _din = value & 0xff;
+		data_in.write(_din);
+		sc_dt::sc_uint<3> _addr = (value >> 8) & 0x07;
+		addr.write(_addr);
 	}
 
-	/* Method */
+	/* Method for input and output handling */
+
+	void regs_output_handling()
+	{
+		/* Register UARTOUTPUT definition
+		*	bit 0 -> 7 : input data_out
+		*/
+		unsigned int _output = data_out.read();
+		regs[UARTOUTPUT].set_value(_output, true); // To set directly value into register that is not apply mask
+	}
 
 	void output_handling()
 	{
-		/* Register COUNTEROUTPUT definition
-		*	bit 0 -> 7 : dout
-		*/
-		unsigned int output = dout.read();
-		regs[COUNTEROUTPUT].set_value(output, true);
-		if (m_message)
-		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": counter value: " << output << std::endl;
-		}
+		m_int2.write(int2.read());
+		m_sout.write(sout.read());
 	}
 
 	void input_handling()
 	{
-		load.write(m_load.read());
-		clear.write(m_clear.read());
-		clock.write(m_clk.read());
+		clk.write(m_clk.read()); // clock synchronization
+		rst.write(!m_rst.read()); // negative reset
+		nrw.write(m_nrw.read());
+		cs.write(m_cs.read());
+		sin.write(m_sin.read());
 	}
 
 
 public:
-	tlm_utils::simple_target_socket<wrapper_counter, BUSWIDTH> target_socket;
+	tlm_utils::simple_target_socket<wrapper_uart, BUSWIDTH> target_socket;
 
 
-	wrapper_counter(sc_core::sc_module_name name, bool message = false) :
+	wrapper_uart(sc_core::sc_module_name name, bool message = false) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_socket("target_socket")
 		, m_message(message)
-		, m_counter("Counter")
+		, m_uart("uart")
 	{
-		target_socket.register_nb_transport_fw(this, &wrapper_counter::nb_transport_fw);
+		target_socket.register_nb_transport_fw(this, &wrapper_uart::nb_transport_fw);
 		init_register();
 		binding_inout();
+		
+		SC_METHOD(regs_output_handling);
+		sensitive << data_out;
 
 		SC_METHOD(output_handling);
-		sensitive << dout;
-
+		sensitive << int2 << sout;
+	
 		SC_METHOD(input_handling);
-		sensitive << m_load << m_clear << m_clk;
-
-		load.write(true);
-		clear.write(false);
+		sensitive << m_clk << m_rst << m_nrw << m_cs << m_sin;
 	};
 };
 
