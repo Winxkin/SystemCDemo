@@ -1,0 +1,519 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_b_u_s" xml:lang="en-US">
+<title>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</title>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;bus.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for BUS&lt; BUSWIDTH, DATA_WIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_b_u_s.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_b_u_s_1_1address">address</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS</link> (sc_core::sc_module_name name, bool message=false)</para>
+
+<para><link linkend="_class_b_u_s">BUS</link> constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_class_b_u_s_1aa75c5c8fe127b8e2bbe3f616f9e27395">~BUS</link> ()</para>
+</listitem>
+            <listitem><para>tlm_utils::multi_passthrough_initiator_socket&lt; <link linkend="_class_b_u_s">BUS</link>, BUSWIDTH &gt; &amp; <link linkend="_class_b_u_s_1a6bd977040e659f716aab9faea34bebf2">mapping_target_sockets</link> (unsigned int _addr, unsigned int _size)</para>
+
+<para>mapping_target_sockets Implement the registration socket address range for target socket </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_bus_8h_1a962b17d96ca7fcc31fd6cee97d502f7d">sc_clk_in</link> <link linkend="_class_b_u_s_1aa6794a6593c6ede21f45fad5011be77d">m_clk</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_b_u_s_1a9493822da315290ea222507413c63745">m_rst</link></para>
+</listitem>
+            <listitem><para>tlm_utils::multi_passthrough_target_socket&lt; <link linkend="_class_b_u_s">BUS</link>, BUSWIDTH &gt; <link linkend="_class_b_u_s_1aa7c093fee38f107b57301ba1f248025e">target_sockets</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_b_u_s_1aace875a6d6c0f6d67d926583c88af55d">copy_tlm_generic_payload</link> (tlm::tlm_generic_payload &amp;des, tlm::tlm_generic_payload &amp;src)</para>
+
+<para>copy_tlm_generic_payload Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">foward_transaction_process</link> ()</para>
+
+<para>foward_transaction_process Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">mth_reset</link> ()</para>
+
+<para>mth_reset Impelmentation of the method when reset is active </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">nb_transport_bw</link> (int id, tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_bw Implements the non-blocking backward transport interface for the nitiator. </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">nb_transport_fw</link> (int id, tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_fw Implements the non-blocking forward transport interface for the target. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">TS_handle_begin_req</link> (int id, tlm::tlm_generic_payload &amp;trans, sc_core::sc_time &amp;delay)</para>
+
+<para>TS_handle_begin_req Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; <link linkend="_struct_b_u_s_1_1address">address</link> &gt; <link linkend="_class_b_u_s_1a699d1d5e434d11afa4dda7a18b056f16">address_mapping</link></para>
+</listitem>
+            <listitem><para>tlm::tlm_generic_payload <link linkend="_class_b_u_s_1ab64fcbde6ccffc2fa42aaad88a32faa3">current_trans</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_event <link linkend="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d">e_forward_tran</link></para>
+</listitem>
+            <listitem><para>tlm_utils::multi_passthrough_initiator_socket&lt; <link linkend="_class_b_u_s">BUS</link>, BUSWIDTH &gt; <link linkend="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf">initiator_sockets</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_b_u_s_1aaaaf605ad1a256bb691919474c275e47">m_bind_id</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_b_u_s_1a73159a2a342aec6d149d6627f70b35b7">m_bus_lock</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">m_cur_socket</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_b_u_s_1a2bc2425139d1e7a45b2400327aa54e5f">m_current_ts_id</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_b_u_s_1a40f977ac4c6e432882dfb186d3450bd4">m_message</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_b_u_s_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d"/><section>
+    <title>BUS()</title>
+<indexterm><primary>BUS</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>BUS</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput><link linkend="_class_b_u_s">BUS</link> (sc_core::sc_module_name name, bool message = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_b_u_s">BUS</link> constructor. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to sc_module name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>message</entry><entry>
+<para>To enable message log </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::e_forward_tran</link>, <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::initiator_sockets</link>, <link linkend="_class_b_u_s_1a9493822da315290ea222507413c63745">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_rst</link>, <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>, <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_b_u_s_1aa7c093fee38f107b57301ba1f248025e">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::target_sockets</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1aa75c5c8fe127b8e2bbe3f616f9e27395"/><section>
+    <title>~BUS()</title>
+<indexterm><primary>~BUS</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>~BUS</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>~<link linkend="_class_b_u_s">BUS</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_b_u_s_1aace875a6d6c0f6d67d926583c88af55d"/><section>
+    <title>copy_tlm_generic_payload()</title>
+<indexterm><primary>copy_tlm_generic_payload</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>copy_tlm_generic_payload</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>void copy_tlm_generic_payload (tlm::tlm_generic_payload &amp; des, tlm::tlm_generic_payload &amp; src)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>copy_tlm_generic_payload Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>des</entry><entry>
+<para>Reference to destination TLM generic payload </para>
+</entry>
+                            </row>
+                            <row>
+<entry>src</entry><entry>
+<para>Reference to source TLM generic payload </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a88552c26c5911573660db4ee853cc521"/><section>
+    <title>foward_transaction_process()</title>
+<indexterm><primary>foward_transaction_process</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>foward_transaction_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>void foward_transaction_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>foward_transaction_process Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator </para>
+</para>
+<para>
+References <link linkend="_class_b_u_s_1a699d1d5e434d11afa4dda7a18b056f16">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address_mapping</link>, <link linkend="_class_b_u_s_1ab64fcbde6ccffc2fa42aaad88a32faa3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::current_trans</link>, <link linkend="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::e_forward_tran</link>, <link linkend="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::initiator_sockets</link>, <link linkend="_class_b_u_s_1aa6794a6593c6ede21f45fad5011be77d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_clk</link>, <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_cur_socket</link>, <link linkend="_class_b_u_s_1a40f977ac4c6e432882dfb186d3450bd4">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_message</link>, and <link linkend="_class_b_u_s_1adb41893ba19e889e56c559f25fc1a68a">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_name</link>.</para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a6bd977040e659f716aab9faea34bebf2"/><section>
+    <title>mapping_target_sockets()</title>
+<indexterm><primary>mapping_target_sockets</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>mapping_target_sockets</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm_utils::multi_passthrough_initiator_socket&lt; <link linkend="_class_b_u_s">BUS</link>, BUSWIDTH &gt; &amp; mapping_target_sockets (unsigned int _addr, unsigned int _size)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>mapping_target_sockets Implement the registration socket address range for target socket </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>_id</entry><entry>
+<para>The id number of target socket in bus memory mapping I/O </para>
+</entry>
+                            </row>
+                            <row>
+<entry>_addr</entry><entry>
+<para>The base address of target socket that is registered into bus memory mapping I/O </para>
+</entry>
+                            </row>
+                            <row>
+<entry>_size</entry><entry>
+<para>the range of address space </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm_utils::simple_initiator_socket is the initiator socket with id registration used to bind with the corresponding target socket </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_b_u_s_1a699d1d5e434d11afa4dda7a18b056f16">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address_mapping</link>, <link linkend="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::initiator_sockets</link>, and <link linkend="_class_b_u_s_1aaaaf605ad1a256bb691919474c275e47">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_bind_id</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c"/><section>
+    <title>mth_reset()</title>
+<indexterm><primary>mth_reset</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>mth_reset</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>void mth_reset ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>mth_reset Impelmentation of the method when reset is active </para>
+</para>
+<para>
+References <link linkend="_class_b_u_s_1ab64fcbde6ccffc2fa42aaad88a32faa3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::current_trans</link>, <link linkend="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::e_forward_tran</link>, <link linkend="_class_b_u_s_1a73159a2a342aec6d149d6627f70b35b7">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_bus_lock</link>, <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_cur_socket</link>, and <link linkend="_class_b_u_s_1a9493822da315290ea222507413c63745">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_rst</link>.</para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d"/><section>
+    <title>nb_transport_bw()</title>
+<indexterm><primary>nb_transport_bw</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>nb_transport_bw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_bw (int id, tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_bw Implements the non-blocking backward transport interface for the nitiator. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_b_u_s_1a73159a2a342aec6d149d6627f70b35b7">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_bus_lock</link>, <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_cur_socket</link>, <link linkend="_class_b_u_s_1a2bc2425139d1e7a45b2400327aa54e5f">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_current_ts_id</link>, <link linkend="_class_b_u_s_1a40f977ac4c6e432882dfb186d3450bd4">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_message</link>, <link linkend="_class_b_u_s_1adb41893ba19e889e56c559f25fc1a68a">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_name</link>, and <link linkend="_class_b_u_s_1aa7c093fee38f107b57301ba1f248025e">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::target_sockets</link>.</para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686"/><section>
+    <title>nb_transport_fw()</title>
+<indexterm><primary>nb_transport_fw</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>nb_transport_fw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_fw (int id, tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_fw Implements the non-blocking forward transport interface for the target. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>id</entry><entry>
+<para>Integer identifier to distinguish between multiple initiators or channels. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::initiator_sockets</link>, <link linkend="_class_b_u_s_1a73159a2a342aec6d149d6627f70b35b7">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_bus_lock</link>, <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_cur_socket</link>, <link linkend="_class_b_u_s_1a40f977ac4c6e432882dfb186d3450bd4">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_message</link>, <link linkend="_class_b_u_s_1adb41893ba19e889e56c559f25fc1a68a">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_name</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55"/><section>
+    <title>TS_handle_begin_req()</title>
+<indexterm><primary>TS_handle_begin_req</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>TS_handle_begin_req</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>void TS_handle_begin_req (int id, tlm::tlm_generic_payload &amp; trans, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>TS_handle_begin_req Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_b_u_s_1a699d1d5e434d11afa4dda7a18b056f16">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address_mapping</link>, <link linkend="_class_b_u_s_1aace875a6d6c0f6d67d926583c88af55d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::copy_tlm_generic_payload()</link>, <link linkend="_class_b_u_s_1ab64fcbde6ccffc2fa42aaad88a32faa3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::current_trans</link>, <link linkend="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::e_forward_tran</link>, <link linkend="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_cur_socket</link>, and <link linkend="_class_b_u_s_1a2bc2425139d1e7a45b2400327aa54e5f">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::m_current_ts_id</link>.</para>
+<para>
+Referenced by <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_b_u_s_1a699d1d5e434d11afa4dda7a18b056f16"/><section>
+    <title>address_mapping</title>
+<indexterm><primary>address_mapping</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>address_mapping</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>std::vector&lt;<link linkend="_struct_b_u_s_1_1address">address</link>&gt; address_mapping<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a6bd977040e659f716aab9faea34bebf2">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mapping_target_sockets()</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1ab64fcbde6ccffc2fa42aaad88a32faa3"/><section>
+    <title>current_trans</title>
+<indexterm><primary>current_trans</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>current_trans</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm::tlm_generic_payload current_trans<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a18034977a5e4bc1d0b4362b90e64b13d"/><section>
+    <title>e_forward_tran</title>
+<indexterm><primary>e_forward_tran</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>e_forward_tran</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_forward_tran<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>, <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a094a19110aae4a934479d6bf446f6ecf"/><section>
+    <title>initiator_sockets</title>
+<indexterm><primary>initiator_sockets</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>initiator_sockets</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm_utils::multi_passthrough_initiator_socket&lt;<link linkend="_class_b_u_s">BUS</link>, BUSWIDTH&gt; initiator_sockets<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>, <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a6bd977040e659f716aab9faea34bebf2">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mapping_target_sockets()</link>, and <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1aaaaf605ad1a256bb691919474c275e47"/><section>
+    <title>m_bind_id</title>
+<indexterm><primary>m_bind_id</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_bind_id</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int m_bind_id<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a6bd977040e659f716aab9faea34bebf2">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mapping_target_sockets()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a73159a2a342aec6d149d6627f70b35b7"/><section>
+    <title>m_bus_lock</title>
+<indexterm><primary>m_bus_lock</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_bus_lock</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>bool m_bus_lock<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>, <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1aa6794a6593c6ede21f45fad5011be77d"/><section>
+    <title>m_clk</title>
+<indexterm><primary>m_clk</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_clk</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput><link linkend="_bus_8h_1a962b17d96ca7fcc31fd6cee97d502f7d">sc_clk_in</link> m_clk</computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1af7f596ed2b90281af5e2d9e2d31dccb3"/><section>
+    <title>m_cur_socket</title>
+<indexterm><primary>m_cur_socket</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_cur_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int m_cur_socket<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>, <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a2bc2425139d1e7a45b2400327aa54e5f"/><section>
+    <title>m_current_ts_id</title>
+<indexterm><primary>m_current_ts_id</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_current_ts_id</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int m_current_ts_id<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_b_u_s_1a679fda612be2cc0d4e4a21eba5606d55">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::TS_handle_begin_req()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a40f977ac4c6e432882dfb186d3450bd4"/><section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_message</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>bool m_message<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1a88552c26c5911573660db4ee853cc521">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::foward_transaction_process()</link>, <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_b_u_s_1a872dace6d13b9a34aa31266b18d2f686">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1a9493822da315290ea222507413c63745"/><section>
+    <title>m_rst</title>
+<indexterm><primary>m_rst</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>m_rst</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; m_rst</computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>, and <link linkend="_class_b_u_s_1a23141eed3303128f9bc12f17bb2cde3c">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::mth_reset()</link>.</para>
+</section>
+<anchor xml:id="_class_b_u_s_1aa7c093fee38f107b57301ba1f248025e"/><section>
+    <title>target_sockets</title>
+<indexterm><primary>target_sockets</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</primary><secondary>target_sockets</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>tlm_utils::multi_passthrough_target_socket&lt;<link linkend="_class_b_u_s">BUS</link>, BUSWIDTH&gt; target_sockets</computeroutput></para><para>
+Referenced by <link linkend="_class_b_u_s_1aac5e5263b5f5ad390d384e50b0dff08d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::BUS()</link>, and <link linkend="_class_b_u_s_1a2bd0315abeeb4489fb9e21550de6036d">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::nb_transport_bw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="_bus_8h">bus.h</link></section>
+</section>

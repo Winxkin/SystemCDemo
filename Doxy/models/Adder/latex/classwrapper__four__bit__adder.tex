@@ -1,0 +1,278 @@
+\doxysection{wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$}
+\label{classwrapper__four__bit__adder}\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+
+
+{\ttfamily \#include "{}Adder\+\_\+wrapper.\+h"{}}
+
+
+
+Inherits sc\+\_\+module.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool message=false)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$ \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder}, BUSWIDTH $>$ \textbf{ target\+\_\+socket}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ binding\+\_\+inout} ()
+\item 
+void \textbf{ cb\+\_\+\+ADDERINPUT} (const std\+::string \&name, uint32\+\_\+t value, uint32\+\_\+t old\+\_\+value, uint32\+\_\+t mask, uint32\+\_\+t ch)
+\item 
+void \textbf{ init\+\_\+register} ()
+\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+fw} (tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\item 
+void \textbf{ output\+\_\+handling} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+signal$<$ sc\+\_\+uint$<$ 4 $>$ $>$ \textbf{ a}
+\item 
+sc\+\_\+signal$<$ sc\+\_\+uint$<$ 4 $>$ $>$ \textbf{ b}
+\item 
+sc\+\_\+signal$<$ bool $>$ \textbf{ cin}
+\item 
+sc\+\_\+signal$<$ bool $>$ \textbf{ cout}
+\item 
+four\+\_\+bit\+\_\+adder \textbf{ m\+\_\+four\+\_\+bit\+\_\+adder}
+\item 
+bool \textbf{ m\+\_\+message}
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\item 
+Register\+Interface \textbf{ regs}
+\item 
+sc\+\_\+signal$<$ sc\+\_\+uint$<$ 4 $>$ $>$ \textbf{ sum}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!wrapper\_four\_bit\_adder@{wrapper\_four\_bit\_adder}}
+\index{wrapper\_four\_bit\_adder@{wrapper\_four\_bit\_adder}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{wrapper\_four\_bit\_adder()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a26b4a009dcf9d86a147d54fb0b7df1da} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{, }\item[{bool}]{message}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cout}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::init\+\_\+register()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::output\+\_\+handling()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::sum}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::target\+\_\+socket}.
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\doxysubsection{Member Function Documentation}
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!binding\_inout@{binding\_inout}}
+\index{binding\_inout@{binding\_inout}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{binding\_inout()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a56d17f4b027177be6eba849616a2d9dc} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void binding\+\_\+inout (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::a}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::b}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cin}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cout}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::m\+\_\+four\+\_\+bit\+\_\+adder}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::sum}.
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}.
+
+Here is the caller graph for this function\+:
+% FIG 1
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!cb\_ADDERINPUT@{cb\_ADDERINPUT}}
+\index{cb\_ADDERINPUT@{cb\_ADDERINPUT}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{cb\_ADDERINPUT()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_af64236c53e7cd1b6ac9631b6000ef8ab} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void cb\+\_\+\+ADDERINPUT (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{uint32\+\_\+t}]{value}{, }\item[{uint32\+\_\+t}]{old\+\_\+value}{, }\item[{uint32\+\_\+t}]{mask}{, }\item[{uint32\+\_\+t}]{ch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::a}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::b}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cin}.
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::init\+\_\+register()}.
+
+Here is the caller graph for this function\+:
+% FIG 2
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!init\_register@{init\_register}}
+\index{init\_register@{init\_register}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{init\_register()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_aa3754fdca47463cb555920060a29e6e2} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void init\+\_\+register (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ ADDERINPUT}, \textbf{ ADDEROUTPUT}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cb\+\_\+\+ADDERINPUT()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::regs}.
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}.
+
+Here is the call graph for this function\+:
+% FIG 3
+Here is the caller graph for this function\+:
+% FIG 4
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!nb\_transport\_fw@{nb\_transport\_fw}}
+\index{nb\_transport\_fw@{nb\_transport\_fw}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{nb\_transport\_fw()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a882a19a1d4962f1024c218c07e8e0289} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+fw (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::regs}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::target\+\_\+socket}.
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}.
+
+Here is the caller graph for this function\+:
+% FIG 5
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!output\_handling@{output\_handling}}
+\index{output\_handling@{output\_handling}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{output\_handling()}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a4c7b2e9e249e3493baad4be51269abb8} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void output\+\_\+handling (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ ADDEROUTPUT}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cout}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::regs}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::sum}.
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}.
+
+Here is the caller graph for this function\+:
+% FIG 6
+
+
+\doxysubsection{Member Data Documentation}
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!a@{a}}
+\index{a@{a}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{a}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_aca4f3d1affc2c4ff2c5381f84c7225eb} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+signal$<$sc\+\_\+uint$<$4$>$ $>$ a\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cb\+\_\+\+ADDERINPUT()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!b@{b}}
+\index{b@{b}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{b}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_aaa6fc656ca5f488ee0c1f63f2b22c841} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+signal$<$sc\+\_\+uint$<$4$>$ $>$ b\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cb\+\_\+\+ADDERINPUT()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!cin@{cin}}
+\index{cin@{cin}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{cin}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_ac5a4c4523f50ff42af75574168e4e5b8} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+signal$<$bool$>$ cin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::cb\+\_\+\+ADDERINPUT()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!cout@{cout}}
+\index{cout@{cout}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{cout}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a3086aac8275aca76e8f00f0aab213ece} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+signal$<$bool$>$ cout\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::output\+\_\+handling()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!m\_four\_bit\_adder@{m\_four\_bit\_adder}}
+\index{m\_four\_bit\_adder@{m\_four\_bit\_adder}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_four\_bit\_adder}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a465e0d59aaa8765bae06863cf1bf1e3e} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+four\+\_\+bit\+\_\+adder m\+\_\+four\+\_\+bit\+\_\+adder\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!m\_message@{m\_message}}
+\index{m\_message@{m\_message}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_message}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a40f977ac4c6e432882dfb186d3450bd4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+message\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_adb41893ba19e889e56c559f25fc1a68a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!regs@{regs}}
+\index{regs@{regs}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{regs}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_afbd41e80ab004d6bad07dc9ca8e282f4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+Register\+Interface regs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::init\+\_\+register()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::output\+\_\+handling()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!sum@{sum}}
+\index{sum@{sum}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{sum}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a505c64f947ab98a02e3118c7378d7047} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+signal$<$sc\+\_\+uint$<$4$>$ $>$ sum\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}, \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::binding\+\_\+inout()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::output\+\_\+handling()}.
+
+\index{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}!target\_socket@{target\_socket}}
+\index{target\_socket@{target\_socket}!wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$@{wrapper\_four\_bit\_adder$<$ BUSWIDTH $>$}}
+\doxysubsubsection{target\_socket}
+{\footnotesize\ttfamily \label{classwrapper__four__bit__adder_a9ffd456dcfb0b0853a698783fb09d7ef} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$\textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder}, BUSWIDTH$>$ target\+\_\+socket}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::wrapper\+\_\+four\+\_\+bit\+\_\+adder()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+models/\+Adder/\textbf{ Adder\+\_\+wrapper.\+h}\end{DoxyCompactItemize}

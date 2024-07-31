@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__dummy_slave_8h" xml:lang="en-US">
+<title>common/DummySlave.h File Reference</title>
+<indexterm><primary>common/DummySlave.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;systemc&gt;<?linebreak?>#include &lt;tlm&gt;<?linebreak?>#include &lt;tlm_utils/simple_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/simple_target_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_target_socket.h&gt;<?linebreak?>#include &lt;map&gt;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &lt;iostream&gt;<?linebreak?>#include &lt;cstdint&gt;<?linebreak?>#include &quot;Registerif.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_dummy_slave">DummySlave&lt; BUSWIDTH &gt;</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="__dummy_slave_8h_1a07a53b64bf7de240c994c66886ae5a5c">DUMMYRESULT</link>&#160;&#160;&#160;0x00</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="__dummy_slave_8h_1a07a53b64bf7de240c994c66886ae5a5c"/><section>
+    <title>DUMMYRESULT</title>
+<indexterm><primary>DUMMYRESULT</primary><secondary>DummySlave.h</secondary></indexterm>
+<indexterm><primary>DummySlave.h</primary><secondary>DUMMYRESULT</secondary></indexterm>
+<para><computeroutput>#define DUMMYRESULT&#160;&#160;&#160;0x00</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>.</para>
+</section>
+</section>
+</section>

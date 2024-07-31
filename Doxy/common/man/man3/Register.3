@@ -1,0 +1,166 @@
+.TH "Register" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Register
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'Registerif\&.h'\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBCallback\fP = std::function<void(const std::string&, uint32_t, uint32_t, uint32_t, uint32_t)>"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRegister\fP ()"
+.br
+.ti -1c
+.RI "\fBRegister\fP (std::string \fBname\fP, uint64_t \fBaddress\fP, uint32_t init, uint32_t \fBmask\fP, uint32_t \fBch\fP, \fBREGPERMISSION\fP \fBpermission\fP)"
+.br
+.ti -1c
+.RI "\fB~Register\fP ()"
+.br
+.ti -1c
+.RI "uint64_t \fBget_address\fP ()"
+.br
+.ti -1c
+.RI "std::string \fBget_name\fP ()"
+.br
+.ti -1c
+.RI "uint32_t \fBget_value\fP () const"
+.br
+.ti -1c
+.RI "\fBRegister\fP & \fBoperator=\fP (uint32_t new_value)"
+.br
+.ti -1c
+.RI "void \fBreset\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_callback\fP (\fBCallback\fP cb)"
+.br
+.ti -1c
+.RI "void \fBset_readonly_value\fP (uint32_t new_value)"
+.br
+.ti -1c
+.RI "void \fBset_value\fP (uint32_t new_value)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "uint64_t \fBaddress\fP"
+.br
+.ti -1c
+.RI "\fBCallback\fP \fBcallback\fP"
+.br
+.ti -1c
+.RI "const uint32_t \fBch\fP"
+.br
+.ti -1c
+.RI "const uint32_t \fBinit_val\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBmask\fP"
+.br
+.ti -1c
+.RI "std::string \fBname\fP"
+.br
+.ti -1c
+.RI "const \fBREGPERMISSION\fP \fBpermission\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBvalue\fP"
+.br
+.in -1c
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBCallback\fP = std::function<void(const std::string&, uint32_t, uint32_t, uint32_t, uint32_t)>"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "\fBRegister\fP ()\fR [inline]\fP"
+
+.SS "\fBRegister\fP (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, \fBREGPERMISSION\fP permission)\fR [inline]\fP"
+
+.SS "~\fBRegister\fP ()\fR [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "uint64_t get_address ()\fR [inline]\fP"
+
+.PP
+References \fBaddress\fP\&.
+.SS "std::string get_name ()\fR [inline]\fP"
+
+.PP
+References \fBname\fP\&.
+.SS "uint32_t get_value () const\fR [inline]\fP"
+
+.PP
+References \fBvalue\fP\&.
+.SS "\fBRegister\fP & operator= (uint32_t new_value)\fR [inline]\fP"
+
+.PP
+References \fBcallback\fP, \fBch\fP, \fBmask\fP, \fBname\fP, \fBpermission\fP, \fBREADWRITE\fP, and \fBvalue\fP\&.
+.SS "void reset ()\fR [inline]\fP"
+
+.PP
+References \fBinit_val\fP, and \fBvalue\fP\&.
+.SS "void set_callback (\fBCallback\fP cb)\fR [inline]\fP"
+
+.PP
+References \fBcallback\fP\&.
+.SS "void set_readonly_value (uint32_t new_value)\fR [inline]\fP"
+
+.PP
+References \fBmask\fP, \fBpermission\fP, \fBREADONLY\fP, and \fBvalue\fP\&.
+.SS "void set_value (uint32_t new_value)\fR [inline]\fP"
+
+.PP
+References \fBcallback\fP, \fBch\fP, \fBmask\fP, \fBname\fP, \fBpermission\fP, \fBREADWRITE\fP, and \fBvalue\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "uint64_t address\fR [private]\fP"
+
+.PP
+Referenced by \fBget_address()\fP\&.
+.SS "\fBCallback\fP callback\fR [private]\fP"
+
+.PP
+Referenced by \fBoperator=()\fP, \fBset_callback()\fP, and \fBset_value()\fP\&.
+.SS "const uint32_t ch\fR [private]\fP"
+
+.PP
+Referenced by \fBoperator=()\fP, and \fBset_value()\fP\&.
+.SS "const uint32_t init_val\fR [private]\fP"
+
+.PP
+Referenced by \fBreset()\fP\&.
+.SS "uint32_t mask\fR [private]\fP"
+
+.PP
+Referenced by \fBoperator=()\fP, \fBset_readonly_value()\fP, and \fBset_value()\fP\&.
+.SS "std::string name\fR [private]\fP"
+
+.PP
+Referenced by \fBget_name()\fP, \fBoperator=()\fP, and \fBset_value()\fP\&.
+.SS "const \fBREGPERMISSION\fP permission\fR [private]\fP"
+
+.PP
+Referenced by \fBoperator=()\fP, \fBset_readonly_value()\fP, and \fBset_value()\fP\&.
+.SS "uint32_t value\fR [private]\fP"
+
+.PP
+Referenced by \fBget_value()\fP, \fBoperator=()\fP, \fBreset()\fP, \fBset_readonly_value()\fP, and \fBset_value()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

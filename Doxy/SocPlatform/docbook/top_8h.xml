@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_top_8h" xml:lang="en-US">
+<title>SocPlatform/top.h File Reference</title>
+<indexterm><primary>SocPlatform/top.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;systemc&gt;<?linebreak?>#include &lt;tlm&gt;<?linebreak?>#include &lt;iostream&gt;<?linebreak?>#include &lt;tlm_utils/simple_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/simple_target_socket.h&gt;<?linebreak?>#include &quot;bus.h&quot;<?linebreak?>#include &quot;DummyMaster.h&quot;<?linebreak?>#include &quot;DummySlave.h&quot;<?linebreak?>#include &quot;target.h&quot;<?linebreak?>#include &quot;memory.h&quot;<?linebreak?>#include &quot;DMAC.h&quot;<?linebreak?>#include &quot;IO.h&quot;<?linebreak?>#include &quot;Inverter.h&quot;<?linebreak?>#include &quot;Adder/Adder_wrapper.h&quot;<?linebreak?>#include &quot;Counter/Counter_wrapper.h&quot;<?linebreak?>#include &quot;Uart/Uart_wrapper.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_so_c_platform">SoCPlatform</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

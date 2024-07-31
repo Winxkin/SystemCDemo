@@ -1,0 +1,285 @@
+.TH "DMAC< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DMAC< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'DMAC\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDMAC\fP (sc_core::sc_module_name name, bool message=false)"
+.br
+.ti -1c
+.RI "\fB~DMAC\fP ()"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBclk\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_out< bool > \fBDMA_ack\fP [\fBDMA_MAX_CH\fP]"
+.br
+.ti -1c
+.RI "sc_core::sc_out< bool > \fBDMA_int\fP [\fBDMA_MAX_CH\fP]"
+.br
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBDMA_req\fP [\fBDMA_MAX_CH\fP]"
+.br
+.ti -1c
+.RI "tlm_utils::simple_initiator_socket< \fBDMAC\fP, BUSWIDTH > \fBinitiator_socket\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBrst\fP"
+.br
+.ti -1c
+.RI "tlm_utils::simple_target_socket< \fBDMAC\fP, BUSWIDTH > \fBtarget_socket\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcb_DMAREQ\fP (const std::string &name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)"
+.br
+.ti -1c
+.RI "void \fBcopy_tlm_generic_payload\fP (tlm::tlm_generic_payload &des, tlm::tlm_generic_payload &src)"
+.br
+.ti -1c
+.RI "void \fBinit_registers\fP ()"
+.br
+.ti -1c
+.RI "void \fBmth_request_signals\fP ()"
+.br
+.ti -1c
+.RI "void \fBmth_reset\fP ()"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_bw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "void \fBthr_DMA_forward_process\fP ()"
+.br
+.ti -1c
+.RI "void \fBthr_DMA_run_process\fP ()"
+.br
+.ti -1c
+.RI "void \fBthr_priority_process\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "tlm::tlm_generic_payload \fBcurrent_trans\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_event \fBe_DMA_forward\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_event \fBe_DMA_request\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_event \fBe_DMA_run\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_event \fBe_DMA_run_done\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBm_cur_reg_ch\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_cur_reg_name\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBm_current_ch\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "bool \fBm_running\fP"
+.br
+.ti -1c
+.RI "bool \fBm_testmode\fP"
+.br
+.ti -1c
+.RI "std::list< unsigned int > \fBport_req_ids\fP"
+.br
+.ti -1c
+.RI "\fBRegisterInterface\fP \fBregs\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBDMAC\fP (sc_core::sc_module_name name, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBDMA_MAX_CH\fP, \fBDMAC< BUSWIDTH >::DMA_req\fP, \fBDMAC< BUSWIDTH >::e_DMA_forward\fP, \fBDMAC< BUSWIDTH >::e_DMA_request\fP, \fBDMAC< BUSWIDTH >::e_DMA_run\fP, \fBDMAC< BUSWIDTH >::init_registers()\fP, \fBDMAC< BUSWIDTH >::initiator_socket\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP, \fBDMAC< BUSWIDTH >::rst\fP, \fBDMAC< BUSWIDTH >::target_socket\fP, \fBDMAC< BUSWIDTH >::thr_DMA_forward_process()\fP, \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> ~\fBDMAC\fP ()\fR [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> void cb_DMAREQ (const std::string & name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::e_DMA_request\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_ch\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_name\fP, \fBDMAC< BUSWIDTH >::m_message\fP, \fBDMAC< BUSWIDTH >::m_name\fP, \fBDMAC< BUSWIDTH >::m_running\fP, and \fBDMAC< BUSWIDTH >::m_testmode\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void copy_tlm_generic_payload (tlm::tlm_generic_payload & des, tlm::tlm_generic_payload & src)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void init_registers ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBRegisterInterface::add_register()\fP, \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMA_MAX_CH\fP, \fBDMAACK\fP, \fBDMACHEN\fP, \fBDMADATALENGTH\fP, \fBDMADESADDR\fP, \fBDMAINT\fP, \fBDMAREQ\fP, \fBDMASRCADDR\fP, \fBREADWRITE\fP, \fBDMAC< BUSWIDTH >::regs\fP, and \fBRegisterInterface::set_register_callback()\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void mth_request_signals ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMA_MAX_CH\fP, \fBDMAC< BUSWIDTH >::DMA_req\fP, \fBDMACHEN\fP, \fBDMAC< BUSWIDTH >::e_DMA_request\fP, \fBDMAC< BUSWIDTH >::m_message\fP, \fBDMAC< BUSWIDTH >::m_name\fP, \fBDMAC< BUSWIDTH >::m_running\fP, \fBDMAC< BUSWIDTH >::port_req_ids\fP, and \fBDMAC< BUSWIDTH >::regs\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void mth_reset ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::e_DMA_forward\fP, \fBDMAC< BUSWIDTH >::e_DMA_request\fP, \fBDMAC< BUSWIDTH >::e_DMA_run\fP, \fBDMAC< BUSWIDTH >::e_DMA_run_done\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_ch\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_name\fP, \fBDMAC< BUSWIDTH >::m_current_ch\fP, \fBDMAC< BUSWIDTH >::m_running\fP, \fBDMAC< BUSWIDTH >::m_testmode\fP, \fBDMAC< BUSWIDTH >::regs\fP, \fBRegisterInterface::reset_regs()\fP, and \fBDMAC< BUSWIDTH >::rst\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_bw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::copy_tlm_generic_payload()\fP, \fBDMAC< BUSWIDTH >::current_trans\fP, \fBDMADESADDR\fP, \fBDMASRCADDR\fP, \fBDMAC< BUSWIDTH >::e_DMA_forward\fP, \fBDMAC< BUSWIDTH >::e_DMA_run_done\fP, \fBDMAC< BUSWIDTH >::m_current_ch\fP, \fBDMAC< BUSWIDTH >::m_message\fP, \fBDMAC< BUSWIDTH >::m_name\fP, and \fBDMAC< BUSWIDTH >::regs\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::m_message\fP, \fBDMAC< BUSWIDTH >::m_name\fP, \fBDMAC< BUSWIDTH >::regs\fP, \fBDMAC< BUSWIDTH >::target_socket\fP, and \fBRegisterInterface::update_register()\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void thr_DMA_forward_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::current_trans\fP, \fBDMAC< BUSWIDTH >::e_DMA_forward\fP, and \fBDMAC< BUSWIDTH >::initiator_socket\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void thr_DMA_run_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMADATALENGTH\fP, \fBDMASRCADDR\fP, \fBDMAC< BUSWIDTH >::e_DMA_run\fP, \fBDMAC< BUSWIDTH >::initiator_socket\fP, \fBDMAC< BUSWIDTH >::m_current_ch\fP, and \fBDMAC< BUSWIDTH >::regs\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void thr_priority_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDMAC< BUSWIDTH >::clk\fP, \fBDMAC< BUSWIDTH >::DMA_ack\fP, \fBDMAC< BUSWIDTH >::DMA_int\fP, \fBDMAACK\fP, \fBDMACHEN\fP, \fBDMAINT\fP, \fBDMAC< BUSWIDTH >::e_DMA_request\fP, \fBDMAC< BUSWIDTH >::e_DMA_run\fP, \fBDMAC< BUSWIDTH >::e_DMA_run_done\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_ch\fP, \fBDMAC< BUSWIDTH >::m_cur_reg_name\fP, \fBDMAC< BUSWIDTH >::m_current_ch\fP, \fBDMAC< BUSWIDTH >::m_message\fP, \fBDMAC< BUSWIDTH >::m_name\fP, \fBDMAC< BUSWIDTH >::m_running\fP, \fBDMAC< BUSWIDTH >::m_testmode\fP, \fBDMAC< BUSWIDTH >::port_req_ids\fP, and \fBDMAC< BUSWIDTH >::regs\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> clk"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_generic_payload current_trans\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, and \fBDMAC< BUSWIDTH >::thr_DMA_forward_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_out<bool> DMA_ack[\fBDMA_MAX_CH\fP]"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_out<bool> DMA_int[\fBDMA_MAX_CH\fP]"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> DMA_req[\fBDMA_MAX_CH\fP]"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, and \fBDMAC< BUSWIDTH >::mth_request_signals()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_DMA_forward\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, and \fBDMAC< BUSWIDTH >::thr_DMA_forward_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_DMA_request\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_DMA_run\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_DMA_run_done\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_initiator_socket<\fBDMAC\fP, BUSWIDTH> initiator_socket"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, \fBDMAC< BUSWIDTH >::thr_DMA_forward_process()\fP, and \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> unsigned int m_cur_reg_ch\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_cur_reg_name\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> unsigned int m_current_ch\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_running\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_testmode\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::cb_DMAREQ()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::list<unsigned int> port_req_ids\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> \fBRegisterInterface\fP regs\fR [private]\fP"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, \fBDMAC< BUSWIDTH >::mth_reset()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP, \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> rst"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, and \fBDMAC< BUSWIDTH >::mth_reset()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_target_socket<\fBDMAC\fP, BUSWIDTH> target_socket"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, and \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

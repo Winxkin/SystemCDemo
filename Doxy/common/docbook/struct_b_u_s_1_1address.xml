@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_b_u_s_1_1address" xml:lang="en-US">
+<title>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</title>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned int <link linkend="_struct_b_u_s_1_1address_1ab36863a07751ac73459d46b677c33b57">addr</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_struct_b_u_s_1_1address_1ab7ce6f462afaf105224b0ca772a33c43">id</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_struct_b_u_s_1_1address_1aac913b3a1f6ef005d66bf7a84428773e">size</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_b_u_s_1_1address_1ab36863a07751ac73459d46b677c33b57"/><section>
+    <title>addr</title>
+<indexterm><primary>addr</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</primary><secondary>addr</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int addr</computeroutput></para></section>
+<anchor xml:id="_struct_b_u_s_1_1address_1ab7ce6f462afaf105224b0ca772a33c43"/><section>
+    <title>id</title>
+<indexterm><primary>id</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</primary><secondary>id</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int id</computeroutput></para></section>
+<anchor xml:id="_struct_b_u_s_1_1address_1aac913b3a1f6ef005d66bf7a84428773e"/><section>
+    <title>size</title>
+<indexterm><primary>size</primary><secondary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</secondary></indexterm>
+<indexterm><primary>BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> DATA_WIDTH = D8BIT&gt; </computeroutput><para><computeroutput>unsigned int size</computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+common/<link linkend="_bus_8h">bus.h</link></section>
+</section>

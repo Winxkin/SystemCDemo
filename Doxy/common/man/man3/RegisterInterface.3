@@ -1,0 +1,90 @@
+.TH "RegisterInterface" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RegisterInterface
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'Registerif\&.h'\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBadd_register\fP (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, \fBREGPERMISSION\fP permission)"
+.br
+.ti -1c
+.RI "void \fBdump_registers\fP ()"
+.br
+.ti -1c
+.RI "\fBRegister\fP & \fBoperator[]\fP (std::string name)"
+.br
+.ti -1c
+.RI "\fBRegister\fP & \fBoperator[]\fP (uint64_t address)"
+.br
+.ti -1c
+.RI "void \fBreset_regs\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_register_callback\fP (const std::string &name, \fBRegister::Callback\fP cb)"
+.br
+.ti -1c
+.RI "void \fBupdate_register\fP (uint64_t address, uint32_t value)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::map< std::string, \fBRegister\fP > \fBregisters\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "void add_register (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, \fBREGPERMISSION\fP permission)\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDummySlave< BUSWIDTH >::init_registers()\fP\&.
+.SS "void dump_registers ()\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.SS "\fBRegister\fP & operator[] (std::string name)\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.SS "\fBRegister\fP & operator[] (uint64_t address)\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.SS "void reset_regs ()\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::mth_reset()\fP, and \fBDummySlave< BUSWIDTH >::mth_reset()\fP\&.
+.SS "void set_register_callback (const std::string & name, \fBRegister::Callback\fP cb)\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDummySlave< BUSWIDTH >::init_registers()\fP\&.
+.SS "void update_register (uint64_t address, uint32_t value)\fR [inline]\fP"
+
+.PP
+References \fBregisters\fP\&.
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::nb_transport_fw()\fP, and \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "std::map<std::string, \fBRegister\fP> registers\fR [private]\fP"
+
+.PP
+Referenced by \fBadd_register()\fP, \fBdump_registers()\fP, \fBoperator[]()\fP, \fBoperator[]()\fP, \fBreset_regs()\fP, \fBset_register_callback()\fP, and \fBupdate_register()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

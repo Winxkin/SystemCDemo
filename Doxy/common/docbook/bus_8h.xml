@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_bus_8h" xml:lang="en-US">
+<title>common/bus.h File Reference</title>
+<indexterm><primary>common/bus.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;systemc&gt;<?linebreak?>#include &lt;tlm&gt;<?linebreak?>#include &lt;tlm_utils/simple_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/simple_target_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_target_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/peq_with_cb_and_phase.h&gt;<?linebreak?>#include &lt;map&gt;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &lt;mutex&gt;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_b_u_s">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_struct_b_u_s_1_1address">BUS&lt; BUSWIDTH, DATA_WIDTH &gt;::address</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef sc_core::sc_in&lt; bool &gt; <link linkend="_bus_8h_1a962b17d96ca7fcc31fd6cee97d502f7d">sc_clk_in</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4">BUS_TYPE</link> { <link linkend="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a7de92f4a834b44ff887be6fc9fe18956">AXI32</link> = 32
+, <link linkend="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a4aeb8d3a22bbd5fb84d2c94e87738dc4">AXI64</link> = 64
+, <link linkend="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a063cb72795aaff6f2500473469aaf44c">APB</link> = 32
+ }</para>
+</listitem>
+            <listitem><para>enum <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link> { <?linebreak?><link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837aca8027f1036118a7f72cf46c24f8f84a">D8BIT</link> = 8
+, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837ac20d20d32bbe573e91a8b0250e22ffd8">D16BIT</link> = 16
+, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837abc3629a193eccea3e94105b3738bb42e">D32BIT</link> = 32
+, <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837ace1272149536efab2aaf26c042565300">D64BIT</link> = 64
+, <?linebreak?><link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837a7b8ddef01f302ece4f34c793995cee0a">D128BIT</link> = 128
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_bus_8h_1a962b17d96ca7fcc31fd6cee97d502f7d"/><section>
+    <title>sc_clk_in</title>
+<indexterm><primary>sc_clk_in</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>sc_clk_in</secondary></indexterm>
+<para><computeroutput>typedef sc_core::sc_in&lt;bool&gt; <link linkend="_bus_8h_1a962b17d96ca7fcc31fd6cee97d502f7d">sc_clk_in</link></computeroutput></para></section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4"/><section>
+    <title>BUS_TYPE</title>
+<indexterm><primary>BUS_TYPE</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>BUS_TYPE</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4">BUS_TYPE</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>AXI32</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>AXI32</secondary></indexterm>
+<anchor xml:id="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a7de92f4a834b44ff887be6fc9fe18956"/>AXI32</entry><entry></entry></row><row><entry><indexterm><primary>AXI64</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>AXI64</secondary></indexterm>
+<anchor xml:id="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a4aeb8d3a22bbd5fb84d2c94e87738dc4"/>AXI64</entry><entry></entry></row><row><entry><indexterm><primary>APB</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>APB</secondary></indexterm>
+<anchor xml:id="_bus_8h_1a1508df264e0751558523bc8d35c1c3f4a063cb72795aaff6f2500473469aaf44c"/>APB</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+</section>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837"/><section>
+    <title>DATAWIDTH</title>
+<indexterm><primary>DATAWIDTH</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>DATAWIDTH</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837">DATAWIDTH</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>D8BIT</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>D8BIT</secondary></indexterm>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837aca8027f1036118a7f72cf46c24f8f84a"/>D8BIT</entry><entry></entry></row><row><entry><indexterm><primary>D16BIT</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>D16BIT</secondary></indexterm>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837ac20d20d32bbe573e91a8b0250e22ffd8"/>D16BIT</entry><entry></entry></row><row><entry><indexterm><primary>D32BIT</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>D32BIT</secondary></indexterm>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837abc3629a193eccea3e94105b3738bb42e"/>D32BIT</entry><entry></entry></row><row><entry><indexterm><primary>D64BIT</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>D64BIT</secondary></indexterm>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837ace1272149536efab2aaf26c042565300"/>D64BIT</entry><entry></entry></row><row><entry><indexterm><primary>D128BIT</primary><secondary>bus.h</secondary></indexterm>
+<indexterm><primary>bus.h</primary><secondary>D128BIT</secondary></indexterm>
+<anchor xml:id="_bus_8h_1ab091971cfc8591fcdbb10a11e6ab7837a7b8ddef01f302ece4f34c793995cee0a"/>D128BIT</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+</section>
+</section>
+</section>

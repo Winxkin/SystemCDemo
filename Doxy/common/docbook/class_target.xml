@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_target" xml:lang="en-US">
+<title>Target&lt; BUSWIDTH &gt;</title>
+<indexterm><primary>Target&lt; BUSWIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;target.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for Target&lt; BUSWIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_target.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_target_1a8a1c49b472a29a18baa3b9cfe57abc02">Target</link> (sc_core::sc_module_name name)</para>
+
+<para><link linkend="_class_target">Target</link>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>tlm_utils::simple_target_socket&lt; <link linkend="_class_target">Target</link>, BUSWIDTH &gt; <link linkend="_class_target_1a0aacab09beb649e6fad1ee8f815e7a29">target_socket</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_target_1a882a19a1d4962f1024c218c07e8e0289">nb_transport_fw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_fw </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_class_target_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_target_1a8a1c49b472a29a18baa3b9cfe57abc02"/><section>
+    <title>Target()</title>
+<indexterm><primary>Target</primary><secondary>Target&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>Target&lt; BUSWIDTH &gt;</primary><secondary>Target</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_target">Target</link> (sc_core::sc_module_name name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_target">Target</link>. </para>
+</para>
+
+<para><link linkend="_class_target">Target</link> Constructure 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to sc_module name </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_target_1a882a19a1d4962f1024c218c07e8e0289">Target&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_target_1a0aacab09beb649e6fad1ee8f815e7a29">Target&lt; BUSWIDTH &gt;::target_socket</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_target_1a882a19a1d4962f1024c218c07e8e0289"/><section>
+    <title>nb_transport_fw()</title>
+<indexterm><primary>nb_transport_fw</primary><secondary>Target&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>Target&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_fw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_fw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_target_1adb41893ba19e889e56c559f25fc1a68a">Target&lt; BUSWIDTH &gt;::m_name</link>, and <link linkend="_class_target_1a0aacab09beb649e6fad1ee8f815e7a29">Target&lt; BUSWIDTH &gt;::target_socket</link>.</para>
+<para>
+Referenced by <link linkend="_class_target_1a8a1c49b472a29a18baa3b9cfe57abc02">Target&lt; BUSWIDTH &gt;::Target()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_target_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>Target&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>Target&lt; BUSWIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_target_1a882a19a1d4962f1024c218c07e8e0289">Target&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_target_1a0aacab09beb649e6fad1ee8f815e7a29"/><section>
+    <title>target_socket</title>
+<indexterm><primary>target_socket</primary><secondary>Target&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>Target&lt; BUSWIDTH &gt;</primary><secondary>target_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_target_socket&lt;<link linkend="_class_target">Target</link>, BUSWIDTH&gt; target_socket</computeroutput></para><para>
+Referenced by <link linkend="_class_target_1a8a1c49b472a29a18baa3b9cfe57abc02">Target&lt; BUSWIDTH &gt;::Target()</link>, and <link linkend="_class_target_1a882a19a1d4962f1024c218c07e8e0289">Target&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="_target_8h">target.h</link></section>
+</section>

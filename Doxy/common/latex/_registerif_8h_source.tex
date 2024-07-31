@@ -1,0 +1,194 @@
+\doxysection{Registerif.\+h}
+\hypertarget{_registerif_8h_source}{}\label{_registerif_8h_source}\index{common/Registerif.h@{common/Registerif.h}}
+\mbox{\hyperlink{_registerif_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Author:\ Huan\ Nguyen-\/Duy}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ date:\ 01/07/2024}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ \_REGISTERIF\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ \_REGISTERIF\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}}\ =\ 0,}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a626af06d585fcb18d2cd6cdec0d235cf}{READONLY}}\ =\ 1}
+\DoxyCodeLine{00020\ \}\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963}{REGPERMISSION}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_register}{Register}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_register_a6f6462b5a400b77343505e1731b69a36}{Callback}}\ =\ std::function<void(\textcolor{keyword}{const}\ std::string\&,\ uint32\_t,\ uint32\_t,\ uint32\_t,\ uint32\_t)>;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_register_ade6ac50ab9c115aba8a9a1c10e35384a}{Register}}()\ :\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}(\textcolor{stringliteral}{"{}"{}}),\ \mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}}(0),\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}(0),\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}}(0),\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}}(0),\ \mbox{\hyperlink{class_register_a2738910a2d48a11a5cae170111c38d2c}{init\_val}}(0),\ \mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}}(\mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}})\ \{\};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_register_ae1025c910d60499f1ae3c928defb08c2}{Register}}(std::string\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}},\ uint64\_t\ \mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}},\ uint32\_t\ init,\ uint32\_t\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}},\ uint32\_t\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}},\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963}{REGPERMISSION}}\ \mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}})}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}(\mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}),\ \mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}}(\mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}}),\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}(init),\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}}(\mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}}),\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}}(\mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}}),\ \mbox{\hyperlink{class_register_a2738910a2d48a11a5cae170111c38d2c}{init\_val}}(init),\ \mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}}(\mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}})}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_register_a04697760fce6a4a15865313f464bb84d}{\string~Register}}()\ \{\};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_register_abf652cde48c79a415d4166d584a3cc5a}{get\_value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}};\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_a5fcb24a46fca6bb40d63c5f25ee93d41}{set\_value}}(uint32\_t\ new\_value)}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ uint32\_t\ old\_value\ =\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}}\ ==\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}})}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ =\ new\_value\ \&\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Info\ message\ */}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Register\ "{}}\ <<\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ changed\ to\ value\ -\/>\ [0x"{}}\ <<\ std::hex\ <<\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calling\ callback\ register\ */}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}})\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}}(\mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}},\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}},\ old\_value,\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}},\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Register\ "{}}\ <<\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}\ <<\ \textcolor{stringliteral}{"{}\ Warning:\ only\ read\ permission"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_ae9d2818713fc35ddc40d76cb65e90f4c}{set\_readonly\_value}}(uint32\_t\ new\_value)}
+\DoxyCodeLine{00061\ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}}\ ==\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a626af06d585fcb18d2cd6cdec0d235cf}{READONLY}})}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ =\ new\_value\ \&\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_ad20897c5c8bd47f5d4005989bead0e55}{reset}}()}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ =\ \mbox{\hyperlink{class_register_a2738910a2d48a11a5cae170111c38d2c}{init\_val}};}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{class_register_ac5218013e0eb854b003c51d982fefb3e}{get\_address}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}};\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ std::string\ \mbox{\hyperlink{class_register_a636296572c928bb9baf49439e9726c30}{get\_name}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}};\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{class_register}{Register}}\&\ \mbox{\hyperlink{class_register_a4141d27dff96e5337def85671351e541}{operator=}}(uint32\_t\ new\_value)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ uint32\_t\ old\_value\ =\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}}\ ==\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}})}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ =\ new\_value\ \&\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Info\ message\ */}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Register\ "{}}\ <<\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ changed\ to\ value\ -\/>\ [0x"{}}\ <<\ std::hex\ <<\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}}\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Calling\ callback\ register\ */}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}})\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}}(\mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}},\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}},\ old\_value,\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}},\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}});}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Register\ "{}}\ <<\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}}\ <<\ \textcolor{stringliteral}{"{}\ Warning:\ only\ read\ permission"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_a5894ecc8c807b6c242da3f4f09d532f7}{set\_callback}}(\mbox{\hyperlink{class_register_a6f6462b5a400b77343505e1731b69a36}{Callback}}\ cb)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}}\ =\ cb;}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00104\ \ \ \ \ std::string\ \mbox{\hyperlink{class_register_a9b45b3e13bd9167aab02e17e08916231}{name}};}
+\DoxyCodeLine{00105\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{class_register_ab6b52376c1b9d81e6ea6f95a1225f832}{address}};}
+\DoxyCodeLine{00106\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd}{value}};}
+\DoxyCodeLine{00107\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_register_ad3bee21df6875eeccd25d3c577e0600a}{mask}};\ \ \textcolor{comment}{//\ Using\ to\ perform\ read\ or\ write\ permission\ }}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{class_register_ad64710488d666c31774f3bb5935dbd4b}{ch}};}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{class_register_a2738910a2d48a11a5cae170111c38d2c}{init\_val}};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963}{REGPERMISSION}}\ \mbox{\hyperlink{class_register_ae549ba30ddef298d996233f52a225ba1}{permission}};}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{class_register_a6f6462b5a400b77343505e1731b69a36}{Callback}}\ \mbox{\hyperlink{class_register_a42712c99422eaa2019fa9713b1dc74b9}{callback}};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ Class\ to\ manage\ a\ collection\ of\ registers}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_register_interface}{RegisterInterface}}\ \{}
+\DoxyCodeLine{00116\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(std::string\ name,\ uint64\_t\ address,\ uint32\_t\ init,\ uint32\_t\ mask,\ uint32\_t\ ch,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963}{REGPERMISSION}}\ permission)\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}.emplace(name,\ \mbox{\hyperlink{class_register}{Register}}(name,\ address,\ init,\ mask,\ ch,\ permission));}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ std::cout\ <<\ "{}[Adding\ new\ register]\ \ \ Register\ name:\ ["{}\ <<\ registers[name].get\_name()}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ <<\ "{}],\ address\ ["{}\ <<\ std::hex\ <<\ registers[name].get\_address()}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ <<\ "{}],\ initialize\ value\ ["{}\ <<\ std::hex\ <<\ registers[name].get\_value()\ <<\ "{}]"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00124\ \ \ \ \ \};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ The\ operator\ to\ get\ register\ by\ name\ for\ example\ this-\/>reg[name]}}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{class_register}{Register}}\&\ \mbox{\hyperlink{class_register_interface_a6ce1143eff40cd2900f607723842be2d}{operator[]}}(std::string\ name)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}.find(name)\ ==\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}.end())\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Register\ not\ found"{}});}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}[name];}
+\DoxyCodeLine{00132\ \ \ \ \ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//\ The\ operator\ to\ get\ register\ by\ address\ for\ example\ this-\/>reg[addr]}}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{class_register}{Register}}\&\ \mbox{\hyperlink{class_register_interface_a3247d9aa20912963b2e0eeb0d979080d}{operator[]}}(uint64\_t\ address)}
+\DoxyCodeLine{00136\ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ reg\ :\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}})\ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reg.second.get\_address()\ ==\ address)\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}[reg.first];}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Register\ with\ the\ given\ address\ not\ found"{}});}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_interface_ab074287fb1d8088234264f3400d8c8eb}{update\_register}}(uint64\_t\ address,\ uint32\_t\ value)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ reg\ :\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}})\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (reg.second.get\_address()\ ==\ address)\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reg.second\ =\ value;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Register\ with\ the\ given\ address\ not\ found"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_interface_ae9e5a36897056f14f1f6eb742cba6ff6}{reset\_regs}}()}
+\DoxyCodeLine{00157\ \ \ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ reg\ :\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}})}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ reg.second.reset();}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_interface_a8ae47f31c3ea49dbe77616951e7b612e}{dump\_registers}}()}
+\DoxyCodeLine{00165\ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ reg\ :\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}})}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ \textcolor{stringliteral}{"{}[dump]\ \ Register\ "{}}\ <<\ reg.second.get\_name()}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ address:\ ["{}}\ <<\ std::hex\ <<\ reg.second.get\_address()}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}]\ value:\ ["{}}\ <<\ std::hex\ <<\ reg.second.get\_value()\ <<\ \textcolor{stringliteral}{"{}]"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \};}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_register_interface_a58b7a47531113e57149c88a61d91830d}{set\_register\_callback}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{class_register_a6f6462b5a400b77343505e1731b69a36}{Register::Callback}}\ cb)\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}.find(name)\ ==\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}.end())\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Register\ not\ found"{}});}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}}[name].set\_callback(cb);}
+\DoxyCodeLine{00180\ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00183\ \ \ \ \ std::map<std::string,\ Register>\ \mbox{\hyperlink{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3}{registers}};}
+\DoxyCodeLine{00184\ \};}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

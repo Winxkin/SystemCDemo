@@ -1,0 +1,446 @@
+\doxysection{BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$}
+\label{class_b_u_s}\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+
+
+{\ttfamily \#include "{}bus.\+h"{}}
+
+Inheritance diagram for BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_b_u_s}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ address}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ BUS} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool message=false)
+\begin{DoxyCompactList}\small\item\em \doxyref{BUS}{p.}{class_b_u_s} constructor. \end{DoxyCompactList}\item 
+\textbf{ $\sim$\+BUS} ()
+\item 
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+initiator\+\_\+socket$<$ \textbf{ BUS}, BUSWIDTH $>$ \& \textbf{ mapping\+\_\+target\+\_\+sockets} (unsigned int \+\_\+addr, unsigned int \+\_\+size)
+\begin{DoxyCompactList}\small\item\em mapping\+\_\+target\+\_\+sockets Implement the registration socket address range for target socket \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ sc\+\_\+clk\+\_\+in} \textbf{ m\+\_\+clk}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ m\+\_\+rst}
+\item 
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+target\+\_\+socket$<$ \textbf{ BUS}, BUSWIDTH $>$ \textbf{ target\+\_\+sockets}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ copy\+\_\+tlm\+\_\+generic\+\_\+payload} (tlm\+::tlm\+\_\+generic\+\_\+payload \&des, tlm\+::tlm\+\_\+generic\+\_\+payload \&src)
+\begin{DoxyCompactList}\small\item\em copy\+\_\+tlm\+\_\+generic\+\_\+payload Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload \end{DoxyCompactList}\item 
+void \textbf{ foward\+\_\+transaction\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em foward\+\_\+transaction\+\_\+process Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator \end{DoxyCompactList}\item 
+void \textbf{ mth\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em mth\+\_\+reset Impelmentation of the method when reset is active \end{DoxyCompactList}\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+bw} (int id, tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+bw Implements the non-\/blocking backward transport interface for the nitiator. \end{DoxyCompactList}\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+fw} (int id, tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+fw Implements the non-\/blocking forward transport interface for the target. \end{DoxyCompactList}\item 
+void \textbf{ TS\+\_\+handle\+\_\+begin\+\_\+req} (int id, tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em TS\+\_\+handle\+\_\+begin\+\_\+req Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \textbf{ address} $>$ \textbf{ address\+\_\+mapping}
+\item 
+tlm\+::tlm\+\_\+generic\+\_\+payload \textbf{ current\+\_\+trans}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+forward\+\_\+tran}
+\item 
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+initiator\+\_\+socket$<$ \textbf{ BUS}, BUSWIDTH $>$ \textbf{ initiator\+\_\+sockets}
+\item 
+unsigned int \textbf{ m\+\_\+bind\+\_\+id}
+\item 
+bool \textbf{ m\+\_\+bus\+\_\+lock}
+\item 
+unsigned int \textbf{ m\+\_\+cur\+\_\+socket}
+\item 
+unsigned int \textbf{ m\+\_\+current\+\_\+ts\+\_\+id}
+\item 
+bool \textbf{ m\+\_\+message}
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!BUS@{BUS}}
+\index{BUS@{BUS}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{BUS()}
+{\footnotesize\ttfamily \label{class_b_u_s_aac5e5263b5f5ad390d384e50b0dff08d} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+\textbf{ BUS} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{, }\item[{bool}]{message}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{BUS}{p.}{class_b_u_s} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to sc\+\_\+module name \\
+\hline
+{\em message} & To enable message log \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::e\+\_\+forward\+\_\+tran}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::initiator\+\_\+sockets}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+rst}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::target\+\_\+sockets}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!````~BUS@{$\sim$BUS}}
+\index{````~BUS@{$\sim$BUS}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{$\sim$BUS()}
+{\footnotesize\ttfamily \label{class_b_u_s_aa75c5c8fe127b8e2bbe3f616f9e27395} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+$\sim$\textbf{ BUS} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!copy\_tlm\_generic\_payload@{copy\_tlm\_generic\_payload}}
+\index{copy\_tlm\_generic\_payload@{copy\_tlm\_generic\_payload}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{copy\_tlm\_generic\_payload()}
+{\footnotesize\ttfamily \label{class_b_u_s_aace875a6d6c0f6d67d926583c88af55d} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+void copy\+\_\+tlm\+\_\+generic\+\_\+payload (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{des}{, }\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{src}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+copy\+\_\+tlm\+\_\+generic\+\_\+payload Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload 
+
+
+\begin{DoxyParams}{Parameters}
+{\em des} & Reference to destination TLM generic payload \\
+\hline
+{\em src} & Reference to source TLM generic payload \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!foward\_transaction\_process@{foward\_transaction\_process}}
+\index{foward\_transaction\_process@{foward\_transaction\_process}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{foward\_transaction\_process()}
+{\footnotesize\ttfamily \label{class_b_u_s_a88552c26c5911573660db4ee853cc521} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+void foward\+\_\+transaction\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+foward\+\_\+transaction\+\_\+process Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator 
+
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::address\+\_\+mapping}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::current\+\_\+trans}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::e\+\_\+forward\+\_\+tran}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::initiator\+\_\+sockets}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+clk}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+cur\+\_\+socket}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+message}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+name}.
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!mapping\_target\_sockets@{mapping\_target\_sockets}}
+\index{mapping\_target\_sockets@{mapping\_target\_sockets}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{mapping\_target\_sockets()}
+{\footnotesize\ttfamily \label{class_b_u_s_a6bd977040e659f716aab9faea34bebf2} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+initiator\+\_\+socket$<$ \textbf{ BUS}, BUSWIDTH $>$ \& mapping\+\_\+target\+\_\+sockets (\begin{DoxyParamCaption}\item[{unsigned int}]{\+\_\+addr}{, }\item[{unsigned int}]{\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+mapping\+\_\+target\+\_\+sockets Implement the registration socket address range for target socket 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+id} & The id number of target socket in bus memory mapping I/O \\
+\hline
+{\em \+\_\+addr} & The base address of target socket that is registered into bus memory mapping I/O \\
+\hline
+{\em \+\_\+size} & the range of address space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+\_\+utils\+::simple\+\_\+initiator\+\_\+socket is the initiator socket with id registration used to bind with the corresponding target socket 
+\end{DoxyReturn}
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::address\+\_\+mapping}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::initiator\+\_\+sockets}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+bind\+\_\+id}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!mth\_reset@{mth\_reset}}
+\index{mth\_reset@{mth\_reset}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{mth\_reset()}
+{\footnotesize\ttfamily \label{class_b_u_s_a23141eed3303128f9bc12f17bb2cde3c} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+void mth\+\_\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+mth\+\_\+reset Impelmentation of the method when reset is active 
+
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::current\+\_\+trans}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::e\+\_\+forward\+\_\+tran}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+bus\+\_\+lock}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+cur\+\_\+socket}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+rst}.
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!nb\_transport\_bw@{nb\_transport\_bw}}
+\index{nb\_transport\_bw@{nb\_transport\_bw}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{nb\_transport\_bw()}
+{\footnotesize\ttfamily \label{class_b_u_s_a2bd0315abeeb4489fb9e21550de6036d} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+bw (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+bw Implements the non-\/blocking backward transport interface for the nitiator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data. \\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function. \\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+bus\+\_\+lock}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+cur\+\_\+socket}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+current\+\_\+ts\+\_\+id}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+message}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+name}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::target\+\_\+sockets}.
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!nb\_transport\_fw@{nb\_transport\_fw}}
+\index{nb\_transport\_fw@{nb\_transport\_fw}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{nb\_transport\_fw()}
+{\footnotesize\ttfamily \label{class_b_u_s_a872dace6d13b9a34aa31266b18d2f686} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+fw (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+fw Implements the non-\/blocking forward transport interface for the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Integer identifier to distinguish between multiple initiators or channels. \\
+\hline
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data. \\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function. \\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::initiator\+\_\+sockets}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+bus\+\_\+lock}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+cur\+\_\+socket}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+message}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+name}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!TS\_handle\_begin\_req@{TS\_handle\_begin\_req}}
+\index{TS\_handle\_begin\_req@{TS\_handle\_begin\_req}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{TS\_handle\_begin\_req()}
+{\footnotesize\ttfamily \label{class_b_u_s_a679fda612be2cc0d4e4a21eba5606d55} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+void TS\+\_\+handle\+\_\+begin\+\_\+req (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+TS\+\_\+handle\+\_\+begin\+\_\+req Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data. \\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function. \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::address\+\_\+mapping}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::copy\+\_\+tlm\+\_\+generic\+\_\+payload()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::current\+\_\+trans}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::e\+\_\+forward\+\_\+tran}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+cur\+\_\+socket}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::m\+\_\+current\+\_\+ts\+\_\+id}.
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!address\_mapping@{address\_mapping}}
+\index{address\_mapping@{address\_mapping}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{address\_mapping}
+{\footnotesize\ttfamily \label{class_b_u_s_a699d1d5e434d11afa4dda7a18b056f16} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+std\+::vector$<$\textbf{ address}$>$ address\+\_\+mapping\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mapping\+\_\+target\+\_\+sockets()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!current\_trans@{current\_trans}}
+\index{current\_trans@{current\_trans}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{current\_trans}
+{\footnotesize\ttfamily \label{class_b_u_s_ab64fcbde6ccffc2fa42aaad88a32faa3} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+::tlm\+\_\+generic\+\_\+payload current\+\_\+trans\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!e\_forward\_tran@{e\_forward\_tran}}
+\index{e\_forward\_tran@{e\_forward\_tran}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{e\_forward\_tran}
+{\footnotesize\ttfamily \label{class_b_u_s_a18034977a5e4bc1d0b4362b90e64b13d} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+forward\+\_\+tran\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!initiator\_sockets@{initiator\_sockets}}
+\index{initiator\_sockets@{initiator\_sockets}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{initiator\_sockets}
+{\footnotesize\ttfamily \label{class_b_u_s_a094a19110aae4a934479d6bf446f6ecf} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+initiator\+\_\+socket$<$\textbf{ BUS}, BUSWIDTH$>$ initiator\+\_\+sockets\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mapping\+\_\+target\+\_\+sockets()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_bind\_id@{m\_bind\_id}}
+\index{m\_bind\_id@{m\_bind\_id}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_bind\_id}
+{\footnotesize\ttfamily \label{class_b_u_s_aaaaf605ad1a256bb691919474c275e47} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+unsigned int m\+\_\+bind\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mapping\+\_\+target\+\_\+sockets()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_bus\_lock@{m\_bus\_lock}}
+\index{m\_bus\_lock@{m\_bus\_lock}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_bus\_lock}
+{\footnotesize\ttfamily \label{class_b_u_s_a73159a2a342aec6d149d6627f70b35b7} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+bool m\+\_\+bus\+\_\+lock\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_clk@{m\_clk}}
+\index{m\_clk@{m\_clk}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_clk}
+{\footnotesize\ttfamily \label{class_b_u_s_aa6794a6593c6ede21f45fad5011be77d} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+\textbf{ sc\+\_\+clk\+\_\+in} m\+\_\+clk}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_cur\_socket@{m\_cur\_socket}}
+\index{m\_cur\_socket@{m\_cur\_socket}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_cur\_socket}
+{\footnotesize\ttfamily \label{class_b_u_s_af7f596ed2b90281af5e2d9e2d31dccb3} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+unsigned int m\+\_\+cur\+\_\+socket\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_current\_ts\_id@{m\_current\_ts\_id}}
+\index{m\_current\_ts\_id@{m\_current\_ts\_id}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_current\_ts\_id}
+{\footnotesize\ttfamily \label{class_b_u_s_a2bc2425139d1e7a45b2400327aa54e5f} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+unsigned int m\+\_\+current\+\_\+ts\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+TS\+\_\+handle\+\_\+begin\+\_\+req()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_message@{m\_message}}
+\index{m\_message@{m\_message}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_message}
+{\footnotesize\ttfamily \label{class_b_u_s_a40f977ac4c6e432882dfb186d3450bd4} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+bool m\+\_\+message\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily \label{class_b_u_s_adb41893ba19e889e56c559f25fc1a68a} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+std\+::string m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::foward\+\_\+transaction\+\_\+process()}, \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!m\_rst@{m\_rst}}
+\index{m\_rst@{m\_rst}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{m\_rst}
+{\footnotesize\ttfamily \label{class_b_u_s_a9493822da315290ea222507413c63745} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ m\+\_\+rst}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::mth\+\_\+reset()}.
+
+\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}!target\_sockets@{target\_sockets}}
+\index{target\_sockets@{target\_sockets}!BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+\doxysubsubsection{target\_sockets}
+{\footnotesize\ttfamily \label{class_b_u_s_aa7c093fee38f107b57301ba1f248025e} 
+template$<$unsigned int BUSWIDTH = 32, \textbf{ DATAWIDTH} DATA\+\_\+\+WIDTH = D8\+BIT$>$ \\
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+target\+\_\+socket$<$\textbf{ BUS}, BUSWIDTH$>$ target\+\_\+sockets}
+
+
+
+Referenced by \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::\+BUS()}, and \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ bus.\+h}\end{DoxyCompactItemize}

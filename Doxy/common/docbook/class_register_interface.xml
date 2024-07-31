@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_register_interface" xml:lang="en-US">
+<title>RegisterInterface</title>
+<indexterm><primary>RegisterInterface</primary></indexterm>
+<para>
+<computeroutput>#include &quot;Registerif.h&quot;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_register_interface_1a544746f8c38d589652fd7adf41227a47">add_register</link> (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> permission)</para>
+
+<para>add_register </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_interface_1a8ae47f31c3ea49dbe77616951e7b612e">dump_registers</link> ()</para>
+
+<para>update_register Using to show all register informations </para>
+</listitem>
+            <listitem><para><link linkend="_class_register">Register</link> &amp; <link linkend="_class_register_interface_1a6ce1143eff40cd2900f607723842be2d">operator[]</link> (std::string name)</para>
+
+<para>add_register The operator to get register by name for example this-&gt;reg[name] </para>
+</listitem>
+            <listitem><para><link linkend="_class_register">Register</link> &amp; <link linkend="_class_register_interface_1a3247d9aa20912963b2e0eeb0d979080d">operator[]</link> (uint64_t address)</para>
+
+<para>operator[] The operator to get register by address for example this-&gt;reg[addr] </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_interface_1ae9e5a36897056f14f1f6eb742cba6ff6">reset_regs</link> ()</para>
+
+<para>update_register Using to reset registers </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_interface_1a58b7a47531113e57149c88a61d91830d">set_register_callback</link> (const std::string &amp;name, <link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Register::Callback</link> cb)</para>
+
+<para>update_register Using to register register callback function </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_interface_1ab074287fb1d8088234264f3400d8c8eb">update_register</link> (uint64_t address, uint32_t value)</para>
+
+<para>update_register Using to update the value of register with specific address </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; std::string, <link linkend="_class_register">Register</link> &gt; <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_register_interface_1a544746f8c38d589652fd7adf41227a47"/><section>
+    <title>add_register()</title>
+<indexterm><primary>add_register</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>add_register</secondary></indexterm>
+<para><computeroutput>void add_register (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> permission)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>add_register </para>
+</para>
+
+<para>Constructure 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>The register name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>address</entry><entry>
+<para>The register base address </para>
+</entry>
+                            </row>
+                            <row>
+<entry>init</entry><entry>
+<para>The register initialization value </para>
+</entry>
+                            </row>
+                            <row>
+<entry>mask</entry><entry>
+<para>The register mask </para>
+</entry>
+                            </row>
+                            <row>
+<entry>ch</entry><entry>
+<para>The register channel </para>
+</entry>
+                            </row>
+                            <row>
+<entry>permission</entry><entry>
+<para>Indicating this register is read /write or read only permission </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">DMAC&lt; BUSWIDTH &gt;::init_registers()</link>, and <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1a8ae47f31c3ea49dbe77616951e7b612e"/><section>
+    <title>dump_registers()</title>
+<indexterm><primary>dump_registers</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>dump_registers</secondary></indexterm>
+<para><computeroutput>void dump_registers ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>update_register Using to show all register informations </para>
+</para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1a6ce1143eff40cd2900f607723842be2d"/><section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register">Register</link> &amp; operator[] (std::string name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>add_register The operator to get register by name for example this-&gt;reg[name] </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>The register name </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para><link linkend="_class_register">Register</link> object with corresponding name </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1a3247d9aa20912963b2e0eeb0d979080d"/><section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register">Register</link> &amp; operator[] (uint64_t address)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>operator[] The operator to get register by address for example this-&gt;reg[addr] </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>address</entry><entry>
+<para>The register address </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para><link linkend="_class_register">Register</link> object with corresponding address </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1ae9e5a36897056f14f1f6eb742cba6ff6"/><section>
+    <title>reset_regs()</title>
+<indexterm><primary>reset_regs</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>reset_regs</secondary></indexterm>
+<para><computeroutput>void reset_regs ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>update_register Using to reset registers </para>
+</para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_dummy_slave_1a23141eed3303128f9bc12f17bb2cde3c">DummySlave&lt; BUSWIDTH &gt;::mth_reset()</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1a58b7a47531113e57149c88a61d91830d"/><section>
+    <title>set_register_callback()</title>
+<indexterm><primary>set_register_callback</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>set_register_callback</secondary></indexterm>
+<para><computeroutput>void set_register_callback (const std::string &amp; name, <link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Register::Callback</link> cb)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>update_register Using to register register callback function </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>The register name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>cb</entry><entry>
+<para>The address of call back function </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">DMAC&lt; BUSWIDTH &gt;::init_registers()</link>, and <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>.</para>
+</section>
+<anchor xml:id="_class_register_interface_1ab074287fb1d8088234264f3400d8c8eb"/><section>
+    <title>update_register()</title>
+<indexterm><primary>update_register</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>update_register</secondary></indexterm>
+<para><computeroutput>void update_register (uint64_t address, uint32_t value)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>update_register Using to update the value of register with specific address </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>address</entry><entry>
+<para>The register address </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>value The new value that is wrote into this register </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3">registers</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_register_interface_1a3a118131224c5739eb41ed33a11ac4d3"/><section>
+    <title>registers</title>
+<indexterm><primary>registers</primary><secondary>RegisterInterface</secondary></indexterm>
+<indexterm><primary>RegisterInterface</primary><secondary>registers</secondary></indexterm>
+<para><computeroutput>std::map&lt;std::string, <link linkend="_class_register">Register</link>&gt; registers<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_interface_1a544746f8c38d589652fd7adf41227a47">add_register()</link>, <link linkend="_class_register_interface_1a8ae47f31c3ea49dbe77616951e7b612e">dump_registers()</link>, <link linkend="_class_register_interface_1a6ce1143eff40cd2900f607723842be2d">operator[]()</link>, <link linkend="_class_register_interface_1a3247d9aa20912963b2e0eeb0d979080d">operator[]()</link>, <link linkend="_class_register_interface_1ae9e5a36897056f14f1f6eb742cba6ff6">reset_regs()</link>, <link linkend="_class_register_interface_1a58b7a47531113e57149c88a61d91830d">set_register_callback()</link>, and <link linkend="_class_register_interface_1ab074287fb1d8088234264f3400d8c8eb">update_register()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="__registerif_8h">Registerif.h</link></section>
+</section>

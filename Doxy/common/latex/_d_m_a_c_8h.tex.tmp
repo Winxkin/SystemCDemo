@@ -1,0 +1,123 @@
+\doxysection{common/\+DMAC.h File Reference}
+\label{_d_m_a_c_8h}\index{common/DMAC.h@{common/DMAC.h}}
+{\ttfamily \#include $<$systemc$>$}\newline
+{\ttfamily \#include $<$tlm$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include "{}Registerif.\+h"{}}\newline
+Include dependency graph for DMAC.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ DMAC$<$ BUSWIDTH $>$}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}~256
+\item 
+\#define \textbf{ DMAACK}(i)~(0x\+C20 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMACHEN}(i)~(0x\+C60 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMADATALENGTH}(i)~(0x800 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMADESADDR}(i)~(0x00 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMAINT}(i)~(0x\+C40 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMAREQ}(i)~(0x\+C00 + 0x04$\ast$(i))
+\item 
+\#define \textbf{ DMASRCADDR}(i)~(0x400 + 0x04$\ast$(i))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\index{DMAC.h@{DMAC.h}!DMA\_MAX\_CH@{DMA\_MAX\_CH}}
+\index{DMA\_MAX\_CH@{DMA\_MAX\_CH}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMA\_MAX\_CH}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4} 
+\#define DMA\+\_\+\+MAX\+\_\+\+CH~256}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}.
+
+\index{DMAC.h@{DMAC.h}!DMAACK@{DMAACK}}
+\index{DMAACK@{DMAACK}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMAACK}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_a6a0530d72a387d69ba590552f8315cc6} 
+\#define DMAACK(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x\+C20 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC.h@{DMAC.h}!DMACHEN@{DMACHEN}}
+\index{DMACHEN@{DMACHEN}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMACHEN}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_accf520c22178b709ca914be37998bd8b} 
+\#define DMACHEN(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x\+C60 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC.h@{DMAC.h}!DMADATALENGTH@{DMADATALENGTH}}
+\index{DMADATALENGTH@{DMADATALENGTH}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMADATALENGTH}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_ab384545a63bcbbb6f2e758eb45a2023a} 
+\#define DMADATALENGTH(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x800 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}.
+
+\index{DMAC.h@{DMAC.h}!DMADESADDR@{DMADESADDR}}
+\index{DMADESADDR@{DMADESADDR}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMADESADDR}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_af399b0e0fe9fa8ae1e2e36bab67ac193} 
+\#define DMADESADDR(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x00 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}.
+
+\index{DMAC.h@{DMAC.h}!DMAINT@{DMAINT}}
+\index{DMAINT@{DMAINT}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMAINT}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_a8a18b39f1e4e95ac9e10aa6bd8c59558} 
+\#define DMAINT(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x\+C40 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC.h@{DMAC.h}!DMAREQ@{DMAREQ}}
+\index{DMAREQ@{DMAREQ}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMAREQ}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_acca8897cfda1b74d0eda3d7ce18e092b} 
+\#define DMAREQ(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x\+C00 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}.
+
+\index{DMAC.h@{DMAC.h}!DMASRCADDR@{DMASRCADDR}}
+\index{DMASRCADDR@{DMASRCADDR}!DMAC.h@{DMAC.h}}
+\doxysubsubsection{DMASRCADDR}
+{\footnotesize\ttfamily \label{_d_m_a_c_8h_ac38be42abe1e46b570f7ce10650b6526} 
+\#define DMASRCADDR(\begin{DoxyParamCaption}\item[{}]{i}{}\end{DoxyParamCaption})~(0x400 + 0x04$\ast$(i))}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}.
+

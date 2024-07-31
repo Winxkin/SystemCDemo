@@ -1,0 +1,335 @@
+\doxysection{Register}
+\label{class_register}\index{Register@{Register}}
+
+
+{\ttfamily \#include "{}Registerif.\+h"{}}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Callback} = std\+::function$<$void(const std\+::string\&, uint32\+\_\+t, uint32\+\_\+t, uint32\+\_\+t, uint32\+\_\+t)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Register} ()
+\begin{DoxyCompactList}\small\item\em \doxyref{Register}{p.}{class_register}. \end{DoxyCompactList}\item 
+\textbf{ Register} (std\+::string \textbf{ name}, uint64\+\_\+t \textbf{ address}, uint32\+\_\+t init, uint32\+\_\+t \textbf{ mask}, uint32\+\_\+t \textbf{ ch}, \textbf{ REGPERMISSION} \textbf{ permission})
+\begin{DoxyCompactList}\small\item\em \doxyref{Register}{p.}{class_register}. \end{DoxyCompactList}\item 
+\textbf{ $\sim$\+Register} ()
+\begin{DoxyCompactList}\small\item\em $\sim$\+Register Destructure \end{DoxyCompactList}\item 
+uint64\+\_\+t \textbf{ get\+\_\+address} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+address Return the register base address \end{DoxyCompactList}\item 
+std\+::string \textbf{ get\+\_\+name} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+name Return the register name \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ get\+\_\+value} () const
+\begin{DoxyCompactList}\small\item\em get\+\_\+value Return the register value \end{DoxyCompactList}\item 
+\textbf{ Register} \& \textbf{ operator=} (uint32\+\_\+t new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em operator= To set new value for the rigster \end{DoxyCompactList}\item 
+void \textbf{ reset} ()
+\begin{DoxyCompactList}\small\item\em reset To reset register to initialization value \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+callback} (\textbf{ Callback} cb)
+\begin{DoxyCompactList}\small\item\em operator= Using to register call back function for the register \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+readonly\+\_\+value} (uint32\+\_\+t new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em set\+\_\+value Using for developer to set read only register value \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+value} (uint32\+\_\+t new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em set\+\_\+value Using to set register value \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \textbf{ address}
+\item 
+\textbf{ Callback} \textbf{ callback}
+\item 
+const uint32\+\_\+t \textbf{ ch}
+\item 
+const uint32\+\_\+t \textbf{ init\+\_\+val}
+\item 
+uint32\+\_\+t \textbf{ mask}
+\item 
+std\+::string \textbf{ name}
+\item 
+const \textbf{ REGPERMISSION} \textbf{ permission}
+\item 
+uint32\+\_\+t \textbf{ value}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\index{Register@{Register}!Callback@{Callback}}
+\index{Callback@{Callback}!Register@{Register}}
+\doxysubsubsection{Callback}
+{\footnotesize\ttfamily \label{class_register_a6f6462b5a400b77343505e1731b69a36} 
+using \textbf{ Callback} = std\+::function$<$void(const std\+::string\&, uint32\+\_\+t, uint32\+\_\+t, uint32\+\_\+t, uint32\+\_\+t)$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{Register@{Register}!Register@{Register}}
+\index{Register@{Register}!Register@{Register}}
+\doxysubsubsection{Register()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_register_ade6ac50ab9c115aba8a9a1c10e35384a} 
+\textbf{ Register} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{Register}{p.}{class_register}. 
+
+Default Constructure (this function does not refer to use) \index{Register@{Register}!Register@{Register}}
+\index{Register@{Register}!Register@{Register}}
+\doxysubsubsection{Register()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_register_ae1025c910d60499f1ae3c928defb08c2} 
+\textbf{ Register} (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{, }\item[{uint64\+\_\+t}]{address}{, }\item[{uint32\+\_\+t}]{init}{, }\item[{uint32\+\_\+t}]{mask}{, }\item[{uint32\+\_\+t}]{ch}{, }\item[{\textbf{ REGPERMISSION}}]{permission}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{Register}{p.}{class_register}. 
+
+Constructure 
+\begin{DoxyParams}{Parameters}
+{\em name} & The register name \\
+\hline
+{\em address} & The register base address \\
+\hline
+{\em init} & The register initialization value \\
+\hline
+{\em mask} & The register mask \\
+\hline
+{\em ch} & The register channel \\
+\hline
+{\em permission} & Indicating this register is read /write or read only permission \\
+\hline
+\end{DoxyParams}
+\index{Register@{Register}!````~Register@{$\sim$Register}}
+\index{````~Register@{$\sim$Register}!Register@{Register}}
+\doxysubsubsection{$\sim$Register()}
+{\footnotesize\ttfamily \label{class_register_a04697760fce6a4a15865313f464bb84d} 
+$\sim$\textbf{ Register} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+$\sim$\+Register Destructure 
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{Register@{Register}!get\_address@{get\_address}}
+\index{get\_address@{get\_address}!Register@{Register}}
+\doxysubsubsection{get\_address()}
+{\footnotesize\ttfamily \label{class_register_ac5218013e0eb854b003c51d982fefb3e} 
+uint64\+\_\+t get\+\_\+address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+address Return the register base address 
+
+
+
+References \textbf{ address}.
+
+\index{Register@{Register}!get\_name@{get\_name}}
+\index{get\_name@{get\_name}!Register@{Register}}
+\doxysubsubsection{get\_name()}
+{\footnotesize\ttfamily \label{class_register_a636296572c928bb9baf49439e9726c30} 
+std\+::string get\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+name Return the register name 
+
+
+
+References \textbf{ name}.
+
+\index{Register@{Register}!get\_value@{get\_value}}
+\index{get\_value@{get\_value}!Register@{Register}}
+\doxysubsubsection{get\_value()}
+{\footnotesize\ttfamily \label{class_register_abf652cde48c79a415d4166d584a3cc5a} 
+uint32\+\_\+t get\+\_\+value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+value Return the register value 
+
+
+
+References \textbf{ value}.
+
+\index{Register@{Register}!operator=@{operator=}}
+\index{operator=@{operator=}!Register@{Register}}
+\doxysubsubsection{operator=()}
+{\footnotesize\ttfamily \label{class_register_a4141d27dff96e5337def85671351e541} 
+\textbf{ Register} \& operator= (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{new\+\_\+value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+operator= To set new value for the rigster 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+value} & The new value that is wrote into this register \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ callback}, \textbf{ ch}, \textbf{ mask}, \textbf{ name}, \textbf{ permission}, \textbf{ READWRITE}, and \textbf{ value}.
+
+\index{Register@{Register}!reset@{reset}}
+\index{reset@{reset}!Register@{Register}}
+\doxysubsubsection{reset()}
+{\footnotesize\ttfamily \label{class_register_ad20897c5c8bd47f5d4005989bead0e55} 
+void reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+reset To reset register to initialization value 
+
+
+
+References \textbf{ init\+\_\+val}, and \textbf{ value}.
+
+\index{Register@{Register}!set\_callback@{set\_callback}}
+\index{set\_callback@{set\_callback}!Register@{Register}}
+\doxysubsubsection{set\_callback()}
+{\footnotesize\ttfamily \label{class_register_a5894ecc8c807b6c242da3f4f09d532f7} 
+void set\+\_\+callback (\begin{DoxyParamCaption}\item[{\textbf{ Callback}}]{cb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+operator= Using to register call back function for the register 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cb} & The address of call back function \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ callback}.
+
+\index{Register@{Register}!set\_readonly\_value@{set\_readonly\_value}}
+\index{set\_readonly\_value@{set\_readonly\_value}!Register@{Register}}
+\doxysubsubsection{set\_readonly\_value()}
+{\footnotesize\ttfamily \label{class_register_ae9d2818713fc35ddc40d76cb65e90f4c} 
+void set\+\_\+readonly\+\_\+value (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{new\+\_\+value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+value Using for developer to set read only register value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+value} & The new value that is wrote into this register \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ mask}, \textbf{ permission}, \textbf{ READONLY}, and \textbf{ value}.
+
+\index{Register@{Register}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!Register@{Register}}
+\doxysubsubsection{set\_value()}
+{\footnotesize\ttfamily \label{class_register_a5fcb24a46fca6bb40d63c5f25ee93d41} 
+void set\+\_\+value (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{new\+\_\+value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+value Using to set register value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+value} & The new value that is wrote into this register \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ callback}, \textbf{ ch}, \textbf{ mask}, \textbf{ name}, \textbf{ permission}, \textbf{ READWRITE}, and \textbf{ value}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{Register@{Register}!address@{address}}
+\index{address@{address}!Register@{Register}}
+\doxysubsubsection{address}
+{\footnotesize\ttfamily \label{class_register_ab6b52376c1b9d81e6ea6f95a1225f832} 
+uint64\+\_\+t address\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ get\+\_\+address()}.
+
+\index{Register@{Register}!callback@{callback}}
+\index{callback@{callback}!Register@{Register}}
+\doxysubsubsection{callback}
+{\footnotesize\ttfamily \label{class_register_a42712c99422eaa2019fa9713b1dc74b9} 
+\textbf{ Callback} callback\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ operator=()}, \textbf{ set\+\_\+callback()}, and \textbf{ set\+\_\+value()}.
+
+\index{Register@{Register}!ch@{ch}}
+\index{ch@{ch}!Register@{Register}}
+\doxysubsubsection{ch}
+{\footnotesize\ttfamily \label{class_register_ad64710488d666c31774f3bb5935dbd4b} 
+const uint32\+\_\+t ch\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ operator=()}, and \textbf{ set\+\_\+value()}.
+
+\index{Register@{Register}!init\_val@{init\_val}}
+\index{init\_val@{init\_val}!Register@{Register}}
+\doxysubsubsection{init\_val}
+{\footnotesize\ttfamily \label{class_register_a2738910a2d48a11a5cae170111c38d2c} 
+const uint32\+\_\+t init\+\_\+val\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ reset()}.
+
+\index{Register@{Register}!mask@{mask}}
+\index{mask@{mask}!Register@{Register}}
+\doxysubsubsection{mask}
+{\footnotesize\ttfamily \label{class_register_ad3bee21df6875eeccd25d3c577e0600a} 
+uint32\+\_\+t mask\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ operator=()}, \textbf{ set\+\_\+readonly\+\_\+value()}, and \textbf{ set\+\_\+value()}.
+
+\index{Register@{Register}!name@{name}}
+\index{name@{name}!Register@{Register}}
+\doxysubsubsection{name}
+{\footnotesize\ttfamily \label{class_register_a9b45b3e13bd9167aab02e17e08916231} 
+std\+::string name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ get\+\_\+name()}, \textbf{ operator=()}, and \textbf{ set\+\_\+value()}.
+
+\index{Register@{Register}!permission@{permission}}
+\index{permission@{permission}!Register@{Register}}
+\doxysubsubsection{permission}
+{\footnotesize\ttfamily \label{class_register_ae549ba30ddef298d996233f52a225ba1} 
+const \textbf{ REGPERMISSION} permission\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ operator=()}, \textbf{ set\+\_\+readonly\+\_\+value()}, and \textbf{ set\+\_\+value()}.
+
+\index{Register@{Register}!value@{value}}
+\index{value@{value}!Register@{Register}}
+\doxysubsubsection{value}
+{\footnotesize\ttfamily \label{class_register_ae7f66047e6e39ba2bb6af8b95f00d1dd} 
+uint32\+\_\+t value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ get\+\_\+value()}, \textbf{ operator=()}, \textbf{ reset()}, \textbf{ set\+\_\+readonly\+\_\+value()}, and \textbf{ set\+\_\+value()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ Registerif.\+h}\end{DoxyCompactItemize}

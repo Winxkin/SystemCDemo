@@ -125,6 +125,14 @@ private:
 public:
 
 	// RAM model
+
+	/**@brief
+	 * dump_memory
+	 *
+	 * Show memory regions
+	 * @param offset The ram offset
+	 * @param len The ram size
+	 */
 	void dump_memory(const std::string& name, sc_dt::uint64 offset, unsigned int len)
 	{
 		if (name == m_ram1.get_name())
@@ -134,43 +142,117 @@ public:
 	}
 
 	// DummySlave model
+
+	/**@brief
+	* monitor_ports
+	*
+	* Using to enable or disable port monitor operation
+	* @param is_enable Indicating whether enabling or disabling port monitor
+	*/
 	void monitor_ports(bool is_enable)
 	{
 		m_dummyslave.monitor_ports(is_enable);
 	}
 
+	/**@brief
+	* set_output_ports
+	*
+	* Using to set specific output port
+	* @param name Reference to the port name
+	* @param value the value of the output port
+	*/
 	void set_output_ports(const std::string& name, bool value)
 	{
 		m_dummyslave.set_output_ports(name, value);
 	}
 
+	/**@brief
+	* set_output_ports
+	*
+	* Using to trigger specific output port
+	* @param name Reference to the port name
+	* @param high_level Indicating the triggered level
+	* @param is_pos Indicating the clock edge synchronization is positive or negative
+	*/
 	void trigger_output_ports(const std::string& name, bool high_level, bool is_pos)
 	{
 		m_dummyslave.trigger_output_ports(name, high_level, is_pos);
 	}
 
+	/**@brief
+	* read_input_ports
+	*
+	* Using to read the value of specific port
+	* @param name Reference to the port name
+	*/
 	bool read_input_ports(const std::string& name)
 	{
 		return m_dummyslave.read_input_ports(name);
 	}
 
 	// DummyMaster model
+
+	/**@brief
+	 * get_received_data
+	 *
+	 * Using to get data from the returned transaction
+	 *
+	 * @return the array of data
+	 *
+	 */
 	unsigned char* get_received_data()
 	{
 		return m_dummymaster.get_received_data();
 	}
 
+	/**@brief
+	 * get_received_data
+	 *
+	 * Using to get data from the returned transaction
+	 *
+	 * @return the 32-bit data
+	 *
+	 */
 	unsigned int get_received_32bit_data()
 	{
 		return m_dummymaster.get_received_32bit_data();
 	}
 
-	
+	/**@brief
+	 * SentTransaction
+	 *
+	 * Implements the sent a transaction with 32 bit data to bus MMIO
+	 *
+	 * @param addr  Reference to the address of the slave
+	 *
+	 * @param data	Reference to 32-bit data
+	 *
+	 * @param cmd   Reference to tlm command
+	 *				-TLM_READ_COMMAND  : TLM read requset
+	 *				-TLM_WRITE_COMMAND : TLM write requset
+	 *				-TLM_IGNORE_COMMAND: TLM ignore requset
+	 */
 	void SentTransaction(unsigned int addr, uint32_t data, tlm::tlm_command cmd)
 	{
 		m_dummymaster.SentTransaction(addr, data, cmd);
 	}
 
+	/**@brief
+	 * Sentcustomtransaction
+	 *
+	 * Implements the sent a custom transaction to bus MMIO
+	 *
+	 * @param addr  Reference to the address of the slave
+	 *
+	 * @param data	Reference to the pointer of array data
+	 *
+	 * @param data_length Reference to the length of data
+	 *
+	 * @param cmd   Reference to tlm command
+	 *				-TLM_READ_COMMAND  : TLM read requset
+	 *				-TLM_WRITE_COMMAND : TLM write requset
+	 *				-TLM_IGNORE_COMMAND: TLM ignore requset
+	 */
 	void Sentcustomtransaction(unsigned int addr, unsigned char* data, unsigned int data_length, tlm::tlm_command cmd)
 	{
 		m_dummymaster.Sentcustomtransaction(addr, data, data_length, cmd);

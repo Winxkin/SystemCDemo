@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__inverter_8h" xml:lang="en-US">
+<title>common/Inverter.h File Reference</title>
+<indexterm><primary>common/Inverter.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;systemc.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="__inverter_8h_1aac18d6425962c5bea33160cabd2e9e4c">SC_MODULE</link> (Inverter)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__inverter_8h_1aac18d6425962c5bea33160cabd2e9e4c"/><section>
+    <title>SC_MODULE()</title>
+<indexterm><primary>SC_MODULE</primary><secondary>Inverter.h</secondary></indexterm>
+<indexterm><primary>Inverter.h</primary><secondary>SC_MODULE</secondary></indexterm>
+<para><computeroutput>SC_MODULE (Inverter )</computeroutput></para></section>
+</section>
+</section>

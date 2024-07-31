@@ -1,0 +1,546 @@
+\doxysection{DMAC.\+h}
+\hypertarget{_d_m_a_c_8h_source}{}\label{_d_m_a_c_8h_source}\index{common/DMAC.h@{common/DMAC.h}}
+\mbox{\hyperlink{_d_m_a_c_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ \ Author:\ Huan\ Nguyen-\/Duy}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ Date:\ 24/07/2024}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ \_DMAC\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ \_DMAC\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <systemc>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <tlm>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_initiator\_socket.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_target\_socket.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_initiator\_socket.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_target\_socket.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_registerif_8h}{Registerif.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ Notice:\ DMA\ Controller\ supports\ maximum\ 256\ channels}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ DMA\_MAX\_CH\ 256}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{/*Define\ register\ address*/}}
+\DoxyCodeLine{00025\ \textcolor{comment}{/*\ i\ from\ 0\ to\ 255\ */}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DMADESADDR(i)\ \ \ \ (0x00\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0x000\ \ \ \ -\/>\ \ 0x400}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ DMASRCADDR(i)\ \ \ \ (0x400\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0x400\ \ \ \ -\/>\ \ 0x800}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ DMADATALENGTH(i)\ (0x800\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0x800\ \ \ \ -\/>\ \ 0xC00}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{/*\ i\ from\ 0\ to\ 7\ */}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ DMAREQ(i)\ \ \ \ \ \ \ \ (0xC00\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0xC00\ \ \ \ -\/>\ \ 0xC20}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ DMAACK(i)\ \ \ \ \ \ \ \ (0xC20\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0xC20\ \ \ \ -\/>\ \ 0xC40}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ DMAINT(i)\ \ \ \ \ \ \ \ (0xC40\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0xC40\ \ \ \ -\/>\ \ 0xC60}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ DMACHEN(i)\ \ \ \ \ \ \ (0xC60\ +\ 0x04*(i))\ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ 0xC60\ \ \ \ -\/>\ \ 0xC80\ }}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ BUSWIDTH\ =\ 32>}
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_d_m_a_c}{DMAC}}\ :\ \textcolor{keyword}{public}\ sc\_core::sc\_module\ \{}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ std::string\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_register_interface}{RegisterInterface}}\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::string\ \mbox{\hyperlink{class_d_m_a_c_a38ee55cf888731f625a45854286e6156}{m\_cur\_reg\_name}};}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}};}
+\DoxyCodeLine{00049\ \ \ \ \ sc\_core::sc\_event\ \mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}};}
+\DoxyCodeLine{00050\ \ \ \ \ sc\_core::sc\_event\ \mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}};}
+\DoxyCodeLine{00051\ \ \ \ \ sc\_core::sc\_event\ \mbox{\hyperlink{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e}{e\_DMA\_run\_done}};}
+\DoxyCodeLine{00052\ \ \ \ \ sc\_core::sc\_event\ \mbox{\hyperlink{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9}{e\_DMA\_forward}};}
+\DoxyCodeLine{00053\ \ \ \ \ tlm::tlm\_generic\_payload\ \mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}};}
+\DoxyCodeLine{00054\ \ \ \ \ std::list<unsigned\ int>\ \mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}};}
+\DoxyCodeLine{00055\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ *\ copy\_tlm\_generic\_payload}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ the\ copy\ operation\ from\ source\ TLM\ generic\ payload\ to\ destination\ TLM\ generic\ payload}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ *\ @param\ des\ Reference\ to\ destination\ TLM\ generic\ payload}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ *\ @param\ src\ Reference\ to\ source\ TLM\ generic\ payload}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_aace875a6d6c0f6d67d926583c88af55d}{copy\_tlm\_generic\_payload}}(tlm::tlm\_generic\_payload\&\ des,\ tlm::tlm\_generic\_payload\&\ src)}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ des.set\_command(src.get\_command());}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ des.set\_address(src.get\_address());}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ des.set\_data\_length(src.get\_data\_length());}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}[src.get\_data\_length()];}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::memcpy(data,\ src.get\_data\_ptr(),\ src.get\_data\_length());}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ des.set\_data\_ptr(data);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ des.set\_response\_status(src.get\_response\_status());}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ des.set\_streaming\_width(src.get\_streaming\_width());}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ des.set\_byte\_enable\_ptr(src.get\_byte\_enable\_ptr());}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ des.set\_dmi\_allowed(src.is\_dmi\_allowed());}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ *\ nb\_transport\_fw}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ *\ Implements\ the\ non-\/blocking\ backward\ transport\ interface\ for\ the\ initiator.}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ \ *\ @param\ trans\ Reference\ to\ the\ generic\ payload\ object\ containing\ the\ transaction\ details}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ such\ as\ command,\ address,\ and\ data.}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ *\ @param\ phase\ Reference\ to\ the\ transaction\ phase.\ The\ current\ phase\ of\ the\ transaction,}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ which\ may\ be\ updated\ by\ the\ function.}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ *\ @param\ delay\ Reference\ to\ the\ annotated\ delay.\ Specifies\ the\ timing\ delay\ for\ the\ transaction}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ and\ may\ be\ updated\ by\ the\ function.}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ *\ @return\ tlm::tlm\_sync\_enum\ Enumeration\ indicating\ the\ synchronization\ state\ of\ the\ transaction:}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_ACCEPTED:\ Transaction\ is\ accepted,\ and\ no\ immediate\ further\ action\ is\ required.}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_UPDATED:\ Transaction\ phase\ has\ been\ updated.\ The\ initiator\ should\ check\ the\ new\ phase.}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_COMPLETED:\ Transaction\ is\ completed\ immediately,\ and\ no\ further\ phases\ will\ occur.}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00102\ \ \ \ \ tlm::tlm\_sync\_enum\ \mbox{\hyperlink{class_d_m_a_c_a882a19a1d4962f1024c218c07e8e0289}{nb\_transport\_fw}}(tlm::tlm\_generic\_payload\&\ trans,\ tlm::tlm\_phase\&\ phase,\ sc\_core::sc\_time\&\ delay)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (phase)}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::BEGIN\_REQ:}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ BEGIN\_REQ\ phase}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (Target\ socket)\ BEGIN\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (trans.get\_command())\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_WRITE\_COMMAND:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ wdata\ =\ 0;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(\&wdata,\ trans.get\_data\_ptr(),\ \textcolor{keyword}{sizeof}(wdata));}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_ab074287fb1d8088234264f3400d8c8eb}{update\_register}}(trans.get\_address(),\ wdata);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Received\ transaction\ with\ address\ 0x"{}}\ <<\ std::hex\ <<\ trans.get\_address()\ <<\ \textcolor{stringliteral}{"{}\ data:\ 0x"{}}\ <<\ std::hex\ <<\ wdata\ <<\ std::dec\ <<\ std::endl;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_READ\_COMMAND:}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[trans.get\_address()].get\_value();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ cvalue\ =\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&value);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memcpy(trans.get\_data\_ptr(),\ cvalue,\ trans.get\_data\_length());}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Return\ data\ and\ END\_REQ\ to\ bus}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_phase\ next\_phase\ =\ tlm::END\_REQ;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ac697585af3a0d581e6a66c87ac824ec1}{target\_socket}}-\/>nb\_transport\_bw(trans,\ next\_phase,\ delay);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::END\_REQ:}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ END\_REQ\ phase\ (shouldn't\ happen\ here)}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (Target\ socket)\ END\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tlm::TLM\_ACCEPTED;}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ \ \ *\ nb\_transport\_bw}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ *\ Implements\ the\ non-\/blocking\ backward\ transport\ interface\ for\ the\ initiator.}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ *\ @param\ trans\ Reference\ to\ the\ generic\ payload\ object\ containing\ the\ transaction\ details}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ such\ as\ command,\ address,\ and\ data.}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ *\ @param\ phase\ Reference\ to\ the\ transaction\ phase.\ The\ current\ phase\ of\ the\ transaction,}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ which\ may\ be\ updated\ by\ the\ function.}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ *\ @param\ delay\ Reference\ to\ the\ annotated\ delay.\ Specifies\ the\ timing\ delay\ for\ the\ transaction}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ and\ may\ be\ updated\ by\ the\ function.}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ *\ @return\ tlm::tlm\_sync\_enum\ Enumeration\ indicating\ the\ synchronization\ state\ of\ the\ transaction:}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_ACCEPTED:\ Transaction\ is\ accepted,\ and\ no\ immediate\ further\ action\ is\ required.}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_UPDATED:\ Transaction\ phase\ has\ been\ updated.\ The\ initiator\ should\ check\ the\ new\ phase.}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ -\/\ TLM\_COMPLETED:\ Transaction\ is\ completed\ immediately,\ and\ no\ further\ phases\ will\ occur.}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00178\ \ \ \ \ tlm::tlm\_sync\_enum\ \mbox{\hyperlink{class_d_m_a_c_a9401643ffeae74f7b9b36713bc735da7}{nb\_transport\_bw}}(tlm::tlm\_generic\_payload\&\ trans,\ tlm::tlm\_phase\&\ phase,\ sc\_core::sc\_time\&\ delay)\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (phase)}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::BEGIN\_REQ:}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ BEGIN\_REQ\ phase}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (Initiator\ socket)\ BEGIN\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::END\_REQ:}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ END\_REQ\ phase}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ (Initiator\ socket)\ END\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (trans.is\_response\_error())\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Transaction\ failed\ with\ response\ status:\ "{}}\ <<\ trans.get\_response\_string()\ <<\ std::endl;}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (trans.get\_command())\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_READ\_COMMAND:}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Change\ the\ address\ of\ transaction\ to\ destination\ address}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_aace875a6d6c0f6d67d926583c88af55d}{copy\_tlm\_generic\_payload}}(\mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}},\ trans);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}}.set\_address(\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_af399b0e0fe9fa8ae1e2e36bab67ac193}{DMADESADDR}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value());}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}}.set\_response\_status(tlm::TLM\_INCOMPLETE\_RESPONSE);}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}}.set\_command(tlm::TLM\_WRITE\_COMMAND);}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9}{e\_DMA\_forward}}.notify();}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_WRITE\_COMMAND:}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ :\ DMA\ transfers\ data\ from\ \ 0x"{}}\ <<\ std::hex}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_ac38be42abe1e46b570f7ce10650b6526}{DMASRCADDR}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value()\ <<\ \textcolor{stringliteral}{"{}\ to\ 0x"{}}\ <<\ std::hex\ <<\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_af399b0e0fe9fa8ae1e2e36bab67ac193}{DMADESADDR}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value()\ <<\ std::endl;}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notifying\ DMA\ operation\ done\ !}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e}{e\_DMA\_run\_done}}.notify();}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tlm::TLM\_ACCEPTED;}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ \ *\ init\_registers}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ *\ To\ initialize\ registers\ for\ DMAC\ model}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ \ *\ }}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a1cf609a2603fd853aa7095c8fc2a9e1d}{init\_registers}}()}
+\DoxyCodeLine{00248\ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}};\ i++)}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMADESADDR"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_af399b0e0fe9fa8ae1e2e36bab67ac193}{DMADESADDR}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMASRCADDR"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_ac38be42abe1e46b570f7ce10650b6526}{DMASRCADDR}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMADATALENGTH"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_ab384545a63bcbbb6f2e758eb45a2023a}{DMADATALENGTH}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ (\mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}}/32);\ i++)}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMAREQ"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_acca8897cfda1b74d0eda3d7ce18e092b}{DMAREQ}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMAACK"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_a6a0530d72a387d69ba590552f8315cc6}{DMAACK}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMAINT"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_a8a18b39f1e4e95ac9e10aa6bd8c59558}{DMAINT}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DMACHEN"{}}\ +\ std::to\_string(i),\ \mbox{\hyperlink{_d_m_a_c_8h_accf520c22178b709ca914be37998bd8b}{DMACHEN}}(i),\ 0x00,\ 0xFFFFFFFF,\ i,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Registration\ call\ back\ function}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a58b7a47531113e57149c88a61d91830d}{set\_register\_callback}}(\textcolor{stringliteral}{"{}DMAREQ"{}}\ +\ std::to\_string(i),\ std::bind(\&\mbox{\hyperlink{class_d_m_a_c_a4b2a77c68a8cf19befd770de34508015}{DMAC::cb\_DMAREQ}},\ \textcolor{keyword}{this},}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::placeholders::\_1,\ std::placeholders::\_2,\ std::placeholders::\_3,\ std::placeholders::\_4,\ std::placeholders::\_5));}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ \ *\ cb\_DMAREQ}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00272\ \textcolor{comment}{\ \ \ \ *\ The\ call\ back\ register\ function\ for\ DMAREQ\ register}}
+\DoxyCodeLine{00273\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00274\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a4b2a77c68a8cf19befd770de34508015}{cb\_DMAREQ}}(\textcolor{keyword}{const}\ std::string\&\ name,\ uint32\_t\ value,\ uint32\_t\ old\_value,\ uint32\_t\ mask,\ uint32\_t\ ch)}
+\DoxyCodeLine{00276\ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Request\ DMA\ operation\ in\ here}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}})}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}}\ =\ ch;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a38ee55cf888731f625a45854286e6156}{m\_cur\_reg\_name}}\ =\ name;}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}}.notify();}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ \ \ DMA\ is\ running,\ cannot\ request\ DMA\ operation\ in\ this\ time\ !"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00293\ \ \ \ \ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{comment}{/*\ SC\_METHOD\ and\ SC\_THREAD\ are\ defined\ in\ here\ */}}
+\DoxyCodeLine{00298\ \ \ \ \ }
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ \ *\ mth\_reset}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00302\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ of\ the\ method\ when\ reset\ is\ active}}
+\DoxyCodeLine{00303\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00304\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a23141eed3303128f9bc12f17bb2cde3c}{mth\_reset}}()}
+\DoxyCodeLine{00306\ \ \ \ \ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a618e4571cbf41913c0c7a71d84917625}{rst}}.read())}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}\ =\ 0;}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_ae9e5a36897056f14f1f6eb742cba6ff6}{reset\_regs}}();}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}}\ =\ 0;}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a38ee55cf888731f625a45854286e6156}{m\_cur\_reg\_name}}.clear();}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9}{e\_DMA\_forward}}.cancel();}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}}.cancel();}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}}.cancel();}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e}{e\_DMA\_run\_done}}.cancel();}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ *\ mth\_request\_signals}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ of\ the\ method\ when\ requests\ signal\ are\ triggered\ by\ peripherals}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a59437db485e7c65c6a90ad57d8b43f23}{mth\_request\_signals}}()}
+\DoxyCodeLine{00330\ \ \ \ \ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SC\_THREAD\ is\ triggered\ only\ one\ at\ the\ same\ simulation\ time}}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}})}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}};\ i++)\ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_enable\ =\ (bool)((\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_accf520c22178b709ca914be37998bd8b}{DMACHEN}}(i\ /\ 32)].get\_value()\ >>\ i)\ \&\ 0x01);}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_enable)}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a5b9d377a3ff02e089ae1c6c96d3b7b8b}{DMA\_req}}[i].read())}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ DMA\_req["{}}\ <<\ i\ <<\ \textcolor{stringliteral}{"{}]\ has\ changed\ to\ HIGH"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}}.push\_back(i);}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}}.empty())}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}}.notify();}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ \ \ DMA\ is\ running,\ cannot\ request\ DMA\ operation\ in\ this\ time\ !"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00362\ \ \ \ \ \}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ *\ thr\_priority\_process}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ of\ the\ thread\ to\ handle\ priority\ of\ DMA\ operation}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00369\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a877845e838c18e15b6dd910f76b83afe}{thr\_priority\_process}}()}
+\DoxyCodeLine{00371\ \ \ \ \ \{}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ waiting\ to\ next\ cycle}}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}});}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a7e19409f662da0c599256b1ca029ebe1}{clk}}.posedge\_event());}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}})}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ using\ ports\ to\ trigger\ DMAC}}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}}.empty())}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}\ =\ \mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}}.front();}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a}{port\_req\_ids}}.pop\_front();\ \textcolor{comment}{//\ removing\ request\ id\ from\ list}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}}.notify();\ \ \ \ \textcolor{comment}{//\ Bus\ delay\ simulation\ time}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e}{e\_DMA\_run\_done}});}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ output\ ack\ and\ int\ port}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a7e19409f662da0c599256b1ca029ebe1}{clk}}.posedge\_event());}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_af4634216201dfe6af419cf08217daeff}{DMA\_ack}}[\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}].write(\textcolor{keyword}{true});}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a66afed0c8d5a5119a5c7befdad389243}{DMA\_int}}[\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}].write(\textcolor{keyword}{true});}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a7e19409f662da0c599256b1ca029ebe1}{clk}}.posedge\_event());}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_af4634216201dfe6af419cf08217daeff}{DMA\_ack}}[\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}].write(\textcolor{keyword}{false});}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a66afed0c8d5a5119a5c7befdad389243}{DMA\_int}}[\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}].write(\textcolor{keyword}{false});}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ continuting\ with\ next\ channels}}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ using\ register\ to\ trigger\ DMAC}}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ value\ =\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{class_d_m_a_c_a38ee55cf888731f625a45854286e6156}{m\_cur\_reg\_name}}].get\_value();}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 32;\ i++)}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_accf520c22178b709ca914be37998bd8b}{DMACHEN}}(\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}})].get\_value()\ >>\ i)\ \&\ 0x01)}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((value\ >>\ i)\ \&\ 0x01)}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ current\ channel}}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}\ =\ (\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}}\ ==\ 0)\ ?\ i\ :\ (i\ *\ \mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}});}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}}.notify();\ \ \ \ \textcolor{comment}{//\ Bus\ delay\ simulation\ time}}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e}{e\_DMA\_run\_done}});}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ continuting\ with\ next\ channels}}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_a6a0530d72a387d69ba590552f8315cc6}{DMAACK}}(\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}})]\ =\ (0x01\ <<\ i)\ |\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_a6a0530d72a387d69ba590552f8315cc6}{DMAACK}}(\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}})].get\_value();}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_a8a18b39f1e4e95ac9e10aa6bd8c59558}{DMAINT}}(\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}})]\ =\ (0x01\ <<\ i)\ |\ \mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_a8a18b39f1e4e95ac9e10aa6bd8c59558}{DMAINT}}(\mbox{\hyperlink{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade}{m\_cur\_reg\_ch}})].get\_value();}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ DMA\ process\ is\ done"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ releasing\ flags}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00429\ \ \ \ \ \}}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ *\ thr\_DMA\_run\_process}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ of\ the\ thread\ to\ start\ DMA\ operation}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a998adbb27ee33736cfa6a47c22309b91}{thr\_DMA\_run\_process}}()}
+\DoxyCodeLine{00438\ \ \ \ \ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}});}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ DMA\ operation\ in\ here}}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00444\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Initiator\ socket\ -\/>\ request\ trans\ -\/>\ get\ return\ data\ trans}}
+\DoxyCodeLine{00445\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_generic\_payload\ trans;}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ sc\_core::sc\_time\ delay\ =\ sc\_core::SC\_ZERO\_TIME;}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}[\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_ab384545a63bcbbb6f2e758eb45a2023a}{DMADATALENGTH}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value()];}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Configuration\ transaction}}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_command(tlm::TLM\_READ\_COMMAND);}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_address(\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_ac38be42abe1e46b570f7ce10650b6526}{DMASRCADDR}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value());}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_data\_ptr(data);}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_data\_length(\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_ab384545a63bcbbb6f2e758eb45a2023a}{DMADATALENGTH}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value());}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_streaming\_width(\mbox{\hyperlink{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[\mbox{\hyperlink{_d_m_a_c_8h_ab384545a63bcbbb6f2e758eb45a2023a}{DMADATALENGTH}}(\mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}})].get\_value());\ \textcolor{comment}{//\ =\ data\_length\ to\ indicate\ no\ streaming}}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_byte\_enable\_ptr(0);\ \textcolor{comment}{//\ 0\ indicates\ unused}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_dmi\_allowed(\textcolor{keyword}{false});\ \textcolor{comment}{//\ DMI\ not\ allowed}}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_INCOMPLETE\_RESPONSE);}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sending\ transaction\ using\ initiator\ socket}}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_phase\ fw\_phase\ =\ tlm::BEGIN\_REQ;}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_sync\_enum\ status;}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114}{initiator\_socket}}-\/>nb\_transport\_fw(trans,\ fw\_phase,\ delay);}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00463\ \ \ \ \ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ \ *\ thr\_DMA\_forward\_process}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ \ \ *\ Impelmentation\ of\ the\ thread\ to\ forward\ data\ from\ the\ source\ to\ the\ destination}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00471\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_m_a_c_a833712d45cbe2e11e96bfdfa9e7ae7fd}{thr\_DMA\_forward\_process}}()}
+\DoxyCodeLine{00472\ \ \ \ \ \{}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ waiting\ when\ receiving\ data\ from\ slave}}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9}{e\_DMA\_forward}});}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_phase\ fw\_phase\ =\ tlm::BEGIN\_REQ;}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_sync\_enum\ status;}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ sc\_core::sc\_time\ delay\ =\ sc\_core::SC\_ZERO\_TIME;}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ status\ =\ \mbox{\hyperlink{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114}{initiator\_socket}}-\/>nb\_transport\_fw(\mbox{\hyperlink{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3}{current\_trans}},\ fw\_phase,\ delay);}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00485\ \ \ \ \ tlm\_utils::simple\_target\_socket<DMAC,\ BUSWIDTH>\ \mbox{\hyperlink{class_d_m_a_c_ac697585af3a0d581e6a66c87ac824ec1}{target\_socket}};}
+\DoxyCodeLine{00486\ \ \ \ \ tlm\_utils::simple\_initiator\_socket<DMAC,\ BUSWIDTH>\ \mbox{\hyperlink{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114}{initiator\_socket}};}
+\DoxyCodeLine{00487\ \ \ \ \ sc\_core::sc\_out<bool>\ \mbox{\hyperlink{class_d_m_a_c_af4634216201dfe6af419cf08217daeff}{DMA\_ack}}[\mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}}];}
+\DoxyCodeLine{00488\ \ \ \ \ sc\_core::sc\_in<bool>\ \mbox{\hyperlink{class_d_m_a_c_a5b9d377a3ff02e089ae1c6c96d3b7b8b}{DMA\_req}}[\mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}}];}
+\DoxyCodeLine{00489\ \ \ \ \ sc\_core::sc\_out<bool>\ \mbox{\hyperlink{class_d_m_a_c_a66afed0c8d5a5119a5c7befdad389243}{DMA\_int}}[\mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}}];}
+\DoxyCodeLine{00490\ \ \ \ \ sc\_core::sc\_in<bool>\ \mbox{\hyperlink{class_d_m_a_c_a7e19409f662da0c599256b1ca029ebe1}{clk}};}
+\DoxyCodeLine{00491\ \ \ \ \ sc\_core::sc\_in<bool>\ \mbox{\hyperlink{class_d_m_a_c_a618e4571cbf41913c0c7a71d84917625}{rst}};}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00493\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00494\ \textcolor{comment}{\ \ \ \ *\ DMAC\ constructor}}
+\DoxyCodeLine{00495\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00496\ \textcolor{comment}{\ \ \ \ *\ @param\ name\ Reference\ to\ sc\_module\ name}}
+\DoxyCodeLine{00497\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00498\ \textcolor{comment}{\ \ \ \ *\ @param\ message\ To\ enable\ message\ log}}
+\DoxyCodeLine{00499\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00500\ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_acfc644a1d53bd4b398bf9e468953caef}{DMAC}}(sc\_core::sc\_module\_name\ name,\ \textcolor{keywordtype}{bool}\ message\ =\ \textcolor{keyword}{false})\ :}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ sc\_core::sc\_module(name)}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}(name)}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}}(message)}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_ac697585af3a0d581e6a66c87ac824ec1}{target\_socket}}(\textcolor{stringliteral}{"{}target\_socket"{}})}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114}{initiator\_socket}}(\textcolor{stringliteral}{"{}initiator\_socket"{}})}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_a554de9bd57e273361ce8b59611980315}{m\_current\_ch}}(0)}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265}{m\_running}}(false)}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ ,\ \mbox{\hyperlink{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815}{m\_testmode}}(false)}
+\DoxyCodeLine{00509\ \ \ \ \ \{}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_ac697585af3a0d581e6a66c87ac824ec1}{target\_socket}}.register\_nb\_transport\_fw(\textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_d_m_a_c_a882a19a1d4962f1024c218c07e8e0289}{DMAC::nb\_transport\_fw}});}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114}{initiator\_socket}}.register\_nb\_transport\_bw(\textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_d_m_a_c_a9401643ffeae74f7b9b36713bc735da7}{DMAC::nb\_transport\_bw}});}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ initialization\ registers}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_a1cf609a2603fd853aa7095c8fc2a9e1d}{init\_registers}}();}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Registration\ Method\ and\ thread}}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ SC\_METHOD(\mbox{\hyperlink{class_d_m_a_c_a59437db485e7c65c6a90ad57d8b43f23}{mth\_request\_signals}});}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_d_m_a_c_8h_a1dcb1c5d799aaba2b02041f1b220c6c4}{DMA\_MAX\_CH}};\ ++i)\ }
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_d_m_a_c_a5b9d377a3ff02e089ae1c6c96d3b7b8b}{DMA\_req}}[i];\ \textcolor{comment}{//\ Register\ each\ input\ port\ with\ the\ SC\_METHOD}}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ dont\_initialize();}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ SC\_THREAD(\mbox{\hyperlink{class_d_m_a_c_a23141eed3303128f9bc12f17bb2cde3c}{mth\_reset}});}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_d_m_a_c_a618e4571cbf41913c0c7a71d84917625}{rst}};}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ SC\_THREAD(\mbox{\hyperlink{class_d_m_a_c_a877845e838c18e15b6dd910f76b83afe}{thr\_priority\_process}});}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314}{e\_DMA\_request}};}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ SC\_THREAD(\mbox{\hyperlink{class_d_m_a_c_a998adbb27ee33736cfa6a47c22309b91}{thr\_DMA\_run\_process}});}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00}{e\_DMA\_run}};}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ SC\_THREAD(\mbox{\hyperlink{class_d_m_a_c_a833712d45cbe2e11e96bfdfa9e7ae7fd}{thr\_DMA\_forward\_process}});}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9}{e\_DMA\_forward}};}
+\DoxyCodeLine{00533\ \ \ \ \ \};}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \ \ \ \ \mbox{\hyperlink{class_d_m_a_c_aea73e1155c88c19d3baedcc99ac0991d}{\string~DMAC}}()\ \{\};}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \};}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ }
+\DoxyCodeLine{00540\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

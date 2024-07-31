@@ -1,0 +1,160 @@
+.TH "wrapper_four_bit_adder< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+wrapper_four_bit_adder< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'Adder_wrapper\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBwrapper_four_bit_adder\fP (sc_core::sc_module_name name, bool message=false)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "tlm_utils::simple_target_socket< \fBwrapper_four_bit_adder\fP, BUSWIDTH > \fBtarget_socket\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBbinding_inout\fP ()"
+.br
+.ti -1c
+.RI "void \fBcb_ADDERINPUT\fP (const std::string &name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)"
+.br
+.ti -1c
+.RI "void \fBinit_register\fP ()"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "void \fBoutput_handling\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_signal< sc_uint< 4 > > \fBa\fP"
+.br
+.ti -1c
+.RI "sc_signal< sc_uint< 4 > > \fBb\fP"
+.br
+.ti -1c
+.RI "sc_signal< bool > \fBcin\fP"
+.br
+.ti -1c
+.RI "sc_signal< bool > \fBcout\fP"
+.br
+.ti -1c
+.RI "four_bit_adder \fBm_four_bit_adder\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "RegisterInterface \fBregs\fP"
+.br
+.ti -1c
+.RI "sc_signal< sc_uint< 4 > > \fBsum\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBwrapper_four_bit_adder\fP (sc_core::sc_module_name name, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::cout\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::init_register()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::nb_transport_fw()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::output_handling()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::sum\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::target_socket\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> void binding_inout ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBwrapper_four_bit_adder< BUSWIDTH >::a\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::b\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::cin\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::cout\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::m_four_bit_adder\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::sum\fP\&.
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void cb_ADDERINPUT (const std::string & name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBwrapper_four_bit_adder< BUSWIDTH >::a\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::b\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::cin\fP\&.
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::init_register()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void init_register ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBADDERINPUT\fP, \fBADDEROUTPUT\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::cb_ADDERINPUT()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::regs\fP\&.
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBwrapper_four_bit_adder< BUSWIDTH >::m_message\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::m_name\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::regs\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::target_socket\fP\&.
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void output_handling ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBADDEROUTPUT\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::cout\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::regs\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::sum\fP\&.
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> sc_signal<sc_uint<4> > a\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::cb_ADDERINPUT()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_signal<sc_uint<4> > b\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::cb_ADDERINPUT()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_signal<bool> cin\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::cb_ADDERINPUT()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_signal<bool> cout\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::output_handling()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> four_bit_adder m_four_bit_adder\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> RegisterInterface regs\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::init_register()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::nb_transport_fw()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::output_handling()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_signal<sc_uint<4> > sum\fR [private]\fP"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP, \fBwrapper_four_bit_adder< BUSWIDTH >::binding_inout()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::output_handling()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_target_socket<\fBwrapper_four_bit_adder\fP, BUSWIDTH> target_socket"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::wrapper_four_bit_adder()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::nb_transport_fw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

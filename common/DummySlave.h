@@ -47,6 +47,12 @@ private:
 	
 private:
 
+	/**@brief
+	 * end_of_elaboration
+	 *
+	 * The function end_of_elaboration is called before starting simulation
+	 *
+	 */
 	void end_of_elaboration() override {
 		// Set up sensitivity list for monitoring inputs
 		SC_METHOD(monitor_inputs);
@@ -56,6 +62,12 @@ private:
 		dont_initialize();
 	}
 
+	/**@brief
+	 * monitor_inputs
+	 *
+	 * The method uses to monitor input ports
+	 *
+	 */
 	void monitor_inputs()
 	{
 		for (const auto& pair : input_ports) {
@@ -71,7 +83,12 @@ private:
 		}
 	}
 
-
+	/**@brief
+	 * init_registers
+	 *
+	 *	Initialization registers
+	 *
+	 */
     void init_registers()
     {
 		regs.add_register("DUMMYRESULT", DUMMYRESULT, 0x00, 0x01, 0x0, READWRITE);
@@ -79,6 +96,25 @@ private:
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
     }
 
+	/**@brief
+	 * nb_transport_fw
+	 *
+	 * Implements the non-blocking backward transport interface for the initiator.
+	 *
+	 * @param trans Reference to the generic payload object containing the transaction details
+	 *              such as command, address, and data.
+	 *
+	 * @param phase Reference to the transaction phase. The current phase of the transaction,
+	 *              which may be updated by the function.
+	 *
+	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	 *              and may be updated by the function.
+	 *
+	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
+	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
+	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
+	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
+	 */
 	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
 		switch (phase)
 		{
@@ -138,6 +174,16 @@ private:
 
 	/* Callback register */
 
+	/**@brief
+	 * cb_DUMMYRESULT
+	 *
+	 *	The callback function for DUMMYRESULT register
+	 *	@param name			The name of register
+	 *  @param value		The value of register
+	 *  @param old_value	the previous value
+	 *  @param mask			the mask of register
+	 *  @param ch			the register channel
+	 */
 	void cb_DUMMYRESULT(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
 		if (name == "DUMMYRESULT")
@@ -161,7 +207,7 @@ private:
 
 	/* SC_METHOD function */
 
-	/*
+	/**@brief
 	* mth_synchronize_cycles
 	*
 	* Implementation the method to monitor clock cycles
@@ -177,6 +223,12 @@ private:
 
 	/* SC_THREAD function */
 
+	/**@brief
+	* thr_triggered_port_process
+	*
+	* Implementation the process to trigger specific ports
+	*
+	*/
 	void thr_triggered_port_process()
 	{
 		while (true)
@@ -194,6 +246,12 @@ private:
 		}
 	}
 
+	/**@brief
+	* mth_reset
+	*
+	* Implementation the method to handle reset operation
+	*
+	*/
 	void mth_reset()
 	{
 		regs.reset_regs();
@@ -204,7 +262,13 @@ public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_in<bool> rst;
 
-
+	/**@brief
+	* DummySlave
+	*
+	* DummySlave Constructure
+	* @param name Reference to sc_module name
+	* @param message To enable message log
+	*/
     DummySlave(sc_core::sc_module_name name, bool message = false) :
         sc_core::sc_module(name)
 		,m_message(message)
@@ -229,25 +293,51 @@ public:
 		sensitive << rst;
     }
 
-	// Method to add ports to the maps
+
+	/**@brief
+	* add_input_port
+	*
+	* To add input specific input ports to DummySlave
+	* @param name Reference to the port name
+	*/
 	sc_core::sc_in<bool>* add_input_port(const std::string& name) {
 		input_ports[name] = new sc_core::sc_in<bool>();
 		input_val_ports[name] = false;
 		return input_ports[name];
 	}
 
-	// Method to add ports to the maps
+	/**@brief
+	* add_output_port
+	*
+	* To add ouput specific output ports to DummySlave
+	* @param name Reference to the port name
+	*/
 	sc_core::sc_out<bool>* add_output_port(const std::string& name) {
 		output_ports[name] = new sc_core::sc_out<bool>();
 		output_val_ports[name] = false;
 		return output_ports[name];
 	}
 
+	/**@brief
+	* set_output_ports
+	*
+	* Using to set specific output port
+	* @param name Reference to the port name
+	* @param value the value of the output port
+	*/
 	void set_output_ports(const std::string& name, bool value)
 	{
 		output_ports[name]->write(value);
 	}
 
+	/**@brief
+	* set_output_ports
+	*
+	* Using to trigger specific output port
+	* @param name Reference to the port name
+	* @param high_level Indicating the triggered level
+	* @param is_pos Indicating the clock edge synchronization is positive or negative
+	*/
 	void trigger_output_ports(const std::string& name, bool high_level, bool is_pos)
 	{
 		output_ports[name]->write(high_level);
@@ -256,16 +346,34 @@ public:
 		m_cur_is_pos = is_pos;
 	}
 
+	/**@brief
+	* read_input_ports
+	*
+	* Using to read the value of specific port
+	* @param name Reference to the port name
+	*/
 	bool read_input_ports(const std::string& name)
 	{
 		return input_ports[name]->read();
 	}
 
+	/**@brief
+	* monitor_ports
+	*
+	* Using to enable or disable port monitor operation
+	* @param is_enable Indicating whether enabling or disabling port monitor
+	*/
 	void monitor_ports(bool is_enable)
 	{
 		m_portmonitor = is_enable;
 	}
 
+	/**@brief
+	* enable_monitor_clock
+	*
+	* Using to enable or disable clock monitor operation
+	* @param is_enable Indicating whether enabling or disabling clock monitor
+	*/
 	void enable_monitor_clock(bool is_enable)
 	{
 		m_clkmonitor = is_enable;

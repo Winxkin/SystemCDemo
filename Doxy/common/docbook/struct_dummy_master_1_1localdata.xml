@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_struct_dummy_master_1_1localdata" xml:lang="en-US">
+<title>DummyMaster&lt; BUSWIDTH &gt;::localdata</title>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;::localdata</primary></indexterm>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned char * <link linkend="_struct_dummy_master_1_1localdata_1a869c0e685d480f585c4281ac7a2ed6e3">m_data</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_struct_dummy_master_1_1localdata_1aac3296aec9a2cfdd8c5330480943982c">m_length</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_struct_dummy_master_1_1localdata_1a869c0e685d480f585c4281ac7a2ed6e3"/><section>
+    <title>m_data</title>
+<indexterm><primary>m_data</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;::localdata</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;::localdata</primary><secondary>m_data</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned char* m_data</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a08a564de97649540c69db5090febf892">DummyMaster&lt; BUSWIDTH &gt;::get_received_32bit_data()</link>, <link linkend="_class_dummy_master_1ab48cdf23350697763e6d6e1980c29ed0">DummyMaster&lt; BUSWIDTH &gt;::get_received_data()</link>, and <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">DummyMaster&lt; BUSWIDTH &gt;::nb_transport_bw()</link>.</para>
+</section>
+<anchor xml:id="_struct_dummy_master_1_1localdata_1aac3296aec9a2cfdd8c5330480943982c"/><section>
+    <title>m_length</title>
+<indexterm><primary>m_length</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;::localdata</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;::localdata</primary><secondary>m_length</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned int m_length</computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+common/<link linkend="__dummy_master_8h">DummyMaster.h</link></section>
+</section>

@@ -1,0 +1,91 @@
+.TH "common/bus.h" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+common/bus.h
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <systemc>\fP
+.br
+\fR#include <tlm>\fP
+.br
+\fR#include <tlm_utils/simple_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/simple_target_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_target_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/peq_with_cb_and_phase\&.h>\fP
+.br
+\fR#include <map>\fP
+.br
+\fR#include <vector>\fP
+.br
+\fR#include <mutex>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBBUS< BUSWIDTH, DATA_WIDTH >\fP"
+.br
+.ti -1c
+.RI "struct \fBBUS< BUSWIDTH, DATA_WIDTH >::address\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef sc_core::sc_in< bool > \fBsc_clk_in\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBBUS_TYPE\fP { \fBAXI32\fP = 32, \fBAXI64\fP = 64, \fBAPB\fP = 32 }"
+.br
+.ti -1c
+.RI "enum \fBDATAWIDTH\fP { \fBD8BIT\fP = 8, \fBD16BIT\fP = 16, \fBD32BIT\fP = 32, \fBD64BIT\fP = 64, \fBD128BIT\fP = 128 }"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef sc_core::sc_in<bool> \fBsc_clk_in\fP"
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBBUS_TYPE\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIAXI32 \fP\fP
+.TP
+\fB\fIAXI64 \fP\fP
+.TP
+\fB\fIAPB \fP\fP
+.SS "enum \fBDATAWIDTH\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fID8BIT \fP\fP
+.TP
+\fB\fID16BIT \fP\fP
+.TP
+\fB\fID32BIT \fP\fP
+.TP
+\fB\fID64BIT \fP\fP
+.TP
+\fB\fID128BIT \fP\fP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

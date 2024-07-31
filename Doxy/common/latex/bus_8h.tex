@@ -1,0 +1,101 @@
+\doxysection{common/bus.h File Reference}
+\label{bus_8h}\index{common/bus.h@{common/bus.h}}
+{\ttfamily \#include $<$systemc$>$}\newline
+{\ttfamily \#include $<$tlm$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/peq\+\_\+with\+\_\+cb\+\_\+and\+\_\+phase.\+h$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$}
+\item 
+struct \textbf{ BUS$<$ BUSWIDTH, DATA\+\_\+\+WIDTH $>$\+::address}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ sc\+\_\+clk\+\_\+in}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ BUS\+\_\+\+TYPE} \{ \textbf{ AXI32} = 32
+, \textbf{ AXI64} = 64
+, \textbf{ APB} = 32
+ \}
+\item 
+enum \textbf{ DATAWIDTH} \{ \newline
+\textbf{ D8\+BIT} = 8
+, \textbf{ D16\+BIT} = 16
+, \textbf{ D32\+BIT} = 32
+, \textbf{ D64\+BIT} = 64
+, \newline
+\textbf{ D128\+BIT} = 128
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\index{bus.h@{bus.h}!sc\_clk\_in@{sc\_clk\_in}}
+\index{sc\_clk\_in@{sc\_clk\_in}!bus.h@{bus.h}}
+\doxysubsubsection{sc\_clk\_in}
+{\footnotesize\ttfamily \label{bus_8h_a962b17d96ca7fcc31fd6cee97d502f7d} 
+typedef sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ \textbf{ sc\+\_\+clk\+\_\+in}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\index{bus.h@{bus.h}!BUS\_TYPE@{BUS\_TYPE}}
+\index{BUS\_TYPE@{BUS\_TYPE}!bus.h@{bus.h}}
+\doxysubsubsection{BUS\_TYPE}
+{\footnotesize\ttfamily \label{bus_8h_a1508df264e0751558523bc8d35c1c3f4} 
+enum \textbf{ BUS\+\_\+\+TYPE}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AXI32@{AXI32}!bus.h@{bus.h}}\index{bus.h@{bus.h}!AXI32@{AXI32}}}\label{bus_8h_a1508df264e0751558523bc8d35c1c3f4} 
+AXI32&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AXI64@{AXI64}!bus.h@{bus.h}}\index{bus.h@{bus.h}!AXI64@{AXI64}}}\label{bus_8h_a1508df264e0751558523bc8d35c1c3f4} 
+AXI64&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APB@{APB}!bus.h@{bus.h}}\index{bus.h@{bus.h}!APB@{APB}}}\label{bus_8h_a1508df264e0751558523bc8d35c1c3f4} 
+APB&\\
+\hline
+
+\end{DoxyEnumFields}
+\index{bus.h@{bus.h}!DATAWIDTH@{DATAWIDTH}}
+\index{DATAWIDTH@{DATAWIDTH}!bus.h@{bus.h}}
+\doxysubsubsection{DATAWIDTH}
+{\footnotesize\ttfamily \label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+enum \textbf{ DATAWIDTH}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D8BIT@{D8BIT}!bus.h@{bus.h}}\index{bus.h@{bus.h}!D8BIT@{D8BIT}}}\label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+D8\+BIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D16BIT@{D16BIT}!bus.h@{bus.h}}\index{bus.h@{bus.h}!D16BIT@{D16BIT}}}\label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+D16\+BIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D32BIT@{D32BIT}!bus.h@{bus.h}}\index{bus.h@{bus.h}!D32BIT@{D32BIT}}}\label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+D32\+BIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D64BIT@{D64BIT}!bus.h@{bus.h}}\index{bus.h@{bus.h}!D64BIT@{D64BIT}}}\label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+D64\+BIT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D128BIT@{D128BIT}!bus.h@{bus.h}}\index{bus.h@{bus.h}!D128BIT@{D128BIT}}}\label{bus_8h_ab091971cfc8591fcdbb10a11e6ab7837} 
+D128\+BIT&\\
+\hline
+
+\end{DoxyEnumFields}

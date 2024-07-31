@@ -1,0 +1,68 @@
+.TH "Target< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Target< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'target\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTarget\fP (sc_core::sc_module_name name)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "tlm_utils::simple_target_socket< \fBTarget\fP, BUSWIDTH > \fBtarget_socket\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBTarget\fP (sc_core::sc_module_name name)\fR [inline]\fP"
+
+.PP
+References \fBTarget< BUSWIDTH >::nb_transport_fw()\fP, and \fBTarget< BUSWIDTH >::target_socket\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBTarget< BUSWIDTH >::m_name\fP, and \fBTarget< BUSWIDTH >::target_socket\fP\&.
+.PP
+Referenced by \fBTarget< BUSWIDTH >::Target()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBTarget< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_target_socket<\fBTarget\fP, BUSWIDTH> target_socket"
+
+.PP
+Referenced by \fBTarget< BUSWIDTH >::Target()\fP, and \fBTarget< BUSWIDTH >::nb_transport_fw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

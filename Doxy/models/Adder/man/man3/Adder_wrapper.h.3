@@ -1,0 +1,66 @@
+.TH "models/Adder/Adder_wrapper.h" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+models/Adder/Adder_wrapper.h
+.SH SYNOPSIS
+.br
+.PP
+\fR#include 'inc/adder_four_bit_adder\&.h'\fP
+.br
+\fR#include <systemc>\fP
+.br
+\fR#include <tlm>\fP
+.br
+\fR#include <tlm_utils/simple_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/simple_target_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_target_socket\&.h>\fP
+.br
+\fR#include <map>\fP
+.br
+\fR#include <vector>\fP
+.br
+\fR#include <iostream>\fP
+.br
+\fR#include <cstdint>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBwrapper_four_bit_adder< BUSWIDTH >\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_ADDER_WRAPPER_H\fP"
+.br
+.ti -1c
+.RI "#define \fBADDERINPUT\fP   (0x00 + 0x00)"
+.br
+.ti -1c
+.RI "#define \fBADDEROUTPUT\fP   (0x00 + 0x04)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _ADDER_WRAPPER_H"
+
+.SS "#define ADDERINPUT   (0x00 + 0x00)"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::init_register()\fP\&.
+.SS "#define ADDEROUTPUT   (0x00 + 0x04)"
+
+.PP
+Referenced by \fBwrapper_four_bit_adder< BUSWIDTH >::init_register()\fP, and \fBwrapper_four_bit_adder< BUSWIDTH >::output_handling()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

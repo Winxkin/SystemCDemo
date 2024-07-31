@@ -1,0 +1,105 @@
+.TH "common/DMAC.h" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+common/DMAC.h
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <systemc>\fP
+.br
+\fR#include <tlm>\fP
+.br
+\fR#include <tlm_utils/simple_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/simple_target_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_initiator_socket\&.h>\fP
+.br
+\fR#include <tlm_utils/multi_passthrough_target_socket\&.h>\fP
+.br
+\fR#include <map>\fP
+.br
+\fR#include <vector>\fP
+.br
+\fR#include <iostream>\fP
+.br
+\fR#include <list>\fP
+.br
+\fR#include <cstdint>\fP
+.br
+\fR#include 'Registerif\&.h'\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBDMAC< BUSWIDTH >\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDMA_MAX_CH\fP   256"
+.br
+.ti -1c
+.RI "#define \fBDMAACK\fP(i)   (0xC20 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMACHEN\fP(i)   (0xC60 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMADATALENGTH\fP(i)   (0x800 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMADESADDR\fP(i)   (0x00 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMAINT\fP(i)   (0xC40 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMAREQ\fP(i)   (0xC00 + 0x04*(i))"
+.br
+.ti -1c
+.RI "#define \fBDMASRCADDR\fP(i)   (0x400 + 0x04*(i))"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DMA_MAX_CH   256"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::DMAC()\fP, \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDMAC< BUSWIDTH >::mth_request_signals()\fP\&.
+.SS "#define DMAACK( i)   (0xC20 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "#define DMACHEN( i)   (0xC60 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, \fBDMAC< BUSWIDTH >::mth_request_signals()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "#define DMADATALENGTH( i)   (0x800 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP\&.
+.SS "#define DMADESADDR( i)   (0x00 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP\&.
+.SS "#define DMAINT( i)   (0xC40 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, and \fBDMAC< BUSWIDTH >::thr_priority_process()\fP\&.
+.SS "#define DMAREQ( i)   (0xC00 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP\&.
+.SS "#define DMASRCADDR( i)   (0x400 + 0x04*(i))"
+
+.PP
+Referenced by \fBDMAC< BUSWIDTH >::init_registers()\fP, \fBDMAC< BUSWIDTH >::nb_transport_bw()\fP, and \fBDMAC< BUSWIDTH >::thr_DMA_run_process()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

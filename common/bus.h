@@ -42,7 +42,7 @@ class BUS : public sc_core::sc_module
 public:
 	tlm_utils::multi_passthrough_target_socket<BUS, BUSWIDTH> target_sockets;
 	sc_clk_in m_clk;
-	sc_core::sc_in<bool> rst;
+	sc_core::sc_in<bool> m_rst;
 
 private:
 	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH> initiator_sockets;
@@ -67,15 +67,13 @@ private:
 
 private:
 
-	/*
+	/**@brief
 	* mth_reset
-	*
 	* Impelmentation of the method when reset is active
-	*
 	*/
 	void mth_reset()
 	{
-		if (rst.read())
+		if (m_rst.read())
 		{
 			e_forward_tran.cancel();
 			current_trans.reset();
@@ -84,15 +82,11 @@ private:
 		}
 	}
 
-	/*
+	/**@brief
 	* copy_tlm_generic_payload
-	* 
 	* Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload
-	* 
 	* @param des Reference to destination TLM generic payload
-	* 
 	* @param src Reference to source TLM generic payload
-	* 
 	*/
 	void copy_tlm_generic_payload(tlm::tlm_generic_payload& des, tlm::tlm_generic_payload& src)
 	{
@@ -114,11 +108,9 @@ private:
 		Thread handles forward transaction
 	*/
 
-	/*
+	/**@brief
 	* foward_transaction_process
-	*
 	* Implementation the thread to synchronize with clock cycles and forward the transaction to slave through the corresponding initiator 
-	*
 	*/
 	void foward_transaction_process()
 	{
@@ -170,14 +162,11 @@ private:
 		}
 	}
 
-	/*
+	/**@brief
 	* TS_handle_begin_req
-	* 
 	* Implementation for decoding address from transaction payload and selecting the suitable initiator socket with the corresponding id
-	* 
 	* @param trans Reference to the generic payload object containing the transaction details
 	*              such as command, address, and data.
-	* 
 	* @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
 	*              and may be updated by the function. 
 	*/
@@ -211,20 +200,15 @@ private:
 		Define the functions to handle for Bus Initiator sockets
 	*/
 
-	/*
+	/**@brief
 	 * nb_transport_bw
-	 *
 	 * Implements the non-blocking backward transport interface for the nitiator.
-	 *
 	 * @param trans Reference to the generic payload object containing the transaction details
 	 *              such as command, address, and data.
-	 *
 	 * @param phase Reference to the transaction phase. The current phase of the transaction,
 	 *              which may be updated by the function.
-	 *
 	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
 	 *              and may be updated by the function.
-	 *
 	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
 	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
 	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
@@ -265,22 +249,16 @@ private:
 		Define the functions to handle for Bus Target socket
 	*/
 
-	/*
+	/**@brief
 	 * nb_transport_fw
-	 *
 	 * Implements the non-blocking forward transport interface for the target.
-	 *
 	 * @param id    Integer identifier to distinguish between multiple initiators or channels.
-	 *
 	 * @param trans Reference to the generic payload object containing the transaction details
 	 *              such as command, address, and data.
-	 *
 	 * @param phase Reference to the transaction phase. The current phase of the transaction,
 	 *              which may be updated by the function.
-	 *
 	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
 	 *              and may be updated by the function.
-	 *
 	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
 	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
 	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
@@ -339,14 +317,12 @@ private:
 
 
 public:
-	/*
+	/**@brief
 	* BUS constructor
-	* 
 	* @param name Reference to sc_module name
-	* 
-	* @param enclkmonitor To enable clock monitor through print message when the posedge clock event is triggered 
+	* @param message To enable message log
 	*/
-	BUS(sc_core::sc_module_name name, bool enclkmonitor = false, bool message = false) :
+	BUS(sc_core::sc_module_name name, bool message = false) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_sockets("target_socket")
@@ -366,7 +342,7 @@ public:
 		sensitive << e_forward_tran;
 
 		SC_METHOD(mth_reset);
-		sensitive << rst;
+		sensitive << m_rst;
 
 	};
 
@@ -377,17 +353,12 @@ public:
 	{
 	};
 
-	/*
+	/**@brief
 	* mapping_target_sockets
-	* 
 	* Implement the registration socket address range for target socket
-	* 
 	* @param _id   The id number of target socket in bus memory mapping I/O
-	* 
 	* @param _addr The base address of target socket that is registered into bus memory mapping I/O
-	* 
 	* @param _size the range of address space
-	* 
 	* @return tlm_utils::simple_initiator_socket is the initiator socket with id registration used to bind with the corresponding target socket
 	*/
 	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)

@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_register" xml:lang="en-US">
+<title>Register</title>
+<indexterm><primary>Register</primary></indexterm>
+<para>
+<computeroutput>#include &quot;Registerif.h&quot;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Types    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> = std::function&lt;void(const std::string&amp;, uint32_t, uint32_t, uint32_t, uint32_t)&gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_register_1ade6ac50ab9c115aba8a9a1c10e35384a">Register</link> ()</para>
+
+<para><link linkend="_class_register">Register</link>. </para>
+</listitem>
+            <listitem><para><link linkend="_class_register_1ae1025c910d60499f1ae3c928defb08c2">Register</link> (std::string <link linkend="_class_register_1a9b45b3e13bd9167aab02e17e08916231">name</link>, uint64_t <link linkend="_class_register_1ab6b52376c1b9d81e6ea6f95a1225f832">address</link>, uint32_t init, uint32_t <link linkend="_class_register_1ad3bee21df6875eeccd25d3c577e0600a">mask</link>, uint32_t <link linkend="_class_register_1ad64710488d666c31774f3bb5935dbd4b">ch</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> <link linkend="_class_register_1ae549ba30ddef298d996233f52a225ba1">permission</link>)</para>
+
+<para><link linkend="_class_register">Register</link>. </para>
+</listitem>
+            <listitem><para><link linkend="_class_register_1a04697760fce6a4a15865313f464bb84d">~Register</link> ()</para>
+
+<para>~Register Destructure </para>
+</listitem>
+            <listitem><para>uint64_t <link linkend="_class_register_1ac5218013e0eb854b003c51d982fefb3e">get_address</link> ()</para>
+
+<para>get_address Return the register base address </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_register_1a636296572c928bb9baf49439e9726c30">get_name</link> ()</para>
+
+<para>get_name Return the register name </para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_register_1abf652cde48c79a415d4166d584a3cc5a">get_value</link> () const</para>
+
+<para>get_value Return the register value </para>
+</listitem>
+            <listitem><para><link linkend="_class_register">Register</link> &amp; <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=</link> (uint32_t new_value)</para>
+
+<para>operator= To set new value for the rigster </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_1ad20897c5c8bd47f5d4005989bead0e55">reset</link> ()</para>
+
+<para>reset To reset register to initialization value </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_1a5894ecc8c807b6c242da3f4f09d532f7">set_callback</link> (<link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> cb)</para>
+
+<para>operator= Using to register call back function for the register </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_1ae9d2818713fc35ddc40d76cb65e90f4c">set_readonly_value</link> (uint32_t new_value)</para>
+
+<para>set_value Using for developer to set read only register value </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value</link> (uint32_t new_value)</para>
+
+<para>set_value Using to set register value </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>uint64_t <link linkend="_class_register_1ab6b52376c1b9d81e6ea6f95a1225f832">address</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> <link linkend="_class_register_1a42712c99422eaa2019fa9713b1dc74b9">callback</link></para>
+</listitem>
+            <listitem><para>const uint32_t <link linkend="_class_register_1ad64710488d666c31774f3bb5935dbd4b">ch</link></para>
+</listitem>
+            <listitem><para>const uint32_t <link linkend="_class_register_1a2738910a2d48a11a5cae170111c38d2c">init_val</link></para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_register_1ad3bee21df6875eeccd25d3c577e0600a">mask</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_register_1a9b45b3e13bd9167aab02e17e08916231">name</link></para>
+</listitem>
+            <listitem><para>const <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> <link linkend="_class_register_1ae549ba30ddef298d996233f52a225ba1">permission</link></para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Typedef Documentation</title>
+<anchor xml:id="_class_register_1a6f6462b5a400b77343505e1731b69a36"/><section>
+    <title>Callback</title>
+<indexterm><primary>Callback</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>Callback</secondary></indexterm>
+<para><computeroutput>using <link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> = std::function&lt;void(const std::string&amp;, uint32_t, uint32_t, uint32_t, uint32_t)&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_register_1ade6ac50ab9c115aba8a9a1c10e35384a"/><section>
+    <title>Register()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Register</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>Register</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register">Register</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_register">Register</link>. </para>
+</para>
+
+<para>Default Constructure (this function does not refer to use) </para>
+</section>
+<anchor xml:id="_class_register_1ae1025c910d60499f1ae3c928defb08c2"/><section>
+    <title>Register()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Register</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>Register</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register">Register</link> (std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> permission)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_register">Register</link>. </para>
+</para>
+
+<para>Constructure 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>The register name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>address</entry><entry>
+<para>The register base address </para>
+</entry>
+                            </row>
+                            <row>
+<entry>init</entry><entry>
+<para>The register initialization value </para>
+</entry>
+                            </row>
+                            <row>
+<entry>mask</entry><entry>
+<para>The register mask </para>
+</entry>
+                            </row>
+                            <row>
+<entry>ch</entry><entry>
+<para>The register channel </para>
+</entry>
+                            </row>
+                            <row>
+<entry>permission</entry><entry>
+<para>Indicating this register is read /write or read only permission </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_class_register_1a04697760fce6a4a15865313f464bb84d"/><section>
+    <title>~Register()</title>
+<indexterm><primary>~Register</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>~Register</secondary></indexterm>
+<para><computeroutput>~<link linkend="_class_register">Register</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>~Register Destructure </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_register_1ac5218013e0eb854b003c51d982fefb3e"/><section>
+    <title>get_address()</title>
+<indexterm><primary>get_address</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>get_address</secondary></indexterm>
+<para><computeroutput>uint64_t get_address ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_address Return the register base address </para>
+</para>
+<para>
+References <link linkend="_class_register_1ab6b52376c1b9d81e6ea6f95a1225f832">address</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a636296572c928bb9baf49439e9726c30"/><section>
+    <title>get_name()</title>
+<indexterm><primary>get_name</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>get_name</secondary></indexterm>
+<para><computeroutput>std::string get_name ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_name Return the register name </para>
+</para>
+<para>
+References <link linkend="_class_register_1a9b45b3e13bd9167aab02e17e08916231">name</link>.</para>
+</section>
+<anchor xml:id="_class_register_1abf652cde48c79a415d4166d584a3cc5a"/><section>
+    <title>get_value()</title>
+<indexterm><primary>get_value</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>get_value</secondary></indexterm>
+<para><computeroutput>uint32_t get_value ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_value Return the register value </para>
+</para>
+<para>
+References <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a4141d27dff96e5337def85671351e541"/><section>
+    <title>operator=()</title>
+<indexterm><primary>operator=</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register">Register</link> &amp; operator= (uint32_t new_value)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>operator= To set new value for the rigster </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>new_value</entry><entry>
+<para>The new value that is wrote into this register </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_1a42712c99422eaa2019fa9713b1dc74b9">callback</link>, <link linkend="_class_register_1ad64710488d666c31774f3bb5935dbd4b">ch</link>, <link linkend="_class_register_1ad3bee21df6875eeccd25d3c577e0600a">mask</link>, <link linkend="_class_register_1a9b45b3e13bd9167aab02e17e08916231">name</link>, <link linkend="_class_register_1ae549ba30ddef298d996233f52a225ba1">permission</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de">READWRITE</link>, and <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ad20897c5c8bd47f5d4005989bead0e55"/><section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void reset ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>reset To reset register to initialization value </para>
+</para>
+<para>
+References <link linkend="_class_register_1a2738910a2d48a11a5cae170111c38d2c">init_val</link>, and <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a5894ecc8c807b6c242da3f4f09d532f7"/><section>
+    <title>set_callback()</title>
+<indexterm><primary>set_callback</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>set_callback</secondary></indexterm>
+<para><computeroutput>void set_callback (<link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> cb)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>operator= Using to register call back function for the register </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>cb</entry><entry>
+<para>The address of call back function </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_1a42712c99422eaa2019fa9713b1dc74b9">callback</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ae9d2818713fc35ddc40d76cb65e90f4c"/><section>
+    <title>set_readonly_value()</title>
+<indexterm><primary>set_readonly_value</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>set_readonly_value</secondary></indexterm>
+<para><computeroutput>void set_readonly_value (uint32_t new_value)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>set_value Using for developer to set read only register value </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>new_value</entry><entry>
+<para>The new value that is wrote into this register </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_1ad3bee21df6875eeccd25d3c577e0600a">mask</link>, <link linkend="_class_register_1ae549ba30ddef298d996233f52a225ba1">permission</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963a626af06d585fcb18d2cd6cdec0d235cf">READONLY</link>, and <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41"/><section>
+    <title>set_value()</title>
+<indexterm><primary>set_value</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>set_value</secondary></indexterm>
+<para><computeroutput>void set_value (uint32_t new_value)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>set_value Using to set register value </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>new_value</entry><entry>
+<para>The new value that is wrote into this register </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_register_1a42712c99422eaa2019fa9713b1dc74b9">callback</link>, <link linkend="_class_register_1ad64710488d666c31774f3bb5935dbd4b">ch</link>, <link linkend="_class_register_1ad3bee21df6875eeccd25d3c577e0600a">mask</link>, <link linkend="_class_register_1a9b45b3e13bd9167aab02e17e08916231">name</link>, <link linkend="_class_register_1ae549ba30ddef298d996233f52a225ba1">permission</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de">READWRITE</link>, and <link linkend="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd">value</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_register_1ab6b52376c1b9d81e6ea6f95a1225f832"/><section>
+    <title>address</title>
+<indexterm><primary>address</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>address</secondary></indexterm>
+<para><computeroutput>uint64_t address<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1ac5218013e0eb854b003c51d982fefb3e">get_address()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a42712c99422eaa2019fa9713b1dc74b9"/><section>
+    <title>callback</title>
+<indexterm><primary>callback</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>callback</secondary></indexterm>
+<para><computeroutput><link linkend="_class_register_1a6f6462b5a400b77343505e1731b69a36">Callback</link> callback<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, <link linkend="_class_register_1a5894ecc8c807b6c242da3f4f09d532f7">set_callback()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ad64710488d666c31774f3bb5935dbd4b"/><section>
+    <title>ch</title>
+<indexterm><primary>ch</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>ch</secondary></indexterm>
+<para><computeroutput>const uint32_t ch<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a2738910a2d48a11a5cae170111c38d2c"/><section>
+    <title>init_val</title>
+<indexterm><primary>init_val</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>init_val</secondary></indexterm>
+<para><computeroutput>const uint32_t init_val<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1ad20897c5c8bd47f5d4005989bead0e55">reset()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ad3bee21df6875eeccd25d3c577e0600a"/><section>
+    <title>mask</title>
+<indexterm><primary>mask</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>mask</secondary></indexterm>
+<para><computeroutput>uint32_t mask<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, <link linkend="_class_register_1ae9d2818713fc35ddc40d76cb65e90f4c">set_readonly_value()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1a9b45b3e13bd9167aab02e17e08916231"/><section>
+    <title>name</title>
+<indexterm><primary>name</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>std::string name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1a636296572c928bb9baf49439e9726c30">get_name()</link>, <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ae549ba30ddef298d996233f52a225ba1"/><section>
+    <title>permission</title>
+<indexterm><primary>permission</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>permission</secondary></indexterm>
+<para><computeroutput>const <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963">REGPERMISSION</link> permission<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, <link linkend="_class_register_1ae9d2818713fc35ddc40d76cb65e90f4c">set_readonly_value()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<anchor xml:id="_class_register_1ae7f66047e6e39ba2bb6af8b95f00d1dd"/><section>
+    <title>value</title>
+<indexterm><primary>value</primary><secondary>Register</secondary></indexterm>
+<indexterm><primary>Register</primary><secondary>value</secondary></indexterm>
+<para><computeroutput>uint32_t value<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_register_1abf652cde48c79a415d4166d584a3cc5a">get_value()</link>, <link linkend="_class_register_1a4141d27dff96e5337def85671351e541">operator=()</link>, <link linkend="_class_register_1ad20897c5c8bd47f5d4005989bead0e55">reset()</link>, <link linkend="_class_register_1ae9d2818713fc35ddc40d76cb65e90f4c">set_readonly_value()</link>, and <link linkend="_class_register_1a5fcb24a46fca6bb40d63c5f25ee93d41">set_value()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="__registerif_8h">Registerif.h</link></section>
+</section>

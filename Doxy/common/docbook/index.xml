@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_index" xml:lang="en-US">
+    <info>
+    <title>SoCPlatform</title>
+    </info>
+<chapter>
+    <title>Class Documentation</title>
+    <xi:include href="class_b_u_s.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="struct_b_u_s_1_1address.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_d_m_a_c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_dummy_master.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="struct_dummy_master_1_1localdata.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_dummy_slave.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_r_a_m.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_register.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_register_interface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_target.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<chapter>
+    <title>File Documentation</title>
+    <xi:include href="bus_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_d_m_a_c_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_dummy_master_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_dummy_slave_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_inverter_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="memory_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_registerif_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="target_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href=".xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<index/>
+</book>

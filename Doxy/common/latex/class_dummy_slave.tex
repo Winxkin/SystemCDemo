@@ -1,0 +1,622 @@
+\doxysection{Dummy\+Slave$<$ BUSWIDTH $>$}
+\label{class_dummy_slave}\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+
+
+{\ttfamily \#include "{}Dummy\+Slave.\+h"{}}
+
+Inheritance diagram for Dummy\+Slave$<$ BUSWIDTH $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dummy_slave}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Dummy\+Slave} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool message=false)
+\begin{DoxyCompactList}\small\item\em \doxyref{Dummy\+Slave}{p.}{class_dummy_slave}. \end{DoxyCompactList}\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ $\ast$ \textbf{ add\+\_\+input\+\_\+port} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em add\+\_\+input\+\_\+port \end{DoxyCompactList}\item 
+sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ $\ast$ \textbf{ add\+\_\+output\+\_\+port} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em add\+\_\+output\+\_\+port \end{DoxyCompactList}\item 
+void \textbf{ enable\+\_\+monitor\+\_\+clock} (bool is\+\_\+enable)
+\begin{DoxyCompactList}\small\item\em enable\+\_\+monitor\+\_\+clock \end{DoxyCompactList}\item 
+void \textbf{ monitor\+\_\+ports} (bool is\+\_\+enable)
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+ports \end{DoxyCompactList}\item 
+bool \textbf{ read\+\_\+input\+\_\+ports} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em read\+\_\+input\+\_\+ports \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+output\+\_\+ports} (const std\+::string \&name, bool value)
+\begin{DoxyCompactList}\small\item\em set\+\_\+output\+\_\+ports \end{DoxyCompactList}\item 
+void \textbf{ trigger\+\_\+output\+\_\+ports} (const std\+::string \&name, bool high\+\_\+level, bool is\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em set\+\_\+output\+\_\+ports \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ clk}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ rst}
+\item 
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$ \textbf{ Dummy\+Slave}, BUSWIDTH $>$ \textbf{ target\+\_\+socket}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ cb\+\_\+\+DUMMYRESULT} (const std\+::string \&name, uint32\+\_\+t value, uint32\+\_\+t old\+\_\+value, uint32\+\_\+t mask, uint32\+\_\+t ch)
+\begin{DoxyCompactList}\small\item\em cb\+\_\+\+DUMMYRESULT \end{DoxyCompactList}\item 
+void \textbf{ end\+\_\+of\+\_\+elaboration} () override
+\begin{DoxyCompactList}\small\item\em end\+\_\+of\+\_\+elaboration \end{DoxyCompactList}\item 
+void \textbf{ init\+\_\+registers} ()
+\begin{DoxyCompactList}\small\item\em init\+\_\+registers \end{DoxyCompactList}\item 
+void \textbf{ monitor\+\_\+inputs} ()
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+inputs \end{DoxyCompactList}\item 
+void \textbf{ mth\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em mth\+\_\+reset \end{DoxyCompactList}\item 
+void \textbf{ mth\+\_\+synchronize\+\_\+cycles} ()
+\begin{DoxyCompactList}\small\item\em mth\+\_\+synchronize\+\_\+cycles \end{DoxyCompactList}\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+fw} (tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+fw \end{DoxyCompactList}\item 
+void \textbf{ thr\+\_\+triggered\+\_\+port\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em thr\+\_\+triggered\+\_\+port\+\_\+process \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+triggerd\+\_\+port}
+\item 
+std\+::map$<$ std\+::string, sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ $\ast$ $>$ \textbf{ input\+\_\+ports}
+\item 
+std\+::map$<$ std\+::string, bool $>$ \textbf{ input\+\_\+val\+\_\+ports}
+\item 
+bool \textbf{ m\+\_\+clkmonitor}
+\item 
+bool \textbf{ m\+\_\+cur\+\_\+is\+\_\+pos}
+\item 
+std\+::string \textbf{ m\+\_\+cur\+\_\+port\+\_\+name}
+\item 
+bool \textbf{ m\+\_\+cur\+\_\+triggered\+\_\+val}
+\item 
+bool \textbf{ m\+\_\+message}
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\item 
+bool \textbf{ m\+\_\+portmonitor}
+\item 
+std\+::map$<$ std\+::string, sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ $\ast$ $>$ \textbf{ output\+\_\+ports}
+\item 
+std\+::map$<$ std\+::string, bool $>$ \textbf{ output\+\_\+val\+\_\+ports}
+\item 
+\textbf{ Register\+Interface} \textbf{ regs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!DummySlave@{DummySlave}}
+\index{DummySlave@{DummySlave}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DummySlave()}
+{\footnotesize\ttfamily \label{class_dummy_slave_ad03db41fb462ebee8d4c7037357ad437} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ Dummy\+Slave} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{, }\item[{bool}]{message}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{Dummy\+Slave}{p.}{class_dummy_slave}. 
+
+\doxyref{Dummy\+Slave}{p.}{class_dummy_slave} Constructure 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to sc\+\_\+module name \\
+\hline
+{\em message} & To enable message log \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::clk}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::e\+\_\+triggerd\+\_\+port}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::mth\+\_\+synchronize\+\_\+cycles()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::rst}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::target\+\_\+socket}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!add\_input\_port@{add\_input\_port}}
+\index{add\_input\_port@{add\_input\_port}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{add\_input\_port()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a18e3e486599beaa9198e3de0cc017fff} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ $\ast$ add\+\_\+input\+\_\+port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+\_\+input\+\_\+port 
+
+To add input specific input ports to \doxyref{Dummy\+Slave}{p.}{class_dummy_slave} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+ports}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+val\+\_\+ports}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!add\_output\_port@{add\_output\_port}}
+\index{add\_output\_port@{add\_output\_port}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{add\_output\_port()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a22c1a62e37948cd85d1a62adce158c6e} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ $\ast$ add\+\_\+output\+\_\+port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+\_\+output\+\_\+port 
+
+To add ouput specific output ports to \doxyref{Dummy\+Slave}{p.}{class_dummy_slave} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::output\+\_\+ports}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::output\+\_\+val\+\_\+ports}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!cb\_DUMMYRESULT@{cb\_DUMMYRESULT}}
+\index{cb\_DUMMYRESULT@{cb\_DUMMYRESULT}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{cb\_DUMMYRESULT()}
+{\footnotesize\ttfamily \label{class_dummy_slave_aebeedbb375cc4d723d9b0d221ab027cb} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void cb\+\_\+\+DUMMYRESULT (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{uint32\+\_\+t}]{value}{, }\item[{uint32\+\_\+t}]{old\+\_\+value}{, }\item[{uint32\+\_\+t}]{mask}{, }\item[{uint32\+\_\+t}]{ch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+cb\+\_\+\+DUMMYRESULT 
+
+The callback function for DUMMYRESULT register 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of register \\
+\hline
+{\em value} & The value of register \\
+\hline
+{\em old\+\_\+value} & the previous value \\
+\hline
+{\em mask} & the mask of register \\
+\hline
+{\em ch} & the register channel \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::init\+\_\+registers()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!enable\_monitor\_clock@{enable\_monitor\_clock}}
+\index{enable\_monitor\_clock@{enable\_monitor\_clock}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{enable\_monitor\_clock()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a2e318c1eacd31a28585f44df5a5c8719} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void enable\+\_\+monitor\+\_\+clock (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+enable\+\_\+monitor\+\_\+clock 
+
+Using to enable or disable clock monitor operation 
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+enable} & Indicating whether enabling or disabling clock monitor \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+clkmonitor}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!end\_of\_elaboration@{end\_of\_elaboration}}
+\index{end\_of\_elaboration@{end\_of\_elaboration}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{end\_of\_elaboration()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a8b99e16059c0fa4f3d3db261c30f5476} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void end\+\_\+of\+\_\+elaboration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}}
+
+
+
+end\+\_\+of\+\_\+elaboration 
+
+The function end\+\_\+of\+\_\+elaboration is called before starting simulation 
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+ports}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+inputs()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!init\_registers@{init\_registers}}
+\index{init\_registers@{init\_registers}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{init\_registers()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a1cf609a2603fd853aa7095c8fc2a9e1d} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void init\+\_\+registers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+init\+\_\+registers 
+
+Initialization registers 
+
+References \textbf{ Register\+Interface\+::add\+\_\+register()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::cb\+\_\+\+DUMMYRESULT()}, \textbf{ DUMMYRESULT}, \textbf{ READWRITE}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::regs}, and \textbf{ Register\+Interface\+::set\+\_\+register\+\_\+callback()}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!monitor\_inputs@{monitor\_inputs}}
+\index{monitor\_inputs@{monitor\_inputs}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{monitor\_inputs()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a9bc7d11764bc5231892fb539c5aa3b93} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void monitor\+\_\+inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+monitor\+\_\+inputs 
+
+The method uses to monitor input ports 
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+ports}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+val\+\_\+ports}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+name}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+portmonitor}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::end\+\_\+of\+\_\+elaboration()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!monitor\_ports@{monitor\_ports}}
+\index{monitor\_ports@{monitor\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{monitor\_ports()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a05fd6e372ec6c89b2fcff4deb62dd3ac} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void monitor\+\_\+ports (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+monitor\+\_\+ports 
+
+Using to enable or disable port monitor operation 
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+enable} & Indicating whether enabling or disabling port monitor \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+portmonitor}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!mth\_reset@{mth\_reset}}
+\index{mth\_reset@{mth\_reset}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{mth\_reset()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a23141eed3303128f9bc12f17bb2cde3c} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void mth\+\_\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+mth\+\_\+reset 
+
+Implementation the method to handle reset operation 
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::regs}, and \textbf{ Register\+Interface\+::reset\+\_\+regs()}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!mth\_synchronize\_cycles@{mth\_synchronize\_cycles}}
+\index{mth\_synchronize\_cycles@{mth\_synchronize\_cycles}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{mth\_synchronize\_cycles()}
+{\footnotesize\ttfamily \label{class_dummy_slave_ad14ba1bdba16c5566fe9497cf2231002} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void mth\+\_\+synchronize\+\_\+cycles (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+mth\+\_\+synchronize\+\_\+cycles 
+
+Implementation the method to monitor clock cycles 
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+clkmonitor}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!nb\_transport\_fw@{nb\_transport\_fw}}
+\index{nb\_transport\_fw@{nb\_transport\_fw}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{nb\_transport\_fw()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a882a19a1d4962f1024c218c07e8e0289} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+fw (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+fw 
+
+Implements the non-\/blocking backward transport interface for the initiator.
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data.\\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.\\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::regs}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::target\+\_\+socket}, and \textbf{ Register\+Interface\+::update\+\_\+register()}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!read\_input\_ports@{read\_input\_ports}}
+\index{read\_input\_ports@{read\_input\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{read\_input\_ports()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a68420e10135a04360b1af8a70baff6f6} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool read\+\_\+input\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+read\+\_\+input\+\_\+ports 
+
+Using to read the value of specific port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::input\+\_\+ports}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!set\_output\_ports@{set\_output\_ports}}
+\index{set\_output\_ports@{set\_output\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{set\_output\_ports()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a23dd64199f535427de942617399d99dd} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void set\+\_\+output\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+output\+\_\+ports 
+
+Using to set specific output port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+{\em value} & the value of the output port \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::output\+\_\+ports}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!thr\_triggered\_port\_process@{thr\_triggered\_port\_process}}
+\index{thr\_triggered\_port\_process@{thr\_triggered\_port\_process}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{thr\_triggered\_port\_process()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a53a30b6827abcc657b635842e3ead98c} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void thr\+\_\+triggered\+\_\+port\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+thr\+\_\+triggered\+\_\+port\+\_\+process 
+
+Implementation the process to trigger specific ports 
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::clk}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::e\+\_\+triggerd\+\_\+port}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+is\+\_\+pos}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+port\+\_\+name}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+triggered\+\_\+val}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::output\+\_\+ports}.
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!trigger\_output\_ports@{trigger\_output\_ports}}
+\index{trigger\_output\_ports@{trigger\_output\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{trigger\_output\_ports()}
+{\footnotesize\ttfamily \label{class_dummy_slave_a13bda8683a32fdf40b44b36300f0ba26} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void trigger\+\_\+output\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{bool}]{high\+\_\+level}{, }\item[{bool}]{is\+\_\+pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+output\+\_\+ports 
+
+Using to trigger specific output port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+{\em high\+\_\+level} & Indicating the triggered level \\
+\hline
+{\em is\+\_\+pos} & Indicating the clock edge synchronization is positive or negative \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+is\+\_\+pos}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+port\+\_\+name}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+triggered\+\_\+val}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::output\+\_\+ports}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!clk@{clk}}
+\index{clk@{clk}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{clk}
+{\footnotesize\ttfamily \label{class_dummy_slave_a7e19409f662da0c599256b1ca029ebe1} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ clk}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!e\_triggerd\_port@{e\_triggerd\_port}}
+\index{e\_triggerd\_port@{e\_triggerd\_port}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_triggerd\_port}
+{\footnotesize\ttfamily \label{class_dummy_slave_a18930c7d974c2a28137440eb64bd1bb5} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+triggerd\+\_\+port\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!input\_ports@{input\_ports}}
+\index{input\_ports@{input\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{input\_ports}
+{\footnotesize\ttfamily \label{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::map$<$std\+::string, sc\+\_\+core\+::sc\+\_\+in$<$bool$>$$\ast$$>$ input\+\_\+ports\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::add\+\_\+input\+\_\+port()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::end\+\_\+of\+\_\+elaboration()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+inputs()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::read\+\_\+input\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!input\_val\_ports@{input\_val\_ports}}
+\index{input\_val\_ports@{input\_val\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{input\_val\_ports}
+{\footnotesize\ttfamily \label{class_dummy_slave_aab7e959f2c4214b9e44b130e3bb759ad} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::map$<$std\+::string, bool$>$ input\+\_\+val\+\_\+ports\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::add\+\_\+input\+\_\+port()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+inputs()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_clkmonitor@{m\_clkmonitor}}
+\index{m\_clkmonitor@{m\_clkmonitor}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_clkmonitor}
+{\footnotesize\ttfamily \label{class_dummy_slave_ae1c9252336dd2cb1feaa369122a593ee} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+clkmonitor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::enable\+\_\+monitor\+\_\+clock()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::mth\+\_\+synchronize\+\_\+cycles()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_cur\_is\_pos@{m\_cur\_is\_pos}}
+\index{m\_cur\_is\_pos@{m\_cur\_is\_pos}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_cur\_is\_pos}
+{\footnotesize\ttfamily \label{class_dummy_slave_a7719723e8d7ba06b705b83f925fcf824} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+cur\+\_\+is\+\_\+pos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::trigger\+\_\+output\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_cur\_port\_name@{m\_cur\_port\_name}}
+\index{m\_cur\_port\_name@{m\_cur\_port\_name}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_cur\_port\_name}
+{\footnotesize\ttfamily \label{class_dummy_slave_a15d50a6c3900dc701136970f851a4e5b} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+cur\+\_\+port\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::trigger\+\_\+output\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_cur\_triggered\_val@{m\_cur\_triggered\_val}}
+\index{m\_cur\_triggered\_val@{m\_cur\_triggered\_val}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_cur\_triggered\_val}
+{\footnotesize\ttfamily \label{class_dummy_slave_ab7199813f84e703d078330886fa5b932} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+cur\+\_\+triggered\+\_\+val\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::trigger\+\_\+output\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_message@{m\_message}}
+\index{m\_message@{m\_message}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_message}
+{\footnotesize\ttfamily \label{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+message\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily \label{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+inputs()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!m\_portmonitor@{m\_portmonitor}}
+\index{m\_portmonitor@{m\_portmonitor}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_portmonitor}
+{\footnotesize\ttfamily \label{class_dummy_slave_a4bce3b7e214b17194008fd5803bc9490} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+portmonitor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+inputs()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::monitor\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!output\_ports@{output\_ports}}
+\index{output\_ports@{output\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{output\_ports}
+{\footnotesize\ttfamily \label{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::map$<$std\+::string, sc\+\_\+core\+::sc\+\_\+out$<$bool$>$$\ast$$>$ output\+\_\+ports\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::add\+\_\+output\+\_\+port()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::set\+\_\+output\+\_\+ports()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::thr\+\_\+triggered\+\_\+port\+\_\+process()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::trigger\+\_\+output\+\_\+ports()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!output\_val\_ports@{output\_val\_ports}}
+\index{output\_val\_ports@{output\_val\_ports}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{output\_val\_ports}
+{\footnotesize\ttfamily \label{class_dummy_slave_a36acaafd43494e3452b7c7c8f42641c0} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::map$<$std\+::string, bool$>$ output\+\_\+val\+\_\+ports\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::add\+\_\+output\+\_\+port()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!regs@{regs}}
+\index{regs@{regs}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{regs}
+{\footnotesize\ttfamily \label{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ Register\+Interface} regs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!rst@{rst}}
+\index{rst@{rst}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{rst}
+{\footnotesize\ttfamily \label{class_dummy_slave_a618e4571cbf41913c0c7a71d84917625} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ rst}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}.
+
+\index{DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}!target\_socket@{target\_socket}}
+\index{target\_socket@{target\_socket}!DummySlave$<$ BUSWIDTH $>$@{DummySlave$<$ BUSWIDTH $>$}}
+\doxysubsubsection{target\_socket}
+{\footnotesize\ttfamily \label{class_dummy_slave_aef06f5b320fac4baca68b77b1610e6f7} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$\textbf{ Dummy\+Slave}, BUSWIDTH$>$ target\+\_\+socket}
+
+
+
+Referenced by \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::\+Dummy\+Slave()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ Dummy\+Slave.\+h}\end{DoxyCompactItemize}

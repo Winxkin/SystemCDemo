@@ -1,0 +1,102 @@
+\doxysection{target.\+h}
+\hypertarget{target_8h_source}{}\label{target_8h_source}\index{common/target.h@{common/target.h}}
+\mbox{\hyperlink{target_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_TARGET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_TARGET\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <systemc>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <tlm>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_initiator\_socket.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_target\_socket.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_initiator\_socket.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_target\_socket.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ BUSWIDTH\ =\ 32>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_target}{Target}}\ :\ \textcolor{keyword}{public}\ sc\_core::sc\_module\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ std::string\ \mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ tlm::tlm\_sync\_enum\ \mbox{\hyperlink{class_target_a882a19a1d4962f1024c218c07e8e0289}{nb\_transport\_fw}}(tlm::tlm\_generic\_payload\&\ trans,\ tlm::tlm\_phase\&\ phase,\ sc\_core::sc\_time\&\ delay)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (phase)}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::BEGIN\_REQ:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ BEGIN\_REQ\ phase}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ BEGIN\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}[trans.get\_data\_length()];}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (trans.get\_command())\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_WRITE\_COMMAND:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(data,\ trans.get\_data\_ptr(),\ trans.get\_data\_length());}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Received\ transaction\ with\ address\ 0x"{}}\ <<\ std::hex\ <<\ trans.get\_address()\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ data:\ "{}};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ trans.get\_data\_length();\ i++)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ [0x"{}}\ <<\ std::hex\ <<\ (\textcolor{keywordtype}{unsigned}\ int)data[i]\ <<\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ std::endl;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_READ\_COMMAND:}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ trans.get\_data\_length();\ i++)}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[i]\ =\ (\textcolor{keywordtype}{unsigned}\ char)\ i;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Received\ transaction\ with\ address\ 0x"{}}\ <<\ std::hex\ <<\ trans.get\_address()\ <<\ std::endl;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(trans.get\_data\_ptr(),\ data,\ trans.get\_data\_length());}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Return\ data\ and\ END\_REQ\ to\ bus}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_phase\ next\_phase\ =\ tlm::END\_REQ;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_target_a0aacab09beb649e6fad1ee8f815e7a29}{target\_socket}}-\/>nb\_transport\_bw(trans,\ next\_phase,\ delay);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::END\_REQ:}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ END\_REQ\ phase\ (shouldn't\ happen\ here)}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ END\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tlm::TLM\_ACCEPTED;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \ \ tlm\_utils::simple\_target\_socket<Target,\ BUSWIDTH>\ \mbox{\hyperlink{class_target_a0aacab09beb649e6fad1ee8f815e7a29}{target\_socket}};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{class_target_a8a1c49b472a29a18baa3b9cfe57abc02}{Target}}(sc\_core::sc\_module\_name\ name)\ :}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ sc\_core::sc\_module(name)}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_target_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}(name)}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_target_a0aacab09beb649e6fad1ee8f815e7a29}{target\_socket}}(\textcolor{stringliteral}{"{}target\_socket"{}})}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_target_a0aacab09beb649e6fad1ee8f815e7a29}{target\_socket}}.register\_nb\_transport\_fw(\textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_target_a882a19a1d4962f1024c218c07e8e0289}{Target::nb\_transport\_fw}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

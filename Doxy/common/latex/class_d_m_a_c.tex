@@ -1,0 +1,601 @@
+\doxysection{DMAC$<$ BUSWIDTH $>$}
+\label{class_d_m_a_c}\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+
+
+{\ttfamily \#include "{}DMAC.\+h"{}}
+
+Inheritance diagram for DMAC$<$ BUSWIDTH $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_m_a_c}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ DMAC} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool message=false)
+\begin{DoxyCompactList}\small\item\em \doxyref{DMAC}{p.}{class_d_m_a_c} constructor. \end{DoxyCompactList}\item 
+\textbf{ $\sim$\+DMAC} ()
+\begin{DoxyCompactList}\small\item\em \doxyref{DMAC}{p.}{class_d_m_a_c} destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ clk}
+\item 
+sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ \textbf{ DMA\+\_\+ack} [\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]
+\item 
+sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ \textbf{ DMA\+\_\+int} [\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ DMA\+\_\+req} [\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]
+\item 
+tlm\+\_\+utils\+::simple\+\_\+initiator\+\_\+socket$<$ \textbf{ DMAC}, BUSWIDTH $>$ \textbf{ initiator\+\_\+socket}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ rst}
+\item 
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$ \textbf{ DMAC}, BUSWIDTH $>$ \textbf{ target\+\_\+socket}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ cb\+\_\+\+DMAREQ} (const std\+::string \&name, uint32\+\_\+t value, uint32\+\_\+t old\+\_\+value, uint32\+\_\+t mask, uint32\+\_\+t ch)
+\begin{DoxyCompactList}\small\item\em cb\+\_\+\+DMAREQ \end{DoxyCompactList}\item 
+void \textbf{ copy\+\_\+tlm\+\_\+generic\+\_\+payload} (tlm\+::tlm\+\_\+generic\+\_\+payload \&des, tlm\+::tlm\+\_\+generic\+\_\+payload \&src)
+\begin{DoxyCompactList}\small\item\em copy\+\_\+tlm\+\_\+generic\+\_\+payload \end{DoxyCompactList}\item 
+void \textbf{ init\+\_\+registers} ()
+\begin{DoxyCompactList}\small\item\em init\+\_\+registers \end{DoxyCompactList}\item 
+void \textbf{ mth\+\_\+request\+\_\+signals} ()
+\begin{DoxyCompactList}\small\item\em mth\+\_\+request\+\_\+signals \end{DoxyCompactList}\item 
+void \textbf{ mth\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em mth\+\_\+reset \end{DoxyCompactList}\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+bw} (tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+bw \end{DoxyCompactList}\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+fw} (tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+fw \end{DoxyCompactList}\item 
+void \textbf{ thr\+\_\+\+DMA\+\_\+forward\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em thr\+\_\+\+DMA\+\_\+forward\+\_\+process \end{DoxyCompactList}\item 
+void \textbf{ thr\+\_\+\+DMA\+\_\+run\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em thr\+\_\+\+DMA\+\_\+run\+\_\+process \end{DoxyCompactList}\item 
+void \textbf{ thr\+\_\+priority\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em thr\+\_\+priority\+\_\+process \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tlm\+::tlm\+\_\+generic\+\_\+payload \textbf{ current\+\_\+trans}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+\+DMA\+\_\+forward}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+\+DMA\+\_\+request}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+\+DMA\+\_\+run}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+\+DMA\+\_\+run\+\_\+done}
+\item 
+unsigned int \textbf{ m\+\_\+cur\+\_\+reg\+\_\+ch}
+\item 
+std\+::string \textbf{ m\+\_\+cur\+\_\+reg\+\_\+name}
+\item 
+unsigned int \textbf{ m\+\_\+current\+\_\+ch}
+\item 
+bool \textbf{ m\+\_\+message}
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\item 
+bool \textbf{ m\+\_\+running}
+\item 
+bool \textbf{ m\+\_\+testmode}
+\item 
+std\+::list$<$ unsigned int $>$ \textbf{ port\+\_\+req\+\_\+ids}
+\item 
+\textbf{ Register\+Interface} \textbf{ regs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!DMAC@{DMAC}}
+\index{DMAC@{DMAC}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DMAC()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_acfc644a1d53bd4b398bf9e468953caef} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ DMAC} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{, }\item[{bool}]{message}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{DMAC}{p.}{class_d_m_a_c} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to sc\+\_\+module name\\
+\hline
+{\em message} & To enable message log \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMA\+\_\+req}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+forward}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+request}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::rst}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::target\+\_\+socket}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+forward\+\_\+process()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!````~DMAC@{$\sim$DMAC}}
+\index{````~DMAC@{$\sim$DMAC}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{$\sim$DMAC()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_aea73e1155c88c19d3baedcc99ac0991d} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+$\sim$\textbf{ DMAC} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{DMAC}{p.}{class_d_m_a_c} destructor. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!cb\_DMAREQ@{cb\_DMAREQ}}
+\index{cb\_DMAREQ@{cb\_DMAREQ}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{cb\_DMAREQ()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a4b2a77c68a8cf19befd770de34508015} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void cb\+\_\+\+DMAREQ (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{uint32\+\_\+t}]{value}{, }\item[{uint32\+\_\+t}]{old\+\_\+value}{, }\item[{uint32\+\_\+t}]{mask}{, }\item[{uint32\+\_\+t}]{ch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+cb\+\_\+\+DMAREQ 
+
+The call back register function for DMAREQ register 
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+request}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+running}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+testmode}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!copy\_tlm\_generic\_payload@{copy\_tlm\_generic\_payload}}
+\index{copy\_tlm\_generic\_payload@{copy\_tlm\_generic\_payload}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{copy\_tlm\_generic\_payload()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_aace875a6d6c0f6d67d926583c88af55d} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void copy\+\_\+tlm\+\_\+generic\+\_\+payload (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{des}{, }\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{src}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+copy\+\_\+tlm\+\_\+generic\+\_\+payload 
+
+Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload
+
+
+\begin{DoxyParams}{Parameters}
+{\em des} & Reference to destination TLM generic payload\\
+\hline
+{\em src} & Reference to source TLM generic payload \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!init\_registers@{init\_registers}}
+\index{init\_registers@{init\_registers}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{init\_registers()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a1cf609a2603fd853aa7095c8fc2a9e1d} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void init\+\_\+registers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+init\+\_\+registers 
+
+To initialize registers for \doxyref{DMAC}{p.}{class_d_m_a_c} model 
+
+References \textbf{ Register\+Interface\+::add\+\_\+register()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}, \textbf{ DMAACK}, \textbf{ DMACHEN}, \textbf{ DMADATALENGTH}, \textbf{ DMADESADDR}, \textbf{ DMAINT}, \textbf{ DMAREQ}, \textbf{ DMASRCADDR}, \textbf{ READWRITE}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}, and \textbf{ Register\+Interface\+::set\+\_\+register\+\_\+callback()}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!mth\_request\_signals@{mth\_request\_signals}}
+\index{mth\_request\_signals@{mth\_request\_signals}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{mth\_request\_signals()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a59437db485e7c65c6a90ad57d8b43f23} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void mth\+\_\+request\+\_\+signals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+mth\+\_\+request\+\_\+signals 
+
+Impelmentation of the method when requests signal are triggered by peripherals 
+
+References \textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMA\+\_\+req}, \textbf{ DMACHEN}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+request}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+running}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::port\+\_\+req\+\_\+ids}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!mth\_reset@{mth\_reset}}
+\index{mth\_reset@{mth\_reset}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{mth\_reset()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a23141eed3303128f9bc12f17bb2cde3c} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void mth\+\_\+reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+mth\+\_\+reset 
+
+Impelmentation of the method when reset is active 
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+forward}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+request}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run\+\_\+done}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+current\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+running}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+testmode}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}, \textbf{ Register\+Interface\+::reset\+\_\+regs()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::rst}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!nb\_transport\_bw@{nb\_transport\_bw}}
+\index{nb\_transport\_bw@{nb\_transport\_bw}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{nb\_transport\_bw()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a9401643ffeae74f7b9b36713bc735da7} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+bw (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+bw 
+
+Implements the non-\/blocking backward transport interface for the initiator.
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data.\\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.\\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::copy\+\_\+tlm\+\_\+generic\+\_\+payload()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::current\+\_\+trans}, \textbf{ DMADESADDR}, \textbf{ DMASRCADDR}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+forward}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run\+\_\+done}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+current\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+name}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!nb\_transport\_fw@{nb\_transport\_fw}}
+\index{nb\_transport\_fw@{nb\_transport\_fw}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{nb\_transport\_fw()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a882a19a1d4962f1024c218c07e8e0289} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+fw (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+fw 
+
+Implements the non-\/blocking backward transport interface for the initiator.
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data.\\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.\\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::target\+\_\+socket}, and \textbf{ Register\+Interface\+::update\+\_\+register()}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!thr\_DMA\_forward\_process@{thr\_DMA\_forward\_process}}
+\index{thr\_DMA\_forward\_process@{thr\_DMA\_forward\_process}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{thr\_DMA\_forward\_process()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a833712d45cbe2e11e96bfdfa9e7ae7fd} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void thr\+\_\+\+DMA\+\_\+forward\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+thr\+\_\+\+DMA\+\_\+forward\+\_\+process 
+
+Impelmentation of the thread to forward data from the source to the destination 
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::current\+\_\+trans}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+forward}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!thr\_DMA\_run\_process@{thr\_DMA\_run\_process}}
+\index{thr\_DMA\_run\_process@{thr\_DMA\_run\_process}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{thr\_DMA\_run\_process()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a998adbb27ee33736cfa6a47c22309b91} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void thr\+\_\+\+DMA\+\_\+run\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+thr\+\_\+\+DMA\+\_\+run\+\_\+process 
+
+Impelmentation of the thread to start DMA operation 
+
+References \textbf{ DMADATALENGTH}, \textbf{ DMASRCADDR}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+current\+\_\+ch}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!thr\_priority\_process@{thr\_priority\_process}}
+\index{thr\_priority\_process@{thr\_priority\_process}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{thr\_priority\_process()}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a877845e838c18e15b6dd910f76b83afe} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void thr\+\_\+priority\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+thr\+\_\+priority\+\_\+process 
+
+Impelmentation of the thread to handle priority of DMA operation 
+
+References \textbf{ DMAC$<$ BUSWIDTH $>$\+::clk}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMA\+\_\+ack}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMA\+\_\+int}, \textbf{ DMAACK}, \textbf{ DMACHEN}, \textbf{ DMAINT}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+request}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::e\+\_\+\+DMA\+\_\+run\+\_\+done}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+cur\+\_\+reg\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+current\+\_\+ch}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+name}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+running}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::m\+\_\+testmode}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::port\+\_\+req\+\_\+ids}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::regs}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!clk@{clk}}
+\index{clk@{clk}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{clk}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a7e19409f662da0c599256b1ca029ebe1} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ clk}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!current\_trans@{current\_trans}}
+\index{current\_trans@{current\_trans}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{current\_trans}
+{\footnotesize\ttfamily \label{class_d_m_a_c_ab64fcbde6ccffc2fa42aaad88a32faa3} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+generic\+\_\+payload current\+\_\+trans\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+forward\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!DMA\_ack@{DMA\_ack}}
+\index{DMA\_ack@{DMA\_ack}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DMA\_ack}
+{\footnotesize\ttfamily \label{class_d_m_a_c_af4634216201dfe6af419cf08217daeff} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+out$<$bool$>$ DMA\+\_\+ack[\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!DMA\_int@{DMA\_int}}
+\index{DMA\_int@{DMA\_int}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DMA\_int}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a66afed0c8d5a5119a5c7befdad389243} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+out$<$bool$>$ DMA\+\_\+int[\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!DMA\_req@{DMA\_req}}
+\index{DMA\_req@{DMA\_req}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DMA\_req}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a5b9d377a3ff02e089ae1c6c96d3b7b8b} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ DMA\+\_\+req[\textbf{ DMA\+\_\+\+MAX\+\_\+\+CH}]}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!e\_DMA\_forward@{e\_DMA\_forward}}
+\index{e\_DMA\_forward@{e\_DMA\_forward}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_DMA\_forward}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a137d3828642f153a8323ee5d409261c9} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+\+DMA\+\_\+forward\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+forward\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!e\_DMA\_request@{e\_DMA\_request}}
+\index{e\_DMA\_request@{e\_DMA\_request}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_DMA\_request}
+{\footnotesize\ttfamily \label{class_d_m_a_c_ac88e13e1ab8baec0edc63ad9d92a9314} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+\+DMA\+\_\+request\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!e\_DMA\_run@{e\_DMA\_run}}
+\index{e\_DMA\_run@{e\_DMA\_run}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_DMA\_run}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a91181b8b04d36021d5f15f15ed4fda00} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+\+DMA\+\_\+run\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!e\_DMA\_run\_done@{e\_DMA\_run\_done}}
+\index{e\_DMA\_run\_done@{e\_DMA\_run\_done}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_DMA\_run\_done}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a6ab633e540e5cacf6d818a0529fb2f7e} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+\+DMA\+\_\+run\+\_\+done\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!initiator\_socket@{initiator\_socket}}
+\index{initiator\_socket@{initiator\_socket}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{initiator\_socket}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a6feb068c787a4246e1d8a37006123114} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+\_\+utils\+::simple\+\_\+initiator\+\_\+socket$<$\textbf{ DMAC}, BUSWIDTH$>$ initiator\+\_\+socket}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+forward\+\_\+process()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_cur\_reg\_ch@{m\_cur\_reg\_ch}}
+\index{m\_cur\_reg\_ch@{m\_cur\_reg\_ch}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_cur\_reg\_ch}
+{\footnotesize\ttfamily \label{class_d_m_a_c_abff73b54a5c977ff57af04fea8196ade} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+unsigned int m\+\_\+cur\+\_\+reg\+\_\+ch\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_cur\_reg\_name@{m\_cur\_reg\_name}}
+\index{m\_cur\_reg\_name@{m\_cur\_reg\_name}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_cur\_reg\_name}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a38ee55cf888731f625a45854286e6156} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+cur\+\_\+reg\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_current\_ch@{m\_current\_ch}}
+\index{m\_current\_ch@{m\_current\_ch}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_current\_ch}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a554de9bd57e273361ce8b59611980315} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+unsigned int m\+\_\+current\+\_\+ch\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_message@{m\_message}}
+\index{m\_message@{m\_message}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_message}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a40f977ac4c6e432882dfb186d3450bd4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+message\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily \label{class_d_m_a_c_adb41893ba19e889e56c559f25fc1a68a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_running@{m\_running}}
+\index{m\_running@{m\_running}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_running}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a4bf34194d819be948dea90eddb02c265} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+running\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!m\_testmode@{m\_testmode}}
+\index{m\_testmode@{m\_testmode}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_testmode}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a23a6ed8e40f03f5d1d205f4e80208815} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+testmode\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::cb\+\_\+\+DMAREQ()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!port\_req\_ids@{port\_req\_ids}}
+\index{port\_req\_ids@{port\_req\_ids}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{port\_req\_ids}
+{\footnotesize\ttfamily \label{class_d_m_a_c_aa54f96391b9ae4c79bf5385bda81bd9a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::list$<$unsigned int$>$ port\+\_\+req\+\_\+ids\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!regs@{regs}}
+\index{regs@{regs}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{regs}
+{\footnotesize\ttfamily \label{class_d_m_a_c_afbd41e80ab004d6bad07dc9ca8e282f4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ Register\+Interface} regs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+request\+\_\+signals()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+\+DMA\+\_\+run\+\_\+process()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::thr\+\_\+priority\+\_\+process()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!rst@{rst}}
+\index{rst@{rst}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{rst}
+{\footnotesize\ttfamily \label{class_d_m_a_c_a618e4571cbf41913c0c7a71d84917625} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ rst}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}.
+
+\index{DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}!target\_socket@{target\_socket}}
+\index{target\_socket@{target\_socket}!DMAC$<$ BUSWIDTH $>$@{DMAC$<$ BUSWIDTH $>$}}
+\doxysubsubsection{target\_socket}
+{\footnotesize\ttfamily \label{class_d_m_a_c_ac697585af3a0d581e6a66c87ac824ec1} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+\_\+utils\+::simple\+\_\+target\+\_\+socket$<$\textbf{ DMAC}, BUSWIDTH$>$ target\+\_\+socket}
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::\+DMAC()}, and \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ DMAC.\+h}\end{DoxyCompactItemize}

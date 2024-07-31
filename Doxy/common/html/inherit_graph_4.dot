@@ -1,0 +1,21 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="sc_module",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge1_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="BUS\< BUSWIDTH, DATA\l_WIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_b_u_s.html",tooltip=" "];
+  Node0 -> Node2 [id="edge2_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="DMAC\< BUSWIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html",tooltip=" "];
+  Node0 -> Node3 [id="edge3_Node000000_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="DummyMaster\< BUSWIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_dummy_master.html",tooltip=" "];
+  Node0 -> Node4 [id="edge4_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="DummySlave\< BUSWIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_dummy_slave.html",tooltip=" "];
+  Node0 -> Node5 [id="edge5_Node000000_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="RAM\< BUSWIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_r_a_m.html",tooltip=" "];
+  Node0 -> Node6 [id="edge6_Node000000_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="Target\< BUSWIDTH \>",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_target.html",tooltip=" "];
+}

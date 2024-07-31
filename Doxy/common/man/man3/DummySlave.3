@@ -1,0 +1,274 @@
+.TH "DummySlave< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DummySlave< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'DummySlave\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDummySlave\fP (sc_core::sc_module_name name, bool message=false)"
+.br
+.ti -1c
+.RI "sc_core::sc_in< bool > * \fBadd_input_port\fP (const std::string &name)"
+.br
+.ti -1c
+.RI "sc_core::sc_out< bool > * \fBadd_output_port\fP (const std::string &name)"
+.br
+.ti -1c
+.RI "void \fBenable_monitor_clock\fP (bool is_enable)"
+.br
+.ti -1c
+.RI "void \fBmonitor_ports\fP (bool is_enable)"
+.br
+.ti -1c
+.RI "bool \fBread_input_ports\fP (const std::string &name)"
+.br
+.ti -1c
+.RI "void \fBset_output_ports\fP (const std::string &name, bool value)"
+.br
+.ti -1c
+.RI "void \fBtrigger_output_ports\fP (const std::string &name, bool high_level, bool is_pos)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBclk\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBrst\fP"
+.br
+.ti -1c
+.RI "tlm_utils::simple_target_socket< \fBDummySlave\fP, BUSWIDTH > \fBtarget_socket\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcb_DUMMYRESULT\fP (const std::string &name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)"
+.br
+.ti -1c
+.RI "void \fBend_of_elaboration\fP () override"
+.br
+.ti -1c
+.RI "void \fBinit_registers\fP ()"
+.br
+.ti -1c
+.RI "void \fBmonitor_inputs\fP ()"
+.br
+.ti -1c
+.RI "void \fBmth_reset\fP ()"
+.br
+.ti -1c
+.RI "void \fBmth_synchronize_cycles\fP ()"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "void \fBthr_triggered_port_process\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_core::sc_event \fBe_triggerd_port\fP"
+.br
+.ti -1c
+.RI "std::map< std::string, sc_core::sc_in< bool > * > \fBinput_ports\fP"
+.br
+.ti -1c
+.RI "std::map< std::string, bool > \fBinput_val_ports\fP"
+.br
+.ti -1c
+.RI "bool \fBm_clkmonitor\fP"
+.br
+.ti -1c
+.RI "bool \fBm_cur_is_pos\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_cur_port_name\fP"
+.br
+.ti -1c
+.RI "bool \fBm_cur_triggered_val\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "bool \fBm_portmonitor\fP"
+.br
+.ti -1c
+.RI "std::map< std::string, sc_core::sc_out< bool > * > \fBoutput_ports\fP"
+.br
+.ti -1c
+.RI "std::map< std::string, bool > \fBoutput_val_ports\fP"
+.br
+.ti -1c
+.RI "\fBRegisterInterface\fP \fBregs\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBDummySlave\fP (sc_core::sc_module_name name, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::clk\fP, \fBDummySlave< BUSWIDTH >::e_triggerd_port\fP, \fBDummySlave< BUSWIDTH >::init_registers()\fP, \fBDummySlave< BUSWIDTH >::mth_reset()\fP, \fBDummySlave< BUSWIDTH >::mth_synchronize_cycles()\fP, \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP, \fBDummySlave< BUSWIDTH >::rst\fP, \fBDummySlave< BUSWIDTH >::target_socket\fP, and \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in< bool > * add_input_port (const std::string & name)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::input_ports\fP, and \fBDummySlave< BUSWIDTH >::input_val_ports\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_out< bool > * add_output_port (const std::string & name)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::output_ports\fP, and \fBDummySlave< BUSWIDTH >::output_val_ports\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void cb_DUMMYRESULT (const std::string & name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::init_registers()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void enable_monitor_clock (bool is_enable)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::m_clkmonitor\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void end_of_elaboration ()\fR [inline]\fP, \fR [override]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::input_ports\fP, and \fBDummySlave< BUSWIDTH >::monitor_inputs()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void init_registers ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBRegisterInterface::add_register()\fP, \fBDummySlave< BUSWIDTH >::cb_DUMMYRESULT()\fP, \fBDUMMYRESULT\fP, \fBREADWRITE\fP, \fBDummySlave< BUSWIDTH >::regs\fP, and \fBRegisterInterface::set_register_callback()\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void monitor_inputs ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::input_ports\fP, \fBDummySlave< BUSWIDTH >::input_val_ports\fP, \fBDummySlave< BUSWIDTH >::m_name\fP, and \fBDummySlave< BUSWIDTH >::m_portmonitor\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::end_of_elaboration()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void monitor_ports (bool is_enable)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::m_portmonitor\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void mth_reset ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::regs\fP, and \fBRegisterInterface::reset_regs()\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void mth_synchronize_cycles ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::m_clkmonitor\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::m_message\fP, \fBDummySlave< BUSWIDTH >::m_name\fP, \fBDummySlave< BUSWIDTH >::regs\fP, \fBDummySlave< BUSWIDTH >::target_socket\fP, and \fBRegisterInterface::update_register()\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool read_input_ports (const std::string & name)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::input_ports\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void set_output_ports (const std::string & name, bool value)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::output_ports\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void thr_triggered_port_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::clk\fP, \fBDummySlave< BUSWIDTH >::e_triggerd_port\fP, \fBDummySlave< BUSWIDTH >::m_cur_is_pos\fP, \fBDummySlave< BUSWIDTH >::m_cur_port_name\fP, \fBDummySlave< BUSWIDTH >::m_cur_triggered_val\fP, and \fBDummySlave< BUSWIDTH >::output_ports\fP\&.
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void trigger_output_ports (const std::string & name, bool high_level, bool is_pos)\fR [inline]\fP"
+
+.PP
+References \fBDummySlave< BUSWIDTH >::m_cur_is_pos\fP, \fBDummySlave< BUSWIDTH >::m_cur_port_name\fP, \fBDummySlave< BUSWIDTH >::m_cur_triggered_val\fP, and \fBDummySlave< BUSWIDTH >::output_ports\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> clk"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP, and \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_triggerd_port\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP, and \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::map<std::string, sc_core::sc_in<bool>*> input_ports\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::add_input_port()\fP, \fBDummySlave< BUSWIDTH >::end_of_elaboration()\fP, \fBDummySlave< BUSWIDTH >::monitor_inputs()\fP, and \fBDummySlave< BUSWIDTH >::read_input_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::map<std::string, bool> input_val_ports\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::add_input_port()\fP, and \fBDummySlave< BUSWIDTH >::monitor_inputs()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_clkmonitor\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::enable_monitor_clock()\fP, and \fBDummySlave< BUSWIDTH >::mth_synchronize_cycles()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_cur_is_pos\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP, and \fBDummySlave< BUSWIDTH >::trigger_output_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_cur_port_name\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP, and \fBDummySlave< BUSWIDTH >::trigger_output_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_cur_triggered_val\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP, and \fBDummySlave< BUSWIDTH >::trigger_output_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::monitor_inputs()\fP, and \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_portmonitor\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::monitor_inputs()\fP, and \fBDummySlave< BUSWIDTH >::monitor_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::map<std::string, sc_core::sc_out<bool>*> output_ports\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::add_output_port()\fP, \fBDummySlave< BUSWIDTH >::set_output_ports()\fP, \fBDummySlave< BUSWIDTH >::thr_triggered_port_process()\fP, and \fBDummySlave< BUSWIDTH >::trigger_output_ports()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::map<std::string, bool> output_val_ports\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::add_output_port()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> \fBRegisterInterface\fP regs\fR [private]\fP"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::init_registers()\fP, \fBDummySlave< BUSWIDTH >::mth_reset()\fP, and \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> rst"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_target_socket<\fBDummySlave\fP, BUSWIDTH> target_socket"
+
+.PP
+Referenced by \fBDummySlave< BUSWIDTH >::DummySlave()\fP, and \fBDummySlave< BUSWIDTH >::nb_transport_fw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

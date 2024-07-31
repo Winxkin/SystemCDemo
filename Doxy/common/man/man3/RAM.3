@@ -1,0 +1,106 @@
+.TH "RAM< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+RAM< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'memory\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRAM\fP (sc_core::sc_module_name name, sc_dt::uint64 \fBsize\fP, bool message=false)"
+.br
+.ti -1c
+.RI "\fB~RAM\fP ()"
+.br
+.ti -1c
+.RI "void \fBdump_memory\fP (sc_dt::uint64 offset, unsigned int len)"
+.br
+.ti -1c
+.RI "std::string \fBget_name\fP ()"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "tlm_utils::simple_target_socket< \fBRAM\fP, BUSWIDTH > \fBsocket\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned char * \fBdata\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "sc_dt::uint64 \fBsize\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBRAM\fP (sc_core::sc_module_name name, sc_dt::uint64 size, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBRAM< BUSWIDTH >::data\fP, \fBRAM< BUSWIDTH >::nb_transport_fw()\fP, \fBRAM< BUSWIDTH >::size\fP, and \fBRAM< BUSWIDTH >::socket\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> ~\fBRAM\fP ()\fR [inline]\fP"
+
+.PP
+References \fBRAM< BUSWIDTH >::data\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> void dump_memory (sc_dt::uint64 offset, unsigned int len)\fR [inline]\fP"
+
+.PP
+References \fBRAM< BUSWIDTH >::data\fP, \fBRAM< BUSWIDTH >::m_name\fP, and \fBRAM< BUSWIDTH >::size\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string get_name ()\fR [inline]\fP"
+
+.PP
+References \fBRAM< BUSWIDTH >::m_name\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP"
+
+.PP
+References \fBRAM< BUSWIDTH >::data\fP, \fBRAM< BUSWIDTH >::m_message\fP, \fBRAM< BUSWIDTH >::m_name\fP, \fBRAM< BUSWIDTH >::size\fP, and \fBRAM< BUSWIDTH >::socket\fP\&.
+.PP
+Referenced by \fBRAM< BUSWIDTH >::RAM()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> unsigned char* data\fR [private]\fP"
+
+.PP
+Referenced by \fBRAM< BUSWIDTH >::RAM()\fP, \fBRAM< BUSWIDTH >::~RAM()\fP, \fBRAM< BUSWIDTH >::dump_memory()\fP, and \fBRAM< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBRAM< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBRAM< BUSWIDTH >::dump_memory()\fP, \fBRAM< BUSWIDTH >::get_name()\fP, and \fBRAM< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_dt::uint64 size\fR [private]\fP"
+
+.PP
+Referenced by \fBRAM< BUSWIDTH >::RAM()\fP, \fBRAM< BUSWIDTH >::dump_memory()\fP, and \fBRAM< BUSWIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_target_socket<\fBRAM\fP, BUSWIDTH> socket"
+
+.PP
+Referenced by \fBRAM< BUSWIDTH >::RAM()\fP, and \fBRAM< BUSWIDTH >::nb_transport_fw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

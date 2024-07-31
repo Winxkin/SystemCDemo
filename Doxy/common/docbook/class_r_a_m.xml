@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_r_a_m" xml:lang="en-US">
+<title>RAM&lt; BUSWIDTH &gt;</title>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;memory.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for RAM&lt; BUSWIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_a_m.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f">RAM</link> (sc_core::sc_module_name name, sc_dt::uint64 <link linkend="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba">size</link>, bool message=false)</para>
+
+<para><link linkend="_class_r_a_m">RAM</link>. </para>
+</listitem>
+            <listitem><para><link linkend="_class_r_a_m_1ad8f4c557e9446b4eeee8f4ed6e415524">~RAM</link> ()</para>
+
+<para><link linkend="_class_r_a_m">RAM</link>. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_r_a_m_1a310d6ead320691eac876248d4080cb1f">dump_memory</link> (sc_dt::uint64 offset, unsigned int len)</para>
+
+<para>dump_memory </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_r_a_m_1a636296572c928bb9baf49439e9726c30">get_name</link> ()</para>
+
+<para>get_name </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">nb_transport_fw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_fw </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>tlm_utils::simple_target_socket&lt; <link linkend="_class_r_a_m">RAM</link>, BUSWIDTH &gt; <link linkend="_class_r_a_m_1afdbe0e43cf391a3af35610ef83ef785a">socket</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned char * <link linkend="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8">data</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_r_a_m_1a40f977ac4c6e432882dfb186d3450bd4">m_message</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_r_a_m_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+            <listitem><para>sc_dt::uint64 <link linkend="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba">size</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f"/><section>
+    <title>RAM()</title>
+<indexterm><primary>RAM</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>RAM</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_r_a_m">RAM</link> (sc_core::sc_module_name name, sc_dt::uint64 size, bool message = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_r_a_m">RAM</link>. </para>
+</para>
+
+<para><link linkend="_class_r_a_m">RAM</link> Constructure 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to sc_module name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>size</entry><entry>
+<para>Reference to the ram size </para>
+</entry>
+                            </row>
+                            <row>
+<entry>message</entry><entry>
+<para>To enable message log </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8">RAM&lt; BUSWIDTH &gt;::data</link>, <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, <link linkend="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba">RAM&lt; BUSWIDTH &gt;::size</link>, and <link linkend="_class_r_a_m_1afdbe0e43cf391a3af35610ef83ef785a">RAM&lt; BUSWIDTH &gt;::socket</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1ad8f4c557e9446b4eeee8f4ed6e415524"/><section>
+    <title>~RAM()</title>
+<indexterm><primary>~RAM</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>~RAM</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>~<link linkend="_class_r_a_m">RAM</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_r_a_m">RAM</link>. </para>
+</para>
+
+<para><link linkend="_class_r_a_m">RAM</link> Destructure </para>
+<para>
+References <link linkend="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8">RAM&lt; BUSWIDTH &gt;::data</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_r_a_m_1a310d6ead320691eac876248d4080cb1f"/><section>
+    <title>dump_memory()</title>
+<indexterm><primary>dump_memory</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>dump_memory</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void dump_memory (sc_dt::uint64 offset, unsigned int len)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>dump_memory </para>
+</para>
+
+<para>Show memory regions 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>offset</entry><entry>
+<para>The ram offset </para>
+</entry>
+                            </row>
+                            <row>
+<entry>len</entry><entry>
+<para>The ram size </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8">RAM&lt; BUSWIDTH &gt;::data</link>, <link linkend="_class_r_a_m_1adb41893ba19e889e56c559f25fc1a68a">RAM&lt; BUSWIDTH &gt;::m_name</link>, and <link linkend="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba">RAM&lt; BUSWIDTH &gt;::size</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1a636296572c928bb9baf49439e9726c30"/><section>
+    <title>get_name()</title>
+<indexterm><primary>get_name</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>get_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string get_name ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_name </para>
+</para>
+
+<para>Using to get the name of Ram. </para>
+<para>
+References <link linkend="_class_r_a_m_1adb41893ba19e889e56c559f25fc1a68a">RAM&lt; BUSWIDTH &gt;::m_name</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289"/><section>
+    <title>nb_transport_fw()</title>
+<indexterm><primary>nb_transport_fw</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_fw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_fw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8">RAM&lt; BUSWIDTH &gt;::data</link>, <link linkend="_class_r_a_m_1a40f977ac4c6e432882dfb186d3450bd4">RAM&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_r_a_m_1adb41893ba19e889e56c559f25fc1a68a">RAM&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba">RAM&lt; BUSWIDTH &gt;::size</link>, and <link linkend="_class_r_a_m_1afdbe0e43cf391a3af35610ef83ef785a">RAM&lt; BUSWIDTH &gt;::socket</link>.</para>
+<para>
+Referenced by <link linkend="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f">RAM&lt; BUSWIDTH &gt;::RAM()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_r_a_m_1ac24cea2bfcc927fd29bc74d1086707d8"/><section>
+    <title>data</title>
+<indexterm><primary>data</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>data</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned char* data<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f">RAM&lt; BUSWIDTH &gt;::RAM()</link>, <link linkend="_class_r_a_m_1ad8f4c557e9446b4eeee8f4ed6e415524">RAM&lt; BUSWIDTH &gt;::~RAM()</link>, <link linkend="_class_r_a_m_1a310d6ead320691eac876248d4080cb1f">RAM&lt; BUSWIDTH &gt;::dump_memory()</link>, and <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1a40f977ac4c6e432882dfb186d3450bd4"/><section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>m_message</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_message<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_r_a_m_1a310d6ead320691eac876248d4080cb1f">RAM&lt; BUSWIDTH &gt;::dump_memory()</link>, <link linkend="_class_r_a_m_1a636296572c928bb9baf49439e9726c30">RAM&lt; BUSWIDTH &gt;::get_name()</link>, and <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1a96fc66a459450692c61d56158d7fabba"/><section>
+    <title>size</title>
+<indexterm><primary>size</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_dt::uint64 size<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f">RAM&lt; BUSWIDTH &gt;::RAM()</link>, <link linkend="_class_r_a_m_1a310d6ead320691eac876248d4080cb1f">RAM&lt; BUSWIDTH &gt;::dump_memory()</link>, and <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_r_a_m_1afdbe0e43cf391a3af35610ef83ef785a"/><section>
+    <title>socket</title>
+<indexterm><primary>socket</primary><secondary>RAM&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>RAM&lt; BUSWIDTH &gt;</primary><secondary>socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_target_socket&lt;<link linkend="_class_r_a_m">RAM</link>, BUSWIDTH&gt; socket</computeroutput></para><para>
+Referenced by <link linkend="_class_r_a_m_1ac27bce338d61e3e437ccc39aab2a434f">RAM&lt; BUSWIDTH &gt;::RAM()</link>, and <link linkend="_class_r_a_m_1a882a19a1d4962f1024c218c07e8e0289">RAM&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="_memory_8h">memory.h</link></section>
+</section>

@@ -1,0 +1,37 @@
+digraph "DMAC"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="DMAC",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge15_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="init_registers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a1cf609a2603fd853aa7095c8fc2a9e1d",tooltip=" "];
+  Node2 -> Node3 [id="edge16_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="RegisterInterface::\ladd_register",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_register_interface.html#a544746f8c38d589652fd7adf41227a47",tooltip=" "];
+  Node2 -> Node4 [id="edge17_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="cb_DMAREQ",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a4b2a77c68a8cf19befd770de34508015",tooltip=" "];
+  Node2 -> Node5 [id="edge18_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="RegisterInterface::\lset_register_callback",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_register_interface.html#a58b7a47531113e57149c88a61d91830d",tooltip=" "];
+  Node1 -> Node6 [id="edge19_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="mth_request_signals",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a59437db485e7c65c6a90ad57d8b43f23",tooltip=" "];
+  Node1 -> Node7 [id="edge20_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="mth_reset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a23141eed3303128f9bc12f17bb2cde3c",tooltip=" "];
+  Node7 -> Node8 [id="edge21_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="RegisterInterface::\lreset_regs",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_register_interface.html#ae9e5a36897056f14f1f6eb742cba6ff6",tooltip=" "];
+  Node1 -> Node9 [id="edge22_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="nb_transport_bw",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a9401643ffeae74f7b9b36713bc735da7",tooltip=" "];
+  Node9 -> Node10 [id="edge23_Node000009_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="copy_tlm_generic_payload",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#aace875a6d6c0f6d67d926583c88af55d",tooltip=" "];
+  Node1 -> Node11 [id="edge24_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="nb_transport_fw",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a882a19a1d4962f1024c218c07e8e0289",tooltip=" "];
+  Node11 -> Node12 [id="edge25_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="RegisterInterface::\lupdate_register",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_register_interface.html#ab074287fb1d8088234264f3400d8c8eb",tooltip=" "];
+  Node1 -> Node13 [id="edge26_Node000001_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="thr_DMA_forward_process",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a833712d45cbe2e11e96bfdfa9e7ae7fd",tooltip=" "];
+  Node1 -> Node14 [id="edge27_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="thr_DMA_run_process",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a998adbb27ee33736cfa6a47c22309b91",tooltip=" "];
+  Node1 -> Node15 [id="edge28_Node000001_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="thr_priority_process",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_d_m_a_c.html#a877845e838c18e15b6dd910f76b83afe",tooltip=" "];
+}

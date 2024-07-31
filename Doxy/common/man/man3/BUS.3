@@ -1,0 +1,207 @@
+.TH "BUS< BUSWIDTH, DATA_WIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BUS< BUSWIDTH, DATA_WIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'bus\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBaddress\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBUS\fP (sc_core::sc_module_name name, bool enclkmonitor=false, bool message=false)"
+.br
+.ti -1c
+.RI "\fB~BUS\fP ()"
+.br
+.ti -1c
+.RI "tlm_utils::multi_passthrough_initiator_socket< \fBBUS\fP, BUSWIDTH > & \fBmapping_target_sockets\fP (unsigned int _addr, unsigned int _size)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBsc_clk_in\fP \fBm_clk\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBrst\fP"
+.br
+.ti -1c
+.RI "tlm_utils::multi_passthrough_target_socket< \fBBUS\fP, BUSWIDTH > \fBtarget_sockets\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcopy_tlm_generic_payload\fP (tlm::tlm_generic_payload &des, tlm::tlm_generic_payload &src)"
+.br
+.ti -1c
+.RI "void \fBfoward_transaction_process\fP ()"
+.br
+.ti -1c
+.RI "void \fBmth_reset\fP ()"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_bw\fP (int id, tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_fw\fP (int id, tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "void \fBTS_handle_begin_req\fP (int id, tlm::tlm_generic_payload &trans, sc_core::sc_time &delay)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBaddress\fP > \fBaddress_mapping\fP"
+.br
+.ti -1c
+.RI "tlm::tlm_generic_payload \fBcurrent_trans\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_event \fBe_forward_tran\fP"
+.br
+.ti -1c
+.RI "tlm_utils::multi_passthrough_initiator_socket< \fBBUS\fP, BUSWIDTH > \fBinitiator_sockets\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBm_bind_id\fP"
+.br
+.ti -1c
+.RI "bool \fBm_bus_lock\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBm_cur_socket\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBm_current_ts_id\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> \fBBUS\fP (sc_core::sc_module_name name, bool enclkmonitor = \fRfalse\fP, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::e_forward_tran\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::initiator_sockets\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::rst\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::target_sockets\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> ~\fBBUS\fP ()\fR [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> void copy_tlm_generic_payload (tlm::tlm_generic_payload & des, tlm::tlm_generic_payload & src)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> void foward_transaction_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::address_mapping\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::current_trans\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::e_forward_tran\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::initiator_sockets\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_clk\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_cur_socket\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_message\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::m_name\fP\&.
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm_utils::multi_passthrough_initiator_socket< \fBBUS\fP, BUSWIDTH > & mapping_target_sockets (unsigned int _addr, unsigned int _size)\fR [inline]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::address_mapping\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::initiator_sockets\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::m_bind_id\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> void mth_reset ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::current_trans\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::e_forward_tran\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_bus_lock\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_cur_socket\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::rst\fP\&.
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm::tlm_sync_enum nb_transport_bw (int id, tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::m_bus_lock\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_cur_socket\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_current_ts_id\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_message\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_name\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::target_sockets\fP\&.
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm::tlm_sync_enum nb_transport_fw (int id, tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::initiator_sockets\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_bus_lock\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_cur_socket\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_message\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_name\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> void TS_handle_begin_req (int id, tlm::tlm_generic_payload & trans, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBBUS< BUSWIDTH, DATA_WIDTH >::address_mapping\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::copy_tlm_generic_payload()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::current_trans\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::e_forward_tran\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::m_cur_socket\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::m_current_ts_id\fP\&.
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> std::vector<\fBaddress\fP> address_mapping\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mapping_target_sockets()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm::tlm_generic_payload current_trans\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> sc_core::sc_event e_forward_tran\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm_utils::multi_passthrough_initiator_socket<\fBBUS\fP, BUSWIDTH> initiator_sockets\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mapping_target_sockets()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> unsigned int m_bind_id\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::mapping_target_sockets()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> bool m_bus_lock\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> \fBsc_clk_in\fP m_clk"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> unsigned int m_cur_socket\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> unsigned int m_current_ts_id\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::TS_handle_begin_req()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::foward_transaction_process()\fP, \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_fw()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> sc_core::sc_in<bool> rst"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::mth_reset()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32, \fBDATAWIDTH\fP DATA_WIDTH = D8BIT> tlm_utils::multi_passthrough_target_socket<\fBBUS\fP, BUSWIDTH> target_sockets"
+
+.PP
+Referenced by \fBBUS< BUSWIDTH, DATA_WIDTH >::BUS()\fP, and \fBBUS< BUSWIDTH, DATA_WIDTH >::nb_transport_bw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

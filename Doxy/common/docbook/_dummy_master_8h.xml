@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__dummy_master_8h" xml:lang="en-US">
+<title>common/DummyMaster.h File Reference</title>
+<indexterm><primary>common/DummyMaster.h</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;systemc&gt;<?linebreak?>#include &lt;tlm&gt;<?linebreak?>#include &lt;tlm_utils/simple_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/simple_target_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_initiator_socket.h&gt;<?linebreak?>#include &lt;tlm_utils/multi_passthrough_target_socket.h&gt;<?linebreak?>#include &lt;map&gt;<?linebreak?>#include &lt;vector&gt;<?linebreak?>#include &lt;iostream&gt;<?linebreak?>#include &lt;cstdint&gt;<?linebreak?>#include &quot;Registerif.h&quot;<?linebreak?>#include &quot;bus.h&quot;<?linebreak?></programlisting><simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_dummy_master">DummyMaster&lt; BUSWIDTH &gt;</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_struct_dummy_master_1_1localdata">DummyMaster&lt; BUSWIDTH &gt;::localdata</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

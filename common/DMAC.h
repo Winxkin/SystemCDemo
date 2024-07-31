@@ -54,7 +54,7 @@ private:
 	std::list<unsigned int> port_req_ids;
 private:
 
-	/*
+	/**@brief
 	* copy_tlm_generic_payload
 	*
 	* Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload
@@ -80,7 +80,7 @@ private:
 		des.set_dmi_allowed(src.is_dmi_allowed());
 	}
 
-	/*
+	/**@brief
 	 * nb_transport_fw
 	 *
 	 * Implements the non-blocking backward transport interface for the initiator.
@@ -156,7 +156,7 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
-	/*
+	/**@brief
 	 * nb_transport_bw
 	 *
 	 * Implements the non-blocking backward transport interface for the initiator.
@@ -238,7 +238,7 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
-	/*
+	/**@brief
 	* init_registers
 	*
 	* To initialize registers for DMAC model
@@ -266,7 +266,7 @@ private:
 
 	}
 
-	/*
+	/**@brief
 	* cb_DMAREQ
 	*
 	* The call back register function for DMAREQ register
@@ -296,7 +296,7 @@ private:
 
 	/* SC_METHOD and SC_THREAD are defined in here */
 	
-	/*
+	/**@brief
 	* mth_reset
 	*
 	* Impelmentation of the method when reset is active
@@ -320,7 +320,7 @@ private:
 	}
 
 
-	/*
+	/**@brief
 	* mth_request_signals
 	*
 	* Impelmentation of the method when requests signal are triggered by peripherals
@@ -361,7 +361,7 @@ private:
 		}
 	}
 
-	/*
+	/**@brief
 	* thr_priority_process
 	*
 	* Impelmentation of the thread to handle priority of DMA operation
@@ -428,7 +428,7 @@ private:
 		}
 	}
 
-	/*
+	/**@brief
 	* thr_DMA_run_process
 	*
 	* Impelmentation of the thread to start DMA operation
@@ -462,7 +462,7 @@ private:
 		}
 	}
 
-	/*
+	/**@brief
 	* thr_DMA_forward_process
 	*
 	* Impelmentation of the thread to forward data from the source to the destination
@@ -490,7 +490,7 @@ public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_in<bool> rst;
 
-	/*
+	/**@brief
 	* DMAC constructor
 	*
 	* @param name Reference to sc_module name
@@ -532,6 +532,9 @@ public:
 		sensitive << e_DMA_forward;
 	};
 
+	/**@brief
+	* DMAC destructor
+	*/
 	~DMAC() {};
 
 };

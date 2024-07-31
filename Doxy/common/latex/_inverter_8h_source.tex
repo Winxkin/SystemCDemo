@@ -1,0 +1,25 @@
+\doxysection{Inverter.\+h}
+\hypertarget{_inverter_8h_source}{}\label{_inverter_8h_source}\index{common/Inverter.h@{common/Inverter.h}}
+\mbox{\hyperlink{_inverter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ \_INVERTER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ \_INVERTER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <systemc.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \mbox{\hyperlink{_inverter_8h_aac18d6425962c5bea33160cabd2e9e4c}{SC\_MODULE}}(Inverter)\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ sc\_core::sc\_in<bool>\ in;\ \ \ \ \textcolor{comment}{//\ Input\ signal}}
+\DoxyCodeLine{00007\ \ \ \ \ sc\_core::sc\_out<bool>\ out;\ \ \textcolor{comment}{//\ Output\ signal\ (inverted)}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{void}\ do\_invert()\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ out.write(!in.read());\ \ \textcolor{comment}{//\ Invert\ the\ input\ signal}}
+\DoxyCodeLine{00011\ \ \ \ \ \}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ SC\_CTOR(Inverter)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ SC\_METHOD(do\_invert);\ \ \ \textcolor{comment}{//\ Register\ the\ method\ with\ the\ SystemC\ kernel}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ sensitive\ <<\ in;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sensitize\ to\ changes\ in\ the\ input\ signal}}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -35,7 +35,7 @@ private:
 
 private:
 
-	/*
+	/**@brief
 	 * nb_transport_bw
 	 *
 	 * Implements the non-blocking backward transport interface for the initiator.
@@ -117,11 +117,19 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
+	/**@brief
+	 * resetsystem
+	 * To triggered reset signal
+	 */
 	void resetsystem()
 	{
 		e_reset.notify();
 	}
 
+	/**@brief
+	 * resetsystem
+	 * Reset thread handling
+	 */
 	void reset_process()
 	{
 		while (true)
@@ -138,7 +146,7 @@ public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_out<bool> rst;
 
-	/*
+	/**@brief
 	 * DummyMaster
 	 *
 	 * The constructor of DummyMaster
@@ -156,7 +164,7 @@ public:
 			sensitive << e_reset;
 		 }
 
-	/*
+	/**@brief
 	 * get_received_data
 	 * 
 	 * Using to get data from the returned transaction
@@ -169,7 +177,7 @@ public:
 		return tempdata.m_data;
 	}
 
-	/*
+	/**@brief
 	 * get_received_data
 	 *
 	 * Using to get data from the returned transaction
@@ -182,7 +190,7 @@ public:
 		return *reinterpret_cast<unsigned int*>(tempdata.m_data);
 	}
 
-	/*
+	/**@brief
 	 * SentTransaction
 	 *
 	 * Implements the sent a transaction with 32 bit data to bus MMIO
@@ -251,7 +259,7 @@ public:
 		}
 	}
 
-	/*
+	/**@brief
 	 * Sentcustomtransaction
 	 *
 	 * Implements the sent a custom transaction to bus MMIO

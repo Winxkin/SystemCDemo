@@ -24,17 +24,46 @@ public:
 
     using Callback = std::function<void(const std::string&, uint32_t, uint32_t, uint32_t, uint32_t)>;
 
+    /**@brief
+    * Register
+    *
+    * Default Constructure (this function does not refer to use)
+    */
     Register() : name(""), address(0), value(0), mask(0), ch(0), init_val(0), permission(READWRITE) {};
 
+    /**@brief
+    * Register
+    *
+    * Constructure
+    * @param name  The register name
+    * @param address  The register base address
+    * @param init The register initialization value
+    * @param mask The register mask
+    * @param ch The register channel
+    * @param permission Indicating this register is read /write or read only permission
+    */
     Register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, REGPERMISSION permission)
         : name(name), address(address), value(init), mask(mask), ch(ch), init_val(init), permission(permission)
     {
     };
 
+    /**@brief
+    * ~Register
+    * Destructure
+    */
     ~Register() {};
 
+    /**@brief
+    * get_value
+    * Return the register value
+    */
     uint32_t get_value() const { return value; };
 
+    /**@brief
+    * set_value
+    * Using to set register value
+    * @param new_value The new value that is wrote into this register
+    */
     void set_value(uint32_t new_value)
     {
         uint32_t old_value = value;
@@ -57,6 +86,11 @@ public:
         }
     };
 
+    /**@brief
+   * set_value
+   * Using for developer to set read only register value
+   * @param new_value The new value that is wrote into this register
+   */
     void set_readonly_value(uint32_t new_value)
     {
         if (permission == READONLY)
@@ -65,16 +99,32 @@ public:
         }
     }
 
-
+    /**@brief
+    * reset
+    * To reset register to initialization value
+    */
     void reset()
     {
         value = init_val;
     }
 
+    /**@brief
+    * get_address
+    * Return the register base address
+    */
     uint64_t get_address() { return address; };
 
+    /**@brief
+    * get_name
+    * Return the register name
+    */
     std::string get_name() { return name; };
 
+    /**@brief
+    * operator=
+    * To set new value for the rigster
+    * @param new_value The new value that is wrote into this register
+    */
     Register& operator=(uint32_t new_value) {
         uint32_t old_value = value;
         if (permission == READWRITE)
@@ -96,6 +146,11 @@ public:
         return *this;
     }
 
+    /**@brief
+    * operator=
+    * Using to register call back function for the register
+    * @param cb The address of call back function
+    */
     void set_callback(Callback cb) {
         callback = cb;
     }
@@ -114,6 +169,18 @@ private:
 // Class to manage a collection of registers
 class RegisterInterface {
 public:
+
+    /**@brief
+    * add_register
+    *
+    * Constructure
+    * @param name  The register name
+    * @param address  The register base address
+    * @param init The register initialization value
+    * @param mask The register mask
+    * @param ch The register channel
+    * @param permission Indicating this register is read /write or read only permission
+    */
     void add_register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, REGPERMISSION permission) {
         registers.emplace(name, Register(name, address, init, mask, ch, permission));
         /*
@@ -123,7 +190,12 @@ public:
         */
     };
 
-    // The operator to get register by name for example this->reg[name]
+    /**@brief
+    * add_register
+    * The operator to get register by name for example this->reg[name]
+    * @param name  The register name
+    * @return Register object with corresponding name
+    */
     Register& operator[](std::string name) {
         if (registers.find(name) == registers.end()) {
             throw std::runtime_error("Register not found");
@@ -131,7 +203,13 @@ public:
         return registers[name];
     };
 
-    // The operator to get register by address for example this->reg[addr]
+    
+    /**@brief
+    * operator[]
+    * The operator to get register by address for example this->reg[addr]
+    * @param address  The register address
+    * @return Register object with corresponding address
+    */
     Register& operator[](uint64_t address)
     {
         for (auto& reg : registers) {
@@ -143,6 +221,12 @@ public:
     }
 
 
+    /**@brief
+   * update_register
+   * Using to update the value of register with specific address
+   * @param address  The register address
+   * @return value The new value that is wrote into this register
+   */
     void update_register(uint64_t address, uint32_t value) {
         for (auto& reg : registers) {
             if (reg.second.get_address() == address) {
@@ -153,6 +237,10 @@ public:
         throw std::runtime_error("Register with the given address not found");
     };
 
+    /**@brief
+   * update_register
+   * Using to reset registers
+   */
     void reset_regs()
     {
         for (auto& reg : registers)
@@ -161,6 +249,10 @@ public:
         }
     }
 
+    /**@brief
+    * update_register
+    * Using to show all register informations
+    */
     void dump_registers()
     {
         for (auto& reg : registers)
@@ -172,6 +264,12 @@ public:
 
     };
 
+    /**@brief
+    * update_register
+    * Using to register register callback function
+    * @param name The register name
+    * @param cb The address of call back function
+    */
     void set_register_callback(const std::string& name, Register::Callback cb) {
         if (registers.find(name) == registers.end()) {
             throw std::runtime_error("Register not found");

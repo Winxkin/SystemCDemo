@@ -1,0 +1,331 @@
+\doxysection{Dummy\+Master$<$ BUSWIDTH $>$}
+\label{class_dummy_master}\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+
+
+{\ttfamily \#include "{}Dummy\+Master.\+h"{}}
+
+Inheritance diagram for Dummy\+Master$<$ BUSWIDTH $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dummy_master}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ localdata}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Dummy\+Master} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool message=false)
+\begin{DoxyCompactList}\small\item\em \doxyref{Dummy\+Master}{p.}{class_dummy_master}. \end{DoxyCompactList}\item 
+unsigned int \textbf{ get\+\_\+received\+\_\+32bit\+\_\+data} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+received\+\_\+data \end{DoxyCompactList}\item 
+unsigned char $\ast$ \textbf{ get\+\_\+received\+\_\+data} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+received\+\_\+data \end{DoxyCompactList}\item 
+void \textbf{ Sentcustomtransaction} (unsigned int addr, unsigned char $\ast$data, unsigned int data\+\_\+length, tlm\+::tlm\+\_\+command cmd)
+\begin{DoxyCompactList}\small\item\em Sentcustomtransaction. \end{DoxyCompactList}\item 
+void \textbf{ Sent\+Transaction} (unsigned int addr, uint32\+\_\+t data, tlm\+::tlm\+\_\+command cmd)
+\begin{DoxyCompactList}\small\item\em Sent\+Transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ \textbf{ clk}
+\item 
+tlm\+\_\+utils\+::simple\+\_\+initiator\+\_\+socket$<$ \textbf{ Dummy\+Master}, BUSWIDTH $>$ \textbf{ initiator\+\_\+socket}
+\item 
+sc\+\_\+core\+::sc\+\_\+out$<$ bool $>$ \textbf{ rst}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+tlm\+::tlm\+\_\+sync\+\_\+enum \textbf{ nb\+\_\+transport\+\_\+bw} (tlm\+::tlm\+\_\+generic\+\_\+payload \&trans, tlm\+::tlm\+\_\+phase \&phase, sc\+\_\+core\+::sc\+\_\+time \&delay)
+\begin{DoxyCompactList}\small\item\em nb\+\_\+transport\+\_\+bw \end{DoxyCompactList}\item 
+void \textbf{ reset\+\_\+process} ()
+\begin{DoxyCompactList}\small\item\em resetsystem Reset thread handling \end{DoxyCompactList}\item 
+void \textbf{ resetsystem} ()
+\begin{DoxyCompactList}\small\item\em resetsystem To triggered reset signal \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+event \textbf{ e\+\_\+reset}
+\item 
+bool \textbf{ m\+\_\+message}
+\item 
+std\+::string \textbf{ m\+\_\+name}
+\item 
+\textbf{ localdata} \textbf{ tempdata}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!DummyMaster@{DummyMaster}}
+\index{DummyMaster@{DummyMaster}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{DummyMaster()}
+{\footnotesize\ttfamily \label{class_dummy_master_a72b047a1a7d2f7d0bb5fc6678dc962b1} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ Dummy\+Master} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{, }\item[{bool}]{message}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxyref{Dummy\+Master}{p.}{class_dummy_master}. 
+
+The constructor of \doxyref{Dummy\+Master}{p.}{class_dummy_master} 
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::e\+\_\+reset}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::reset\+\_\+process()}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!get\_received\_32bit\_data@{get\_received\_32bit\_data}}
+\index{get\_received\_32bit\_data@{get\_received\_32bit\_data}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{get\_received\_32bit\_data()}
+{\footnotesize\ttfamily \label{class_dummy_master_a08a564de97649540c69db5090febf892} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+unsigned int get\+\_\+received\+\_\+32bit\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+received\+\_\+data 
+
+Using to get data from the returned transaction
+
+\begin{DoxyReturn}{Returns}
+the 32-\/bit data 
+\end{DoxyReturn}
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::localdata\+::m\+\_\+data}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::tempdata}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!get\_received\_data@{get\_received\_data}}
+\index{get\_received\_data@{get\_received\_data}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{get\_received\_data()}
+{\footnotesize\ttfamily \label{class_dummy_master_ab48cdf23350697763e6d6e1980c29ed0} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+unsigned char $\ast$ get\+\_\+received\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+received\+\_\+data 
+
+Using to get data from the returned transaction
+
+\begin{DoxyReturn}{Returns}
+the array of data 
+\end{DoxyReturn}
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::localdata\+::m\+\_\+data}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::tempdata}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!nb\_transport\_bw@{nb\_transport\_bw}}
+\index{nb\_transport\_bw@{nb\_transport\_bw}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{nb\_transport\_bw()}
+{\footnotesize\ttfamily \label{class_dummy_master_a9401643ffeae74f7b9b36713bc735da7} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+::tlm\+\_\+sync\+\_\+enum nb\+\_\+transport\+\_\+bw (\begin{DoxyParamCaption}\item[{tlm\+::tlm\+\_\+generic\+\_\+payload \&}]{trans}{, }\item[{tlm\+::tlm\+\_\+phase \&}]{phase}{, }\item[{sc\+\_\+core\+::sc\+\_\+time \&}]{delay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+nb\+\_\+transport\+\_\+bw 
+
+Implements the non-\/blocking backward transport interface for the initiator.
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Reference to the generic payload object containing the transaction details such as command, address, and data.\\
+\hline
+{\em phase} & Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.\\
+\hline
+{\em delay} & Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tlm\+::tlm\+\_\+sync\+\_\+enum Enumeration indicating the synchronization state of the transaction\+:
+\begin{DoxyItemize}
+\item TLM\+\_\+\+ACCEPTED\+: Transaction is accepted, and no immediate further action is required.
+\item TLM\+\_\+\+UPDATED\+: Transaction phase has been updated. The initiator should check the new phase.
+\item TLM\+\_\+\+COMPLETED\+: Transaction is completed immediately, and no further phases will occur. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::localdata\+::m\+\_\+data}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+message}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+name}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::tempdata}.
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Dummy\+Master()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!reset\_process@{reset\_process}}
+\index{reset\_process@{reset\_process}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{reset\_process()}
+{\footnotesize\ttfamily \label{class_dummy_master_a986b85515060e0574b322d5b9bef2970} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void reset\+\_\+process (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+resetsystem Reset thread handling 
+
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::clk}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::e\+\_\+reset}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::rst}.
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Dummy\+Master()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!resetsystem@{resetsystem}}
+\index{resetsystem@{resetsystem}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{resetsystem()}
+{\footnotesize\ttfamily \label{class_dummy_master_acc8759ffc46c6f1ecbb1ea613adc2b1a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void resetsystem (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+resetsystem To triggered reset signal 
+
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::e\+\_\+reset}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!Sentcustomtransaction@{Sentcustomtransaction}}
+\index{Sentcustomtransaction@{Sentcustomtransaction}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{Sentcustomtransaction()}
+{\footnotesize\ttfamily \label{class_dummy_master_aa5a464ae099c60ba1d6bca9579afa1a7} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void Sentcustomtransaction (\begin{DoxyParamCaption}\item[{unsigned int}]{addr}{, }\item[{unsigned char $\ast$}]{data}{, }\item[{unsigned int}]{data\+\_\+length}{, }\item[{tlm\+::tlm\+\_\+command}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sentcustomtransaction. 
+
+Implements the sent a custom transaction to bus MMIO
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Reference to the address of the slave\\
+\hline
+{\em data} & Reference to the pointer of array data\\
+\hline
+{\em data\+\_\+length} & Reference to the length of data\\
+\hline
+{\em cmd} & Reference to tlm command -\/TLM\+\_\+\+READ\+\_\+\+COMMAND \+: TLM read requset -\/TLM\+\_\+\+WRITE\+\_\+\+COMMAND \+: TLM write requset -\/TLM\+\_\+\+IGNORE\+\_\+\+COMMAND\+: TLM ignore requset \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+message}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+name}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!SentTransaction@{SentTransaction}}
+\index{SentTransaction@{SentTransaction}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{SentTransaction()}
+{\footnotesize\ttfamily \label{class_dummy_master_a79130bb3520c3a038345f56d2fd6cf25} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+void Sent\+Transaction (\begin{DoxyParamCaption}\item[{unsigned int}]{addr}{, }\item[{uint32\+\_\+t}]{data}{, }\item[{tlm\+::tlm\+\_\+command}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sent\+Transaction. 
+
+Implements the sent a transaction with 32 bit data to bus MMIO
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Reference to the address of the slave\\
+\hline
+{\em data} & Reference to 32-\/bit data\\
+\hline
+{\em cmd} & Reference to tlm command -\/TLM\+\_\+\+READ\+\_\+\+COMMAND \+: TLM read requset -\/TLM\+\_\+\+WRITE\+\_\+\+COMMAND \+: TLM write requset -\/TLM\+\_\+\+IGNORE\+\_\+\+COMMAND\+: TLM ignore requset \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::initiator\+\_\+socket}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+message}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::m\+\_\+name}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!clk@{clk}}
+\index{clk@{clk}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{clk}
+{\footnotesize\ttfamily \label{class_dummy_master_a7e19409f662da0c599256b1ca029ebe1} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+in$<$bool$>$ clk}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::reset\+\_\+process()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!e\_reset@{e\_reset}}
+\index{e\_reset@{e\_reset}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{e\_reset}
+{\footnotesize\ttfamily \label{class_dummy_master_aade78c3e7ec82c269a292677575ebd48} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+event e\+\_\+reset\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Dummy\+Master()}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::reset\+\_\+process()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::resetsystem()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!initiator\_socket@{initiator\_socket}}
+\index{initiator\_socket@{initiator\_socket}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{initiator\_socket}
+{\footnotesize\ttfamily \label{class_dummy_master_a96966ca30eb3282b79eae61e99c75602} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+tlm\+\_\+utils\+::simple\+\_\+initiator\+\_\+socket$<$\textbf{ Dummy\+Master}, BUSWIDTH$>$ initiator\+\_\+socket}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Dummy\+Master()}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sentcustomtransaction()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sent\+Transaction()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!m\_message@{m\_message}}
+\index{m\_message@{m\_message}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_message}
+{\footnotesize\ttfamily \label{class_dummy_master_a40f977ac4c6e432882dfb186d3450bd4} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+bool m\+\_\+message\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sentcustomtransaction()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sent\+Transaction()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{m\_name}
+{\footnotesize\ttfamily \label{class_dummy_master_adb41893ba19e889e56c559f25fc1a68a} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+std\+::string m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sentcustomtransaction()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::\+Sent\+Transaction()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!rst@{rst}}
+\index{rst@{rst}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{rst}
+{\footnotesize\ttfamily \label{class_dummy_master_ad1a1e826932115ea77aa11dbcef2a78b} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+sc\+\_\+core\+::sc\+\_\+out$<$bool$>$ rst}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::reset\+\_\+process()}.
+
+\index{DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}!tempdata@{tempdata}}
+\index{tempdata@{tempdata}!DummyMaster$<$ BUSWIDTH $>$@{DummyMaster$<$ BUSWIDTH $>$}}
+\doxysubsubsection{tempdata}
+{\footnotesize\ttfamily \label{class_dummy_master_a594a33cffd2e25159af2ae3e83e62905} 
+template$<$unsigned int BUSWIDTH = 32$>$ \\
+\textbf{ localdata} tempdata\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::get\+\_\+received\+\_\+32bit\+\_\+data()}, \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::get\+\_\+received\+\_\+data()}, and \textbf{ Dummy\+Master$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+bw()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ Dummy\+Master.\+h}\end{DoxyCompactItemize}

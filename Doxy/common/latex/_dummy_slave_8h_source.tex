@@ -1,0 +1,283 @@
+\doxysection{Dummy\+Slave.\+h}
+\hypertarget{_dummy_slave_8h_source}{}\label{_dummy_slave_8h_source}\index{common/DummySlave.h@{common/DummySlave.h}}
+\mbox{\hyperlink{_dummy_slave_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ \ Author:\ Huan\ Nguyen-\/Duy}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ Date:\ 12/07/2024}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ \_DUMMYSLAVE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ \_DUMMYSLAVE\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <systemc>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <tlm>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_initiator\_socket.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <tlm\_utils/simple\_target\_socket.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_initiator\_socket.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <tlm\_utils/multi\_passthrough\_target\_socket.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_registerif_8h}{Registerif.h}}"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ DUMMYRESULT\ 0x00}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}<\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ BUSWIDTH\ =\ 32>}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_dummy_slave}{DummySlave}}\ :\ \textcolor{keyword}{public}\ sc\_core::sc\_module}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_register_interface}{RegisterInterface}}\ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}};}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}};}
+\DoxyCodeLine{00029\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{/*\ The\ internal\ variables\ for\ triggered\ ports\ operation*/}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_a7719723e8d7ba06b705b83f925fcf824}{m\_cur\_is\_pos}};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_ab7199813f84e703d078330886fa5b932}{m\_cur\_triggered\_val}};}
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ \mbox{\hyperlink{class_dummy_slave_a15d50a6c3900dc701136970f851a4e5b}{m\_cur\_port\_name}};}
+\DoxyCodeLine{00034\ \ \ \ \ sc\_core::sc\_event\ \mbox{\hyperlink{class_dummy_slave_a18930c7d974c2a28137440eb64bd1bb5}{e\_triggerd\_port}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{/*\ The\ internal\ flags\ to\ enable\ or\ disable\ port\ monitor*/}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_a4bce3b7e214b17194008fd5803bc9490}{m\_portmonitor}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_ae1c9252336dd2cb1feaa369122a593ee}{m\_clkmonitor}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::map<std::string,\ sc\_core::sc\_in<bool>*>\ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}};}
+\DoxyCodeLine{00041\ \ \ \ \ std::map<std::string,\ sc\_core::sc\_out<bool>*>\ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ std::map<std::string,\ bool>\ \mbox{\hyperlink{class_dummy_slave_aab7e959f2c4214b9e44b130e3bb759ad}{input\_val\_ports}};}
+\DoxyCodeLine{00045\ \ \ \ \ std::map<std::string,\ bool>\ \mbox{\hyperlink{class_dummy_slave_a36acaafd43494e3452b7c7c8f42641c0}{output\_val\_ports}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a8b99e16059c0fa4f3d3db261c30f5476}{end\_of\_elaboration}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ sensitivity\ list\ for\ monitoring\ inputs}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ SC\_METHOD(\mbox{\hyperlink{class_dummy_slave_a9bc7d11764bc5231892fb539c5aa3b93}{monitor\_inputs}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ pair\ :\ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}})\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ sensitive\ <<\ *pair.second;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ dont\_initialize();}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a9bc7d11764bc5231892fb539c5aa3b93}{monitor\_inputs}}()}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pair\ :\ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}})\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pair.second-\/>read()\ !=\ \mbox{\hyperlink{class_dummy_slave_aab7e959f2c4214b9e44b130e3bb759ad}{input\_val\_ports}}[pair.first])}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_aab7e959f2c4214b9e44b130e3bb759ad}{input\_val\_ports}}[pair.first]\ =\ pair.second-\/>read();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_a4bce3b7e214b17194008fd5803bc9490}{m\_portmonitor}})}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Port\ "{}}\ <<\ pair.first\ <<\ \textcolor{stringliteral}{"{}\ has\ changed,\ value:\ "{}}\ <<\ pair.second-\/>read()\ <<\ std::endl;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a1cf609a2603fd853aa7095c8fc2a9e1d}{init\_registers}}()}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a544746f8c38d589652fd7adf41227a47}{add\_register}}(\textcolor{stringliteral}{"{}DUMMYRESULT"{}},\ \mbox{\hyperlink{_dummy_slave_8h_a07a53b64bf7de240c994c66886ae5a5c}{DUMMYRESULT}},\ 0x00,\ 0x01,\ 0x0,\ \mbox{\hyperlink{_registerif_8h_a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de}{READWRITE}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_a58b7a47531113e57149c88a61d91830d}{set\_register\_callback}}(\textcolor{stringliteral}{"{}DUMMYRESULT"{}},\ std::bind(\&\mbox{\hyperlink{class_dummy_slave_aebeedbb375cc4d723d9b0d221ab027cb}{DummySlave::cb\_DUMMYRESULT}},\ \textcolor{keyword}{this},}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ std::placeholders::\_1,\ std::placeholders::\_2,\ std::placeholders::\_3,\ std::placeholders::\_4,\ std::placeholders::\_5));}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ tlm::tlm\_sync\_enum\ \mbox{\hyperlink{class_dummy_slave_a882a19a1d4962f1024c218c07e8e0289}{nb\_transport\_fw}}(tlm::tlm\_generic\_payload\&\ trans,\ tlm::tlm\_phase\&\ phase,\ sc\_core::sc\_time\&\ delay)\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (phase)}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::BEGIN\_REQ:}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ BEGIN\_REQ\ phase}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ BEGIN\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (trans.get\_command())\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_WRITE\_COMMAND:}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ wdata\ =\ 0;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(\&wdata,\ trans.get\_data\_ptr(),\ \textcolor{keyword}{sizeof}(wdata));}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_ab074287fb1d8088234264f3400d8c8eb}{update\_register}}(trans.get\_address(),\ wdata);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}:\ Received\ transaction\ with\ address\ 0x"{}}\ <<\ std::hex\ <<\ trans.get\_address()\ <<\ \textcolor{stringliteral}{"{}\ data:\ 0x"{}}\ <<\ std::hex\ <<\ wdata\ <<\ std::dec\ <<\ std::endl;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::TLM\_READ\_COMMAND:}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ value\ =\ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}[trans.get\_address()].get\_value();}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ cvalue\ =\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&value);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memcpy(trans.get\_data\_ptr(),\ cvalue,\ trans.get\_data\_length());}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ trans.set\_response\_status(tlm::TLM\_OK\_RESPONSE);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Return\ data\ and\ END\_REQ\ to\ bus}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ tlm::tlm\_phase\ next\_phase\ =\ tlm::END\_REQ;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_aef06f5b320fac4baca68b77b1610e6f7}{target\_socket}}-\/>nb\_transport\_bw(trans,\ next\_phase,\ delay);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ tlm::END\_REQ:}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ END\_REQ\ phase\ (shouldn't\ happen\ here)}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}})}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]"{}}\ <<\ \mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}\ <<\ \textcolor{stringliteral}{"{}\ END\_REQ\ received"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tlm::TLM\_ACCEPTED;}
+\DoxyCodeLine{00137\ \ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{/*\ Callback\ register\ */}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_aebeedbb375cc4d723d9b0d221ab027cb}{cb\_DUMMYRESULT}}(\textcolor{keyword}{const}\ std::string\&\ name,\ uint32\_t\ value,\ uint32\_t\ old\_value,\ uint32\_t\ mask,\ uint32\_t\ ch)}
+\DoxyCodeLine{00142\ \ \ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (name\ ==\ \textcolor{stringliteral}{"{}DUMMYRESULT"{}})}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value)}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ TM\ is\ Pass\ \ \ \ \ \ \ \(\backslash\)n"{}};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ TM\ is\ Fail\ \ \ \ \ \ \ \(\backslash\)n"{}};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Total\ simulation\ time:\ "{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}NS"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ sc\_core::sc\_stop();\ \textcolor{comment}{//\ To\ stop\ systemC\ kernel\ simulation}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{/*\ SC\_METHOD\ function\ */}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ *\ mth\_synchronize\_cycles}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ *\ Implementation\ the\ method\ to\ monitor\ clock\ cycles}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ *}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_ad14ba1bdba16c5566fe9497cf2231002}{mth\_synchronize\_cycles}}()}
+\DoxyCodeLine{00171\ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_ae1c9252336dd2cb1feaa369122a593ee}{m\_clkmonitor}})}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}["{}}\ <<\ sc\_core::sc\_time\_stamp().to\_double()\ <<\ \textcolor{stringliteral}{"{}\ NS\ ]\ Clock\ posedge\ is\ triggered.\(\backslash\)n"{}};}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{comment}{/*\ SC\_THREAD\ function\ */}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a53a30b6827abcc657b635842e3ead98c}{thr\_triggered\_port\_process}}()}
+\DoxyCodeLine{00181\ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_dummy_slave_a18930c7d974c2a28137440eb64bd1bb5}{e\_triggerd\_port}});}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_dummy_slave_a7719723e8d7ba06b705b83f925fcf824}{m\_cur\_is\_pos}})}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_dummy_slave_a7e19409f662da0c599256b1ca029ebe1}{clk}}.posedge\_event());}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ wait(\mbox{\hyperlink{class_dummy_slave_a7e19409f662da0c599256b1ca029ebe1}{clk}}.negedge\_event());}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}}[\mbox{\hyperlink{class_dummy_slave_a15d50a6c3900dc701136970f851a4e5b}{m\_cur\_port\_name}}]-\/>write(!\mbox{\hyperlink{class_dummy_slave_ab7199813f84e703d078330886fa5b932}{m\_cur\_triggered\_val}});}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a23141eed3303128f9bc12f17bb2cde3c}{mth\_reset}}()}
+\DoxyCodeLine{00198\ \ \ \ \ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_afbd41e80ab004d6bad07dc9ca8e282f4}{regs}}.\mbox{\hyperlink{class_register_interface_ae9e5a36897056f14f1f6eb742cba6ff6}{reset\_regs}}();}
+\DoxyCodeLine{00200\ \ \ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00203\ \ \ \ \ tlm\_utils::simple\_target\_socket<DummySlave,\ BUSWIDTH>\ \mbox{\hyperlink{class_dummy_slave_aef06f5b320fac4baca68b77b1610e6f7}{target\_socket}};}
+\DoxyCodeLine{00204\ \ \ \ \ sc\_core::sc\_in<bool>\ \mbox{\hyperlink{class_dummy_slave_a7e19409f662da0c599256b1ca029ebe1}{clk}};}
+\DoxyCodeLine{00205\ \ \ \ \ sc\_core::sc\_in<bool>\ \mbox{\hyperlink{class_dummy_slave_a618e4571cbf41913c0c7a71d84917625}{rst}};}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_ad03db41fb462ebee8d4c7037357ad437}{DummySlave}}(sc\_core::sc\_module\_name\ name,\ \textcolor{keywordtype}{bool}\ message\ =\ \textcolor{keyword}{false})\ :}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ sc\_core::sc\_module(name)}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_a40f977ac4c6e432882dfb186d3450bd4}{m\_message}}(message)}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_a4bce3b7e214b17194008fd5803bc9490}{m\_portmonitor}}(false)}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_adb41893ba19e889e56c559f25fc1a68a}{m\_name}}(name)}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_aef06f5b320fac4baca68b77b1610e6f7}{target\_socket}}(\textcolor{stringliteral}{"{}target\_socket"{}})}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_a7719723e8d7ba06b705b83f925fcf824}{m\_cur\_is\_pos}}(true)}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_ab7199813f84e703d078330886fa5b932}{m\_cur\_triggered\_val}}(false)}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ ,\mbox{\hyperlink{class_dummy_slave_ae1c9252336dd2cb1feaa369122a593ee}{m\_clkmonitor}}(false)}
+\DoxyCodeLine{00217\ \ \ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_aef06f5b320fac4baca68b77b1610e6f7}{target\_socket}}.register\_nb\_transport\_fw(\textcolor{keyword}{this},\ \&\mbox{\hyperlink{class_dummy_slave_a882a19a1d4962f1024c218c07e8e0289}{DummySlave::nb\_transport\_fw}});}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a1cf609a2603fd853aa7095c8fc2a9e1d}{init\_registers}}();}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ SC\_THREAD(\mbox{\hyperlink{class_dummy_slave_a53a30b6827abcc657b635842e3ead98c}{thr\_triggered\_port\_process}});}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_dummy_slave_a18930c7d974c2a28137440eb64bd1bb5}{e\_triggerd\_port}};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ SC\_METHOD(\mbox{\hyperlink{class_dummy_slave_ad14ba1bdba16c5566fe9497cf2231002}{mth\_synchronize\_cycles}});}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_dummy_slave_a7e19409f662da0c599256b1ca029ebe1}{clk}}.pos();\ \ \textcolor{comment}{//\ Synchronizing\ with\ posdge\ clock}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ dont\_initialize();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ SC\_METHOD(\mbox{\hyperlink{class_dummy_slave_a23141eed3303128f9bc12f17bb2cde3c}{mth\_reset}});}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ sensitive\ <<\ \mbox{\hyperlink{class_dummy_slave_a618e4571cbf41913c0c7a71d84917625}{rst}};}
+\DoxyCodeLine{00230\ \ \ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ add\ ports\ to\ the\ maps}}
+\DoxyCodeLine{00233\ \ \ \ \ sc\_core::sc\_in<bool>*\ \mbox{\hyperlink{class_dummy_slave_a18e3e486599beaa9198e3de0cc017fff}{add\_input\_port}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}}[name]\ =\ \textcolor{keyword}{new}\ sc\_core::sc\_in<bool>();}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_aab7e959f2c4214b9e44b130e3bb759ad}{input\_val\_ports}}[name]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}}[name];}
+\DoxyCodeLine{00237\ \ \ \ \ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{comment}{//\ Method\ to\ add\ ports\ to\ the\ maps}}
+\DoxyCodeLine{00240\ \ \ \ \ sc\_core::sc\_out<bool>*\ \mbox{\hyperlink{class_dummy_slave_a22c1a62e37948cd85d1a62adce158c6e}{add\_output\_port}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}}[name]\ =\ \textcolor{keyword}{new}\ sc\_core::sc\_out<bool>();}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a36acaafd43494e3452b7c7c8f42641c0}{output\_val\_ports}}[name]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}}[name];}
+\DoxyCodeLine{00244\ \ \ \ \ \}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a23dd64199f535427de942617399d99dd}{set\_output\_ports}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ value)}
+\DoxyCodeLine{00247\ \ \ \ \ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}}[name]-\/>write(value);}
+\DoxyCodeLine{00249\ \ \ \ \ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a13bda8683a32fdf40b44b36300f0ba26}{trigger\_output\_ports}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keywordtype}{bool}\ high\_level,\ \textcolor{keywordtype}{bool}\ is\_pos)}
+\DoxyCodeLine{00252\ \ \ \ \ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a4593ff3c46fbc684df4d5cc3bea3fe74}{output\_ports}}[name]-\/>write(high\_level);}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_ab7199813f84e703d078330886fa5b932}{m\_cur\_triggered\_val}}\ =\ high\_level;}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a15d50a6c3900dc701136970f851a4e5b}{m\_cur\_port\_name}}\ =\ name;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a7719723e8d7ba06b705b83f925fcf824}{m\_cur\_is\_pos}}\ =\ is\_pos;}
+\DoxyCodeLine{00257\ \ \ \ \ \}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_dummy_slave_a68420e10135a04360b1af8a70baff6f6}{read\_input\_ports}}(\textcolor{keyword}{const}\ std::string\&\ name)}
+\DoxyCodeLine{00260\ \ \ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_dummy_slave_a19b7ff0db3ad78f9d4eb9a0e212e68b6}{input\_ports}}[name]-\/>read();}
+\DoxyCodeLine{00262\ \ \ \ \ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a05fd6e372ec6c89b2fcff4deb62dd3ac}{monitor\_ports}}(\textcolor{keywordtype}{bool}\ is\_enable)}
+\DoxyCodeLine{00265\ \ \ \ \ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_a4bce3b7e214b17194008fd5803bc9490}{m\_portmonitor}}\ =\ is\_enable;}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_dummy_slave_a2e318c1eacd31a28585f44df5a5c8719}{enable\_monitor\_clock}}(\textcolor{keywordtype}{bool}\ is\_enable)}
+\DoxyCodeLine{00270\ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dummy_slave_ae1c9252336dd2cb1feaa369122a593ee}{m\_clkmonitor}}\ =\ is\_enable;}
+\DoxyCodeLine{00272\ \ \ \ \ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \};}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

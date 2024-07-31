@@ -1,0 +1,36 @@
+\doxysection{BUS\texorpdfstring{$<$}{<} BUSWIDTH, DATA\+\_\+\+WIDTH \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_b_u_s}{}\label{class_b_u_s}\index{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$@{BUS$<$ BUSWIDTH, DATA\_WIDTH $>$}}
+
+
+Inheritance diagram for BUS\texorpdfstring{$<$}{<} BUSWIDTH, DATA\+\_\+\+WIDTH \texorpdfstring{$>$}{>}\+:
+% FIG 0
+
+
+Collaboration diagram for BUS\texorpdfstring{$<$}{<} BUSWIDTH, DATA\+\_\+\+WIDTH \texorpdfstring{$>$}{>}\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_b_u_s_ab53ce569813c3d52e65927bf5a26a27d}\label{class_b_u_s_ab53ce569813c3d52e65927bf5a26a27d} 
+{\bfseries BUS} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name, bool enclkmonitor=false, bool message=false)
+\item 
+\Hypertarget{class_b_u_s_ad519fa3fa5f59edfad79e626c188d4d0}\label{class_b_u_s_ad519fa3fa5f59edfad79e626c188d4d0} 
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+initiator\+\_\+socket$<$ \mbox{\hyperlink{class_b_u_s}{BUS}}, BUSWIDTH $>$ \& {\bfseries mapping\+\_\+target\+\_\+sockets} (unsigned int \+\_\+addr, unsigned int \+\_\+size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_b_u_s_a48cee5eba7e7de10c082384b2345e457}\label{class_b_u_s_a48cee5eba7e7de10c082384b2345e457} 
+tlm\+\_\+utils\+::multi\+\_\+passthrough\+\_\+target\+\_\+socket$<$ \mbox{\hyperlink{class_b_u_s}{BUS}}, BUSWIDTH $>$ {\bfseries target\+\_\+sockets}
+\item 
+\Hypertarget{class_b_u_s_a5bca69f6fd12add92fba72bfde13431e}\label{class_b_u_s_a5bca69f6fd12add92fba72bfde13431e} 
+sc\+\_\+clk\+\_\+in {\bfseries m\+\_\+clk}
+\item 
+\Hypertarget{class_b_u_s_aaae2e4ec66c0a4c25cf92d273014868c}\label{class_b_u_s_aaae2e4ec66c0a4c25cf92d273014868c} 
+sc\+\_\+core\+::sc\+\_\+in$<$ bool $>$ {\bfseries rst}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/bus.\+h\end{DoxyCompactItemize}

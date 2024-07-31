@@ -1,0 +1,595 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_d_m_a_c" xml:lang="en-US">
+<title>DMAC&lt; BUSWIDTH &gt;</title>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;DMAC.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for DMAC&lt; BUSWIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_d_m_a_c.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC</link> (sc_core::sc_module_name name, bool message=false)</para>
+
+<para><link linkend="_class_d_m_a_c">DMAC</link> constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_class_d_m_a_c_1aea73e1155c88c19d3baedcc99ac0991d">~DMAC</link> ()</para>
+
+<para><link linkend="_class_d_m_a_c">DMAC</link> destructor. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_d_m_a_c_1a7e19409f662da0c599256b1ca029ebe1">clk</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_out&lt; bool &gt; <link linkend="_class_d_m_a_c_1af4634216201dfe6af419cf08217daeff">DMA_ack</link> [<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</para>
+</listitem>
+            <listitem><para>sc_core::sc_out&lt; bool &gt; <link linkend="_class_d_m_a_c_1a66afed0c8d5a5119a5c7befdad389243">DMA_int</link> [<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</para>
+</listitem>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_d_m_a_c_1a5b9d377a3ff02e089ae1c6c96d3b7b8b">DMA_req</link> [<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</para>
+</listitem>
+            <listitem><para>tlm_utils::simple_initiator_socket&lt; <link linkend="_class_d_m_a_c">DMAC</link>, BUSWIDTH &gt; <link linkend="_class_d_m_a_c_1a6feb068c787a4246e1d8a37006123114">initiator_socket</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_d_m_a_c_1a618e4571cbf41913c0c7a71d84917625">rst</link></para>
+</listitem>
+            <listitem><para>tlm_utils::simple_target_socket&lt; <link linkend="_class_d_m_a_c">DMAC</link>, BUSWIDTH &gt; <link linkend="_class_d_m_a_c_1ac697585af3a0d581e6a66c87ac824ec1">target_socket</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">cb_DMAREQ</link> (const std::string &amp;name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)</para>
+
+<para>cb_DMAREQ </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1aace875a6d6c0f6d67d926583c88af55d">copy_tlm_generic_payload</link> (tlm::tlm_generic_payload &amp;des, tlm::tlm_generic_payload &amp;src)</para>
+
+<para>copy_tlm_generic_payload </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">init_registers</link> ()</para>
+
+<para>init_registers </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">mth_request_signals</link> ()</para>
+
+<para>mth_request_signals </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">mth_reset</link> ()</para>
+
+<para>mth_reset </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">nb_transport_bw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_bw </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">nb_transport_fw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_fw </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd">thr_DMA_forward_process</link> ()</para>
+
+<para>thr_DMA_forward_process </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">thr_DMA_run_process</link> ()</para>
+
+<para>thr_DMA_run_process </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">thr_priority_process</link> ()</para>
+
+<para>thr_priority_process </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>tlm::tlm_generic_payload <link linkend="_class_d_m_a_c_1ab64fcbde6ccffc2fa42aaad88a32faa3">current_trans</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_event <link linkend="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9">e_DMA_forward</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_event <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">e_DMA_request</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_event <link linkend="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00">e_DMA_run</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_event <link linkend="_class_d_m_a_c_1a6ab633e540e5cacf6d818a0529fb2f7e">e_DMA_run_done</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_d_m_a_c_1abff73b54a5c977ff57af04fea8196ade">m_cur_reg_ch</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_d_m_a_c_1a38ee55cf888731f625a45854286e6156">m_cur_reg_name</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315">m_current_ch</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">m_message</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265">m_running</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_d_m_a_c_1a23a6ed8e40f03f5d1d205f4e80208815">m_testmode</link></para>
+</listitem>
+            <listitem><para>std::list&lt; unsigned int &gt; <link linkend="_class_d_m_a_c_1aa54f96391b9ae4c79bf5385bda81bd9a">port_req_ids</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_register_interface">RegisterInterface</link> <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">regs</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef"/><section>
+    <title>DMAC()</title>
+<indexterm><primary>DMAC</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>DMAC</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_d_m_a_c">DMAC</link> (sc_core::sc_module_name name, bool message = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_d_m_a_c">DMAC</link> constructor. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to sc_module name</para>
+</entry>
+                            </row>
+                            <row>
+<entry>message</entry><entry>
+<para>To enable message log </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>, <link linkend="_class_d_m_a_c_1a5b9d377a3ff02e089ae1c6c96d3b7b8b">DMAC&lt; BUSWIDTH &gt;::DMA_req</link>, <link linkend="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9">DMAC&lt; BUSWIDTH &gt;::e_DMA_forward</link>, <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">DMAC&lt; BUSWIDTH &gt;::e_DMA_request</link>, <link linkend="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00">DMAC&lt; BUSWIDTH &gt;::e_DMA_run</link>, <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">DMAC&lt; BUSWIDTH &gt;::init_registers()</link>, <link linkend="_class_d_m_a_c_1a6feb068c787a4246e1d8a37006123114">DMAC&lt; BUSWIDTH &gt;::initiator_socket</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, <link linkend="_class_d_m_a_c_1a618e4571cbf41913c0c7a71d84917625">DMAC&lt; BUSWIDTH &gt;::rst</link>, <link linkend="_class_d_m_a_c_1ac697585af3a0d581e6a66c87ac824ec1">DMAC&lt; BUSWIDTH &gt;::target_socket</link>, <link linkend="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd">DMAC&lt; BUSWIDTH &gt;::thr_DMA_forward_process()</link>, <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">DMAC&lt; BUSWIDTH &gt;::thr_DMA_run_process()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1aea73e1155c88c19d3baedcc99ac0991d"/><section>
+    <title>~DMAC()</title>
+<indexterm><primary>~DMAC</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>~DMAC</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>~<link linkend="_class_d_m_a_c">DMAC</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_d_m_a_c">DMAC</link> destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015"/><section>
+    <title>cb_DMAREQ()</title>
+<indexterm><primary>cb_DMAREQ</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>cb_DMAREQ</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void cb_DMAREQ (const std::string &amp; name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>cb_DMAREQ </para>
+</para>
+
+<para>The call back register function for DMAREQ register </para>
+<para>
+References <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">DMAC&lt; BUSWIDTH &gt;::e_DMA_request</link>, <link linkend="_class_d_m_a_c_1abff73b54a5c977ff57af04fea8196ade">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_ch</link>, <link linkend="_class_d_m_a_c_1a38ee55cf888731f625a45854286e6156">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_name</link>, <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">DMAC&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">DMAC&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265">DMAC&lt; BUSWIDTH &gt;::m_running</link>, and <link linkend="_class_d_m_a_c_1a23a6ed8e40f03f5d1d205f4e80208815">DMAC&lt; BUSWIDTH &gt;::m_testmode</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">DMAC&lt; BUSWIDTH &gt;::init_registers()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1aace875a6d6c0f6d67d926583c88af55d"/><section>
+    <title>copy_tlm_generic_payload()</title>
+<indexterm><primary>copy_tlm_generic_payload</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>copy_tlm_generic_payload</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void copy_tlm_generic_payload (tlm::tlm_generic_payload &amp; des, tlm::tlm_generic_payload &amp; src)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>copy_tlm_generic_payload </para>
+</para>
+
+<para>Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>des</entry><entry>
+<para>Reference to destination TLM generic payload</para>
+</entry>
+                            </row>
+                            <row>
+<entry>src</entry><entry>
+<para>Reference to source TLM generic payload </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d"/><section>
+    <title>init_registers()</title>
+<indexterm><primary>init_registers</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>init_registers</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void init_registers ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>init_registers </para>
+</para>
+
+<para>To initialize registers for <link linkend="_class_d_m_a_c">DMAC</link> model </para>
+<para>
+References <link linkend="_class_register_interface_1a544746f8c38d589652fd7adf41227a47">RegisterInterface::add_register()</link>, <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>, <link linkend="__d_m_a_c_8h_1a6a0530d72a387d69ba590552f8315cc6">DMAACK</link>, <link linkend="__d_m_a_c_8h_1accf520c22178b709ca914be37998bd8b">DMACHEN</link>, <link linkend="__d_m_a_c_8h_1ab384545a63bcbbb6f2e758eb45a2023a">DMADATALENGTH</link>, <link linkend="__d_m_a_c_8h_1af399b0e0fe9fa8ae1e2e36bab67ac193">DMADESADDR</link>, <link linkend="__d_m_a_c_8h_1a8a18b39f1e4e95ac9e10aa6bd8c59558">DMAINT</link>, <link linkend="__d_m_a_c_8h_1acca8897cfda1b74d0eda3d7ce18e092b">DMAREQ</link>, <link linkend="__d_m_a_c_8h_1ac38be42abe1e46b570f7ce10650b6526">DMASRCADDR</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de">READWRITE</link>, <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>, and <link linkend="_class_register_interface_1a58b7a47531113e57149c88a61d91830d">RegisterInterface::set_register_callback()</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23"/><section>
+    <title>mth_request_signals()</title>
+<indexterm><primary>mth_request_signals</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>mth_request_signals</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void mth_request_signals ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>mth_request_signals </para>
+</para>
+
+<para>Impelmentation of the method when requests signal are triggered by peripherals </para>
+<para>
+References <link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>, <link linkend="_class_d_m_a_c_1a5b9d377a3ff02e089ae1c6c96d3b7b8b">DMAC&lt; BUSWIDTH &gt;::DMA_req</link>, <link linkend="__d_m_a_c_8h_1accf520c22178b709ca914be37998bd8b">DMACHEN</link>, <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">DMAC&lt; BUSWIDTH &gt;::e_DMA_request</link>, <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">DMAC&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">DMAC&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265">DMAC&lt; BUSWIDTH &gt;::m_running</link>, <link linkend="_class_d_m_a_c_1aa54f96391b9ae4c79bf5385bda81bd9a">DMAC&lt; BUSWIDTH &gt;::port_req_ids</link>, and <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c"/><section>
+    <title>mth_reset()</title>
+<indexterm><primary>mth_reset</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>mth_reset</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void mth_reset ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>mth_reset </para>
+</para>
+
+<para>Impelmentation of the method when reset is active </para>
+<para>
+References <link linkend="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9">DMAC&lt; BUSWIDTH &gt;::e_DMA_forward</link>, <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">DMAC&lt; BUSWIDTH &gt;::e_DMA_request</link>, <link linkend="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00">DMAC&lt; BUSWIDTH &gt;::e_DMA_run</link>, <link linkend="_class_d_m_a_c_1a6ab633e540e5cacf6d818a0529fb2f7e">DMAC&lt; BUSWIDTH &gt;::e_DMA_run_done</link>, <link linkend="_class_d_m_a_c_1abff73b54a5c977ff57af04fea8196ade">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_ch</link>, <link linkend="_class_d_m_a_c_1a38ee55cf888731f625a45854286e6156">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_name</link>, <link linkend="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315">DMAC&lt; BUSWIDTH &gt;::m_current_ch</link>, <link linkend="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265">DMAC&lt; BUSWIDTH &gt;::m_running</link>, <link linkend="_class_d_m_a_c_1a23a6ed8e40f03f5d1d205f4e80208815">DMAC&lt; BUSWIDTH &gt;::m_testmode</link>, <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>, <link linkend="_class_register_interface_1ae9e5a36897056f14f1f6eb742cba6ff6">RegisterInterface::reset_regs()</link>, and <link linkend="_class_d_m_a_c_1a618e4571cbf41913c0c7a71d84917625">DMAC&lt; BUSWIDTH &gt;::rst</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7"/><section>
+    <title>nb_transport_bw()</title>
+<indexterm><primary>nb_transport_bw</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_bw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_bw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_bw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_d_m_a_c_1aace875a6d6c0f6d67d926583c88af55d">DMAC&lt; BUSWIDTH &gt;::copy_tlm_generic_payload()</link>, <link linkend="_class_d_m_a_c_1ab64fcbde6ccffc2fa42aaad88a32faa3">DMAC&lt; BUSWIDTH &gt;::current_trans</link>, <link linkend="__d_m_a_c_8h_1af399b0e0fe9fa8ae1e2e36bab67ac193">DMADESADDR</link>, <link linkend="__d_m_a_c_8h_1ac38be42abe1e46b570f7ce10650b6526">DMASRCADDR</link>, <link linkend="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9">DMAC&lt; BUSWIDTH &gt;::e_DMA_forward</link>, <link linkend="_class_d_m_a_c_1a6ab633e540e5cacf6d818a0529fb2f7e">DMAC&lt; BUSWIDTH &gt;::e_DMA_run_done</link>, <link linkend="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315">DMAC&lt; BUSWIDTH &gt;::m_current_ch</link>, <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">DMAC&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">DMAC&lt; BUSWIDTH &gt;::m_name</link>, and <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289"/><section>
+    <title>nb_transport_fw()</title>
+<indexterm><primary>nb_transport_fw</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_fw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_fw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">DMAC&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">DMAC&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>, <link linkend="_class_d_m_a_c_1ac697585af3a0d581e6a66c87ac824ec1">DMAC&lt; BUSWIDTH &gt;::target_socket</link>, and <link linkend="_class_register_interface_1ab074287fb1d8088234264f3400d8c8eb">RegisterInterface::update_register()</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd"/><section>
+    <title>thr_DMA_forward_process()</title>
+<indexterm><primary>thr_DMA_forward_process</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>thr_DMA_forward_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void thr_DMA_forward_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>thr_DMA_forward_process </para>
+</para>
+
+<para>Impelmentation of the thread to forward data from the source to the destination </para>
+<para>
+References <link linkend="_class_d_m_a_c_1ab64fcbde6ccffc2fa42aaad88a32faa3">DMAC&lt; BUSWIDTH &gt;::current_trans</link>, <link linkend="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9">DMAC&lt; BUSWIDTH &gt;::e_DMA_forward</link>, and <link linkend="_class_d_m_a_c_1a6feb068c787a4246e1d8a37006123114">DMAC&lt; BUSWIDTH &gt;::initiator_socket</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91"/><section>
+    <title>thr_DMA_run_process()</title>
+<indexterm><primary>thr_DMA_run_process</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>thr_DMA_run_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void thr_DMA_run_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>thr_DMA_run_process </para>
+</para>
+
+<para>Impelmentation of the thread to start DMA operation </para>
+<para>
+References <link linkend="__d_m_a_c_8h_1ab384545a63bcbbb6f2e758eb45a2023a">DMADATALENGTH</link>, <link linkend="__d_m_a_c_8h_1ac38be42abe1e46b570f7ce10650b6526">DMASRCADDR</link>, <link linkend="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00">DMAC&lt; BUSWIDTH &gt;::e_DMA_run</link>, <link linkend="_class_d_m_a_c_1a6feb068c787a4246e1d8a37006123114">DMAC&lt; BUSWIDTH &gt;::initiator_socket</link>, <link linkend="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315">DMAC&lt; BUSWIDTH &gt;::m_current_ch</link>, and <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe"/><section>
+    <title>thr_priority_process()</title>
+<indexterm><primary>thr_priority_process</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>thr_priority_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void thr_priority_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>thr_priority_process </para>
+</para>
+
+<para>Impelmentation of the thread to handle priority of DMA operation </para>
+<para>
+References <link linkend="_class_d_m_a_c_1a7e19409f662da0c599256b1ca029ebe1">DMAC&lt; BUSWIDTH &gt;::clk</link>, <link linkend="_class_d_m_a_c_1af4634216201dfe6af419cf08217daeff">DMAC&lt; BUSWIDTH &gt;::DMA_ack</link>, <link linkend="_class_d_m_a_c_1a66afed0c8d5a5119a5c7befdad389243">DMAC&lt; BUSWIDTH &gt;::DMA_int</link>, <link linkend="__d_m_a_c_8h_1a6a0530d72a387d69ba590552f8315cc6">DMAACK</link>, <link linkend="__d_m_a_c_8h_1accf520c22178b709ca914be37998bd8b">DMACHEN</link>, <link linkend="__d_m_a_c_8h_1a8a18b39f1e4e95ac9e10aa6bd8c59558">DMAINT</link>, <link linkend="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314">DMAC&lt; BUSWIDTH &gt;::e_DMA_request</link>, <link linkend="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00">DMAC&lt; BUSWIDTH &gt;::e_DMA_run</link>, <link linkend="_class_d_m_a_c_1a6ab633e540e5cacf6d818a0529fb2f7e">DMAC&lt; BUSWIDTH &gt;::e_DMA_run_done</link>, <link linkend="_class_d_m_a_c_1abff73b54a5c977ff57af04fea8196ade">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_ch</link>, <link linkend="_class_d_m_a_c_1a38ee55cf888731f625a45854286e6156">DMAC&lt; BUSWIDTH &gt;::m_cur_reg_name</link>, <link linkend="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315">DMAC&lt; BUSWIDTH &gt;::m_current_ch</link>, <link linkend="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4">DMAC&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a">DMAC&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265">DMAC&lt; BUSWIDTH &gt;::m_running</link>, <link linkend="_class_d_m_a_c_1a23a6ed8e40f03f5d1d205f4e80208815">DMAC&lt; BUSWIDTH &gt;::m_testmode</link>, <link linkend="_class_d_m_a_c_1aa54f96391b9ae4c79bf5385bda81bd9a">DMAC&lt; BUSWIDTH &gt;::port_req_ids</link>, and <link linkend="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4">DMAC&lt; BUSWIDTH &gt;::regs</link>.</para>
+<para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_d_m_a_c_1a7e19409f662da0c599256b1ca029ebe1"/><section>
+    <title>clk</title>
+<indexterm><primary>clk</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>clk</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; clk</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1ab64fcbde6ccffc2fa42aaad88a32faa3"/><section>
+    <title>current_trans</title>
+<indexterm><primary>current_trans</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>current_trans</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_generic_payload current_trans<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd">DMAC&lt; BUSWIDTH &gt;::thr_DMA_forward_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1af4634216201dfe6af419cf08217daeff"/><section>
+    <title>DMA_ack</title>
+<indexterm><primary>DMA_ack</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>DMA_ack</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_out&lt;bool&gt; DMA_ack[<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a66afed0c8d5a5119a5c7befdad389243"/><section>
+    <title>DMA_int</title>
+<indexterm><primary>DMA_int</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>DMA_int</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_out&lt;bool&gt; DMA_int[<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a5b9d377a3ff02e089ae1c6c96d3b7b8b"/><section>
+    <title>DMA_req</title>
+<indexterm><primary>DMA_req</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>DMA_req</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; DMA_req[<link linkend="__d_m_a_c_8h_1a1dcb1c5d799aaba2b02041f1b220c6c4">DMA_MAX_CH</link>]</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, and <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a137d3828642f153a8323ee5d409261c9"/><section>
+    <title>e_DMA_forward</title>
+<indexterm><primary>e_DMA_forward</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>e_DMA_forward</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_DMA_forward<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd">DMAC&lt; BUSWIDTH &gt;::thr_DMA_forward_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1ac88e13e1ab8baec0edc63ad9d92a9314"/><section>
+    <title>e_DMA_request</title>
+<indexterm><primary>e_DMA_request</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>e_DMA_request</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_DMA_request<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a91181b8b04d36021d5f15f15ed4fda00"/><section>
+    <title>e_DMA_run</title>
+<indexterm><primary>e_DMA_run</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>e_DMA_run</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_DMA_run<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">DMAC&lt; BUSWIDTH &gt;::thr_DMA_run_process()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a6ab633e540e5cacf6d818a0529fb2f7e"/><section>
+    <title>e_DMA_run_done</title>
+<indexterm><primary>e_DMA_run_done</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>e_DMA_run_done</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_DMA_run_done<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a6feb068c787a4246e1d8a37006123114"/><section>
+    <title>initiator_socket</title>
+<indexterm><primary>initiator_socket</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>initiator_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_initiator_socket&lt;<link linkend="_class_d_m_a_c">DMAC</link>, BUSWIDTH&gt; initiator_socket</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, <link linkend="_class_d_m_a_c_1a833712d45cbe2e11e96bfdfa9e7ae7fd">DMAC&lt; BUSWIDTH &gt;::thr_DMA_forward_process()</link>, and <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">DMAC&lt; BUSWIDTH &gt;::thr_DMA_run_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1abff73b54a5c977ff57af04fea8196ade"/><section>
+    <title>m_cur_reg_ch</title>
+<indexterm><primary>m_cur_reg_ch</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_cur_reg_ch</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned int m_cur_reg_ch<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a38ee55cf888731f625a45854286e6156"/><section>
+    <title>m_cur_reg_name</title>
+<indexterm><primary>m_cur_reg_name</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_cur_reg_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_cur_reg_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a554de9bd57e273361ce8b59611980315"/><section>
+    <title>m_current_ch</title>
+<indexterm><primary>m_current_ch</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_current_ch</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned int m_current_ch<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">DMAC&lt; BUSWIDTH &gt;::thr_DMA_run_process()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a40f977ac4c6e432882dfb186d3450bd4"/><section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_message</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_message<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a4bf34194d819be948dea90eddb02c265"/><section>
+    <title>m_running</title>
+<indexterm><primary>m_running</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_running</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_running<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a23a6ed8e40f03f5d1d205f4e80208815"/><section>
+    <title>m_testmode</title>
+<indexterm><primary>m_testmode</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>m_testmode</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_testmode<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a4b2a77c68a8cf19befd770de34508015">DMAC&lt; BUSWIDTH &gt;::cb_DMAREQ()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1aa54f96391b9ae4c79bf5385bda81bd9a"/><section>
+    <title>port_req_ids</title>
+<indexterm><primary>port_req_ids</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>port_req_ids</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::list&lt;unsigned int&gt; port_req_ids<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1afbd41e80ab004d6bad07dc9ca8e282f4"/><section>
+    <title>regs</title>
+<indexterm><primary>regs</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>regs</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_register_interface">RegisterInterface</link> regs<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1a1cf609a2603fd853aa7095c8fc2a9e1d">DMAC&lt; BUSWIDTH &gt;::init_registers()</link>, <link linkend="_class_d_m_a_c_1a59437db485e7c65c6a90ad57d8b43f23">DMAC&lt; BUSWIDTH &gt;::mth_request_signals()</link>, <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_d_m_a_c_1a9401643ffeae74f7b9b36713bc735da7">DMAC&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, <link linkend="_class_d_m_a_c_1a998adbb27ee33736cfa6a47c22309b91">DMAC&lt; BUSWIDTH &gt;::thr_DMA_run_process()</link>, and <link linkend="_class_d_m_a_c_1a877845e838c18e15b6dd910f76b83afe">DMAC&lt; BUSWIDTH &gt;::thr_priority_process()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1a618e4571cbf41913c0c7a71d84917625"/><section>
+    <title>rst</title>
+<indexterm><primary>rst</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>rst</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; rst</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, and <link linkend="_class_d_m_a_c_1a23141eed3303128f9bc12f17bb2cde3c">DMAC&lt; BUSWIDTH &gt;::mth_reset()</link>.</para>
+</section>
+<anchor xml:id="_class_d_m_a_c_1ac697585af3a0d581e6a66c87ac824ec1"/><section>
+    <title>target_socket</title>
+<indexterm><primary>target_socket</primary><secondary>DMAC&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DMAC&lt; BUSWIDTH &gt;</primary><secondary>target_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_target_socket&lt;<link linkend="_class_d_m_a_c">DMAC</link>, BUSWIDTH&gt; target_socket</computeroutput></para><para>
+Referenced by <link linkend="_class_d_m_a_c_1acfc644a1d53bd4b398bf9e468953caef">DMAC&lt; BUSWIDTH &gt;::DMAC()</link>, and <link linkend="_class_d_m_a_c_1a882a19a1d4962f1024c218c07e8e0289">DMAC&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="__d_m_a_c_8h">DMAC.h</link></section>
+</section>

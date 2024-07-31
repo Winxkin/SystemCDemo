@@ -1,0 +1,590 @@
+\doxysection{So\+CPlatform}
+\label{class_so_c_platform}\index{SoCPlatform@{SoCPlatform}}
+
+
+{\ttfamily \#include "{}top.\+h"{}}
+
+Inheritance diagram for So\+CPlatform\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_so_c_platform}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ So\+CPlatform} (sc\+\_\+core\+::sc\+\_\+module\+\_\+name name)
+\item 
+void \textbf{ dump\+\_\+memory} (const std\+::string \&name, sc\+\_\+dt\+::uint64 offset, unsigned int len)
+\begin{DoxyCompactList}\small\item\em dump\+\_\+memory \end{DoxyCompactList}\item 
+unsigned int \textbf{ get\+\_\+received\+\_\+32bit\+\_\+data} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+received\+\_\+data \end{DoxyCompactList}\item 
+unsigned char $\ast$ \textbf{ get\+\_\+received\+\_\+data} ()
+\begin{DoxyCompactList}\small\item\em get\+\_\+received\+\_\+data \end{DoxyCompactList}\item 
+void \textbf{ monitor\+\_\+ports} (bool is\+\_\+enable)
+\begin{DoxyCompactList}\small\item\em monitor\+\_\+ports \end{DoxyCompactList}\item 
+bool \textbf{ read\+\_\+input\+\_\+ports} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em read\+\_\+input\+\_\+ports \end{DoxyCompactList}\item 
+void \textbf{ Sentcustomtransaction} (unsigned int addr, unsigned char $\ast$data, unsigned int data\+\_\+length, tlm\+::tlm\+\_\+command cmd)
+\begin{DoxyCompactList}\small\item\em Sentcustomtransaction. \end{DoxyCompactList}\item 
+void \textbf{ Sent\+Transaction} (unsigned int addr, uint32\+\_\+t data, tlm\+::tlm\+\_\+command cmd)
+\begin{DoxyCompactList}\small\item\em Sent\+Transaction. \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+output\+\_\+ports} (const std\+::string \&name, bool value)
+\begin{DoxyCompactList}\small\item\em set\+\_\+output\+\_\+ports \end{DoxyCompactList}\item 
+void \textbf{ trigger\+\_\+output\+\_\+ports} (const std\+::string \&name, bool high\+\_\+level, bool is\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em set\+\_\+output\+\_\+ports \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ do\+\_\+bus\+\_\+binding} ()
+\item 
+void \textbf{ do\+\_\+signals\+\_\+binding} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ counter\+\_\+clear}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ counter\+\_\+load}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ counter\+\_\+start}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ dma\+\_\+ack} [256]
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ dma\+\_\+int} [256]
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ dma\+\_\+req} [256]
+\item 
+BUS$<$ APB $>$ \textbf{ m\+\_\+bus}
+\item 
+DMAC$<$ 32 $>$ \textbf{ m\+\_\+dmac}
+\item 
+Dummy\+Master$<$ 32 $>$ \textbf{ m\+\_\+dummymaster}
+\item 
+Dummy\+Slave$<$ 32 $>$ \textbf{ m\+\_\+dummyslave}
+\item 
+RAM$<$ 32 $>$ \textbf{ m\+\_\+ram1}
+\item 
+sc\+\_\+core\+::sc\+\_\+clock \textbf{ m\+\_\+sysclk}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ m\+\_\+sysrst}
+\item 
+Target$<$ 32 $>$ \textbf{ m\+\_\+target1}
+\item 
+Target$<$ 32 $>$ \textbf{ m\+\_\+target2}
+\item 
+Target$<$ 32 $>$ \textbf{ m\+\_\+target3}
+\item 
+Target$<$ 32 $>$ \textbf{ m\+\_\+target4}
+\item 
+wrapper\+\_\+counter$<$ 32 $>$ \textbf{ m\+\_\+wrapper\+\_\+counter}
+\item 
+wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ 32 $>$ \textbf{ m\+\_\+wrapper\+\_\+four\+\_\+bit\+\_\+adder}
+\item 
+wrapper\+\_\+uart$<$ 32 $>$ \textbf{ m\+\_\+wrapper\+\_\+uart}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ uart\+\_\+cs}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ uart\+\_\+int2}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ uart\+\_\+nrw}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ uart\+\_\+sin}
+\item 
+sc\+\_\+core\+::sc\+\_\+signal$<$ bool $>$ \textbf{ uart\+\_\+sout}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\index{SoCPlatform@{SoCPlatform}!SoCPlatform@{SoCPlatform}}
+\index{SoCPlatform@{SoCPlatform}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{SoCPlatform()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a22c0796a30b0a77bacd94752fb228e28} 
+\textbf{ So\+CPlatform} (\begin{DoxyParamCaption}\item[{sc\+\_\+core\+::sc\+\_\+module\+\_\+name}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+References \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\index{SoCPlatform@{SoCPlatform}!do\_bus\_binding@{do\_bus\_binding}}
+\index{do\_bus\_binding@{do\_bus\_binding}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{do\_bus\_binding()}
+{\footnotesize\ttfamily \label{class_so_c_platform_ab79739920ef226160974aaaf9856d663} 
+void do\+\_\+bus\+\_\+binding (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ BASE\+\_\+\+COUNTER}, \textbf{ BASE\+\_\+\+DMAC}, \textbf{ BASE\+\_\+\+DUMMYSLAVE}, \textbf{ BASE\+\_\+\+FOUR\+\_\+\+BIT\+\_\+\+ADDER}, \textbf{ BASE\+\_\+\+RAM1}, \textbf{ BASE\+\_\+\+TARGET1}, \textbf{ BASE\+\_\+\+TARGET2}, \textbf{ BASE\+\_\+\+TARGET3}, \textbf{ BASE\+\_\+\+TARGET4}, \textbf{ BASE\+\_\+\+UART}, \textbf{ m\+\_\+bus}, \textbf{ m\+\_\+dmac}, \textbf{ m\+\_\+dummymaster}, \textbf{ m\+\_\+dummyslave}, \textbf{ m\+\_\+ram1}, \textbf{ m\+\_\+target1}, \textbf{ m\+\_\+target2}, \textbf{ m\+\_\+target3}, \textbf{ m\+\_\+target4}, \textbf{ m\+\_\+wrapper\+\_\+counter}, \textbf{ m\+\_\+wrapper\+\_\+four\+\_\+bit\+\_\+adder}, \textbf{ m\+\_\+wrapper\+\_\+uart}, \textbf{ SIZE\+\_\+\+COUNTER}, \textbf{ SIZE\+\_\+\+DMAC}, \textbf{ SIZE\+\_\+\+DUMMYSLAVE}, \textbf{ SIZE\+\_\+\+FOUR\+\_\+\+BIT\+\_\+\+ADDER}, \textbf{ SIZE\+\_\+\+RAM1}, \textbf{ SIZE\+\_\+\+TARGET1}, \textbf{ SIZE\+\_\+\+TARGET2}, \textbf{ SIZE\+\_\+\+TARGET3}, \textbf{ SIZE\+\_\+\+TARGET4}, and \textbf{ SIZE\+\_\+\+UART}.
+
+
+
+Referenced by \textbf{ So\+CPlatform()}.
+
+\index{SoCPlatform@{SoCPlatform}!do\_signals\_binding@{do\_signals\_binding}}
+\index{do\_signals\_binding@{do\_signals\_binding}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{do\_signals\_binding()}
+{\footnotesize\ttfamily \label{class_so_c_platform_ae7219aa80b0f1313e6d9c62554722b72} 
+void do\+\_\+signals\+\_\+binding (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+References \textbf{ counter\+\_\+clear}, \textbf{ counter\+\_\+load}, \textbf{ counter\+\_\+start}, \textbf{ dma\+\_\+ack}, \textbf{ dma\+\_\+int}, \textbf{ dma\+\_\+req}, \textbf{ m\+\_\+bus}, \textbf{ m\+\_\+dmac}, \textbf{ m\+\_\+dummymaster}, \textbf{ m\+\_\+dummyslave}, \textbf{ m\+\_\+sysclk}, \textbf{ m\+\_\+sysrst}, \textbf{ m\+\_\+wrapper\+\_\+counter}, \textbf{ m\+\_\+wrapper\+\_\+uart}, \textbf{ uart\+\_\+cs}, \textbf{ uart\+\_\+int2}, \textbf{ uart\+\_\+nrw}, \textbf{ uart\+\_\+sin}, and \textbf{ uart\+\_\+sout}.
+
+
+
+Referenced by \textbf{ So\+CPlatform()}.
+
+\index{SoCPlatform@{SoCPlatform}!dump\_memory@{dump\_memory}}
+\index{dump\_memory@{dump\_memory}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{dump\_memory()}
+{\footnotesize\ttfamily \label{class_so_c_platform_aa9a73c577c0ff71064d56ef5b4a622fb} 
+void dump\+\_\+memory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{sc\+\_\+dt\+::uint64}]{offset}{, }\item[{unsigned int}]{len}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+dump\+\_\+memory 
+
+Show memory regions 
+\begin{DoxyParams}{Parameters}
+{\em offset} & The ram offset \\
+\hline
+{\em len} & The ram size \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+ram1}.
+
+\index{SoCPlatform@{SoCPlatform}!get\_received\_32bit\_data@{get\_received\_32bit\_data}}
+\index{get\_received\_32bit\_data@{get\_received\_32bit\_data}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{get\_received\_32bit\_data()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a08a564de97649540c69db5090febf892} 
+unsigned int get\+\_\+received\+\_\+32bit\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+received\+\_\+data 
+
+Using to get data from the returned transaction
+
+\begin{DoxyReturn}{Returns}
+the 32-\/bit data 
+\end{DoxyReturn}
+
+
+References \textbf{ m\+\_\+dummymaster}.
+
+\index{SoCPlatform@{SoCPlatform}!get\_received\_data@{get\_received\_data}}
+\index{get\_received\_data@{get\_received\_data}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{get\_received\_data()}
+{\footnotesize\ttfamily \label{class_so_c_platform_ab48cdf23350697763e6d6e1980c29ed0} 
+unsigned char $\ast$ get\+\_\+received\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get\+\_\+received\+\_\+data 
+
+Using to get data from the returned transaction
+
+\begin{DoxyReturn}{Returns}
+the array of data 
+\end{DoxyReturn}
+
+
+References \textbf{ m\+\_\+dummymaster}.
+
+\index{SoCPlatform@{SoCPlatform}!monitor\_ports@{monitor\_ports}}
+\index{monitor\_ports@{monitor\_ports}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{monitor\_ports()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a05fd6e372ec6c89b2fcff4deb62dd3ac} 
+void monitor\+\_\+ports (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+enable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+monitor\+\_\+ports 
+
+Using to enable or disable port monitor operation 
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+enable} & Indicating whether enabling or disabling port monitor \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummyslave}.
+
+\index{SoCPlatform@{SoCPlatform}!read\_input\_ports@{read\_input\_ports}}
+\index{read\_input\_ports@{read\_input\_ports}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{read\_input\_ports()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a68420e10135a04360b1af8a70baff6f6} 
+bool read\+\_\+input\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+read\+\_\+input\+\_\+ports 
+
+Using to read the value of specific port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummyslave}.
+
+\index{SoCPlatform@{SoCPlatform}!Sentcustomtransaction@{Sentcustomtransaction}}
+\index{Sentcustomtransaction@{Sentcustomtransaction}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{Sentcustomtransaction()}
+{\footnotesize\ttfamily \label{class_so_c_platform_aa5a464ae099c60ba1d6bca9579afa1a7} 
+void Sentcustomtransaction (\begin{DoxyParamCaption}\item[{unsigned int}]{addr}{, }\item[{unsigned char $\ast$}]{data}{, }\item[{unsigned int}]{data\+\_\+length}{, }\item[{tlm\+::tlm\+\_\+command}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sentcustomtransaction. 
+
+Implements the sent a custom transaction to bus MMIO
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Reference to the address of the slave\\
+\hline
+{\em data} & Reference to the pointer of array data\\
+\hline
+{\em data\+\_\+length} & Reference to the length of data\\
+\hline
+{\em cmd} & Reference to tlm command -\/TLM\+\_\+\+READ\+\_\+\+COMMAND \+: TLM read requset -\/TLM\+\_\+\+WRITE\+\_\+\+COMMAND \+: TLM write requset -\/TLM\+\_\+\+IGNORE\+\_\+\+COMMAND\+: TLM ignore requset \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummymaster}.
+
+\index{SoCPlatform@{SoCPlatform}!SentTransaction@{SentTransaction}}
+\index{SentTransaction@{SentTransaction}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{SentTransaction()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a79130bb3520c3a038345f56d2fd6cf25} 
+void Sent\+Transaction (\begin{DoxyParamCaption}\item[{unsigned int}]{addr}{, }\item[{uint32\+\_\+t}]{data}{, }\item[{tlm\+::tlm\+\_\+command}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sent\+Transaction. 
+
+Implements the sent a transaction with 32 bit data to bus MMIO
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Reference to the address of the slave\\
+\hline
+{\em data} & Reference to 32-\/bit data\\
+\hline
+{\em cmd} & Reference to tlm command -\/TLM\+\_\+\+READ\+\_\+\+COMMAND \+: TLM read requset -\/TLM\+\_\+\+WRITE\+\_\+\+COMMAND \+: TLM write requset -\/TLM\+\_\+\+IGNORE\+\_\+\+COMMAND\+: TLM ignore requset \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummymaster}.
+
+\index{SoCPlatform@{SoCPlatform}!set\_output\_ports@{set\_output\_ports}}
+\index{set\_output\_ports@{set\_output\_ports}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{set\_output\_ports()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a23dd64199f535427de942617399d99dd} 
+void set\+\_\+output\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+output\+\_\+ports 
+
+Using to set specific output port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+{\em value} & the value of the output port \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummyslave}.
+
+\index{SoCPlatform@{SoCPlatform}!trigger\_output\_ports@{trigger\_output\_ports}}
+\index{trigger\_output\_ports@{trigger\_output\_ports}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{trigger\_output\_ports()}
+{\footnotesize\ttfamily \label{class_so_c_platform_a13bda8683a32fdf40b44b36300f0ba26} 
+void trigger\+\_\+output\+\_\+ports (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{bool}]{high\+\_\+level}{, }\item[{bool}]{is\+\_\+pos}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+set\+\_\+output\+\_\+ports 
+
+Using to trigger specific output port 
+\begin{DoxyParams}{Parameters}
+{\em name} & Reference to the port name \\
+\hline
+{\em high\+\_\+level} & Indicating the triggered level \\
+\hline
+{\em is\+\_\+pos} & Indicating the clock edge synchronization is positive or negative \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ m\+\_\+dummyslave}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{SoCPlatform@{SoCPlatform}!counter\_clear@{counter\_clear}}
+\index{counter\_clear@{counter\_clear}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{counter\_clear}
+{\footnotesize\ttfamily \label{class_so_c_platform_a859d2b771422c5a164012dafbc8989e1} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ counter\+\_\+clear\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!counter\_load@{counter\_load}}
+\index{counter\_load@{counter\_load}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{counter\_load}
+{\footnotesize\ttfamily \label{class_so_c_platform_a008c346a0bdd8863ff8ec17814f0bfb5} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ counter\+\_\+load\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!counter\_start@{counter\_start}}
+\index{counter\_start@{counter\_start}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{counter\_start}
+{\footnotesize\ttfamily \label{class_so_c_platform_a4066df293cfee090b59889e9aaa45fbe} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ counter\+\_\+start\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!dma\_ack@{dma\_ack}}
+\index{dma\_ack@{dma\_ack}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{dma\_ack}
+{\footnotesize\ttfamily \label{class_so_c_platform_a19da0392795127799e66fc4816478764} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ dma\+\_\+ack[256]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!dma\_int@{dma\_int}}
+\index{dma\_int@{dma\_int}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{dma\_int}
+{\footnotesize\ttfamily \label{class_so_c_platform_a963010b8cb78c33b6b4c229449fa9203} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ dma\+\_\+int[256]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!dma\_req@{dma\_req}}
+\index{dma\_req@{dma\_req}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{dma\_req}
+{\footnotesize\ttfamily \label{class_so_c_platform_a432d316da9659b75a9ff2ec2ad44be53} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ dma\+\_\+req[256]\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_bus@{m\_bus}}
+\index{m\_bus@{m\_bus}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_bus}
+{\footnotesize\ttfamily \label{class_so_c_platform_ad3506003ffe603a616c144d3df83b74e} 
+BUS$<$APB$>$ m\+\_\+bus\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_dmac@{m\_dmac}}
+\index{m\_dmac@{m\_dmac}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_dmac}
+{\footnotesize\ttfamily \label{class_so_c_platform_a700fb9162aaf7512e9693c41c8b10894} 
+DMAC$<$32$>$ m\+\_\+dmac\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_dummymaster@{m\_dummymaster}}
+\index{m\_dummymaster@{m\_dummymaster}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_dummymaster}
+{\footnotesize\ttfamily \label{class_so_c_platform_a6b64df5fa8eaa82fe31898d6422643eb} 
+Dummy\+Master$<$32$>$ m\+\_\+dummymaster\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, \textbf{ do\+\_\+signals\+\_\+binding()}, \textbf{ get\+\_\+received\+\_\+32bit\+\_\+data()}, \textbf{ get\+\_\+received\+\_\+data()}, \textbf{ Sentcustomtransaction()}, and \textbf{ Sent\+Transaction()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_dummyslave@{m\_dummyslave}}
+\index{m\_dummyslave@{m\_dummyslave}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_dummyslave}
+{\footnotesize\ttfamily \label{class_so_c_platform_af03ba86ba2da6e4859d047613c552705} 
+Dummy\+Slave$<$32$>$ m\+\_\+dummyslave\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, \textbf{ do\+\_\+signals\+\_\+binding()}, \textbf{ monitor\+\_\+ports()}, \textbf{ read\+\_\+input\+\_\+ports()}, \textbf{ set\+\_\+output\+\_\+ports()}, and \textbf{ trigger\+\_\+output\+\_\+ports()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_ram1@{m\_ram1}}
+\index{m\_ram1@{m\_ram1}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_ram1}
+{\footnotesize\ttfamily \label{class_so_c_platform_a43553bd73e7406d4255a25dc5ee3045d} 
+RAM$<$32$>$ m\+\_\+ram1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ dump\+\_\+memory()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_sysclk@{m\_sysclk}}
+\index{m\_sysclk@{m\_sysclk}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_sysclk}
+{\footnotesize\ttfamily \label{class_so_c_platform_afc086820f6d338c89893794f8a5ed911} 
+sc\+\_\+core\+::sc\+\_\+clock m\+\_\+sysclk\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_sysrst@{m\_sysrst}}
+\index{m\_sysrst@{m\_sysrst}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_sysrst}
+{\footnotesize\ttfamily \label{class_so_c_platform_aa0dc3580e5ee643bc8352bc3222ae7d2} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ m\+\_\+sysrst\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_target1@{m\_target1}}
+\index{m\_target1@{m\_target1}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_target1}
+{\footnotesize\ttfamily \label{class_so_c_platform_af83e96c6763b5b0c39baa0ac328f5418} 
+Target$<$32$>$ m\+\_\+target1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_target2@{m\_target2}}
+\index{m\_target2@{m\_target2}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_target2}
+{\footnotesize\ttfamily \label{class_so_c_platform_aa4121bd495177a6f661dbc5cd06b1786} 
+Target$<$32$>$ m\+\_\+target2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_target3@{m\_target3}}
+\index{m\_target3@{m\_target3}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_target3}
+{\footnotesize\ttfamily \label{class_so_c_platform_a189c54ea99df289ef25b4dab4883736f} 
+Target$<$32$>$ m\+\_\+target3\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_target4@{m\_target4}}
+\index{m\_target4@{m\_target4}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_target4}
+{\footnotesize\ttfamily \label{class_so_c_platform_afa4db5b546c437b7f6306c0fd4c86aef} 
+Target$<$32$>$ m\+\_\+target4\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_wrapper\_counter@{m\_wrapper\_counter}}
+\index{m\_wrapper\_counter@{m\_wrapper\_counter}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_wrapper\_counter}
+{\footnotesize\ttfamily \label{class_so_c_platform_a03bf7006c051b183160d5ea2ed7f9a6c} 
+wrapper\+\_\+counter$<$32$>$ m\+\_\+wrapper\+\_\+counter\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_wrapper\_four\_bit\_adder@{m\_wrapper\_four\_bit\_adder}}
+\index{m\_wrapper\_four\_bit\_adder@{m\_wrapper\_four\_bit\_adder}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_wrapper\_four\_bit\_adder}
+{\footnotesize\ttfamily \label{class_so_c_platform_ad331a9e716b36bd57a50b7a919e8276a} 
+wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$32$>$ m\+\_\+wrapper\+\_\+four\+\_\+bit\+\_\+adder\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!m\_wrapper\_uart@{m\_wrapper\_uart}}
+\index{m\_wrapper\_uart@{m\_wrapper\_uart}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{m\_wrapper\_uart}
+{\footnotesize\ttfamily \label{class_so_c_platform_ac94e35b0eb83ecdd6a6bafb830ecdda4} 
+wrapper\+\_\+uart$<$32$>$ m\+\_\+wrapper\+\_\+uart\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+bus\+\_\+binding()}, and \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!uart\_cs@{uart\_cs}}
+\index{uart\_cs@{uart\_cs}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{uart\_cs}
+{\footnotesize\ttfamily \label{class_so_c_platform_ac8f31d7affacf83b982137f58c974746} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ uart\+\_\+cs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!uart\_int2@{uart\_int2}}
+\index{uart\_int2@{uart\_int2}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{uart\_int2}
+{\footnotesize\ttfamily \label{class_so_c_platform_a9f79fbda67fd95709ab3d9d0ff4cfeae} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ uart\+\_\+int2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!uart\_nrw@{uart\_nrw}}
+\index{uart\_nrw@{uart\_nrw}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{uart\_nrw}
+{\footnotesize\ttfamily \label{class_so_c_platform_a2d7a5026c009275ee78fb487348b230e} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ uart\+\_\+nrw\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!uart\_sin@{uart\_sin}}
+\index{uart\_sin@{uart\_sin}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{uart\_sin}
+{\footnotesize\ttfamily \label{class_so_c_platform_a24207039d998bc340ee1c7f2c9ea5650} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ uart\+\_\+sin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+\index{SoCPlatform@{SoCPlatform}!uart\_sout@{uart\_sout}}
+\index{uart\_sout@{uart\_sout}!SoCPlatform@{SoCPlatform}}
+\doxysubsubsection{uart\_sout}
+{\footnotesize\ttfamily \label{class_so_c_platform_a4fdc7e80e49d8b06b3df57993f9e190d} 
+sc\+\_\+core\+::sc\+\_\+signal$<$bool$>$ uart\+\_\+sout\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ do\+\_\+signals\+\_\+binding()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Soc\+Platform/\textbf{ top.\+h}\end{DoxyCompactItemize}

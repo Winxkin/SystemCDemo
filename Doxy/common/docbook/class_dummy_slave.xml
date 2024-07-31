@@ -1,0 +1,740 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_dummy_slave" xml:lang="en-US">
+<title>DummySlave&lt; BUSWIDTH &gt;</title>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;DummySlave.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for DummySlave&lt; BUSWIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_dummy_slave.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave</link> (sc_core::sc_module_name name, bool message=false)</para>
+
+<para><link linkend="_class_dummy_slave">DummySlave</link>. </para>
+</listitem>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; * <link linkend="_class_dummy_slave_1a18e3e486599beaa9198e3de0cc017fff">add_input_port</link> (const std::string &amp;name)</para>
+
+<para>add_input_port </para>
+</listitem>
+            <listitem><para>sc_core::sc_out&lt; bool &gt; * <link linkend="_class_dummy_slave_1a22c1a62e37948cd85d1a62adce158c6e">add_output_port</link> (const std::string &amp;name)</para>
+
+<para>add_output_port </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a2e318c1eacd31a28585f44df5a5c8719">enable_monitor_clock</link> (bool is_enable)</para>
+
+<para>enable_monitor_clock </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a05fd6e372ec6c89b2fcff4deb62dd3ac">monitor_ports</link> (bool is_enable)</para>
+
+<para>monitor_ports </para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1a68420e10135a04360b1af8a70baff6f6">read_input_ports</link> (const std::string &amp;name)</para>
+
+<para>read_input_ports </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a23dd64199f535427de942617399d99dd">set_output_ports</link> (const std::string &amp;name, bool value)</para>
+
+<para>set_output_ports </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26">trigger_output_ports</link> (const std::string &amp;name, bool high_level, bool is_pos)</para>
+
+<para>set_output_ports </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_dummy_slave_1a7e19409f662da0c599256b1ca029ebe1">clk</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_dummy_slave_1a618e4571cbf41913c0c7a71d84917625">rst</link></para>
+</listitem>
+            <listitem><para>tlm_utils::simple_target_socket&lt; <link linkend="_class_dummy_slave">DummySlave</link>, BUSWIDTH &gt; <link linkend="_class_dummy_slave_1aef06f5b320fac4baca68b77b1610e6f7">target_socket</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_dummy_slave_1aebeedbb375cc4d723d9b0d221ab027cb">cb_DUMMYRESULT</link> (const std::string &amp;name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)</para>
+
+<para>cb_DUMMYRESULT </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a8b99e16059c0fa4f3d3db261c30f5476">end_of_elaboration</link> () override</para>
+
+<para>end_of_elaboration </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">init_registers</link> ()</para>
+
+<para>init_registers </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">monitor_inputs</link> ()</para>
+
+<para>monitor_inputs </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a23141eed3303128f9bc12f17bb2cde3c">mth_reset</link> ()</para>
+
+<para>mth_reset </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1ad14ba1bdba16c5566fe9497cf2231002">mth_synchronize_cycles</link> ()</para>
+
+<para>mth_synchronize_cycles </para>
+</listitem>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">nb_transport_fw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_fw </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">thr_triggered_port_process</link> ()</para>
+
+<para>thr_triggered_port_process </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>sc_core::sc_event <link linkend="_class_dummy_slave_1a18930c7d974c2a28137440eb64bd1bb5">e_triggerd_port</link></para>
+</listitem>
+            <listitem><para>std::map&lt; std::string, sc_core::sc_in&lt; bool &gt; * &gt; <link linkend="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6">input_ports</link></para>
+</listitem>
+            <listitem><para>std::map&lt; std::string, bool &gt; <link linkend="_class_dummy_slave_1aab7e959f2c4214b9e44b130e3bb759ad">input_val_ports</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1ae1c9252336dd2cb1feaa369122a593ee">m_clkmonitor</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1a7719723e8d7ba06b705b83f925fcf824">m_cur_is_pos</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_dummy_slave_1a15d50a6c3900dc701136970f851a4e5b">m_cur_port_name</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1ab7199813f84e703d078330886fa5b932">m_cur_triggered_val</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1a40f977ac4c6e432882dfb186d3450bd4">m_message</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_dummy_slave_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_slave_1a4bce3b7e214b17194008fd5803bc9490">m_portmonitor</link></para>
+</listitem>
+            <listitem><para>std::map&lt; std::string, sc_core::sc_out&lt; bool &gt; * &gt; <link linkend="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74">output_ports</link></para>
+</listitem>
+            <listitem><para>std::map&lt; std::string, bool &gt; <link linkend="_class_dummy_slave_1a36acaafd43494e3452b7c7c8f42641c0">output_val_ports</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_register_interface">RegisterInterface</link> <link linkend="_class_dummy_slave_1afbd41e80ab004d6bad07dc9ca8e282f4">regs</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437"/><section>
+    <title>DummySlave()</title>
+<indexterm><primary>DummySlave</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>DummySlave</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_dummy_slave">DummySlave</link> (sc_core::sc_module_name name, bool message = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_dummy_slave">DummySlave</link>. </para>
+</para>
+
+<para><link linkend="_class_dummy_slave">DummySlave</link> Constructure 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to sc_module name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>message</entry><entry>
+<para>To enable message log </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a7e19409f662da0c599256b1ca029ebe1">DummySlave&lt; BUSWIDTH &gt;::clk</link>, <link linkend="_class_dummy_slave_1a18930c7d974c2a28137440eb64bd1bb5">DummySlave&lt; BUSWIDTH &gt;::e_triggerd_port</link>, <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>, <link linkend="_class_dummy_slave_1a23141eed3303128f9bc12f17bb2cde3c">DummySlave&lt; BUSWIDTH &gt;::mth_reset()</link>, <link linkend="_class_dummy_slave_1ad14ba1bdba16c5566fe9497cf2231002">DummySlave&lt; BUSWIDTH &gt;::mth_synchronize_cycles()</link>, <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>, <link linkend="_class_dummy_slave_1a618e4571cbf41913c0c7a71d84917625">DummySlave&lt; BUSWIDTH &gt;::rst</link>, <link linkend="_class_dummy_slave_1aef06f5b320fac4baca68b77b1610e6f7">DummySlave&lt; BUSWIDTH &gt;::target_socket</link>, and <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_dummy_slave_1a18e3e486599beaa9198e3de0cc017fff"/><section>
+    <title>add_input_port()</title>
+<indexterm><primary>add_input_port</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>add_input_port</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt; bool &gt; * add_input_port (const std::string &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>add_input_port </para>
+</para>
+
+<para>To add input specific input ports to <link linkend="_class_dummy_slave">DummySlave</link> 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to the port name </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6">DummySlave&lt; BUSWIDTH &gt;::input_ports</link>, and <link linkend="_class_dummy_slave_1aab7e959f2c4214b9e44b130e3bb759ad">DummySlave&lt; BUSWIDTH &gt;::input_val_ports</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a22c1a62e37948cd85d1a62adce158c6e"/><section>
+    <title>add_output_port()</title>
+<indexterm><primary>add_output_port</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>add_output_port</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_out&lt; bool &gt; * add_output_port (const std::string &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>add_output_port </para>
+</para>
+
+<para>To add ouput specific output ports to <link linkend="_class_dummy_slave">DummySlave</link> 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to the port name </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74">DummySlave&lt; BUSWIDTH &gt;::output_ports</link>, and <link linkend="_class_dummy_slave_1a36acaafd43494e3452b7c7c8f42641c0">DummySlave&lt; BUSWIDTH &gt;::output_val_ports</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1aebeedbb375cc4d723d9b0d221ab027cb"/><section>
+    <title>cb_DUMMYRESULT()</title>
+<indexterm><primary>cb_DUMMYRESULT</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>cb_DUMMYRESULT</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void cb_DUMMYRESULT (const std::string &amp; name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>cb_DUMMYRESULT </para>
+</para>
+
+<para>The callback function for DUMMYRESULT register 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>The name of register </para>
+</entry>
+                            </row>
+                            <row>
+<entry>value</entry><entry>
+<para>The value of register </para>
+</entry>
+                            </row>
+                            <row>
+<entry>old_value</entry><entry>
+<para>the previous value </para>
+</entry>
+                            </row>
+                            <row>
+<entry>mask</entry><entry>
+<para>the mask of register </para>
+</entry>
+                            </row>
+                            <row>
+<entry>ch</entry><entry>
+<para>the register channel </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a2e318c1eacd31a28585f44df5a5c8719"/><section>
+    <title>enable_monitor_clock()</title>
+<indexterm><primary>enable_monitor_clock</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>enable_monitor_clock</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void enable_monitor_clock (bool is_enable)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>enable_monitor_clock </para>
+</para>
+
+<para>Using to enable or disable clock monitor operation 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>is_enable</entry><entry>
+<para>Indicating whether enabling or disabling clock monitor </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1ae1c9252336dd2cb1feaa369122a593ee">DummySlave&lt; BUSWIDTH &gt;::m_clkmonitor</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a8b99e16059c0fa4f3d3db261c30f5476"/><section>
+    <title>end_of_elaboration()</title>
+<indexterm><primary>end_of_elaboration</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>end_of_elaboration</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void end_of_elaboration ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[override]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>end_of_elaboration </para>
+</para>
+
+<para>The function end_of_elaboration is called before starting simulation </para>
+<para>
+References <link linkend="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6">DummySlave&lt; BUSWIDTH &gt;::input_ports</link>, and <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">DummySlave&lt; BUSWIDTH &gt;::monitor_inputs()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d"/><section>
+    <title>init_registers()</title>
+<indexterm><primary>init_registers</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>init_registers</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void init_registers ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>init_registers </para>
+</para>
+
+<para>Initialization registers </para>
+<para>
+References <link linkend="_class_register_interface_1a544746f8c38d589652fd7adf41227a47">RegisterInterface::add_register()</link>, <link linkend="_class_dummy_slave_1aebeedbb375cc4d723d9b0d221ab027cb">DummySlave&lt; BUSWIDTH &gt;::cb_DUMMYRESULT()</link>, <link linkend="__dummy_slave_8h_1a07a53b64bf7de240c994c66886ae5a5c">DUMMYRESULT</link>, <link linkend="__registerif_8h_1a0e6c7317cf376cdad54ba182c1769963a35c9731eb1af206e4ebcfc0bc95cd6de">READWRITE</link>, <link linkend="_class_dummy_slave_1afbd41e80ab004d6bad07dc9ca8e282f4">DummySlave&lt; BUSWIDTH &gt;::regs</link>, and <link linkend="_class_register_interface_1a58b7a47531113e57149c88a61d91830d">RegisterInterface::set_register_callback()</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93"/><section>
+    <title>monitor_inputs()</title>
+<indexterm><primary>monitor_inputs</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>monitor_inputs</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void monitor_inputs ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>monitor_inputs </para>
+</para>
+
+<para>The method uses to monitor input ports </para>
+<para>
+References <link linkend="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6">DummySlave&lt; BUSWIDTH &gt;::input_ports</link>, <link linkend="_class_dummy_slave_1aab7e959f2c4214b9e44b130e3bb759ad">DummySlave&lt; BUSWIDTH &gt;::input_val_ports</link>, <link linkend="_class_dummy_slave_1adb41893ba19e889e56c559f25fc1a68a">DummySlave&lt; BUSWIDTH &gt;::m_name</link>, and <link linkend="_class_dummy_slave_1a4bce3b7e214b17194008fd5803bc9490">DummySlave&lt; BUSWIDTH &gt;::m_portmonitor</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1a8b99e16059c0fa4f3d3db261c30f5476">DummySlave&lt; BUSWIDTH &gt;::end_of_elaboration()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a05fd6e372ec6c89b2fcff4deb62dd3ac"/><section>
+    <title>monitor_ports()</title>
+<indexterm><primary>monitor_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>monitor_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void monitor_ports (bool is_enable)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>monitor_ports </para>
+</para>
+
+<para>Using to enable or disable port monitor operation 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>is_enable</entry><entry>
+<para>Indicating whether enabling or disabling port monitor </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a4bce3b7e214b17194008fd5803bc9490">DummySlave&lt; BUSWIDTH &gt;::m_portmonitor</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a23141eed3303128f9bc12f17bb2cde3c"/><section>
+    <title>mth_reset()</title>
+<indexterm><primary>mth_reset</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>mth_reset</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void mth_reset ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>mth_reset </para>
+</para>
+
+<para>Implementation the method to handle reset operation </para>
+<para>
+References <link linkend="_class_dummy_slave_1afbd41e80ab004d6bad07dc9ca8e282f4">DummySlave&lt; BUSWIDTH &gt;::regs</link>, and <link linkend="_class_register_interface_1ae9e5a36897056f14f1f6eb742cba6ff6">RegisterInterface::reset_regs()</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1ad14ba1bdba16c5566fe9497cf2231002"/><section>
+    <title>mth_synchronize_cycles()</title>
+<indexterm><primary>mth_synchronize_cycles</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>mth_synchronize_cycles</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void mth_synchronize_cycles ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>mth_synchronize_cycles </para>
+</para>
+
+<para>Implementation the method to monitor clock cycles </para>
+<para>
+References <link linkend="_class_dummy_slave_1ae1c9252336dd2cb1feaa369122a593ee">DummySlave&lt; BUSWIDTH &gt;::m_clkmonitor</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289"/><section>
+    <title>nb_transport_fw()</title>
+<indexterm><primary>nb_transport_fw</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_fw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_fw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_fw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_class_dummy_slave_1a40f977ac4c6e432882dfb186d3450bd4">DummySlave&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_dummy_slave_1adb41893ba19e889e56c559f25fc1a68a">DummySlave&lt; BUSWIDTH &gt;::m_name</link>, <link linkend="_class_dummy_slave_1afbd41e80ab004d6bad07dc9ca8e282f4">DummySlave&lt; BUSWIDTH &gt;::regs</link>, <link linkend="_class_dummy_slave_1aef06f5b320fac4baca68b77b1610e6f7">DummySlave&lt; BUSWIDTH &gt;::target_socket</link>, and <link linkend="_class_register_interface_1ab074287fb1d8088234264f3400d8c8eb">RegisterInterface::update_register()</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a68420e10135a04360b1af8a70baff6f6"/><section>
+    <title>read_input_ports()</title>
+<indexterm><primary>read_input_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>read_input_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool read_input_ports (const std::string &amp; name)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>read_input_ports </para>
+</para>
+
+<para>Using to read the value of specific port 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to the port name </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6">DummySlave&lt; BUSWIDTH &gt;::input_ports</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a23dd64199f535427de942617399d99dd"/><section>
+    <title>set_output_ports()</title>
+<indexterm><primary>set_output_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>set_output_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void set_output_ports (const std::string &amp; name, bool value)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>set_output_ports </para>
+</para>
+
+<para>Using to set specific output port 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to the port name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>value</entry><entry>
+<para>the value of the output port </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74">DummySlave&lt; BUSWIDTH &gt;::output_ports</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c"/><section>
+    <title>thr_triggered_port_process()</title>
+<indexterm><primary>thr_triggered_port_process</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>thr_triggered_port_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void thr_triggered_port_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>thr_triggered_port_process </para>
+</para>
+
+<para>Implementation the process to trigger specific ports </para>
+<para>
+References <link linkend="_class_dummy_slave_1a7e19409f662da0c599256b1ca029ebe1">DummySlave&lt; BUSWIDTH &gt;::clk</link>, <link linkend="_class_dummy_slave_1a18930c7d974c2a28137440eb64bd1bb5">DummySlave&lt; BUSWIDTH &gt;::e_triggerd_port</link>, <link linkend="_class_dummy_slave_1a7719723e8d7ba06b705b83f925fcf824">DummySlave&lt; BUSWIDTH &gt;::m_cur_is_pos</link>, <link linkend="_class_dummy_slave_1a15d50a6c3900dc701136970f851a4e5b">DummySlave&lt; BUSWIDTH &gt;::m_cur_port_name</link>, <link linkend="_class_dummy_slave_1ab7199813f84e703d078330886fa5b932">DummySlave&lt; BUSWIDTH &gt;::m_cur_triggered_val</link>, and <link linkend="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74">DummySlave&lt; BUSWIDTH &gt;::output_ports</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26"/><section>
+    <title>trigger_output_ports()</title>
+<indexterm><primary>trigger_output_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>trigger_output_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void trigger_output_ports (const std::string &amp; name, bool high_level, bool is_pos)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>set_output_ports </para>
+</para>
+
+<para>Using to trigger specific output port 
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>name</entry><entry>
+<para>Reference to the port name </para>
+</entry>
+                            </row>
+                            <row>
+<entry>high_level</entry><entry>
+<para>Indicating the triggered level </para>
+</entry>
+                            </row>
+                            <row>
+<entry>is_pos</entry><entry>
+<para>Indicating the clock edge synchronization is positive or negative </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_slave_1a7719723e8d7ba06b705b83f925fcf824">DummySlave&lt; BUSWIDTH &gt;::m_cur_is_pos</link>, <link linkend="_class_dummy_slave_1a15d50a6c3900dc701136970f851a4e5b">DummySlave&lt; BUSWIDTH &gt;::m_cur_port_name</link>, <link linkend="_class_dummy_slave_1ab7199813f84e703d078330886fa5b932">DummySlave&lt; BUSWIDTH &gt;::m_cur_triggered_val</link>, and <link linkend="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74">DummySlave&lt; BUSWIDTH &gt;::output_ports</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_dummy_slave_1a7e19409f662da0c599256b1ca029ebe1"/><section>
+    <title>clk</title>
+<indexterm><primary>clk</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>clk</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; clk</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>, and <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a18930c7d974c2a28137440eb64bd1bb5"/><section>
+    <title>e_triggerd_port</title>
+<indexterm><primary>e_triggerd_port</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>e_triggerd_port</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_triggerd_port<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>, and <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a19b7ff0db3ad78f9d4eb9a0e212e68b6"/><section>
+    <title>input_ports</title>
+<indexterm><primary>input_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>input_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::map&lt;std::string, sc_core::sc_in&lt;bool&gt;*&gt; input_ports<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a18e3e486599beaa9198e3de0cc017fff">DummySlave&lt; BUSWIDTH &gt;::add_input_port()</link>, <link linkend="_class_dummy_slave_1a8b99e16059c0fa4f3d3db261c30f5476">DummySlave&lt; BUSWIDTH &gt;::end_of_elaboration()</link>, <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">DummySlave&lt; BUSWIDTH &gt;::monitor_inputs()</link>, and <link linkend="_class_dummy_slave_1a68420e10135a04360b1af8a70baff6f6">DummySlave&lt; BUSWIDTH &gt;::read_input_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1aab7e959f2c4214b9e44b130e3bb759ad"/><section>
+    <title>input_val_ports</title>
+<indexterm><primary>input_val_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>input_val_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::map&lt;std::string, bool&gt; input_val_ports<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a18e3e486599beaa9198e3de0cc017fff">DummySlave&lt; BUSWIDTH &gt;::add_input_port()</link>, and <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">DummySlave&lt; BUSWIDTH &gt;::monitor_inputs()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1ae1c9252336dd2cb1feaa369122a593ee"/><section>
+    <title>m_clkmonitor</title>
+<indexterm><primary>m_clkmonitor</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_clkmonitor</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_clkmonitor<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a2e318c1eacd31a28585f44df5a5c8719">DummySlave&lt; BUSWIDTH &gt;::enable_monitor_clock()</link>, and <link linkend="_class_dummy_slave_1ad14ba1bdba16c5566fe9497cf2231002">DummySlave&lt; BUSWIDTH &gt;::mth_synchronize_cycles()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a7719723e8d7ba06b705b83f925fcf824"/><section>
+    <title>m_cur_is_pos</title>
+<indexterm><primary>m_cur_is_pos</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_cur_is_pos</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_cur_is_pos<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>, and <link linkend="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26">DummySlave&lt; BUSWIDTH &gt;::trigger_output_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a15d50a6c3900dc701136970f851a4e5b"/><section>
+    <title>m_cur_port_name</title>
+<indexterm><primary>m_cur_port_name</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_cur_port_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_cur_port_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>, and <link linkend="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26">DummySlave&lt; BUSWIDTH &gt;::trigger_output_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1ab7199813f84e703d078330886fa5b932"/><section>
+    <title>m_cur_triggered_val</title>
+<indexterm><primary>m_cur_triggered_val</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_cur_triggered_val</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_cur_triggered_val<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>, and <link linkend="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26">DummySlave&lt; BUSWIDTH &gt;::trigger_output_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a40f977ac4c6e432882dfb186d3450bd4"/><section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_message</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_message<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">DummySlave&lt; BUSWIDTH &gt;::monitor_inputs()</link>, and <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a4bce3b7e214b17194008fd5803bc9490"/><section>
+    <title>m_portmonitor</title>
+<indexterm><primary>m_portmonitor</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>m_portmonitor</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_portmonitor<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a9bc7d11764bc5231892fb539c5aa3b93">DummySlave&lt; BUSWIDTH &gt;::monitor_inputs()</link>, and <link linkend="_class_dummy_slave_1a05fd6e372ec6c89b2fcff4deb62dd3ac">DummySlave&lt; BUSWIDTH &gt;::monitor_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a4593ff3c46fbc684df4d5cc3bea3fe74"/><section>
+    <title>output_ports</title>
+<indexterm><primary>output_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>output_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::map&lt;std::string, sc_core::sc_out&lt;bool&gt;*&gt; output_ports<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a22c1a62e37948cd85d1a62adce158c6e">DummySlave&lt; BUSWIDTH &gt;::add_output_port()</link>, <link linkend="_class_dummy_slave_1a23dd64199f535427de942617399d99dd">DummySlave&lt; BUSWIDTH &gt;::set_output_ports()</link>, <link linkend="_class_dummy_slave_1a53a30b6827abcc657b635842e3ead98c">DummySlave&lt; BUSWIDTH &gt;::thr_triggered_port_process()</link>, and <link linkend="_class_dummy_slave_1a13bda8683a32fdf40b44b36300f0ba26">DummySlave&lt; BUSWIDTH &gt;::trigger_output_ports()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a36acaafd43494e3452b7c7c8f42641c0"/><section>
+    <title>output_val_ports</title>
+<indexterm><primary>output_val_ports</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>output_val_ports</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::map&lt;std::string, bool&gt; output_val_ports<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a22c1a62e37948cd85d1a62adce158c6e">DummySlave&lt; BUSWIDTH &gt;::add_output_port()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1afbd41e80ab004d6bad07dc9ca8e282f4"/><section>
+    <title>regs</title>
+<indexterm><primary>regs</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>regs</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_register_interface">RegisterInterface</link> regs<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1a1cf609a2603fd853aa7095c8fc2a9e1d">DummySlave&lt; BUSWIDTH &gt;::init_registers()</link>, <link linkend="_class_dummy_slave_1a23141eed3303128f9bc12f17bb2cde3c">DummySlave&lt; BUSWIDTH &gt;::mth_reset()</link>, and <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1a618e4571cbf41913c0c7a71d84917625"/><section>
+    <title>rst</title>
+<indexterm><primary>rst</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>rst</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; rst</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_slave_1aef06f5b320fac4baca68b77b1610e6f7"/><section>
+    <title>target_socket</title>
+<indexterm><primary>target_socket</primary><secondary>DummySlave&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummySlave&lt; BUSWIDTH &gt;</primary><secondary>target_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_target_socket&lt;<link linkend="_class_dummy_slave">DummySlave</link>, BUSWIDTH&gt; target_socket</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_slave_1ad03db41fb462ebee8d4c7037357ad437">DummySlave&lt; BUSWIDTH &gt;::DummySlave()</link>, and <link linkend="_class_dummy_slave_1a882a19a1d4962f1024c218c07e8e0289">DummySlave&lt; BUSWIDTH &gt;::nb_transport_fw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="__dummy_slave_8h">DummySlave.h</link></section>
+</section>

@@ -1,0 +1,209 @@
+\doxysection{Register\+Interface}
+\label{class_register_interface}\index{RegisterInterface@{RegisterInterface}}
+
+
+{\ttfamily \#include "{}Registerif.\+h"{}}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ add\+\_\+register} (std\+::string name, uint64\+\_\+t address, uint32\+\_\+t init, uint32\+\_\+t mask, uint32\+\_\+t ch, \textbf{ REGPERMISSION} permission)
+\begin{DoxyCompactList}\small\item\em add\+\_\+register \end{DoxyCompactList}\item 
+void \textbf{ dump\+\_\+registers} ()
+\begin{DoxyCompactList}\small\item\em update\+\_\+register Using to show all register informations \end{DoxyCompactList}\item 
+\textbf{ Register} \& \textbf{ operator[$\,$]} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em add\+\_\+register The operator to get register by name for example this-\/$>$reg[name] \end{DoxyCompactList}\item 
+\textbf{ Register} \& \textbf{ operator[$\,$]} (uint64\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em operator[] The operator to get register by address for example this-\/$>$reg[addr] \end{DoxyCompactList}\item 
+void \textbf{ reset\+\_\+regs} ()
+\begin{DoxyCompactList}\small\item\em update\+\_\+register Using to reset registers \end{DoxyCompactList}\item 
+void \textbf{ set\+\_\+register\+\_\+callback} (const std\+::string \&name, \textbf{ Register\+::\+Callback} cb)
+\begin{DoxyCompactList}\small\item\em update\+\_\+register Using to register register callback function \end{DoxyCompactList}\item 
+void \textbf{ update\+\_\+register} (uint64\+\_\+t address, uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em update\+\_\+register Using to update the value of register with specific address \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \textbf{ Register} $>$ \textbf{ registers}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\index{RegisterInterface@{RegisterInterface}!add\_register@{add\_register}}
+\index{add\_register@{add\_register}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{add\_register()}
+{\footnotesize\ttfamily \label{class_register_interface_a544746f8c38d589652fd7adf41227a47} 
+void add\+\_\+register (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{, }\item[{uint64\+\_\+t}]{address}{, }\item[{uint32\+\_\+t}]{init}{, }\item[{uint32\+\_\+t}]{mask}{, }\item[{uint32\+\_\+t}]{ch}{, }\item[{\textbf{ REGPERMISSION}}]{permission}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+\_\+register 
+
+Constructure 
+\begin{DoxyParams}{Parameters}
+{\em name} & The register name \\
+\hline
+{\em address} & The register base address \\
+\hline
+{\em init} & The register initialization value \\
+\hline
+{\em mask} & The register mask \\
+\hline
+{\em ch} & The register channel \\
+\hline
+{\em permission} & Indicating this register is read /write or read only permission \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ registers}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::init\+\_\+registers()}.
+
+\index{RegisterInterface@{RegisterInterface}!dump\_registers@{dump\_registers}}
+\index{dump\_registers@{dump\_registers}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{dump\_registers()}
+{\footnotesize\ttfamily \label{class_register_interface_a8ae47f31c3ea49dbe77616951e7b612e} 
+void dump\+\_\+registers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+update\+\_\+register Using to show all register informations 
+
+
+
+References \textbf{ registers}.
+
+\index{RegisterInterface@{RegisterInterface}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_register_interface_a6ce1143eff40cd2900f607723842be2d} 
+\textbf{ Register} \& operator[$\,$] (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+add\+\_\+register The operator to get register by name for example this-\/$>$reg[name] 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The register name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxyref{Register}{p.}{class_register} object with corresponding name 
+\end{DoxyReturn}
+
+
+References \textbf{ registers}.
+
+\index{RegisterInterface@{RegisterInterface}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_register_interface_a3247d9aa20912963b2e0eeb0d979080d} 
+\textbf{ Register} \& operator[$\,$] (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+operator[] The operator to get register by address for example this-\/$>$reg[addr] 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The register address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxyref{Register}{p.}{class_register} object with corresponding address 
+\end{DoxyReturn}
+
+
+References \textbf{ registers}.
+
+\index{RegisterInterface@{RegisterInterface}!reset\_regs@{reset\_regs}}
+\index{reset\_regs@{reset\_regs}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{reset\_regs()}
+{\footnotesize\ttfamily \label{class_register_interface_ae9e5a36897056f14f1f6eb742cba6ff6} 
+void reset\+\_\+regs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+update\+\_\+register Using to reset registers 
+
+
+
+References \textbf{ registers}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::mth\+\_\+reset()}.
+
+\index{RegisterInterface@{RegisterInterface}!set\_register\_callback@{set\_register\_callback}}
+\index{set\_register\_callback@{set\_register\_callback}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{set\_register\_callback()}
+{\footnotesize\ttfamily \label{class_register_interface_a58b7a47531113e57149c88a61d91830d} 
+void set\+\_\+register\+\_\+callback (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{\textbf{ Register\+::\+Callback}}]{cb}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+update\+\_\+register Using to register register callback function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The register name \\
+\hline
+{\em cb} & The address of call back function \\
+\hline
+\end{DoxyParams}
+
+
+References \textbf{ registers}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::init\+\_\+registers()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::init\+\_\+registers()}.
+
+\index{RegisterInterface@{RegisterInterface}!update\_register@{update\_register}}
+\index{update\_register@{update\_register}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{update\_register()}
+{\footnotesize\ttfamily \label{class_register_interface_ab074287fb1d8088234264f3400d8c8eb} 
+void update\+\_\+register (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{address}{, }\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+update\+\_\+register Using to update the value of register with specific address 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The register address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value The new value that is wrote into this register 
+\end{DoxyReturn}
+
+
+References \textbf{ registers}.
+
+
+
+Referenced by \textbf{ DMAC$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}, and \textbf{ Dummy\+Slave$<$ BUSWIDTH $>$\+::nb\+\_\+transport\+\_\+fw()}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\index{RegisterInterface@{RegisterInterface}!registers@{registers}}
+\index{registers@{registers}!RegisterInterface@{RegisterInterface}}
+\doxysubsubsection{registers}
+{\footnotesize\ttfamily \label{class_register_interface_a3a118131224c5739eb41ed33a11ac4d3} 
+std\+::map$<$std\+::string, \textbf{ Register}$>$ registers\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \textbf{ add\+\_\+register()}, \textbf{ dump\+\_\+registers()}, \textbf{ operator[$\,$]()}, \textbf{ operator[$\,$]()}, \textbf{ reset\+\_\+regs()}, \textbf{ set\+\_\+register\+\_\+callback()}, and \textbf{ update\+\_\+register()}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+common/\textbf{ Registerif.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\doxysection{models/\+Adder/\+Adder\+\_\+wrapper.h File Reference}
+\label{_adder__wrapper_8h}\index{models/Adder/Adder\_wrapper.h@{models/Adder/Adder\_wrapper.h}}
+{\ttfamily \#include "{}inc/adder\+\_\+four\+\_\+bit\+\_\+adder.\+h"{}}\newline
+{\ttfamily \#include $<$systemc$>$}\newline
+{\ttfamily \#include $<$tlm$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/simple\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+initiator\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$tlm\+\_\+utils/multi\+\_\+passthrough\+\_\+target\+\_\+socket.\+h$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+Include dependency graph for Adder\+\_\+wrapper.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+ADDER\+\_\+\+WRAPPER\+\_\+H}
+\item 
+\#define \textbf{ ADDERINPUT}~(0x00 + 0x00)
+\item 
+\#define \textbf{ ADDEROUTPUT}~(0x00 + 0x04)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\index{Adder\_wrapper.h@{Adder\_wrapper.h}!\_ADDER\_WRAPPER\_H@{\_ADDER\_WRAPPER\_H}}
+\index{\_ADDER\_WRAPPER\_H@{\_ADDER\_WRAPPER\_H}!Adder\_wrapper.h@{Adder\_wrapper.h}}
+\doxysubsubsection{\_ADDER\_WRAPPER\_H}
+{\footnotesize\ttfamily \label{_adder__wrapper_8h_a3850a37e7775a970fc5f7be2cdc65947} 
+\#define \+\_\+\+ADDER\+\_\+\+WRAPPER\+\_\+H}
+
+\index{Adder\_wrapper.h@{Adder\_wrapper.h}!ADDERINPUT@{ADDERINPUT}}
+\index{ADDERINPUT@{ADDERINPUT}!Adder\_wrapper.h@{Adder\_wrapper.h}}
+\doxysubsubsection{ADDERINPUT}
+{\footnotesize\ttfamily \label{_adder__wrapper_8h_aeff4bca7ebcb47faabf737478d9f9c17} 
+\#define ADDERINPUT~(0x00 + 0x00)}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::init\+\_\+register()}.
+
+\index{Adder\_wrapper.h@{Adder\_wrapper.h}!ADDEROUTPUT@{ADDEROUTPUT}}
+\index{ADDEROUTPUT@{ADDEROUTPUT}!Adder\_wrapper.h@{Adder\_wrapper.h}}
+\doxysubsubsection{ADDEROUTPUT}
+{\footnotesize\ttfamily \label{_adder__wrapper_8h_a4091c8181182a4afcb7b31d0274e8c4e} 
+\#define ADDEROUTPUT~(0x00 + 0x04)}
+
+
+
+Referenced by \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::init\+\_\+register()}, and \textbf{ wrapper\+\_\+four\+\_\+bit\+\_\+adder$<$ BUSWIDTH $>$\+::output\+\_\+handling()}.
+

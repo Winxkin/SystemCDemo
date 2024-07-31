@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_dummy_master" xml:lang="en-US">
+<title>DummyMaster&lt; BUSWIDTH &gt;</title>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &quot;DummyMaster.h&quot;</computeroutput>
+</para>
+<para>Inheritance diagram for DummyMaster&lt; BUSWIDTH &gt;:    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_dummy_master.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_struct_dummy_master_1_1localdata">localdata</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1">DummyMaster</link> (sc_core::sc_module_name name, bool message=false)</para>
+
+<para><link linkend="_class_dummy_master">DummyMaster</link>. </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_class_dummy_master_1a08a564de97649540c69db5090febf892">get_received_32bit_data</link> ()</para>
+
+<para>get_received_data </para>
+</listitem>
+            <listitem><para>unsigned char * <link linkend="_class_dummy_master_1ab48cdf23350697763e6d6e1980c29ed0">get_received_data</link> ()</para>
+
+<para>get_received_data </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_master_1aa5a464ae099c60ba1d6bca9579afa1a7">Sentcustomtransaction</link> (unsigned int addr, unsigned char *data, unsigned int data_length, tlm::tlm_command cmd)</para>
+
+<para>Sentcustomtransaction. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_master_1a79130bb3520c3a038345f56d2fd6cf25">SentTransaction</link> (unsigned int addr, uint32_t data, tlm::tlm_command cmd)</para>
+
+<para>SentTransaction. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>sc_core::sc_in&lt; bool &gt; <link linkend="_class_dummy_master_1a7e19409f662da0c599256b1ca029ebe1">clk</link></para>
+</listitem>
+            <listitem><para>tlm_utils::simple_initiator_socket&lt; <link linkend="_class_dummy_master">DummyMaster</link>, BUSWIDTH &gt; <link linkend="_class_dummy_master_1a96966ca30eb3282b79eae61e99c75602">initiator_socket</link></para>
+</listitem>
+            <listitem><para>sc_core::sc_out&lt; bool &gt; <link linkend="_class_dummy_master_1ad1a1e826932115ea77aa11dbcef2a78b">rst</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>tlm::tlm_sync_enum <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">nb_transport_bw</link> (tlm::tlm_generic_payload &amp;trans, tlm::tlm_phase &amp;phase, sc_core::sc_time &amp;delay)</para>
+
+<para>nb_transport_bw </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970">reset_process</link> ()</para>
+
+<para>resetsystem Reset thread handling </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_dummy_master_1acc8759ffc46c6f1ecbb1ea613adc2b1a">resetsystem</link> ()</para>
+
+<para>resetsystem To triggered reset signal </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>sc_core::sc_event <link linkend="_class_dummy_master_1aade78c3e7ec82c269a292677575ebd48">e_reset</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_dummy_master_1a40f977ac4c6e432882dfb186d3450bd4">m_message</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_dummy_master_1adb41893ba19e889e56c559f25fc1a68a">m_name</link></para>
+</listitem>
+            <listitem><para><link linkend="_struct_dummy_master_1_1localdata">localdata</link> <link linkend="_class_dummy_master_1a594a33cffd2e25159af2ae3e83e62905">tempdata</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1"/><section>
+    <title>DummyMaster()</title>
+<indexterm><primary>DummyMaster</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>DummyMaster</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_class_dummy_master">DummyMaster</link> (sc_core::sc_module_name name, bool message = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_dummy_master">DummyMaster</link>. </para>
+</para>
+
+<para>The constructor of <link linkend="_class_dummy_master">DummyMaster</link> </para>
+<para>
+References <link linkend="_class_dummy_master_1aade78c3e7ec82c269a292677575ebd48">DummyMaster&lt; BUSWIDTH &gt;::e_reset</link>, <link linkend="_class_dummy_master_1a96966ca30eb3282b79eae61e99c75602">DummyMaster&lt; BUSWIDTH &gt;::initiator_socket</link>, <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">DummyMaster&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, and <link linkend="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970">DummyMaster&lt; BUSWIDTH &gt;::reset_process()</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_dummy_master_1a08a564de97649540c69db5090febf892"/><section>
+    <title>get_received_32bit_data()</title>
+<indexterm><primary>get_received_32bit_data</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>get_received_32bit_data</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned int get_received_32bit_data ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_received_data </para>
+</para>
+
+<para>Using to get data from the returned transaction</para>
+
+<para><formalpara><title>Returns</title>
+
+<para>the 32-bit data </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_struct_dummy_master_1_1localdata_1a869c0e685d480f585c4281ac7a2ed6e3">DummyMaster&lt; BUSWIDTH &gt;::localdata::m_data</link>, and <link linkend="_class_dummy_master_1a594a33cffd2e25159af2ae3e83e62905">DummyMaster&lt; BUSWIDTH &gt;::tempdata</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1ab48cdf23350697763e6d6e1980c29ed0"/><section>
+    <title>get_received_data()</title>
+<indexterm><primary>get_received_data</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>get_received_data</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>unsigned char * get_received_data ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>get_received_data </para>
+</para>
+
+<para>Using to get data from the returned transaction</para>
+
+<para><formalpara><title>Returns</title>
+
+<para>the array of data </para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_struct_dummy_master_1_1localdata_1a869c0e685d480f585c4281ac7a2ed6e3">DummyMaster&lt; BUSWIDTH &gt;::localdata::m_data</link>, and <link linkend="_class_dummy_master_1a594a33cffd2e25159af2ae3e83e62905">DummyMaster&lt; BUSWIDTH &gt;::tempdata</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7"/><section>
+    <title>nb_transport_bw()</title>
+<indexterm><primary>nb_transport_bw</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>nb_transport_bw</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm::tlm_sync_enum nb_transport_bw (tlm::tlm_generic_payload &amp; trans, tlm::tlm_phase &amp; phase, sc_core::sc_time &amp; delay)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>nb_transport_bw </para>
+</para>
+
+<para>Implements the non-blocking backward transport interface for the initiator.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>trans</entry><entry>
+<para>Reference to the generic payload object containing the transaction details such as command, address, and data.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>phase</entry><entry>
+<para>Reference to the transaction phase. The current phase of the transaction, which may be updated by the function.</para>
+</entry>
+                            </row>
+                            <row>
+<entry>delay</entry><entry>
+<para>Reference to the annotated delay. Specifies the timing delay for the transaction and may be updated by the function.</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:<itemizedlist>
+<listitem>
+<para>TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.</para>
+</listitem><listitem>
+<para>TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.</para>
+</listitem><listitem>
+<para>TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur. </para>
+</listitem></itemizedlist>
+</para>
+</formalpara>
+</para>
+<para>
+References <link linkend="_struct_dummy_master_1_1localdata_1a869c0e685d480f585c4281ac7a2ed6e3">DummyMaster&lt; BUSWIDTH &gt;::localdata::m_data</link>, <link linkend="_class_dummy_master_1a40f977ac4c6e432882dfb186d3450bd4">DummyMaster&lt; BUSWIDTH &gt;::m_message</link>, <link linkend="_class_dummy_master_1adb41893ba19e889e56c559f25fc1a68a">DummyMaster&lt; BUSWIDTH &gt;::m_name</link>, and <link linkend="_class_dummy_master_1a594a33cffd2e25159af2ae3e83e62905">DummyMaster&lt; BUSWIDTH &gt;::tempdata</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1">DummyMaster&lt; BUSWIDTH &gt;::DummyMaster()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970"/><section>
+    <title>reset_process()</title>
+<indexterm><primary>reset_process</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>reset_process</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void reset_process ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>resetsystem Reset thread handling </para>
+</para>
+<para>
+References <link linkend="_class_dummy_master_1a7e19409f662da0c599256b1ca029ebe1">DummyMaster&lt; BUSWIDTH &gt;::clk</link>, <link linkend="_class_dummy_master_1aade78c3e7ec82c269a292677575ebd48">DummyMaster&lt; BUSWIDTH &gt;::e_reset</link>, and <link linkend="_class_dummy_master_1ad1a1e826932115ea77aa11dbcef2a78b">DummyMaster&lt; BUSWIDTH &gt;::rst</link>.</para>
+<para>
+Referenced by <link linkend="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1">DummyMaster&lt; BUSWIDTH &gt;::DummyMaster()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1acc8759ffc46c6f1ecbb1ea613adc2b1a"/><section>
+    <title>resetsystem()</title>
+<indexterm><primary>resetsystem</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>resetsystem</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void resetsystem ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+
+<para>resetsystem To triggered reset signal </para>
+</para>
+<para>
+References <link linkend="_class_dummy_master_1aade78c3e7ec82c269a292677575ebd48">DummyMaster&lt; BUSWIDTH &gt;::e_reset</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1aa5a464ae099c60ba1d6bca9579afa1a7"/><section>
+    <title>Sentcustomtransaction()</title>
+<indexterm><primary>Sentcustomtransaction</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>Sentcustomtransaction</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void Sentcustomtransaction (unsigned int addr, unsigned char * data, unsigned int data_length, tlm::tlm_command cmd)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Sentcustomtransaction. </para>
+</para>
+
+<para>Implements the sent a custom transaction to bus MMIO</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>addr</entry><entry>
+<para>Reference to the address of the slave</para>
+</entry>
+                            </row>
+                            <row>
+<entry>data</entry><entry>
+<para>Reference to the pointer of array data</para>
+</entry>
+                            </row>
+                            <row>
+<entry>data_length</entry><entry>
+<para>Reference to the length of data</para>
+</entry>
+                            </row>
+                            <row>
+<entry>cmd</entry><entry>
+<para>Reference to tlm command -TLM_READ_COMMAND : TLM read requset -TLM_WRITE_COMMAND : TLM write requset -TLM_IGNORE_COMMAND: TLM ignore requset </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_master_1a96966ca30eb3282b79eae61e99c75602">DummyMaster&lt; BUSWIDTH &gt;::initiator_socket</link>, <link linkend="_class_dummy_master_1a40f977ac4c6e432882dfb186d3450bd4">DummyMaster&lt; BUSWIDTH &gt;::m_message</link>, and <link linkend="_class_dummy_master_1adb41893ba19e889e56c559f25fc1a68a">DummyMaster&lt; BUSWIDTH &gt;::m_name</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a79130bb3520c3a038345f56d2fd6cf25"/><section>
+    <title>SentTransaction()</title>
+<indexterm><primary>SentTransaction</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>SentTransaction</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>void SentTransaction (unsigned int addr, uint32_t data, tlm::tlm_command cmd)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>SentTransaction. </para>
+</para>
+
+<para>Implements the sent a transaction with 32 bit data to bus MMIO</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>addr</entry><entry>
+<para>Reference to the address of the slave</para>
+</entry>
+                            </row>
+                            <row>
+<entry>data</entry><entry>
+<para>Reference to 32-bit data</para>
+</entry>
+                            </row>
+                            <row>
+<entry>cmd</entry><entry>
+<para>Reference to tlm command -TLM_READ_COMMAND : TLM read requset -TLM_WRITE_COMMAND : TLM write requset -TLM_IGNORE_COMMAND: TLM ignore requset </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+References <link linkend="_class_dummy_master_1a96966ca30eb3282b79eae61e99c75602">DummyMaster&lt; BUSWIDTH &gt;::initiator_socket</link>, <link linkend="_class_dummy_master_1a40f977ac4c6e432882dfb186d3450bd4">DummyMaster&lt; BUSWIDTH &gt;::m_message</link>, and <link linkend="_class_dummy_master_1adb41893ba19e889e56c559f25fc1a68a">DummyMaster&lt; BUSWIDTH &gt;::m_name</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_dummy_master_1a7e19409f662da0c599256b1ca029ebe1"/><section>
+    <title>clk</title>
+<indexterm><primary>clk</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>clk</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_in&lt;bool&gt; clk</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970">DummyMaster&lt; BUSWIDTH &gt;::reset_process()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1aade78c3e7ec82c269a292677575ebd48"/><section>
+    <title>e_reset</title>
+<indexterm><primary>e_reset</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>e_reset</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_event e_reset<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1">DummyMaster&lt; BUSWIDTH &gt;::DummyMaster()</link>, <link linkend="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970">DummyMaster&lt; BUSWIDTH &gt;::reset_process()</link>, and <link linkend="_class_dummy_master_1acc8759ffc46c6f1ecbb1ea613adc2b1a">DummyMaster&lt; BUSWIDTH &gt;::resetsystem()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a96966ca30eb3282b79eae61e99c75602"/><section>
+    <title>initiator_socket</title>
+<indexterm><primary>initiator_socket</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>initiator_socket</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>tlm_utils::simple_initiator_socket&lt;<link linkend="_class_dummy_master">DummyMaster</link>, BUSWIDTH&gt; initiator_socket</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a72b047a1a7d2f7d0bb5fc6678dc962b1">DummyMaster&lt; BUSWIDTH &gt;::DummyMaster()</link>, <link linkend="_class_dummy_master_1aa5a464ae099c60ba1d6bca9579afa1a7">DummyMaster&lt; BUSWIDTH &gt;::Sentcustomtransaction()</link>, and <link linkend="_class_dummy_master_1a79130bb3520c3a038345f56d2fd6cf25">DummyMaster&lt; BUSWIDTH &gt;::SentTransaction()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a40f977ac4c6e432882dfb186d3450bd4"/><section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>m_message</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>bool m_message<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">DummyMaster&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_dummy_master_1aa5a464ae099c60ba1d6bca9579afa1a7">DummyMaster&lt; BUSWIDTH &gt;::Sentcustomtransaction()</link>, and <link linkend="_class_dummy_master_1a79130bb3520c3a038345f56d2fd6cf25">DummyMaster&lt; BUSWIDTH &gt;::SentTransaction()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1adb41893ba19e889e56c559f25fc1a68a"/><section>
+    <title>m_name</title>
+<indexterm><primary>m_name</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>m_name</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>std::string m_name<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">DummyMaster&lt; BUSWIDTH &gt;::nb_transport_bw()</link>, <link linkend="_class_dummy_master_1aa5a464ae099c60ba1d6bca9579afa1a7">DummyMaster&lt; BUSWIDTH &gt;::Sentcustomtransaction()</link>, and <link linkend="_class_dummy_master_1a79130bb3520c3a038345f56d2fd6cf25">DummyMaster&lt; BUSWIDTH &gt;::SentTransaction()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1ad1a1e826932115ea77aa11dbcef2a78b"/><section>
+    <title>rst</title>
+<indexterm><primary>rst</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>rst</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput>sc_core::sc_out&lt;bool&gt; rst</computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a986b85515060e0574b322d5b9bef2970">DummyMaster&lt; BUSWIDTH &gt;::reset_process()</link>.</para>
+</section>
+<anchor xml:id="_class_dummy_master_1a594a33cffd2e25159af2ae3e83e62905"/><section>
+    <title>tempdata</title>
+<indexterm><primary>tempdata</primary><secondary>DummyMaster&lt; BUSWIDTH &gt;</secondary></indexterm>
+<indexterm><primary>DummyMaster&lt; BUSWIDTH &gt;</primary><secondary>tempdata</secondary></indexterm>
+<computeroutput>template&lt;unsigned int BUSWIDTH = 32&gt; </computeroutput><para><computeroutput><link linkend="_struct_dummy_master_1_1localdata">localdata</link> tempdata<computeroutput>[private]</computeroutput></computeroutput></para><para>
+Referenced by <link linkend="_class_dummy_master_1a08a564de97649540c69db5090febf892">DummyMaster&lt; BUSWIDTH &gt;::get_received_32bit_data()</link>, <link linkend="_class_dummy_master_1ab48cdf23350697763e6d6e1980c29ed0">DummyMaster&lt; BUSWIDTH &gt;::get_received_data()</link>, and <link linkend="_class_dummy_master_1a9401643ffeae74f7b9b36713bc735da7">DummyMaster&lt; BUSWIDTH &gt;::nb_transport_bw()</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+common/<link linkend="__dummy_master_8h">DummyMaster.h</link></section>
+</section>

@@ -28,6 +28,14 @@ private:
 public:
     tlm_utils::simple_target_socket<RAM, BUSWIDTH> socket;
 
+	/**@brief
+	* RAM
+	*
+	* RAM Constructure
+	* @param name Reference to sc_module name
+	* @param size Reference to the ram size
+	* @param message To enable message log
+	*/
     RAM(sc_core::sc_module_name name, sc_dt::uint64 size, bool message = false) :
         sc_module(name)
 		, m_name(name)
@@ -40,10 +48,34 @@ public:
 		std::memset(data, 0, size);
     }
 
+	/**@brief
+	* RAM
+	*
+	* RAM Destructure
+	*/
 	~RAM() {
 		delete[] data;
 	}
 
+	/**@brief
+	 * nb_transport_fw
+	 *
+	 * Implements the non-blocking backward transport interface for the initiator.
+	 *
+	 * @param trans Reference to the generic payload object containing the transaction details
+	 *              such as command, address, and data.
+	 *
+	 * @param phase Reference to the transaction phase. The current phase of the transaction,
+	 *              which may be updated by the function.
+	 *
+	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	 *              and may be updated by the function.
+	 *
+	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
+	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
+	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
+	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
+	 */
 	tlm::tlm_sync_enum nb_transport_fw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) 
 	{
 		tlm::tlm_phase next_phase = tlm::END_REQ;
@@ -99,6 +131,13 @@ public:
 		return tlm::TLM_ACCEPTED;
 	}
 
+	/**@brief
+	 * dump_memory
+	 *
+	 * Show memory regions
+	 * @param offset The ram offset
+	 * @param len The ram size
+	 */
 	void dump_memory(sc_dt::uint64 offset, unsigned int len) {
 		if (offset + len > size) {
 			std::cerr << m_name << "	Error: Address out of bounds" << std::endl;
@@ -114,6 +153,11 @@ public:
 		}
 	}
 
+	/**@brief
+	 * get_name
+	 *
+	 * Using to get the name of Ram.
+	 */
 	std::string get_name()
 	{
 		return m_name;

@@ -1,0 +1,154 @@
+.TH "DummyMaster< BUSWIDTH >" 3 "Version v1.0" "SoCPlatform" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DummyMaster< BUSWIDTH >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include 'DummyMaster\&.h'\fP
+.PP
+Inherits sc_module\&.
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBlocaldata\fP"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDummyMaster\fP (sc_core::sc_module_name name, bool message=false)"
+.br
+.ti -1c
+.RI "unsigned int \fBget_received_32bit_data\fP ()"
+.br
+.ti -1c
+.RI "unsigned char * \fBget_received_data\fP ()"
+.br
+.ti -1c
+.RI "void \fBSentcustomtransaction\fP (unsigned int addr, unsigned char *data, unsigned int data_length, tlm::tlm_command cmd)"
+.br
+.ti -1c
+.RI "void \fBSentTransaction\fP (unsigned int addr, uint32_t data, tlm::tlm_command cmd)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_core::sc_in< bool > \fBclk\fP"
+.br
+.ti -1c
+.RI "tlm_utils::simple_initiator_socket< \fBDummyMaster\fP, BUSWIDTH > \fBinitiator_socket\fP"
+.br
+.ti -1c
+.RI "sc_core::sc_out< bool > \fBrst\fP"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "tlm::tlm_sync_enum \fBnb_transport_bw\fP (tlm::tlm_generic_payload &trans, tlm::tlm_phase &phase, sc_core::sc_time &delay)"
+.br
+.ti -1c
+.RI "void \fBreset_process\fP ()"
+.br
+.ti -1c
+.RI "void \fBresetsystem\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "sc_core::sc_event \fBe_reset\fP"
+.br
+.ti -1c
+.RI "bool \fBm_message\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "\fBlocaldata\fP \fBtempdata\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> \fBDummyMaster\fP (sc_core::sc_module_name name, bool message = \fRfalse\fP)\fR [inline]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::e_reset\fP, \fBDummyMaster< BUSWIDTH >::initiator_socket\fP, \fBDummyMaster< BUSWIDTH >::nb_transport_bw()\fP, and \fBDummyMaster< BUSWIDTH >::reset_process()\fP\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> unsigned int get_received_32bit_data ()\fR [inline]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::localdata::m_data\fP, and \fBDummyMaster< BUSWIDTH >::tempdata\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> unsigned char * get_received_data ()\fR [inline]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::localdata::m_data\fP, and \fBDummyMaster< BUSWIDTH >::tempdata\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm::tlm_sync_enum nb_transport_bw (tlm::tlm_generic_payload & trans, tlm::tlm_phase & phase, sc_core::sc_time & delay)\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::localdata::m_data\fP, \fBDummyMaster< BUSWIDTH >::m_message\fP, \fBDummyMaster< BUSWIDTH >::m_name\fP, and \fBDummyMaster< BUSWIDTH >::tempdata\fP\&.
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::DummyMaster()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void reset_process ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::clk\fP, \fBDummyMaster< BUSWIDTH >::e_reset\fP, and \fBDummyMaster< BUSWIDTH >::rst\fP\&.
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::DummyMaster()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void resetsystem ()\fR [inline]\fP, \fR [private]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::e_reset\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void Sentcustomtransaction (unsigned int addr, unsigned char * data, unsigned int data_length, tlm::tlm_command cmd)\fR [inline]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::initiator_socket\fP, \fBDummyMaster< BUSWIDTH >::m_message\fP, and \fBDummyMaster< BUSWIDTH >::m_name\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> void SentTransaction (unsigned int addr, uint32_t data, tlm::tlm_command cmd)\fR [inline]\fP"
+
+.PP
+References \fBDummyMaster< BUSWIDTH >::initiator_socket\fP, \fBDummyMaster< BUSWIDTH >::m_message\fP, and \fBDummyMaster< BUSWIDTH >::m_name\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_in<bool> clk"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::reset_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_event e_reset\fR [private]\fP"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::DummyMaster()\fP, \fBDummyMaster< BUSWIDTH >::reset_process()\fP, and \fBDummyMaster< BUSWIDTH >::resetsystem()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> tlm_utils::simple_initiator_socket<\fBDummyMaster\fP, BUSWIDTH> initiator_socket"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::DummyMaster()\fP, \fBDummyMaster< BUSWIDTH >::Sentcustomtransaction()\fP, and \fBDummyMaster< BUSWIDTH >::SentTransaction()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> bool m_message\fR [private]\fP"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::nb_transport_bw()\fP, \fBDummyMaster< BUSWIDTH >::Sentcustomtransaction()\fP, and \fBDummyMaster< BUSWIDTH >::SentTransaction()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> std::string m_name\fR [private]\fP"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::nb_transport_bw()\fP, \fBDummyMaster< BUSWIDTH >::Sentcustomtransaction()\fP, and \fBDummyMaster< BUSWIDTH >::SentTransaction()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> sc_core::sc_out<bool> rst"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::reset_process()\fP\&.
+.SS "template<unsigned int BUSWIDTH = 32> \fBlocaldata\fP tempdata\fR [private]\fP"
+
+.PP
+Referenced by \fBDummyMaster< BUSWIDTH >::get_received_32bit_data()\fP, \fBDummyMaster< BUSWIDTH >::get_received_data()\fP, and \fBDummyMaster< BUSWIDTH >::nb_transport_bw()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SoCPlatform from the source code\&.

@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__i_o_8h" xml:lang="en-US">
+<title>SocPlatform/IO.h File Reference</title>
+<indexterm><primary>SocPlatform/IO.h</primary></indexterm>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="__i_o_8h_1a3de59d834b9891547e28588f43df9f75">_IO_H</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a0417b0cd27b5b7da0540f7cd5c289cf8">BASE_COUNTER</link>&#160;&#160;&#160;0x10000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a47cade6d740de4b59bff04f726523aa8">BASE_DMAC</link>&#160;&#160;&#160;0x4000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1aa2cc5909afc9a3ba5e89085875bbf9c9">BASE_DUMMYSLAVE</link>&#160;&#160;&#160;0x3000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1af0a829a16a6bb7ec0c609fc6d2a61496">BASE_FOUR_BIT_ADDER</link>&#160;&#160;&#160;0x9000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a120adb7d5fd7d3a1779aa54ddc6effec">BASE_RAM1</link>&#160;&#160;&#160;0x0000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a89c299ed457b8cf314ff4d002d862567">BASE_TARGET1</link>&#160;&#160;&#160;0x5000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a1c2de1acfe32f6695ae6a858753ee102">BASE_TARGET2</link>&#160;&#160;&#160;0x6000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a133305a7465d2e26d446e3d6db664813">BASE_TARGET3</link>&#160;&#160;&#160;0x7000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1ae72c2928d2a038c6cf7e12cdc1d282c9">BASE_TARGET4</link>&#160;&#160;&#160;0x8000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a8887fc4ebda111a7806732163208a65d">BASE_UART</link>&#160;&#160;&#160;0x11000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a9e1e528570b29c00fe69bc6a7bcd2eba">SIZE_COUNTER</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a6ce550984ca431af5f198f35fdc10dcd">SIZE_DMAC</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a4a9cac6581a3e203e31f86d7b007ee11">SIZE_DUMMYSLAVE</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a4e43308686860d59bd91d86f50a4acde">SIZE_FOUR_BIT_ADDER</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a0f6c0f49345abdf6825359282833af75">SIZE_RAM1</link>&#160;&#160;&#160;0x3000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a7c30367ec3dc139af2770be26cf31b93">SIZE_TARGET1</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1ad772d330d64bde872ffb0731ed5ead64">SIZE_TARGET2</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1aab5d65a0cf85502275b3e5c842ee930c">SIZE_TARGET3</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a862c7e6a029a6c63849e0292ad49abbf">SIZE_TARGET4</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="__i_o_8h_1a48acc4208931c139a34f10ff7bbba879">SIZE_UART</link>&#160;&#160;&#160;0x1000</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="__i_o_8h_1a3de59d834b9891547e28588f43df9f75"/><section>
+    <title>_IO_H</title>
+<indexterm><primary>_IO_H</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>_IO_H</secondary></indexterm>
+<para><computeroutput>#define _IO_H</computeroutput></para></section>
+<anchor xml:id="__i_o_8h_1a0417b0cd27b5b7da0540f7cd5c289cf8"/><section>
+    <title>BASE_COUNTER</title>
+<indexterm><primary>BASE_COUNTER</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_COUNTER</secondary></indexterm>
+<para><computeroutput>#define BASE_COUNTER&#160;&#160;&#160;0x10000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a47cade6d740de4b59bff04f726523aa8"/><section>
+    <title>BASE_DMAC</title>
+<indexterm><primary>BASE_DMAC</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_DMAC</secondary></indexterm>
+<para><computeroutput>#define BASE_DMAC&#160;&#160;&#160;0x4000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1aa2cc5909afc9a3ba5e89085875bbf9c9"/><section>
+    <title>BASE_DUMMYSLAVE</title>
+<indexterm><primary>BASE_DUMMYSLAVE</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_DUMMYSLAVE</secondary></indexterm>
+<para><computeroutput>#define BASE_DUMMYSLAVE&#160;&#160;&#160;0x3000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1af0a829a16a6bb7ec0c609fc6d2a61496"/><section>
+    <title>BASE_FOUR_BIT_ADDER</title>
+<indexterm><primary>BASE_FOUR_BIT_ADDER</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_FOUR_BIT_ADDER</secondary></indexterm>
+<para><computeroutput>#define BASE_FOUR_BIT_ADDER&#160;&#160;&#160;0x9000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a120adb7d5fd7d3a1779aa54ddc6effec"/><section>
+    <title>BASE_RAM1</title>
+<indexterm><primary>BASE_RAM1</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_RAM1</secondary></indexterm>
+<para><computeroutput>#define BASE_RAM1&#160;&#160;&#160;0x0000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a89c299ed457b8cf314ff4d002d862567"/><section>
+    <title>BASE_TARGET1</title>
+<indexterm><primary>BASE_TARGET1</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_TARGET1</secondary></indexterm>
+<para><computeroutput>#define BASE_TARGET1&#160;&#160;&#160;0x5000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a1c2de1acfe32f6695ae6a858753ee102"/><section>
+    <title>BASE_TARGET2</title>
+<indexterm><primary>BASE_TARGET2</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_TARGET2</secondary></indexterm>
+<para><computeroutput>#define BASE_TARGET2&#160;&#160;&#160;0x6000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a133305a7465d2e26d446e3d6db664813"/><section>
+    <title>BASE_TARGET3</title>
+<indexterm><primary>BASE_TARGET3</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_TARGET3</secondary></indexterm>
+<para><computeroutput>#define BASE_TARGET3&#160;&#160;&#160;0x7000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1ae72c2928d2a038c6cf7e12cdc1d282c9"/><section>
+    <title>BASE_TARGET4</title>
+<indexterm><primary>BASE_TARGET4</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_TARGET4</secondary></indexterm>
+<para><computeroutput>#define BASE_TARGET4&#160;&#160;&#160;0x8000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a8887fc4ebda111a7806732163208a65d"/><section>
+    <title>BASE_UART</title>
+<indexterm><primary>BASE_UART</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>BASE_UART</secondary></indexterm>
+<para><computeroutput>#define BASE_UART&#160;&#160;&#160;0x11000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a9e1e528570b29c00fe69bc6a7bcd2eba"/><section>
+    <title>SIZE_COUNTER</title>
+<indexterm><primary>SIZE_COUNTER</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_COUNTER</secondary></indexterm>
+<para><computeroutput>#define SIZE_COUNTER&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a6ce550984ca431af5f198f35fdc10dcd"/><section>
+    <title>SIZE_DMAC</title>
+<indexterm><primary>SIZE_DMAC</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_DMAC</secondary></indexterm>
+<para><computeroutput>#define SIZE_DMAC&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a4a9cac6581a3e203e31f86d7b007ee11"/><section>
+    <title>SIZE_DUMMYSLAVE</title>
+<indexterm><primary>SIZE_DUMMYSLAVE</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_DUMMYSLAVE</secondary></indexterm>
+<para><computeroutput>#define SIZE_DUMMYSLAVE&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a4e43308686860d59bd91d86f50a4acde"/><section>
+    <title>SIZE_FOUR_BIT_ADDER</title>
+<indexterm><primary>SIZE_FOUR_BIT_ADDER</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_FOUR_BIT_ADDER</secondary></indexterm>
+<para><computeroutput>#define SIZE_FOUR_BIT_ADDER&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a0f6c0f49345abdf6825359282833af75"/><section>
+    <title>SIZE_RAM1</title>
+<indexterm><primary>SIZE_RAM1</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_RAM1</secondary></indexterm>
+<para><computeroutput>#define SIZE_RAM1&#160;&#160;&#160;0x3000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a7c30367ec3dc139af2770be26cf31b93"/><section>
+    <title>SIZE_TARGET1</title>
+<indexterm><primary>SIZE_TARGET1</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_TARGET1</secondary></indexterm>
+<para><computeroutput>#define SIZE_TARGET1&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1ad772d330d64bde872ffb0731ed5ead64"/><section>
+    <title>SIZE_TARGET2</title>
+<indexterm><primary>SIZE_TARGET2</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_TARGET2</secondary></indexterm>
+<para><computeroutput>#define SIZE_TARGET2&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1aab5d65a0cf85502275b3e5c842ee930c"/><section>
+    <title>SIZE_TARGET3</title>
+<indexterm><primary>SIZE_TARGET3</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_TARGET3</secondary></indexterm>
+<para><computeroutput>#define SIZE_TARGET3&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a862c7e6a029a6c63849e0292ad49abbf"/><section>
+    <title>SIZE_TARGET4</title>
+<indexterm><primary>SIZE_TARGET4</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_TARGET4</secondary></indexterm>
+<para><computeroutput>#define SIZE_TARGET4&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+<anchor xml:id="__i_o_8h_1a48acc4208931c139a34f10ff7bbba879"/><section>
+    <title>SIZE_UART</title>
+<indexterm><primary>SIZE_UART</primary><secondary>IO.h</secondary></indexterm>
+<indexterm><primary>IO.h</primary><secondary>SIZE_UART</secondary></indexterm>
+<para><computeroutput>#define SIZE_UART&#160;&#160;&#160;0x1000</computeroutput></para><para>
+Referenced by <link linkend="_class_so_c_platform_1ab79739920ef226160974aaaf9856d663">SoCPlatform::do_bus_binding()</link>.</para>
+</section>
+</section>
+</section>
