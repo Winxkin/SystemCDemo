@@ -23,14 +23,19 @@ template<unsigned int BUSWIDTH = 32>
 class DummySlave : public sc_core::sc_module
 {
 private:
+	RegisterInterface regs;
     std::string m_name;
 	bool m_message;
-	bool is_monitor_ports;
-    RegisterInterface regs;
-	bool cur_is_pos;
-	bool cur_triggered_val;
-	std::string cur_port_name;
+	
+	/* The internal variables for triggered ports operation*/
+	bool m_cur_is_pos;
+	bool m_cur_triggered_val;
+	std::string m_cur_port_name;
 	sc_core::sc_event e_triggerd_port;
+
+	/* The internal flags to enable or disable port monitor*/
+	bool m_portmonitor;
+	bool m_clkmonitor;
 
 	std::map<std::string, sc_core::sc_in<bool>*> input_ports;
 	std::map<std::string, sc_core::sc_out<bool>*> output_ports;
@@ -39,6 +44,7 @@ private:
 	std::map<std::string, bool> input_val_ports;
 	std::map<std::string, bool> output_val_ports;
 
+	
 private:
 
 	void end_of_elaboration() override {
@@ -56,7 +62,7 @@ private:
 			if (pair.second->read() != input_val_ports[pair.first])
 			{
 				input_val_ports[pair.first] = pair.second->read();
-				if (is_monitor_ports)
+				if (m_portmonitor)
 				{
 					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Port " << pair.first << " has changed, value: " << pair.second->read() << std::endl;
 
@@ -68,7 +74,7 @@ private:
 
     void init_registers()
     {
-		regs.add_register("DUMMYRESULT", DUMMYRESULT, 0x00, 0x01, 0x0);
+		regs.add_register("DUMMYRESULT", DUMMYRESULT, 0x00, 0x01, 0x0, READWRITE);
 		regs.set_register_callback("DUMMYRESULT", std::bind(&DummySlave::cb_DUMMYRESULT, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
     }
@@ -153,14 +159,30 @@ private:
 		}
 	}
 
-	/* Thread handling */
+	/* SC_METHOD function */
+
+	/*
+	* mth_synchronize_cycles
+	*
+	* Implementation the method to monitor clock cycles
+	*
+	*/
+	void mth_synchronize_cycles()
+	{
+		if (m_clkmonitor)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+		}
+	}
+
+	/* SC_THREAD function */
 
 	void thr_triggered_port_process()
 	{
 		while (true)
 		{
 			wait(e_triggerd_port);
-			if (cur_is_pos)
+			if (m_cur_is_pos)
 			{
 				wait(clk.posedge_event());
 			}
@@ -168,8 +190,13 @@ private:
 			{
 				wait(clk.negedge_event());
 			}
-			output_ports[cur_port_name]->write(!cur_triggered_val);
+			output_ports[m_cur_port_name]->write(!m_cur_triggered_val);
 		}
+	}
+
+	void mth_reset()
+	{
+		regs.reset_regs();
 	}
 
 public:
@@ -181,17 +208,25 @@ public:
     DummySlave(sc_core::sc_module_name name, bool message = false) :
         sc_core::sc_module(name)
 		,m_message(message)
-		,is_monitor_ports(false)
+		,m_portmonitor(false)
         ,m_name(name)
         ,target_socket("target_socket")
-		, cur_is_pos(true)
-		, cur_triggered_val(false)
+		,m_cur_is_pos(true)
+		,m_cur_triggered_val(false)
+		,m_clkmonitor(false)
     {
         target_socket.register_nb_transport_fw(this, &DummySlave::nb_transport_fw);
 		init_registers();
 
 		SC_THREAD(thr_triggered_port_process);
 		sensitive << e_triggerd_port;
+
+		SC_METHOD(mth_synchronize_cycles);
+		sensitive << clk.pos();	// Synchronizing with posdge clock
+		dont_initialize();
+
+		SC_METHOD(mth_reset);
+		sensitive << rst;
     }
 
 	// Method to add ports to the maps
@@ -216,9 +251,9 @@ public:
 	void trigger_output_ports(const std::string& name, bool high_level, bool is_pos)
 	{
 		output_ports[name]->write(high_level);
-		cur_triggered_val = high_level;
-		cur_port_name = name;
-		cur_is_pos = is_pos;
+		m_cur_triggered_val = high_level;
+		m_cur_port_name = name;
+		m_cur_is_pos = is_pos;
 	}
 
 	bool read_input_ports(const std::string& name)
@@ -228,7 +263,12 @@ public:
 
 	void monitor_ports(bool is_enable)
 	{
-		is_monitor_ports = is_enable;
+		m_portmonitor = is_enable;
+	}
+
+	void enable_monitor_clock(bool is_enable)
+	{
+		m_clkmonitor = is_enable;
 	}
 
 

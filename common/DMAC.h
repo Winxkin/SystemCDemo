@@ -41,11 +41,11 @@ private:
 	std::string m_name;
 	bool m_message;
 	RegisterInterface regs;
-	unsigned int current_ch;
-	unsigned int current_reg_req_ch;
-	std::string current_reg_req_name;
-	bool is_running;
-	bool is_testmode;
+	unsigned int m_current_ch;
+	unsigned int m_cur_reg_ch;
+	std::string m_cur_reg_name;
+	bool m_running;
+	bool m_testmode;
 	sc_core::sc_event e_DMA_request;
 	sc_core::sc_event e_DMA_run;
 	sc_core::sc_event e_DMA_run_done;
@@ -53,6 +53,17 @@ private:
 	tlm::tlm_generic_payload current_trans;
 	std::list<unsigned int> port_req_ids;
 private:
+
+	/*
+	* copy_tlm_generic_payload
+	*
+	* Impelmentation the copy operation from source TLM generic payload to destination TLM generic payload
+	*
+	* @param des Reference to destination TLM generic payload
+	*
+	* @param src Reference to source TLM generic payload
+	*
+	*/
 	void copy_tlm_generic_payload(tlm::tlm_generic_payload& des, tlm::tlm_generic_payload& src)
 	{
 		des.set_command(src.get_command());
@@ -197,7 +208,7 @@ private:
 				{
 					// Change the address of transaction to destination address
 					copy_tlm_generic_payload(current_trans, trans);
-					current_trans.set_address(regs[DMADESADDR(current_ch)].get_value());
+					current_trans.set_address(regs[DMADESADDR(m_current_ch)].get_value());
 					current_trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 					current_trans.set_command(tlm::TLM_WRITE_COMMAND);
 					e_DMA_forward.notify();
@@ -209,7 +220,7 @@ private:
 					if (m_message)
 					{
 						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
-							<< regs[DMASRCADDR(current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(current_ch)].get_value() << std::endl;
+							<< regs[DMASRCADDR(m_current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(m_current_ch)].get_value() << std::endl;
 					}
 					// Notifying DMA operation done !
 					e_DMA_run_done.notify();
@@ -227,20 +238,26 @@ private:
 		return tlm::TLM_ACCEPTED;
 	}
 
+	/*
+	* init_registers
+	*
+	* To initialize registers for DMAC model
+	* 
+	*/
 	void init_registers()
 	{
 		for (unsigned int i = 0; i < DMA_MAX_CH; i++)
 		{
-			regs.add_register("DMADESADDR" + std::to_string(i), DMADESADDR(i), 0x00, 0xFFFFFFFF, i);
-			regs.add_register("DMASRCADDR" + std::to_string(i), DMASRCADDR(i), 0x00, 0xFFFFFFFF, i);
-			regs.add_register("DMADATALENGTH" + std::to_string(i), DMADATALENGTH(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMADESADDR" + std::to_string(i), DMADESADDR(i), 0x00, 0xFFFFFFFF, i, READWRITE);
+			regs.add_register("DMASRCADDR" + std::to_string(i), DMASRCADDR(i), 0x00, 0xFFFFFFFF, i, READWRITE);
+			regs.add_register("DMADATALENGTH" + std::to_string(i), DMADATALENGTH(i), 0x00, 0xFFFFFFFF, i, READWRITE);
 		}
 		for (unsigned int i = 0; i < (DMA_MAX_CH/32); i++)
 		{
-			regs.add_register("DMAREQ" + std::to_string(i), DMAREQ(i), 0x00, 0xFFFFFFFF, i);
-			regs.add_register("DMAACK" + std::to_string(i), DMAACK(i), 0x00, 0xFFFFFFFF, i);
-			regs.add_register("DMAINT" + std::to_string(i), DMAINT(i), 0x00, 0xFFFFFFFF, i);
-			regs.add_register("DMACHEN" + std::to_string(i), DMACHEN(i), 0x00, 0xFFFFFFFF, i);
+			regs.add_register("DMAREQ" + std::to_string(i), DMAREQ(i), 0x00, 0xFFFFFFFF, i, READWRITE);
+			regs.add_register("DMAACK" + std::to_string(i), DMAACK(i), 0x00, 0xFFFFFFFF, i, READWRITE);
+			regs.add_register("DMAINT" + std::to_string(i), DMAINT(i), 0x00, 0xFFFFFFFF, i, READWRITE);
+			regs.add_register("DMACHEN" + std::to_string(i), DMACHEN(i), 0x00, 0xFFFFFFFF, i, READWRITE);
 			
 			// Registration call back function
 			regs.set_register_callback("DMAREQ" + std::to_string(i), std::bind(&DMAC::cb_DMAREQ, this,
@@ -249,15 +266,20 @@ private:
 
 	}
 
-	/* Call back register */
+	/*
+	* cb_DMAREQ
+	*
+	* The call back register function for DMAREQ register
+	*
+	*/
 	void cb_DMAREQ(const std::string& name, uint32_t value, uint32_t old_value, uint32_t mask, uint32_t ch)
 	{
 		// Request DMA operation in here
-		if (!is_running)
+		if (!m_running)
 		{
-			is_testmode = true;
-			current_reg_req_ch = ch;
-			current_reg_req_name = name;
+			m_testmode = true;
+			m_cur_reg_ch = ch;
+			m_cur_reg_name = name;
 			e_DMA_request.notify();
 		}
 		else
@@ -274,16 +296,22 @@ private:
 
 	/* SC_METHOD and SC_THREAD are defined in here */
 	
+	/*
+	* mth_reset
+	*
+	* Impelmentation of the method when reset is active
+	*
+	*/
 	void mth_reset()
 	{
 		if (rst.read())
 		{
-			current_ch = 0;
-			is_running = false;
-			is_testmode = false;
+			m_current_ch = 0;
+			m_running = false;
+			m_testmode = false;
 			regs.reset_regs();
-			current_reg_req_ch = 0;
-			current_reg_req_name.clear();
+			m_cur_reg_ch = 0;
+			m_cur_reg_name.clear();
 			e_DMA_forward.cancel();
 			e_DMA_request.cancel();
 			e_DMA_run.cancel();
@@ -292,10 +320,16 @@ private:
 	}
 
 
+	/*
+	* mth_request_signals
+	*
+	* Impelmentation of the method when requests signal are triggered by peripherals
+	*
+	*/
 	void mth_request_signals()
 	{
 		// SC_THREAD is triggered only one at the same simulation time
-		if (!is_running)
+		if (!m_running)
 		{
 			for (unsigned int i = 0; i < DMA_MAX_CH; i++) {
 				bool is_enable = (bool)((regs[DMACHEN(i / 32)].get_value() >> i) & 0x01);
@@ -313,7 +347,7 @@ private:
 			}
 			if (!port_req_ids.empty())
 			{
-				is_running = true;
+				m_running = true;
 				e_DMA_request.notify();
 			}
 		}
@@ -327,6 +361,12 @@ private:
 		}
 	}
 
+	/*
+	* thr_priority_process
+	*
+	* Impelmentation of the thread to handle priority of DMA operation
+	*
+	*/
 	void thr_priority_process()
 	{
 		while (true)
@@ -334,23 +374,23 @@ private:
 			// waiting to next cycle
 			wait(e_DMA_request);
 			wait(clk.posedge_event());
-			if (!is_testmode)
+			if (!m_testmode)
 			{
 				// using ports to trigger DMAC
 				while (!port_req_ids.empty())
 				{
-					current_ch = port_req_ids.front();
+					m_current_ch = port_req_ids.front();
 					port_req_ids.pop_front(); // removing request id from list
 					e_DMA_run.notify();	// Bus delay simulation time
 					wait(e_DMA_run_done);
 
 					// set output ack and int port
 					wait(clk.posedge_event());
-					DMA_ack[current_ch].write(true);
-					DMA_int[current_ch].write(true);
+					DMA_ack[m_current_ch].write(true);
+					DMA_int[m_current_ch].write(true);
 					wait(clk.posedge_event());
-					DMA_ack[current_ch].write(false);
-					DMA_int[current_ch].write(false);
+					DMA_ack[m_current_ch].write(false);
+					DMA_int[m_current_ch].write(false);
 					// continuting with next channels
 				}
 				
@@ -358,21 +398,21 @@ private:
 			else
 			{
 				// using register to trigger DMAC
-				uint32_t value = regs[current_reg_req_name].get_value();
+				uint32_t value = regs[m_cur_reg_name].get_value();
 				for (unsigned int i = 0; i < 32; i++)
 				{
-					if ((regs[DMACHEN(current_reg_req_ch)].get_value() >> i) & 0x01)
+					if ((regs[DMACHEN(m_cur_reg_ch)].get_value() >> i) & 0x01)
 					{
 						if ((value >> i) & 0x01)
 						{
 							// set current channel
-							is_running = true;
-							current_ch = (current_reg_req_ch == 0) ? i : (i * current_reg_req_ch);
+							m_running = true;
+							m_current_ch = (m_cur_reg_ch == 0) ? i : (i * m_cur_reg_ch);
 							e_DMA_run.notify();	// Bus delay simulation time
 							wait(e_DMA_run_done);
 							// continuting with next channels
-							regs[DMAACK(current_reg_req_ch)] = (0x01 << i) | regs[DMAACK(current_reg_req_ch)].get_value();
-							regs[DMAINT(current_reg_req_ch)] = (0x01 << i) | regs[DMAINT(current_reg_req_ch)].get_value();
+							regs[DMAACK(m_cur_reg_ch)] = (0x01 << i) | regs[DMAACK(m_cur_reg_ch)].get_value();
+							regs[DMAINT(m_cur_reg_ch)] = (0x01 << i) | regs[DMAINT(m_cur_reg_ch)].get_value();
 						}
 					}
 				}
@@ -382,12 +422,18 @@ private:
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
 			}
 			// releasing flags
-			is_running = false;
-			is_testmode = false;
+			m_running = false;
+			m_testmode = false;
 			
 		}
 	}
 
+	/*
+	* thr_DMA_run_process
+	*
+	* Impelmentation of the thread to start DMA operation
+	*
+	*/
 	void thr_DMA_run_process()
 	{
 		while (true)
@@ -399,13 +445,13 @@ private:
 			*/
 			tlm::tlm_generic_payload trans;
 			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-			unsigned char* data = new unsigned char[regs[DMADATALENGTH(current_ch)].get_value()];
+			unsigned char* data = new unsigned char[regs[DMADATALENGTH(m_current_ch)].get_value()];
 			// Configuration transaction
 			trans.set_command(tlm::TLM_READ_COMMAND);
-			trans.set_address(regs[DMASRCADDR(current_ch)].get_value());
+			trans.set_address(regs[DMASRCADDR(m_current_ch)].get_value());
 			trans.set_data_ptr(data);
-			trans.set_data_length(regs[DMADATALENGTH(current_ch)].get_value());
-			trans.set_streaming_width(regs[DMADATALENGTH(current_ch)].get_value()); // = data_length to indicate no streaming
+			trans.set_data_length(regs[DMADATALENGTH(m_current_ch)].get_value());
+			trans.set_streaming_width(regs[DMADATALENGTH(m_current_ch)].get_value()); // = data_length to indicate no streaming
 			trans.set_byte_enable_ptr(0); // 0 indicates unused
 			trans.set_dmi_allowed(false); // DMI not allowed
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
@@ -416,6 +462,12 @@ private:
 		}
 	}
 
+	/*
+	* thr_DMA_forward_process
+	*
+	* Impelmentation of the thread to forward data from the source to the destination
+	*
+	*/
 	void thr_DMA_forward_process()
 	{
 		while (true)
@@ -438,16 +490,22 @@ public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_in<bool> rst;
 
-
+	/*
+	* DMAC constructor
+	*
+	* @param name Reference to sc_module name
+	*
+	* @param message To enable message log
+	*/
 	DMAC(sc_core::sc_module_name name, bool message = false) :
 		sc_core::sc_module(name)
 		, m_name(name)
 		, m_message(message)
 		, target_socket("target_socket")
 		, initiator_socket("initiator_socket")
-		, current_ch(0)
-		, is_running(false)
-		, is_testmode(false)
+		, m_current_ch(0)
+		, m_running(false)
+		, m_testmode(false)
 	{
 		target_socket.register_nb_transport_fw(this, &DMAC::nb_transport_fw);
 		initiator_socket.register_nb_transport_bw(this, &DMAC::nb_transport_bw);

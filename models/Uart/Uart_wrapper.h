@@ -124,8 +124,8 @@ private:
 
 	void init_register()
 	{
-		regs.add_register("UARTINPUT", UARTINPUT, 0x00, 0x07ff, 0x0); // RW permission 
-		regs.add_register("UARTOUTPUT", UARTOUTPUT, 0x00, 0x0000, 0x0); // R only
+		regs.add_register("UARTINPUT", UARTINPUT, 0x00, 0x07ff, 0x0, READWRITE); // RW permission 
+		regs.add_register("UARTOUTPUT", UARTOUTPUT, 0x00, 0x00ff, 0x0, READONLY); // R only
 		regs.set_register_callback("UARTINPUT", std::bind(&wrapper_uart::cb_UARTINPUT, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 	}
@@ -151,7 +151,7 @@ private:
 		*	bit 0 -> 7 : input data_out
 		*/
 		unsigned int _output = data_out.read();
-		regs[UARTOUTPUT].set_value(_output, true); // To set directly value into register that is not apply mask
+		regs[UARTOUTPUT].set_readonly_value(_output); // To set directly value into register that is not apply mask
 	}
 
 	void output_handling()

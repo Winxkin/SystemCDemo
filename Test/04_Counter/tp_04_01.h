@@ -2,12 +2,12 @@
 #include "Register.h"
 
 
-inline void tp_04_01(SoCPlatform& SoC)
+inline void tp_04_01()
 {
     /*
         Using to test Counter module
     */
-
+    SoCPlatform SoC("SoCPlatform");
     std::cout << "Running test case:  tp_04_01" << std::endl;
     sc_core::sc_start(20, sc_core::SC_NS);
     SoC.set_output_ports("counter_load", true);

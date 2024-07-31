@@ -28,15 +28,15 @@ typedef enum
 
 typedef enum
 {
-	D8BIT = 0,
-	D16BIT = 1,
-	D32BIT = 2,
-	D64BIT = 3,
-	D128BIT = 4
+	D8BIT	=	8,
+	D16BIT	=	16,
+	D32BIT	=	32,
+	D64BIT	=	64,
+	D128BIT =	128
 
 } DATAWIDTH;
 
-template<unsigned int BUSWIDTH = 32, unsigned int DATA_WIDTH = D8BIT>
+template<unsigned int BUSWIDTH = 32, DATAWIDTH DATA_WIDTH = D8BIT>
 class BUS : public sc_core::sc_module
 {
 public:
@@ -48,15 +48,13 @@ private:
 	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH> initiator_sockets;
 
 	std::string m_name;
-	unsigned int div_index;
-	unsigned int socket_index;
-	bool Bus_lock;
-	bool m_clkmonitor;
+	unsigned int m_cur_socket;
+	bool m_bus_lock;
 	bool m_message;
 	sc_core::sc_event e_forward_tran;
 	tlm::tlm_generic_payload current_trans;
-	unsigned int current_ts_id;
-	unsigned int bind_count_id;
+	unsigned int m_current_ts_id;
+	unsigned int m_bind_id;
 	
 	struct address
 	{
@@ -69,15 +67,20 @@ private:
 
 private:
 
+	/*
+	* mth_reset
+	*
+	* Impelmentation of the method when reset is active
+	*
+	*/
 	void mth_reset()
 	{
 		if (rst.read())
 		{
 			e_forward_tran.cancel();
 			current_trans.reset();
-			Bus_lock = false;
-			div_index = 0;
-			socket_index = 0;
+			m_bus_lock = false;
+			m_cur_socket = 0;
 		}
 	}
 
@@ -108,21 +111,6 @@ private:
 	}
 
 	/*
-	* synchronize_cycles
-	* 
-	* Implementation the method to monitor clock cycles
-	* 
-	*/
-	void synchronize_cycles()
-	{
-		if (m_clkmonitor && m_message)
-		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
-		}
-	}
-
-	
-	/*
 		Thread handles forward transaction
 	*/
 
@@ -144,7 +132,7 @@ private:
 			/*
 				Synchronization with clock cycles, 1 byte data = 1 clock cycle
 			*/
-			unsigned int num_cycles = (current_trans.get_data_length() / div_index) + 1;		// Note: 1 cycle clock for address transfering
+			unsigned int num_cycles = (current_trans.get_data_length() / (DATA_WIDTH/8)) + 1;		// Note: 1 cycle clock for address transfering
 			for (unsigned int i = 0; i < num_cycles; i++)
 			{
 				wait(m_clk.posedge_event()); // Synchronizing with each clock cycle
@@ -162,7 +150,7 @@ private:
 					{
 						if (m_message)
 						{
-							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
+							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]"
 								<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[i - 1] << std::endl;
 						}
 					}
@@ -174,11 +162,11 @@ private:
 
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]"
-					<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[socket_index].addr << std::endl;
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]"
+					<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[m_cur_socket].addr << std::endl;
 			}
 
-			status = initiator_sockets[socket_index]->nb_transport_fw(current_trans, fw_phase, delay);
+			status = initiator_sockets[m_cur_socket]->nb_transport_fw(current_trans, fw_phase, delay);
 		}
 	}
 
@@ -197,7 +185,7 @@ private:
 	{
 		unsigned int address = trans.get_address();
 		bool decode_addr_status = false;
-		current_ts_id = id;
+		m_current_ts_id = id;
 
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
 		{
@@ -208,7 +196,7 @@ private:
 
 				copy_tlm_generic_payload(current_trans, trans);
 
-				socket_index = i;
+				m_cur_socket = i;
 				decode_addr_status = true;
 				break;
 			}
@@ -250,7 +238,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "BEGIN_REQ received" << std::endl;
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]" << "BEGIN_REQ received" << std::endl;
 			}
 			break;
 		}
@@ -259,11 +247,11 @@ private:
 			// Handle END_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << socket_index << "]" << "END_REQ received" << std::endl;
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]" << "END_REQ received" << std::endl;
 			}
 			tlm::tlm_phase bw_phase = tlm::END_REQ;
-			target_sockets[current_ts_id]->nb_transport_bw(trans, bw_phase, delay);
-			Bus_lock = false;
+			target_sockets[m_current_ts_id]->nb_transport_bw(trans, bw_phase, delay);
+			m_bus_lock = false;
 			break;
 		}
 		default:
@@ -309,13 +297,13 @@ private:
 			{
 				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) BEGIN_REQ received" << std::endl;
 			}
-			if (!Bus_lock)
+			if (!m_bus_lock)
 			{
 				if (m_message)
 				{
 					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " detect transaction" << std::endl;
 				}
-				this->Bus_lock = true;
+				this->m_bus_lock = true;
 				TS_handle_begin_req(id, trans, delay);
 				return tlm::TLM_ACCEPTED;
 			}
@@ -338,8 +326,8 @@ private:
 			}
 			tlm::tlm_phase fw_phase = tlm::END_REQ;
 			tlm::tlm_sync_enum status;
-			Bus_lock = false;
-			status = initiator_sockets[socket_index]->nb_transport_fw(trans, fw_phase, delay);
+			m_bus_lock = false;
+			status = initiator_sockets[m_cur_socket]->nb_transport_fw(trans, fw_phase, delay);
 			break;
 		}
 		default:
@@ -362,11 +350,10 @@ public:
 		sc_core::sc_module(name)
 		, m_name(name)
 		, target_sockets("target_socket")
-		, Bus_lock(false)
-		, socket_index(0)
-		, m_clkmonitor(enclkmonitor)
+		, m_bus_lock(false)
+		, m_cur_socket(0)
 		, m_message(message)
-		, bind_count_id(0)
+		, m_bind_id(0)
 	{
 		// Registration nb_transport_fw for target socket
 		target_sockets.register_nb_transport_fw(this, &BUS::nb_transport_fw);
@@ -381,32 +368,6 @@ public:
 		SC_METHOD(mth_reset);
 		sensitive << rst;
 
-		SC_METHOD(synchronize_cycles);
-		sensitive << m_clk.pos();	// Synchronizing with posdge clock
-		dont_initialize();
-
-		// Setting data width
-		switch (DATA_WIDTH)
-		{
-		case D8BIT:
-			div_index = 1;
-			break;
-		case D16BIT:
-			div_index = 2;
-			break;
-		case D32BIT:
-			div_index = 4;
-			break;
-		case D64BIT:
-			div_index = 8;
-			break;
-		case D128BIT:
-			div_index = 16;
-			break;
-		default:
-			div_index = 1;
-			break;
-		}
 	};
 
 	/*
@@ -431,9 +392,9 @@ public:
 	*/
 	tlm_utils::multi_passthrough_initiator_socket<BUS, BUSWIDTH>& mapping_target_sockets(unsigned int _addr, unsigned int _size)
 	{
-		unsigned int id = bind_count_id;
+		unsigned int id = m_bind_id;
 		// Increasing binding id
-		bind_count_id = bind_count_id + 1;
+		m_bind_id = m_bind_id + 1;
 
 		for (unsigned int i = 0; i < address_mapping.size(); i++)
 		{

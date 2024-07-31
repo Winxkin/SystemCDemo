@@ -101,8 +101,8 @@ private:
 
 	void init_register()
 	{
-		regs.add_register("ADDERINPUT", ADDERINPUT, 0x00, 0x8f0f, 0x0);
-		regs.add_register("ADDEROUTPUT", ADDEROUTPUT, 0x00, 0x00, 0x0);
+		regs.add_register("ADDERINPUT", ADDERINPUT, 0x00, 0x8f0f, 0x0, READWRITE);
+		regs.add_register("ADDEROUTPUT", ADDEROUTPUT, 0x00, 0x800f, 0x0, READONLY);
 		/*Define callback*/
 		regs.set_register_callback("ADDERINPUT", std::bind(&wrapper_four_bit_adder::cb_ADDERINPUT, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
@@ -138,7 +138,7 @@ private:
 		*/
 		unsigned int _cout = cout.read();
 		unsigned int val = (_cout << 15) | sum.read();
-		regs[ADDEROUTPUT].set_value(val,true);
+		regs[ADDEROUTPUT].set_readonly_value(val);
 	}
 
 public:

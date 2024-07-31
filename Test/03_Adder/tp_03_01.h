@@ -2,12 +2,12 @@
 #include "Register.h"
 
 
-inline void tp_03_01(SoCPlatform& SoC)
+inline void tp_03_01()
 {
     /*
         Using to test the arbitration of bus MMIO using address access
     */
-
+    SoCPlatform SoC("SoCPlatform");
     std::cout << "Running test case:  tp_03_01" << std::endl;
 
     unsigned int a = 0x01;

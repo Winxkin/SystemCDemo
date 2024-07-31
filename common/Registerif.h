@@ -13,46 +13,58 @@
 #include <stdio.h>
 #include <iostream>
 
+typedef enum
+{
+  READWRITE = 0,
+  READONLY = 1
+} REGPERMISSION;
+
 class Register {
 public:
 
     using Callback = std::function<void(const std::string&, uint32_t, uint32_t, uint32_t, uint32_t)>;
 
-    Register() : ch(0), init_val(0)
-    {};
+    Register() : name(""), address(0), value(0), mask(0), ch(0), init_val(0), permission(READWRITE) {};
 
-    Register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch)
-        : name(name), address(address), value(init), mask(mask), ch(ch), init_val(init)
+    Register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, REGPERMISSION permission)
+        : name(name), address(address), value(init), mask(mask), ch(ch), init_val(init), permission(permission)
     {
     };
 
     ~Register() {};
 
     uint32_t get_value() const { return value; };
-    void set_value(uint32_t new_value) 
-    {   
-        uint32_t old_value = value;
-        value = new_value & mask;
-        if (callback) {
-            callback(name, value, old_value, mask, ch);
-        }
-    };
 
-    void set_value(uint32_t new_value, bool not_mask)
+    void set_value(uint32_t new_value)
     {
         uint32_t old_value = value;
-        if (not_mask)
+        if (permission == READWRITE)
         {
-            value = new_value;
+            value = new_value & mask;
+
+            /* Info message */
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name
+                << " changed to value -> [0x" << std::hex << value << "]" << std::endl;
+
+            /* Calling callback register */
+            if (callback) {
+                callback(name, value, old_value, mask, ch);
+            }
         }
         else
         {
-            value = new_value & mask;
-        }
-        if (callback) {
-            callback(name, value, old_value, mask, ch);
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name << " Warning: only read permission" << std::endl;
         }
     };
+
+    void set_readonly_value(uint32_t new_value)
+    {
+        if (permission == READONLY)
+        {
+            value = new_value & mask;
+        }
+    }
+
 
     void reset()
     {
@@ -65,9 +77,21 @@ public:
 
     Register& operator=(uint32_t new_value) {
         uint32_t old_value = value;
-        value = new_value & mask;
-        if (callback) {
-            callback(name, value, old_value, mask, ch);
+        if (permission == READWRITE)
+        {
+            value = new_value & mask;
+            /* Info message */
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name
+                << " changed to value -> [0x" << std::hex << value << "]" << std::endl;
+
+            /* Calling callback register */
+            if (callback) {
+                callback(name, value, old_value, mask, ch);
+            }
+        }
+        else
+        {
+            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name << " Warning: only read permission" << std::endl;
         }
         return *this;
     }
@@ -83,14 +107,15 @@ private:
     uint32_t mask;  // Using to perform read or write permission 
     const uint32_t ch;
     const uint32_t init_val;
+    const REGPERMISSION permission;
     Callback callback;
 };
 
 // Class to manage a collection of registers
 class RegisterInterface {
 public:
-    void add_register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch) {
-        registers.emplace(name, Register(name, address, init, mask, ch));
+    void add_register(std::string name, uint64_t address, uint32_t init, uint32_t mask, uint32_t ch, REGPERMISSION permission) {
+        registers.emplace(name, Register(name, address, init, mask, ch, permission));
         /*
         std::cout << "[Adding new register]   Register name: [" << registers[name].get_name()
             << "], address [" << std::hex << registers[name].get_address()
@@ -113,7 +138,6 @@ public:
             if (reg.second.get_address() == address) {
                 return registers[reg.first];
             }
-
         }
         throw std::runtime_error("Register with the given address not found");
     }
@@ -122,9 +146,6 @@ public:
     void update_register(uint64_t address, uint32_t value) {
         for (auto& reg : registers) {
             if (reg.second.get_address() == address) {
-                std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << reg.second.get_name()
-                    << " changed to value -> [0x" << std::hex << value << "]"
-                    << std::dec << std::endl;
                 reg.second = value;
                 return;
             }

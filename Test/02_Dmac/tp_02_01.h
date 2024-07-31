@@ -7,11 +7,12 @@
 #include "top.h"
 #include "Register.h"
 
-inline void tp_02_01(SoCPlatform &SoC)
+inline void tp_02_01()
 {
     /*
         Using to test priority handling and DMA operation that is triggered by ports
     */
+    SoCPlatform SoC("SoCPlatform");
 	unsigned int result = 0x0;
 
     std::cout << "Running test case:  tp_02_01" << std::endl;

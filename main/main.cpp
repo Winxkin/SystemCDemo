@@ -6,11 +6,8 @@
 
 int sc_main(int argc, char* argv[]) {
 
-    SoCPlatform m_SoCPlatform("SoCPlatform");
-
     // Running test case here
-    tp_04_01(m_SoCPlatform);
-
+    tp_04_01();
     return 0;
 }
 

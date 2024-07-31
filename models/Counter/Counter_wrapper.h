@@ -109,8 +109,8 @@ private:
 
 	void init_register()
 	{
-		regs.add_register("COUNTERINPUT", COUNTERINPUT, 0x00, 0x00ff, 0x0); // RW permission 
-		regs.add_register("COUNTEROUTPUT", COUNTEROUTPUT, 0x00, 0x00, 0x0); // R only
+		regs.add_register("COUNTERINPUT", COUNTERINPUT, 0x00, 0x00ff, 0x0, READWRITE); // RW permission 
+		regs.add_register("COUNTEROUTPUT", COUNTEROUTPUT, 0x00, 0x00ff, 0x0, READONLY); // R only
 		/*Define callback*/
 		regs.set_register_callback("COUNTERINPUT", std::bind(&wrapper_counter::cb_COUNTERINPUT, this,
 			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
@@ -137,7 +137,7 @@ private:
 		*	bit 0 -> 7 : dout
 		*/
 		unsigned int output = dout.read();
-		regs[COUNTEROUTPUT].set_value(output, true);
+		regs[COUNTEROUTPUT].set_readonly_value(output);
 		if (m_message)
 		{
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": counter value: " << output << std::endl;

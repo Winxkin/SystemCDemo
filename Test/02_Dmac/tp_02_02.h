@@ -8,11 +8,12 @@
 #include "Register.h"
 
 
-inline void tp_02_02(SoCPlatform& SoC)
+inline void tp_02_02()
 {
     /*
         Using to test priority handling and DMA operation that is triggered by register setting
     */
+    SoCPlatform SoC("SoCPlatform");
     unsigned int result = 0x0;
 
     std::cout << "Running test case:  tp_02_02" << std::endl;
