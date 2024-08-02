@@ -344,6 +344,7 @@ public:
 		m_cur_triggered_val = high_level;
 		m_cur_port_name = name;
 		m_cur_is_pos = is_pos;
+		e_triggerd_port.notify();
 	}
 
 	/**@brief

@@ -187,12 +187,15 @@ public:
 		
 		SC_METHOD(regs_output_handling);
 		sensitive << data_out;
+		dont_initialize();
 
 		SC_METHOD(output_handling);
 		sensitive << int2 << sout;
+		dont_initialize();
 	
 		SC_METHOD(input_handling);
 		sensitive << m_clk << m_rst << m_nrw << m_cs << m_sin;
+		dont_initialize();
 	};
 };
 

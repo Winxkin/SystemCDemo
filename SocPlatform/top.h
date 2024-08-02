@@ -81,7 +81,7 @@ private:
 
 		// binding reset
 		m_dummymaster.rst.bind(m_sysrst);
-		m_bus.rst.bind(m_sysrst);
+		m_bus.m_rst.bind(m_sysrst);
 		m_dmac.rst.bind(m_sysrst);
 		m_wrapper_uart.m_rst(m_sysrst);
 		
