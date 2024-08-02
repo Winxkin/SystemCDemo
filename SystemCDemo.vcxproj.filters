@@ -108,6 +108,9 @@
     <ClCompile Include="models\Uart\src\xmit_rcv_control_xmit_rcv_control.cpp">
       <Filter>Source Files\models\Uart</Filter>
     </ClCompile>
+    <ClCompile Include="common\core\RSCV32\riscv32.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\target.h">

@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="common\core\RSCV32\riscv32.h" />
     <ClCompile Include="main\main.cpp" />
     <ClCompile Include="models\Adder\src\full_adder_full_adder.cpp" />
     <ClCompile Include="models\Counter\src\counter_counter.cpp" />
