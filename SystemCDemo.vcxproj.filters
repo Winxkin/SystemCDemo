@@ -61,6 +61,12 @@
     <Filter Include="Header Files\test\05_Uart">
       <UniqueIdentifier>{276b49aa-e3b2-40a9-a9e8-51fc06c44ced}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\common\core">
+      <UniqueIdentifier>{2faa49f7-cb6b-4f47-a3b9-7a5ea71e9a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common\core\RISCV32">
+      <UniqueIdentifier>{5588f12c-07b2-4946-b6b3-7cd57caa0a0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
@@ -193,6 +199,21 @@
     </ClInclude>
     <ClInclude Include="Test\05_Uart\tp_05_01.h">
       <Filter>Header Files\test\05_Uart</Filter>
+    </ClInclude>
+    <ClInclude Include="common\core\RSCV32\PC.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\core\RSCV32\instruction_mem.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\core\RSCV32\register.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\core\RSCV32\data_mem.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClInclude>
+    <ClInclude Include="common\core\RSCV32\ALU.h">
+      <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
