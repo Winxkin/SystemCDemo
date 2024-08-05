@@ -28,8 +28,7 @@ namespace riscv32
 #define IMM_J_LENGTH    21
 
 // Define the opcode type
-#define R_O_TYPE	0b0110011
-#define R_A_TYPE	0b0101111
+#define R_TYPE	    0b0110011
 #define I_O_TYPE	0b0010011
 #define I_L_TYPE	0b0000011
 #define I_E_TYPE	0b1110011
@@ -152,7 +151,7 @@ namespace riscv32
 
         switch (_isa.opcode)
         {
-        case R_O_TYPE:
+        case R_TYPE:
         {
             _isa.opcodetype = ISA_R_TYPE;
 
@@ -201,11 +200,6 @@ namespace riscv32
             {
                 _isa.inst = "sltu";
             }
-            break;
-        }
-        case R_A_TYPE:
-        {
-            _isa.opcodetype = ISA_R_TYPE;
             break;
         }
         case I_O_TYPE:
