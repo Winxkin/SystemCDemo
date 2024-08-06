@@ -67,6 +67,9 @@
     <Filter Include="Header Files\common\core\RISCV32">
       <UniqueIdentifier>{5588f12c-07b2-4946-b6b3-7cd57caa0a0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\test\06_core">
+      <UniqueIdentifier>{cb26b0db-f58a-4d7b-a9d5-a92e0c3364b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test\01_Bus\tp_01_01.h">
@@ -220,6 +223,12 @@
     </ClInclude>
     <ClInclude Include="common\core\RISCV32\riscv32.h">
       <Filter>Header Files\common\core\RISCV32</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\06_core\riscv32_inst_mix.h">
+      <Filter>Header Files\test\06_core</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\06_core\tp_06_01.h">
+      <Filter>Header Files\test\06_core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
