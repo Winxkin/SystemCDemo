@@ -160,17 +160,13 @@ namespace riscv32
             {
                 _isa.inst = "add";
             }
-            else if (_isa.funct3 == 0x00 && _isa.funct7 == 0x00)
+            else if (_isa.funct3 == 0x00 && _isa.funct7 == 0x20)
             {
                 _isa.inst = "sub";
             }
-            else if (_isa.funct3 == 0x00 && _isa.funct7 == 0x20)
-            {
-                _isa.inst = "xor";
-            }
             else if (_isa.funct3 == 0x04 && _isa.funct7 == 0x00)
             {
-                _isa.inst = "or";
+                _isa.inst = "xor";
             }
             else if (_isa.funct3 == 0x06 && _isa.funct7 == 0x00)
             {
@@ -376,7 +372,7 @@ namespace riscv32
             _isa.opcodetype = ISA_U_TYPE;
             _isa.imm = decode_imm_u(instruction);
             // To Indentify the instructions
-            _isa.inst = "jarl";
+            _isa.inst = "auipc";
             break;
         }
         default:
