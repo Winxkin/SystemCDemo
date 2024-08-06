@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\systemc\src;.\main;.\common;.\SocPlatform;.\Test;.\models;$(IncludePath)</IncludePath>
+    <IncludePath>..\systemc\src;.\main;.\common;.\SocPlatform;.\Test;.\models;.\common\core;$(IncludePath)</IncludePath>
     <LibraryPath>..\systemc\msvc16\SystemC\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -136,7 +136,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="common\core\RSCV32\riscv32.h" />
     <ClCompile Include="main\main.cpp" />
     <ClCompile Include="models\Adder\src\full_adder_full_adder.cpp" />
     <ClCompile Include="models\Counter\src\counter_counter.cpp" />
@@ -153,11 +152,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\bus.h" />
-    <ClInclude Include="common\core\RSCV32\ALU.h" />
-    <ClInclude Include="common\core\RSCV32\data_mem.h" />
-    <ClInclude Include="common\core\RSCV32\instruction_mem.h" />
-    <ClInclude Include="common\core\RSCV32\PC.h" />
-    <ClInclude Include="common\core\RSCV32\register.h" />
+    <ClInclude Include="common\core\RISCV32\ALU.h" />
+    <ClInclude Include="common\core\RISCV32\commondef.h" />
+    <ClInclude Include="common\core\RISCV32\data_mem.h" />
+    <ClInclude Include="common\core\RISCV32\instruction_mem.h" />
+    <ClInclude Include="common\core\RISCV32\PC.h" />
+    <ClInclude Include="common\core\RISCV32\register.h" />
+    <ClInclude Include="common\core\RISCV32\riscv32.h" />
     <ClInclude Include="common\DMAC.h" />
     <ClInclude Include="common\DummyMaster.h" />
     <ClInclude Include="common\DummySlave.h" />
