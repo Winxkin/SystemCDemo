@@ -11,7 +11,7 @@
 #include <string>
 #include <tuple>
 
-namespace riscv32
+namespace isa32
 {
 
     // Define the RISC-V instruction format lengths

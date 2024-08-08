@@ -212,7 +212,7 @@
     <ClInclude Include="common\core\RISCV32\data_mem.h">
       <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
-    <ClInclude Include="common\core\RISCV32\instruction_mem.h">
+    <ClInclude Include="common\core\RISCV32\instruction.h">
       <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
     <ClInclude Include="common\core\RISCV32\PC.h">
