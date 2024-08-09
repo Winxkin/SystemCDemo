@@ -3,7 +3,7 @@
 #include "RISCV32\commondef.h"
 #include "06_core/riscv32_inst_mix.h"
 
-using namespace riscv32;
+using namespace isa32;
 
 inline void tp06_01_r_type_test()
 {

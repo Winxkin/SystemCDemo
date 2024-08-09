@@ -18,6 +18,8 @@
 #include <list>
 #include <cstdint>
 #include "commondef.h"
+#include "instruction.h"
+
 
 class riscv32 : public sc_core::sc_module
 {
@@ -25,18 +27,23 @@ private:
 
 	typedef enum
 	{
-		FORWARDING = 0,
+		NONE = 0,
+		FORWARDING,
 		STALL
 	} HAZARDMODE;
 
+	riscv32::HAZARDMODE m_hazard;
+
 	std::string m_name;
-	isa32::ISAFORMAT m_isa;
+	isa32::ISAFORMAT m_isa; // ??
 	std::uint32_t PC;
 	std::uint32_t cur_inst;
 	
 	std::uint32_t temp_rd;
 	std::uint32_t temp_rs1;
 	std::uint32_t temp_rs2;
+
+	bool is_first_time;
 	// Define event for pipeline process
 	sc_core::sc_event e_inst_fetch;
 	sc_core::sc_event e_inst_decode;
@@ -46,9 +53,12 @@ private:
 
 	sc_core::sc_event e_pipeline_process_done;
 private:
+	// Internal modules
+	Instruction m_Instruction;
 
+private:
 
-
+	
 	void inst_fetch_process()
 	{
 		while (true)
@@ -56,19 +66,25 @@ private:
 			wait(e_inst_fetch);
 			// synchronization with 1 clock cycle
 			wait(clk.posedge_event());
-
 			// Inst_fetch process operation
-			if (check_for_hazard() == STALL)
+			if (m_hazard == STALL && is_first_time == false)
 			{
-				wait(e_pipeline_process_done);
+				wait(clk.posedge_event());
 			}
+			// Waiting 4 times sc_zero_time to control the priority of this process
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+
+
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] inst_fetch_process\n";
 			
-
+			// Check condition in here
 			// Go to next stage
+			is_first_time = false;
 			e_inst_decode.notify();
-			// re-triggering process and waiting to the next cycle
-			e_inst_fetch.notify();
-
 		}
 	}
 
@@ -78,7 +94,22 @@ private:
 		{
 			wait(e_inst_decode);
 			// synchronization with 1 clock cycle
+			e_inst_fetch.notify();
 			wait(clk.posedge_event());
+			// Waiting 3 times sc_zero_time to control the priority of this process
+			wait(sc_core::SC_ZERO_TIME); 
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+
+			// copy old _isa to temporal structe
+
+			// decode new _isa
+			
+			// Check data hazard of current instruction
+			check_for_hazard();
+
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] inst_decode_process\n";
 
 			// Go to next stage
 			e_execute.notify();
@@ -93,10 +124,23 @@ private:
 			wait(e_execute);
 			// synchronization with 1 clock cycle
 			wait(clk.posedge_event());
+			// Waiting 2 times sc_zero_time to control the priority of this process
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
 
 			// ALU operation
-			
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] execute_process\n";
 
+			if (m_hazard == FORWARDING)
+			{
+				// Using temporal data to calculate
+			}
+			else
+			{
+				// Using data that read from reg to calculate
+			}
+			
 			// Go to next stage
 			e_data_memory_access.notify();
 
@@ -110,10 +154,19 @@ private:
 			wait(e_data_memory_access);
 			// synchronization with 1 clock cycle
 			wait(clk.posedge_event());
+			// Waiting 1 time sc_zero_time to control the priority of this process
+			wait(sc_core::SC_ZERO_TIME);
+			wait(sc_core::SC_ZERO_TIME);
 
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] data_memory_access_process\n";
+
+
+			// If forwarding mode, copy data output to temporal variables
+
+			// Copy data output to temporal variable
+		
 			// Go to next stage
 			e_write_back.notify();
-
 		}
 	}
 
@@ -124,17 +177,19 @@ private:
 			wait(e_write_back);
 			// synchronization with 1 clock cycle
 			wait(clk.posedge_event());
+			wait(sc_core::SC_ZERO_TIME);
 
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] write_back_process\n";
 
+			// Release hazard flag.
+			m_Instruction.set_hazard(false);
 			// Complete pipline process
 			e_pipeline_process_done.notify();
 		}
 	}
 
-	void start_cpu()
-	{
-		e_inst_fetch.notify();
-	}
+
+
 
 	riscv32::HAZARDMODE check_for_hazard()
 	{
@@ -143,25 +198,37 @@ private:
 		// In the case Stall operation occur
 		if (true)	// inst = load, 
 		{
+			m_hazard = STALL;
 			return STALL;
 		}
 		return FORWARDING;
 	}
 
 
-	void execute(isa32::ISAFORMAT _isa, uint32_t PC)
+	void execute(isa32::ISAFORMAT _isa, uint32_t& PC)
 	{
-
+		// To call the corresponding instruction
+		m_Instruction[_isa.inst](_isa, PC);
 	}
 
+	void monitor_clk()
+	{
+		std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+	}
 
 
 public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_in<bool> rst;
 
-	riscv32(sc_core::sc_module_name name) : m_name(name), PC(0x00)
+	riscv32(sc_core::sc_module_name name) :
+		m_name(name)
+		, PC(0x00)
+		, m_Instruction("Instruction")
+		, is_first_time(true)
+		, m_hazard(NONE)
 	{
+
 
 		SC_THREAD(inst_fetch_process);
 		sensitive << e_inst_fetch << e_pipeline_process_done;
@@ -169,13 +236,25 @@ public:
 		SC_THREAD(inst_decode_process);
 		sensitive << e_inst_decode;
 
+		SC_THREAD(execute_process);
+		sensitive << e_execute;
+
 		SC_THREAD(data_memory_access_process);
 		sensitive << e_data_memory_access;
 
 		SC_THREAD(write_back_process);
 		sensitive << e_write_back;
 
+		SC_METHOD(monitor_clk);
+		sensitive << clk.pos();
+
 		
+	}
+
+	void start_cpu()
+	{
+		is_first_time = true;
+		e_inst_fetch.notify();
 	}
 
 };

@@ -56,45 +56,28 @@
 #include <list>
 #include <cstdint>
 
-class RegisterFile : public sc_core::sc_module
+class RegisterBank : public sc_core::sc_module
 {
 private:
 	std::string m_name;
 	std::uint32_t reg_x[32];
 
 public:
-	sc_core::sc_in<bool> clk;
-	sc_core::sc_in<bool> rst;
-	sc_core::sc_in<sc_dt::sc_uint<32>> reg_read_1;
-	sc_core::sc_in<sc_dt::sc_uint<32>> reg_read_2;
-	sc_core::sc_in<sc_dt::sc_uint<32>> reg_write;
-	sc_core::sc_in<sc_dt::sc_uint<32>> data_write;
-	sc_core::sc_in<sc_dt::sc_uint<4>> rd;
+	// Interface
 
-	sc_core::sc_out<sc_dt::sc_uint<32>> read_data_1;
-	sc_core::sc_out<sc_dt::sc_uint<32>> read_data_2;
-
-private:
-
-	void handling_syn_clk()
-	{
-
-	}
 
 public:
 
-	RegisterFile(sc_core::sc_module_name name): m_name(name)
+	RegisterBank(sc_core::sc_module_name name): m_name(name)
 	{
 		for (unsigned int i = 0; i < 32; i++)
 		{
 			reg_x[i] = 0x0;
 		}
 		
-		SC_METHOD(handling_syn_clk);
-		sensitive << clk;
 	}
 
-	~RegisterFile() {}
+	~RegisterBank() {}
 
 	std::uint32_t get_x_reg(std::uint32_t index)
 	{

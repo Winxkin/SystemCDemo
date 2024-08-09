@@ -17,13 +17,21 @@ int sc_main(int argc, char* argv[]) {
 #include <iostream>
 #include "RISCV32\commondef.h"
 #include "TestList.h"
+#include "core/RISCV32/riscv32.h"
 
-using namespace riscv32;
+
 
 int sc_main(int argc, char* argv[]) {
     
 
-    tp06_01_u_type_test();
+    riscv32 m_riscv32("riscv32");
+    sc_core::sc_clock m_sysclk("clk", 10, sc_core::SC_NS);
+    sc_core::sc_signal<bool> rst;
+    m_riscv32.clk.bind(m_sysclk);
+    m_riscv32.rst.bind(rst);
+    sc_core::sc_start(2, sc_core::SC_NS);
+    m_riscv32.start_cpu();
+    sc_core::sc_start(100, sc_core::SC_SEC);
     return 0;
 }
 
