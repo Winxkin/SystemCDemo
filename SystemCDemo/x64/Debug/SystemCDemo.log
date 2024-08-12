@@ -13,7 +13,6 @@ D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\inc\xmit_rcv_control
   counter_counter.cpp
   address_decode_address_decode.cpp
   clock_divider_clock_divider.cpp
-D:\HuanNguyen\Viettel\SystemCDesign\SystemCDemo\models\Uart\src\clock_divider_clock_divider.cpp(63,2): warning C4102: 'clk_div': unreferenced label
   control_operation_control_operation.cpp
   cpu_interface_cpu_interface.cpp
   serial_interface_serial_interface.cpp

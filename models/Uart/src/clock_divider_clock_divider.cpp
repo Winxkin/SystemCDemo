@@ -60,7 +60,7 @@ void clock_divider::always_process_57()
 			}
 		}
 	} // end of block: clk_div
-	clk_div:;
+	
 }
 
 void clock_divider::always_process_95() 

@@ -153,11 +153,11 @@
   <ItemGroup>
     <ClInclude Include="common\bus.h" />
     <ClInclude Include="common\core\RISCV32\ALU.h" />
-    <ClInclude Include="common\core\RISCV32\commondef.h" />
+    <ClInclude Include="common\core\RISCV32\decode_inst.h" />
     <ClInclude Include="common\core\RISCV32\data_mem.h" />
     <ClInclude Include="common\core\RISCV32\instruction.h" />
-    <ClInclude Include="common\core\RISCV32\PC.h" />
-    <ClInclude Include="common\core\RISCV32\register.h" />
+    <ClInclude Include="common\core\RISCV32\Inst_mem.h" />
+    <ClInclude Include="common\core\RISCV32\registerbank.h" />
     <ClInclude Include="common\core\RISCV32\riscv32.h" />
     <ClInclude Include="common\DMAC.h" />
     <ClInclude Include="common\DummyMaster.h" />

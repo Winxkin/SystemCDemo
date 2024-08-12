@@ -15,7 +15,7 @@ int sc_main(int argc, char* argv[]) {
 
 #include <systemc>
 #include <iostream>
-#include "RISCV32\commondef.h"
+#include "RISCV32\decode_inst.h"
 #include "TestList.h"
 #include "core/RISCV32/riscv32.h"
 
