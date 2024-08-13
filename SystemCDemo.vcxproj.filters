@@ -203,13 +203,10 @@
     <ClInclude Include="Test\05_Uart\tp_05_01.h">
       <Filter>Header Files\test\05_Uart</Filter>
     </ClInclude>
-    <ClInclude Include="common\core\RISCV32\ALU.h">
-      <Filter>Header Files\common\core\RISCV32</Filter>
-    </ClInclude>
     <ClInclude Include="common\core\RISCV32\decode_inst.h">
       <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
-    <ClInclude Include="common\core\RISCV32\data_mem.h">
+    <ClInclude Include="common\core\RISCV32\memory.h">
       <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
     <ClInclude Include="common\core\RISCV32\instruction.h">
@@ -226,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="Test\06_core\tp_06_01.h">
       <Filter>Header Files\test\06_core</Filter>
-    </ClInclude>
-    <ClInclude Include="common\core\RISCV32\Inst_mem.h">
-      <Filter>Header Files\common\core\RISCV32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

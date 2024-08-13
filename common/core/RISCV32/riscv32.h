@@ -50,7 +50,8 @@ private:
 	// Internal modules
 	Instruction m_Instruction;
 	RegisterBank m_RegisterBank;
-	DataMem m_DataMem;
+	Memory m_DataMem;
+	Memory m_InstMem;
 private:
 
 	
@@ -224,7 +225,8 @@ public:
 		, PC(0x00)
 		, m_Instruction("Instruction")
 		, m_RegisterBank("RegisterBank")
-		, m_DataMem("DataMem")
+		, m_DataMem("DataMem", 64000) // 64KB
+		, m_InstMem("InstMem", 64000) // 64KB
 		, is_first_time(true)
 		, is_branch(false)
 	{
