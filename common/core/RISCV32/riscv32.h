@@ -21,7 +21,7 @@
 #include "instruction.h"
 #include "registerbank.h"
 
-
+template<unsigned int BUSWIDTH = 32>
 class riscv32 : public sc_core::sc_module
 {
 private:
@@ -62,6 +62,7 @@ private:
 	RegisterBank m_RegisterBank;
 	Memory m_DataMem;
 	Memory m_InstMem;
+
 private:
 
 	
@@ -141,23 +142,8 @@ private:
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_process\n";
 			
 
-			// update PC if the instruction is jumping
-			// check if the instruction is branch
-			/*
-			if ((m_isa.inst == "beq") || (m_isa.inst == "bne") || (m_isa.inst == "blt") || (m_isa.inst == "bge") ||
-				(m_isa.inst == "bltu") || (m_isa.inst == "bgeu") || (m_isa.inst == "jal") || (m_isa.inst == "jalr"))
-			{
-				if (m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm))
-				{
-					is_branch = true;
-				}
-			}
-			else
-			{
-				// handling instruction, in case of branch the PC is increase in execution process
-				m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm);
-			}
-			*/
+			execute_instruction();
+			
 
 			// Go to next stage
 			e_data_memory_access.notify();
@@ -178,9 +164,7 @@ private:
 
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	data_memory_access_process\n";
 			// Transfering data through BUS MMIO
-			t_inst_fetch.suspend();
-			t_inst_decode.suspend();
-			t_execute.suspend();
+			suspend_pipeline();
 			
 			// Go to next stage
 			e_write_back.notify();
@@ -214,20 +198,76 @@ private:
 			wait(clk.posedge_event());
 			wait(clk.posedge_event());
 			// simulating for delay on bus MMIO
-			resume_process();
+			resume_pipeline();
 
 
 		}
 	}
 
-	void resume_process()
+
+
+	void resume_pipeline()
 	{
 		t_inst_fetch.resume();
 		t_inst_decode.resume();
 		t_execute.resume();
-
 	}
 
+	void suspend_pipeline()
+	{
+		t_inst_fetch.suspend();
+		t_inst_decode.suspend();
+		t_execute.suspend();
+	}
+
+
+	void execute_instruction()
+	{
+		// update PC if the instruction is jumping
+		// check if the instruction is branch
+
+		if ((m_isa.inst == "beq") || (m_isa.inst == "bne") || (m_isa.inst == "blt") || (m_isa.inst == "bge") ||
+			(m_isa.inst == "bltu") || (m_isa.inst == "bgeu") || (m_isa.inst == "jal") || (m_isa.inst == "jalr"))
+		{
+			if (m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm))
+			{
+				is_branch = true;
+			}
+		}
+		else if (m_isa.inst == "sw")
+		{
+			suspend_pipeline();
+			// In this case the user want to setting register of peripheral through bus mmio
+			m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm);
+
+			std::uint32_t x_rs1 = m_RegisterBank.get_x_reg(m_isa.rs1);
+			std::uint32_t x_rs2 = m_RegisterBank.get_x_reg(m_isa.rs2);
+			std::uint32_t data = m_DataMem.get_word(x_rs1 + m_isa.imm);
+			unsigned char* _data = reinterpret_cast<unsigned char*>(&data);
+
+			tlm::tlm_generic_payload trans;
+			sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+			trans.set_command(tlm::TLM_WRITE_COMMAND);
+			trans.set_address(x_rs1 + m_isa.imm);
+			trans.set_data_length(0x04);
+			trans.set_data_ptr(_data);
+			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
+
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << (x_rs1 + m_isa.imm) << std::endl;
+			}
+			tlm::tlm_phase phase = tlm::BEGIN_REQ;
+			tlm::tlm_sync_enum status;
+			status = initiator_socket->nb_transport_fw(trans, phase, delay);
+
+		}
+		else
+		{
+			// handling instruction, in case of branch the PC is increase in execution process
+			m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm);
+		}
+	}
 
 
 	void monitor_clk()
@@ -254,9 +294,60 @@ private:
 		PC = PC + 4; // default 4 byte = 32bit
 	}
 
+	/**@brief
+	 * nb_transport_bw
+	 *
+	 * Implements the non-blocking backward transport interface for the initiator.
+	 *
+	 * @param trans Reference to the generic payload object containing the transaction details
+	 *              such as command, address, and data.
+	 *
+	 * @param phase Reference to the transaction phase. The current phase of the transaction,
+	 *              which may be updated by the function.
+	 *
+	 * @param delay Reference to the annotated delay. Specifies the timing delay for the transaction
+	 *              and may be updated by the function.
+	 *
+	 * @return tlm::tlm_sync_enum Enumeration indicating the synchronization state of the transaction:
+	 *         - TLM_ACCEPTED: Transaction is accepted, and no immediate further action is required.
+	 *         - TLM_UPDATED: Transaction phase has been updated. The initiator should check the new phase.
+	 *         - TLM_COMPLETED: Transaction is completed immediately, and no further phases will occur.
+	 */
+	tlm::tlm_sync_enum nb_transport_bw(tlm::tlm_generic_payload& trans, tlm::tlm_phase& phase, sc_core::sc_time& delay) {
+		switch (phase)
+		{
+		case tlm::BEGIN_REQ:
+		{
+			// Handle BEGIN_REQ phase
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	BEGIN_REQ received" << std::endl;
+			}
+			break;
+		}
+		case tlm::END_REQ:
+		{
+			// Handle END_REQ phase (shouldn't happen here)
+			if (m_message)
+			{
+				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	END_REQ received" << std::endl;
+			}
+			
+			// To resume pipeline process
+			resume_pipeline();
+			break;
+		}
+		default:
+			break;
+		};
+		return tlm::TLM_ACCEPTED;
+	}
+
 public:
 	sc_core::sc_in<bool> clk;
 	sc_core::sc_in<bool> rst;
+
+	tlm_utils::simple_initiator_socket<riscv32, BUSWIDTH> initiator_socket;
 
 	riscv32(sc_core::sc_module_name name) :
 		m_name(name)
@@ -304,7 +395,12 @@ public:
 		SC_THREAD(test);
 		sensitive << e_test;
 
-		
+
+	}
+
+	void load_instruction(std::uint32_t _inst)
+	{
+		m_InstMem.load_instruction(_inst);
 	}
 
 	void start_cpu()

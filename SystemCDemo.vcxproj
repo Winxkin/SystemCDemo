@@ -186,6 +186,7 @@
     <ClInclude Include="Test\05_Uart\tp_05_01.h" />
     <ClInclude Include="Test\06_core\riscv32_inst_mix.h" />
     <ClInclude Include="Test\06_core\tp_06_01.h" />
+    <ClInclude Include="Test\06_core\tp_06_02.h" />
     <ClInclude Include="Test\Register.h" />
     <ClInclude Include="Test\TestList.h" />
   </ItemGroup>

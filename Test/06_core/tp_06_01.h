@@ -1,6 +1,6 @@
 #include <systemc>
 #include <iostream>
-#include "RISCV32\decode_inst.h"
+#include "RISCV32/decode_inst.h"
 #include "06_core/riscv32_inst_mix.h"
 
 using namespace isa32;

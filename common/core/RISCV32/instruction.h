@@ -22,6 +22,7 @@ class Instruction : public sc_core::sc_module
 {
 private:
 	std::string m_name;
+	bool m_message;
 	std::map<std::string, std::function<bool(RegisterBank&, Memory&, std::uint32_t&, std::uint32_t&, std::uint32_t&, std::uint32_t&, std::uint32_t&)>> instructionmap;
 
 private:
@@ -33,6 +34,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_add\n";
+		}
 
 		x_rd = x_rs1 + x_rs2;
 
@@ -48,6 +54,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sub\n";
+		}
+
 		x_rd = x_rs1 - x_rs2;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -60,6 +71,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_xor\n";
+		}
 
 		x_rd = x_rs1 ^ x_rs2;
 
@@ -74,6 +90,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_or\n";
+		}
+
 		x_rd = x_rs1 | x_rs2;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -85,6 +106,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_and\n";
+		}
 
 		x_rd = x_rs1 & x_rs2;
 
@@ -98,6 +124,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sll\n";
+		}
+
 		x_rd = x_rs1 << x_rs2;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -110,6 +141,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_srl\n";
+		}
+
 		x_rd = x_rs1 >> x_rs2;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -121,6 +157,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sra\n";
+		}
 
 		x_rd = x_rs1 >> x_rs2;
 		x_rd = x_rd | ((x_rs1 >> 31 | 0x01) << 31);
@@ -135,6 +176,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_slt\n";
+		}
+
 		x_rd = (x_rs1 < x_rs2) ? 1 : 0;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -146,6 +192,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sltu\n";
+		}
 
 		x_rd = (x_rs1 < x_rs2) ? 1 : 0;
 
@@ -159,6 +210,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_addi\n";
+		}
+
 		x_rd = x_rs1 + _imm;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -170,6 +226,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_xori\n";
+		}
 
 		x_rd = x_rs1 ^ _imm;
 
@@ -183,6 +244,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_ori\n";
+		}
+
 		x_rd = x_rs1 | _imm;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -194,6 +260,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_andi\n";
+		}
 
 		x_rd = x_rs1 & _imm;
 
@@ -207,6 +278,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_slli\n";
+		}
+
 		x_rd = x_rs1 << (_imm & 0x1f );
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -218,6 +294,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_srli\n";
+		}
 
 		x_rd = x_rs1 >> (_imm & 0x1f);
 
@@ -232,6 +313,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_srai\n";
+		}
+
 		x_rd = x_rs1 >> (_imm & 0x1f);
 		x_rd = x_rd | ((x_rs1 >> 31 | 0x01) << 31);
 		_reg.set_x_reg(_rd, x_rd);
@@ -244,6 +330,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_slti\n";
+		}
+
 		x_rd = (x_rs1 < _imm) ? 1 : 0;
 		_reg.set_x_reg(_rd, x_rd);
 		return true;
@@ -255,6 +346,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sltiu\n";
+		}
+
 		x_rd = (x_rs1 < _imm) ? 1 : 0;
 		_reg.set_x_reg(_rd, x_rd);
 		return true;
@@ -262,41 +358,130 @@ private:
 
 	bool execute_lb(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lb\n";
+		}
+
+		x_rd = (std::uint32_t)_mem.get_byte(x_rs1 + _imm);
+		_reg.set_x_reg(_rd, x_rd);
 		return true;
 	}
 
 	bool execute_lh(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lh\n";
+		}
+
+		x_rd = (std::uint32_t)_mem.get_half(x_rs1 + _imm);
+		_reg.set_x_reg(_rd, x_rd);
 		return true;
 	}
 
 	bool execute_lw(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lw\n";
+		}
+
+		x_rd = (std::uint32_t)_mem.get_word(x_rs1 + _imm);
+		_reg.set_x_reg(_rd, x_rd);
 		return true;
 	}
 
 	bool execute_lbu(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lbu\n";
+		}
+
+		x_rd = (std::uint32_t)_mem.get_byte(x_rs1 + _imm);
+		_reg.set_x_reg(_rd, x_rd);
 		return true;
 	}
 
 	bool execute_lhu(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lhu\n";
+		}
+
+		x_rd = (std::uint32_t)_mem.get_half(x_rs1 + _imm);
+		_reg.set_x_reg(_rd, x_rd);
 		return true;
 	}
 
 	bool execute_sb(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sb\n";
+		}
+
+		x_rs2 = x_rs2 & 0xff;
+		_mem.set_byte(x_rs1 + _imm, (std::uint8_t)x_rs2);
+
 		return true;
 	}
 
 	bool execute_sh(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sh\n";
+		}
+
+		x_rs2 = x_rs2 & 0xffff;
+		_mem.set_half(x_rs1 + _imm, (std::uint16_t)x_rs2);
 		return true;
 	}
 
 	bool execute_sw(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		std::uint32_t x_rd = _reg.get_x_reg(_rd);
+		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
+		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_sw\n";
+		}
+
+		_mem.set_word(x_rs1 + _imm, x_rs2);
+
 		return true;
 	}
 
@@ -304,6 +489,11 @@ private:
 	{
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_beq\n";
+		}
 
 		if (x_rs1 == x_rs2)
 		{
@@ -321,6 +511,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_bne\n";
+		}
+
 		if (x_rs1 != x_rs2)
 		{
 			_PC = _PC + _imm;
@@ -336,6 +531,11 @@ private:
 	{
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_blt\n";
+		}
 
 		if (x_rs1 < x_rs2)
 		{
@@ -353,6 +553,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_bge\n";
+		}
+
 		if (x_rs1 >= x_rs2)
 		{
 			_PC = _PC + _imm;
@@ -368,6 +573,11 @@ private:
 	{
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
+
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_bltu\n";
+		}
 
 		if (x_rs1 < x_rs2)
 		{
@@ -385,6 +595,11 @@ private:
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 		std::uint32_t x_rs2 = _reg.get_x_reg(_rs2);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_bgeu\n";
+		}
+
 		if (x_rs1 >= x_rs2)
 		{
 			_PC = _PC + _imm;
@@ -400,6 +615,11 @@ private:
 	{
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_jal\n";
+		}
+
 		x_rd = _PC + 4;
 		
 		_reg.set_x_reg(_rd, x_rd);
@@ -414,6 +634,11 @@ private:
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 		std::uint32_t x_rs1 = _reg.get_x_reg(_rs1);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_jalr\n";
+		}
+
 		x_rd = _PC + 4;
 		
 		_reg.set_x_reg(_rd, x_rd);
@@ -426,6 +651,11 @@ private:
 	{
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_lui\n";
+		}
+
 		x_rd = _imm << 12;
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -436,6 +666,11 @@ private:
 	{
 		std::uint32_t x_rd = _reg.get_x_reg(_rd);
 
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_auipc\n";
+		}
+
 		x_rd = _PC + (_imm << 12);
 
 		_reg.set_x_reg(_rd, x_rd);
@@ -444,11 +679,19 @@ private:
 
 	bool execute_eccall(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_eccall\n";
+		}
 		return true;
 	}
 
 	bool execute_ebreak(RegisterBank& _reg, Memory& _mem, std::uint32_t& _PC, std::uint32_t& _rd, std::uint32_t& _rs1, std::uint32_t& _rs2, std::uint32_t& _imm)
 	{
+		if (m_message)
+		{
+			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	execute_ebreak\n";
+		}
 		return true;
 	}
 
@@ -498,8 +741,9 @@ private:
 	}
 
 public:
-	Instruction(sc_core::sc_module_name name) 
-		: m_name(name)
+
+	Instruction(sc_core::sc_module_name name, bool message = false) 
+		: m_name(name), m_message(message)
 	{
 		mapping_instruction();
 	}

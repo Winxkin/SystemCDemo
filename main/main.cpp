@@ -1,5 +1,5 @@
 // All systemc modules should include systemc.h header file
-/*
+
 #include "TestList.h"
 
 // sc_main in top level function like in C++ main
@@ -8,11 +8,12 @@
 int sc_main(int argc, char* argv[]) {
 
     // Running test case here
-    tp_05_01();
+    tp06_02_test1();
     return 0;
 }
-*/
 
+
+/*
 #include <systemc>
 #include <iostream>
 #include "RISCV32\decode_inst.h"
@@ -34,6 +35,7 @@ int sc_main(int argc, char* argv[]) {
     sc_core::sc_start(100, sc_core::SC_SEC);
     return 0;
 }
+*/
 
 
 
