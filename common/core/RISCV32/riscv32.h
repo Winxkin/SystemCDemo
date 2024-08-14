@@ -46,6 +46,16 @@ private:
 	sc_core::sc_event e_irq_handler;
 
 	sc_core::sc_event e_pipeline_process_done;
+
+	sc_core::sc_event e_test;
+
+	// Define process handle to control SC_THEARD
+	sc_core::sc_process_handle t_inst_fetch;
+	sc_core::sc_process_handle t_inst_decode;
+	sc_core::sc_process_handle t_execute;
+	sc_core::sc_process_handle t_data_memory_access;
+	sc_core::sc_process_handle t_write_back;
+
 private:
 	// Internal modules
 	Instruction m_Instruction;
@@ -133,6 +143,7 @@ private:
 
 			// update PC if the instruction is jumping
 			// check if the instruction is branch
+			/*
 			if ((m_isa.inst == "beq") || (m_isa.inst == "bne") || (m_isa.inst == "blt") || (m_isa.inst == "bge") ||
 				(m_isa.inst == "bltu") || (m_isa.inst == "bgeu") || (m_isa.inst == "jal") || (m_isa.inst == "jalr"))
 			{
@@ -146,7 +157,7 @@ private:
 				// handling instruction, in case of branch the PC is increase in execution process
 				m_Instruction[m_isa.inst](m_RegisterBank, m_DataMem, PC, m_isa.rd, m_isa.rs1, m_isa.rs2, m_isa.imm);
 			}
-			
+			*/
 
 			// Go to next stage
 			e_data_memory_access.notify();
@@ -166,7 +177,11 @@ private:
 			wait(sc_core::SC_ZERO_TIME);
 
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	data_memory_access_process\n";
-
+			// Transfering data through BUS MMIO
+			t_inst_fetch.suspend();
+			t_inst_decode.suspend();
+			t_execute.suspend();
+			
 			// Go to next stage
 			e_write_back.notify();
 		}
@@ -182,13 +197,36 @@ private:
 			wait(sc_core::SC_ZERO_TIME);
 
 			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]	write_back_process\n";
-
+			e_test.notify();
 			// Complete pipline process
 			e_pipeline_process_done.notify();
 		}
 	}
 
+	void test()
+	{
+		while (true)
+		{
+			wait(e_test);
+			wait(clk.posedge_event());
+			wait(clk.posedge_event());
+			wait(clk.posedge_event());
+			wait(clk.posedge_event());
+			wait(clk.posedge_event());
+			// simulating for delay on bus MMIO
+			resume_process();
 
+
+		}
+	}
+
+	void resume_process()
+	{
+		t_inst_fetch.resume();
+		t_inst_decode.resume();
+		t_execute.resume();
+
+	}
 
 
 
@@ -233,19 +271,24 @@ public:
 
 
 		SC_THREAD(inst_fetch_process);
-		sensitive << e_inst_fetch << e_pipeline_process_done;
+		sensitive << e_inst_fetch;
+		t_inst_fetch = sc_get_current_process_handle();
 
 		SC_THREAD(inst_decode_process);
 		sensitive << e_inst_decode;
+		t_inst_decode = sc_get_current_process_handle();
 
 		SC_THREAD(execute_process);
 		sensitive << e_execute;
+		t_execute = sc_get_current_process_handle();
 
 		SC_THREAD(data_memory_access_process);
 		sensitive << e_data_memory_access;
+		t_data_memory_access = sc_get_current_process_handle();
 
 		SC_THREAD(write_back_process);
 		sensitive << e_write_back;
+		t_write_back = sc_get_current_process_handle();
 
 		SC_THREAD(irq_handler_process);
 		sensitive << e_irq_handler;
@@ -257,6 +300,9 @@ public:
 
 		SC_METHOD(irq_triggered);
 		dont_initialize();
+
+		SC_THREAD(test);
+		sensitive << e_test;
 
 		
 	}
