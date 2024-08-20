@@ -8,7 +8,7 @@
 int sc_main(int argc, char* argv[]) {
 
     // Running test case here
-    tp06_02_test1();
+    tp_04_01();
     return 0;
 }
 
