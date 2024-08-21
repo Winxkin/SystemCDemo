@@ -5,6 +5,11 @@ project(SoCProject)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Set the default build type if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
+
 # Include the FindSystemC.cmake file
 include(FindSystemC.cmake)
 
@@ -18,8 +23,7 @@ set(MAIN_SRC
 
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/models)
-# Find SystemC
-find_package(SystemCLanguage REQUIRED)
+
 
 # Add subdirectories
 add_subdirectory(common)
