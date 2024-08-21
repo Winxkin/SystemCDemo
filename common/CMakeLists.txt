@@ -1,4 +1,5 @@
 set(COMMON_SRC
+    commondef.h
     DMAC.h
     DummyMaster.h
     DummySlave.h
