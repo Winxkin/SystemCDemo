@@ -12,6 +12,7 @@
 #include <memory>
 #include <stdio.h>
 #include <iostream>
+#include "commondef.h"
 
 typedef enum
 {
@@ -72,8 +73,7 @@ public:
             value = new_value & mask;
 
             /* Info message */
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name
-                << " changed to value -> [0x" << std::hex << value << "]" << std::endl;
+            LOG("Register %s changed to value -> [0x%X]\n", name.c_str(), value);
 
             /* Calling callback register */
             if (callback) {
@@ -82,7 +82,7 @@ public:
         }
         else
         {
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name << " Warning: only read permission" << std::endl;
+            LOG("Register %s Warning: only read permission\n", name.c_str());
         }
     };
 
@@ -131,8 +131,7 @@ public:
         {
             value = new_value & mask;
             /* Info message */
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name
-                << " changed to value -> [0x" << std::hex << value << "]" << std::endl;
+            LOG("Register %s changed to value -> [0x%X]\n", name.c_str(), value);
 
             /* Calling callback register */
             if (callback) {
@@ -141,7 +140,7 @@ public:
         }
         else
         {
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << "    Register " << name << " Warning: only read permission" << std::endl;
+            LOG("Register %s Warning: only read permission\n", name.c_str());
         }
         return *this;
     }
@@ -257,9 +256,7 @@ public:
     {
         for (auto& reg : registers)
         {
-            std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" "[dump]  Register " << reg.second.get_name()
-                << ", address: [" << std::hex << reg.second.get_address()
-                << "] value: [" << std::hex << reg.second.get_value() << "]" << std::endl;
+            LOG("[dump]  Register %s, address: [0x%X], value: [0x%X]\n", reg.second.get_name().c_str(), reg.second.get_address(), reg.second.get_value());
         }
 
     };

@@ -17,6 +17,7 @@
 #include <cstdint>
 #include "Registerif.h"
 #include "bus.h"
+#include "commondef.h"
 
 template<unsigned int BUSWIDTH = 32>
 class DummyMaster : public sc_core::sc_module
@@ -62,7 +63,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	BEGIN_REQ received" << std::endl;
+				LOG("(%s) BEGIN_REQ received\n", m_name.c_str());
 			}
 			break;
 		}
@@ -71,12 +72,12 @@ private:
 			// Handle END_REQ phase (shouldn't happen here)
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	END_REQ received" << std::endl;
+				LOG("(%s) END_REQ received\n", m_name.c_str());
 			}
 			if (trans.is_response_error()) {
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+					LOG("(%s) Transaction failed with response status: %s\n", m_name.c_str(), trans.get_response_string().c_str());
 				}
 			}
 			else {
@@ -89,8 +90,7 @@ private:
 					// dump message
 					if (m_message)
 					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received data: ";
-
+						LOG("(%s) Received data: ", m_name.c_str());
 						for (unsigned int i = 0; i < trans.get_data_length(); i++)
 						{
 							std::cout << "[0x" << std::hex << (unsigned int)tempdata.m_data[i] << "]	";
@@ -106,7 +106,7 @@ private:
 				}
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction succeeded" << std::endl;
+					LOG("(%s) Transaction succeeded\n", m_name.c_str());
 				}
 			}
 			break;
@@ -219,8 +219,7 @@ public:
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr
-					<< "	,data: 0x" << std::hex << data << std::endl;
+				LOG("(%s) Sending Write transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), addr, data);
 			}
 			
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
@@ -246,7 +245,7 @@ public:
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+				LOG("(%s) Sending Read transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), addr, data);
 			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
@@ -290,7 +289,7 @@ public:
 
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Write transaction with address 0x" << std::hex << addr << std::endl;
+				LOG("(%s) Sending Write transaction with address 0x%X\n", m_name.c_str(), addr);
 			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;
@@ -314,7 +313,7 @@ public:
 			trans.set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Sending Read transaction with address 0x" << std::hex << addr << std::dec << std::endl;
+				LOG("(%s) Sending Write transaction with address 0x%X\n", m_name.c_str(), addr);
 			}
 			tlm::tlm_phase phase = tlm::BEGIN_REQ;
 			tlm::tlm_sync_enum status;

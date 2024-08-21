@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include "commondef.h"
 
 template<unsigned int BUSWIDTH = 32>
 class Target : public sc_core::sc_module {
@@ -44,7 +45,8 @@ private:
 		case tlm::BEGIN_REQ:
 		{
 			// Handle BEGIN_REQ phase
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
+
+			LOG("(%s) BEGIN_REQ received\n", m_name.c_str());
 
 			unsigned char* data = new unsigned char[trans.get_data_length()];
 
@@ -52,9 +54,9 @@ private:
 			case tlm::TLM_WRITE_COMMAND:
 			{
 				std::memcpy(data, trans.get_data_ptr(), trans.get_data_length());
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() 
-					<< " data: ";
-				
+
+				LOG("(%s) Received transaction with address 0x%X  data: ", m_name.c_str(), trans.get_address());
+
 				for (unsigned int i = 0; i < trans.get_data_length(); i++)
 				{
 					std::cout << " [0x" << std::hex << (unsigned int)data[i] << "]";
@@ -71,7 +73,8 @@ private:
 					data[i] = (unsigned char) i;
 				}
 
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << std::endl;
+				LOG("(%s) Received transaction with address 0x%X", m_name.c_str(), trans.get_address());
+				
 				std::memcpy(trans.get_data_ptr(), data, trans.get_data_length());
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
@@ -90,7 +93,7 @@ private:
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			LOG("(%s) END_REQ received\n", m_name.c_str());
 			break;
 		}
 		default:

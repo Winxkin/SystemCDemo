@@ -16,6 +16,7 @@
 #include <iostream>
 #include <cstdint>
 #include <iomanip>
+#include "commondef.h"
 
 template<unsigned int BUSWIDTH = 32>
 class RAM : public sc_core::sc_module
@@ -121,7 +122,7 @@ public:
 			// Handle END_REQ phase (shouldn't happen here)
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+				LOG("(%s) END_REQ received\n", m_name.c_str());
 			}
 			break;
 		}

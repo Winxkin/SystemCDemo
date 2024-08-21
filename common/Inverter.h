@@ -1,6 +1,7 @@
 #ifndef _INVERTER_H
 #define _INVERTER_H
 #include <systemc.h>
+#include "commondef.h"
 
 SC_MODULE(Inverter) {
     sc_core::sc_in<bool> in;    // Input signal

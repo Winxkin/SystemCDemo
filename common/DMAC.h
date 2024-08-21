@@ -17,6 +17,7 @@
 #include <list>
 #include <cstdint>
 #include "Registerif.h"
+#include "commondef.h"
 
 // Notice: DMA Controller supports maximum 256 channels
 #define DMA_MAX_CH 256
@@ -107,7 +108,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) BEGIN_REQ received" << std::endl;
+				LOG("(%s) (Target socket) BEGIN_REQ received\n", m_name.c_str());
 			}
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
@@ -117,7 +118,7 @@ private:
 				regs.update_register(trans.get_address(), wdata);
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+					LOG("(%s) Received transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), trans.get_address(), wdata);
 				}
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
@@ -146,7 +147,7 @@ private:
 			// Handle END_REQ phase (shouldn't happen here)
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Target socket) END_REQ received" << std::endl;
+				LOG("(%s) (Target socket) END_REQ received\n", m_name.c_str());
 			}
 			break;
 		}
@@ -183,7 +184,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) BEGIN_REQ received" << std::endl;
+				LOG("(%s) (Initiator socket) BEGIN_REQ received\n", m_name.c_str());
 			}
 			break;
 		}
@@ -192,13 +193,13 @@ private:
 			// Handle END_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	(Initiator socket) END_REQ received" << std::endl;
+				LOG("(%s) (Initiator socket) END_REQ received\n", m_name.c_str());
 			}
 			if (trans.is_response_error()) 
 			{
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Transaction failed with response status: " << trans.get_response_string() << std::endl;
+					LOG("(%s) Transaction failed with response status: %s\n", m_name.c_str(), trans.get_response_string().c_str());
 				}
 			}
 			else
@@ -219,8 +220,7 @@ private:
 				{
 					if (m_message)
 					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	: DMA transfers data from  0x" << std::hex
-							<< regs[DMASRCADDR(m_current_ch)].get_value() << " to 0x" << std::hex << regs[DMADESADDR(m_current_ch)].get_value() << std::endl;
+						LOG("(%s) DMA transfers data from  0x%X to 0x%X\n", m_name.c_str(), regs[DMASRCADDR(m_current_ch)].get_value(), regs[DMADESADDR(m_current_ch)].get_value());
 					}
 					// Notifying DMA operation done !
 					e_DMA_run_done.notify();
@@ -286,8 +286,7 @@ private:
 		{
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
-
+				LOG("(%s) DMA is running, cannot request DMA operation in this time !\n", m_name.c_str());
 			}
 		}
 	}
@@ -339,7 +338,7 @@ private:
 					{
 						if (m_message)
 						{
-							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA_req[" << i << "] has changed to HIGH" << std::endl;
+							LOG("(%s) DMA_req[%d] has changed to HIGH\n", m_name.c_str(), i);
 						}
 						port_req_ids.push_back(i);
 					}
@@ -355,8 +354,7 @@ private:
 		{
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ":	DMA is running, cannot request DMA operation in this time !" << std::endl;
-
+				LOG("(%s) DMA is running, cannot request DMA operation in this time !\n", m_name.c_str());
 			}
 		}
 	}
@@ -419,7 +417,7 @@ private:
 			}
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << "	DMA process is done" << std::endl;
+				LOG("(%s) DMA process is done\n", m_name.c_str());
 			}
 			// releasing flags
 			m_running = false;

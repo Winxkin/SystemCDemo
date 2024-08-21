@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\bus.h" />
+    <ClInclude Include="common\commondef.h" />
     <ClInclude Include="common\core\RISCV32\decode_inst.h" />
     <ClInclude Include="common\core\RISCV32\memory.h" />
     <ClInclude Include="common\core\RISCV32\instruction.h" />

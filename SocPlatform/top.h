@@ -28,19 +28,19 @@ class SoCPlatform : public sc_core::sc_module
 public:
 	SoCPlatform(sc_core::sc_module_name name) :
 		sc_core::sc_module(name)
-		, m_dummymaster("DummyMaster", false)
-		, m_dummyslave("DummySlave", false)
-		, m_dmac("Dmac", false)
-		, m_bus("bus_mmio", false)
+		, m_dummymaster("DummyMaster", true)
+		, m_dummyslave("DummySlave", true)
+		, m_dmac("Dmac", true)
+		, m_bus("bus_mmio", true)
 		, m_sysclk("systemCLK", 10, sc_core::SC_NS)	// 100MHz 
 		, m_target1("Target1")
 		, m_target2("Target2")
 		, m_target3("Target3")
 		, m_target4("Target4")
-		, m_ram1("ram1", 0x3000, false)
-		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", false)
+		, m_ram1("ram1", 0x3000, true)
+		, m_wrapper_four_bit_adder("wrapper_four_bit_adder", true)
 		, m_wrapper_counter("wrapper_counter", true)
-		, m_wrapper_uart("wrapper_uart",true)
+		, m_wrapper_uart("wrapper_uart", true)
 		{
 			do_signals_binding();
 			do_bus_binding();

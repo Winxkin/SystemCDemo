@@ -13,6 +13,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdint>
+#include "commondef.h"
 
 #define COUNTERINPUT	(0x00 + 0x00)
 #define COUNTEROUTPUT	(0x00 + 0x04)
@@ -50,7 +51,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
+				LOG("(%s) BEGIN_REQ received\n", m_name.c_str());
 			}
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
@@ -60,7 +61,7 @@ private:
 				regs.update_register(trans.get_address(), wdata);
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+					LOG("(%s) Received transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), trans.get_address(), wdata);
 				}
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
@@ -87,7 +88,7 @@ private:
 		case tlm::END_REQ:
 		{
 			// Handle END_REQ phase (shouldn't happen here)
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+			LOG("(%s) END_REQ received\n", m_name.c_str());
 			break;
 		}
 		default:
@@ -140,7 +141,7 @@ private:
 		regs[COUNTEROUTPUT].set_readonly_value(output);
 		if (m_message)
 		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": counter value: " << output << std::endl;
+			LOG("(%s) counter value: %d\n", m_name.c_str(), output);
 		}
 	}
 

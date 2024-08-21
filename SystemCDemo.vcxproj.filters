@@ -227,5 +227,8 @@
     <ClInclude Include="Test\06_core\tp_06_02.h">
       <Filter>Header Files\test\06_core</Filter>
     </ClInclude>
+    <ClInclude Include="common\commondef.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

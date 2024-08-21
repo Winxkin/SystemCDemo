@@ -16,6 +16,7 @@
 #include <iostream>
 #include <cstdint>
 #include "Registerif.h"
+#include "commondef.h"
 
 #define DUMMYRESULT 0x00
 
@@ -76,8 +77,7 @@ private:
 				input_val_ports[pair.first] = pair.second->read();
 				if (m_portmonitor)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Port " << pair.first << " has changed, value: " << pair.second->read() << std::endl;
-
+					LOG("(%s) Port %d has changed, value: %d\n", m_name.c_str(), pair.first, pair.second->read());
 				}
 			}
 		}
@@ -123,7 +123,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " BEGIN_REQ received" << std::endl;
+				LOG("(%s) BEGIN_REQ received\n", m_name.c_str());
 			}
 			switch (trans.get_command()) {
 			case tlm::TLM_WRITE_COMMAND:
@@ -133,7 +133,7 @@ private:
 				regs.update_register(trans.get_address(), wdata);
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": Received transaction with address 0x" << std::hex << trans.get_address() << " data: 0x" << std::hex << wdata << std::dec << std::endl;
+					LOG("(%s) Received transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), trans.get_address(), wdata);
 				}
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;
@@ -162,7 +162,7 @@ private:
 			// Handle END_REQ phase (shouldn't happen here)
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " END_REQ received" << std::endl;
+				LOG("(%s) END_REQ received\n", m_name.c_str());
 			}
 			break;
 		}
@@ -200,7 +200,7 @@ private:
 				std::cout << "      TM is Fail       \n";
 				std::cout << "-----------------------\n";
 			}
-			std::cout << "Total simulation time: " << sc_core::sc_time_stamp().to_double() << "NS" << std::endl;
+			std::cout << "Total simulation time: " << sc_core::sc_time_stamp().to_double() / 1000 << "NS" << std::endl;
 			sc_core::sc_stop(); // To stop systemC kernel simulation
 		}
 	}
@@ -217,7 +217,7 @@ private:
 	{
 		if (m_clkmonitor)
 		{
-			std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ] Clock posedge is triggered.\n";
+			LOG("(%s) Clock posedge is triggered\n", m_name.c_str());
 		}
 	}
 

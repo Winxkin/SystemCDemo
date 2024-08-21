@@ -16,6 +16,7 @@
 #include <map>
 #include <vector>
 #include <mutex>
+#include "commondef.h"
 
 typedef sc_core::sc_in<bool> sc_clk_in;
 
@@ -132,8 +133,7 @@ private:
 				{
 					if (m_message)
 					{
-						std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Bus) (Address Phase) accepting address 0x" << std::hex
-							<< current_trans.get_address() << std::endl;
+						LOG("(%s) (Address Phase) accepting address 0x%X\n", m_name.c_str(), current_trans.get_address());
 					}
 				}
 				else
@@ -142,8 +142,7 @@ private:
 					{
 						if (m_message)
 						{
-							std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]"
-								<< "(Data phase) Writing data :	0x" << std::hex << (unsigned int)current_trans.get_data_ptr()[i - 1] << std::endl;
+							LOG("(%s) (Initiator socket) (Data phase) Writing data : 0x%X\n",m_name.c_str(), (unsigned int)current_trans.get_data_ptr()[i - 1]);
 						}
 					}
 				}
@@ -154,8 +153,7 @@ private:
 
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]"
-					<< " Fowarding transaction to target socket successfully with base address 0x" << std::hex << address_mapping[m_cur_socket].addr << std::endl;
+				LOG("(%s) (Initiator socket) Fowarding transaction to target socket successfully with base address 0x%X\n", m_name.c_str(), address_mapping[m_cur_socket].addr);
 			}
 
 			status = initiator_sockets[m_cur_socket]->nb_transport_fw(current_trans, fw_phase, delay);
@@ -222,7 +220,7 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]" << "BEGIN_REQ received" << std::endl;
+				LOG("(%s) (Initiator socket)[%d] BEGIN_REQ received\n", m_name.c_str(), m_cur_socket);
 			}
 			break;
 		}
@@ -231,7 +229,7 @@ private:
 			// Handle END_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Initiator socket)" << "[" << m_cur_socket << "]" << "END_REQ received" << std::endl;
+				LOG("(%s) (Initiator socket)[%d] END_REQ received\n", m_name.c_str(), m_cur_socket);
 			}
 			tlm::tlm_phase bw_phase = tlm::END_REQ;
 			target_sockets[m_current_ts_id]->nb_transport_bw(trans, bw_phase, delay);
@@ -273,13 +271,13 @@ private:
 			// Handle BEGIN_REQ phase
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) BEGIN_REQ received" << std::endl;
+				LOG("(%s) (Target socket) BEGIN_REQ received\n", m_name.c_str());
 			}
 			if (!m_bus_lock)
 			{
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " detect transaction" << std::endl;
+					LOG("(%s) detect transaction\n", m_name.c_str());
 				}
 				this->m_bus_lock = true;
 				TS_handle_begin_req(id, trans, delay);
@@ -290,7 +288,7 @@ private:
 				// Handle END_REQ phase
 				if (m_message)
 				{
-					std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << " is locked, ignore transaction !" << std::endl;
+					LOG("(%s) Bus is locked, ignore transaction !\n", m_name.c_str());
 				}
 				return tlm::TLM_COMPLETED;
 			}
@@ -300,7 +298,7 @@ private:
 		{
 			if (m_message)
 			{
-				std::cout << "[" << sc_core::sc_time_stamp().to_double() << " NS ]" << m_name << ": (Target socket) END_REQ received" << std::endl;
+				LOG("(%s) (Target socket) END_REQ received\n", m_name.c_str());
 			}
 			tlm::tlm_phase fw_phase = tlm::END_REQ;
 			tlm::tlm_sync_enum status;
