@@ -1,0 +1,1 @@
+This folder contains six primary examples in SystemC User Guide.

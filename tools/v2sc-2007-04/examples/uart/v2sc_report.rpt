@@ -1,0 +1,26 @@
+ Preprocessing...
+ Compiling...
+ Elaborating...
+ Generating SystemC...
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/address_decode_address_decode.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/clock_divider_clock_divider.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/control_operation_control_operation.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/cpu_interface_cpu_interface.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/serial_interface_serial_interface.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/status_registers_status_registers.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/tester_tester.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/uart_tb_uart_tb.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/uart_top_uart_top.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/xmit_rcv_control_xmit_rcv_control.h
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/address_decode_address_decode.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/clock_divider_clock_divider.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/control_operation_control_operation.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/cpu_interface_cpu_interface.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/serial_interface_serial_interface.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/status_registers_status_registers.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/tester_tester.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/uart_tb_uart_tb.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/uart_top_uart_top.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/xmit_rcv_control_xmit_rcv_control.cpp
+ 	Generating /mnt/d/HuanNguyen/Viettel/toolchains/v2sc-2007-04/examples/uart/uart_tb_main.cpp
+Successfully done.
