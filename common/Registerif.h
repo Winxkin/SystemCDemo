@@ -256,7 +256,7 @@ public:
     {
         for (auto& reg : registers)
         {
-            LOG("[dump]  Register %s, address: [0x%X], value: [0x%X]\n", reg.second.get_name().c_str(), reg.second.get_address(), reg.second.get_value());
+            LOG("[dump]  Register %s, address: [0x%lX], value: [0x%lX]\n", reg.second.get_name().c_str(), reg.second.get_address(), reg.second.get_value());
         }
 
     };

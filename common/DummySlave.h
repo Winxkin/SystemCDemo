@@ -77,7 +77,7 @@ private:
 				input_val_ports[pair.first] = pair.second->read();
 				if (m_portmonitor)
 				{
-					LOG("(%s) Port %d has changed, value: %d\n", m_name.c_str(), pair.first, pair.second->read());
+					LOG("(%s) Port %s has changed, value: %X\n", m_name.c_str(), pair.first.c_str(), pair.second->read());
 				}
 			}
 		}
@@ -133,7 +133,7 @@ private:
 				regs.update_register(trans.get_address(), wdata);
 				if (m_message)
 				{
-					LOG("(%s) Received transaction with address 0x%X, data: 0x%X\n", m_name.c_str(), trans.get_address(), wdata);
+					LOG("(%s) Received transaction with address 0x%lX, data: 0x%X\n", m_name.c_str(), trans.get_address(), wdata);
 				}
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
 				break;

@@ -133,7 +133,7 @@ private:
 				{
 					if (m_message)
 					{
-						LOG("(%s) (Address Phase) accepting address 0x%X\n", m_name.c_str(), current_trans.get_address());
+						LOG("(%s) (Address Phase) accepting address 0x%lX\n", m_name.c_str(), current_trans.get_address());
 					}
 				}
 				else

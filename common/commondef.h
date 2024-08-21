@@ -9,7 +9,7 @@
 #define LOG(fmt, ...) \
     do { \
         int64_t ns = static_cast<int64_t>(sc_core::sc_time_stamp().to_double() / 1000); \
-        printf("[%lld NS ] " fmt, ns, ##__VA_ARGS__); \
+        printf("[%ld NS ] " fmt, ns, ##__VA_ARGS__); \
     } while (0)
 
 #endif

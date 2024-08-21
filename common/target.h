@@ -55,7 +55,7 @@ private:
 			{
 				std::memcpy(data, trans.get_data_ptr(), trans.get_data_length());
 
-				LOG("(%s) Received transaction with address 0x%X  data: ", m_name.c_str(), trans.get_address());
+				LOG("(%s) Received transaction with address 0x%lX  data: ", m_name.c_str(), trans.get_address());
 
 				for (unsigned int i = 0; i < trans.get_data_length(); i++)
 				{
@@ -73,7 +73,7 @@ private:
 					data[i] = (unsigned char) i;
 				}
 
-				LOG("(%s) Received transaction with address 0x%X", m_name.c_str(), trans.get_address());
+				LOG("(%s) Received transaction with address 0x%lX", m_name.c_str(), trans.get_address());
 				
 				std::memcpy(trans.get_data_ptr(), data, trans.get_data_length());
 				trans.set_response_status(tlm::TLM_OK_RESPONSE);
