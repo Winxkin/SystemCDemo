@@ -11,3 +11,4 @@ set(ADDER_INC
 add_library(Adder ${ADDER_SRC} ${ADDER_INC})
 target_include_directories(Adder PUBLIC inc)
 target_link_libraries(Adder common)
+set_target_properties(Adder PROPERTIES LINKER_LANGUAGE CXX)

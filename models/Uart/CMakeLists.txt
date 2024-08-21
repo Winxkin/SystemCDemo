@@ -24,3 +24,4 @@ set(UART_INC
 add_library(Uart ${UART_SRC} ${UART_INC})
 target_include_directories(Uart PUBLIC inc)
 target_link_libraries(Uart common)
+set_target_properties(Uart PROPERTIES LINKER_LANGUAGE CXX)

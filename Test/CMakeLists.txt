@@ -15,3 +15,4 @@ set(TEST_SRC
 add_library(Test ${TEST_SRC})
 target_include_directories(Test PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(Test SocPlatform)
+set_target_properties(Test PROPERTIES LINKER_LANGUAGE CXX)
