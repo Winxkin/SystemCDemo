@@ -122,9 +122,46 @@ private:
 		
 	}
 
+private: // Private models
+	DummyMaster<32> m_dummymaster;
+	DummySlave<32> m_dummyslave;
+	BUS<APB> m_bus;
+	DMAC<32> m_dmac;
+	Target<32> m_target1;
+	Target<32> m_target2;
+	Target<32> m_target3;
+	Target<32> m_target4;
+	RAM<32> m_ram1;
+	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
+	wrapper_counter<32> m_wrapper_counter;
+	wrapper_uart<32> m_wrapper_uart;
+
+private: // Define signals
+
+	sc_core::sc_clock m_sysclk;
+	sc_core::sc_signal<bool> m_sysrst;
+
+	/* DMAC */
+	sc_core::sc_signal<bool> dma_req[256];
+	sc_core::sc_signal<bool> dma_ack[256];
+	sc_core::sc_signal<bool> dma_int[256];
+
+	/* Counter */
+	sc_core::sc_signal<bool> counter_load;
+	sc_core::sc_signal<bool> counter_clear;
+	sc_core::sc_signal<bool> counter_start;
+
+	/* UART */
+	sc_core::sc_signal<bool>	uart_nrw;
+	sc_core::sc_signal<bool>	uart_cs;
+	sc_core::sc_signal<bool>	uart_sin;
+
+	sc_core::sc_signal<bool>	uart_int2;
+	sc_core::sc_signal<bool>	uart_sout;
+
 public:
 
-	// RAM model
+	/* This section defines all necessary function that is used to interact with SoC platform */
 
 	/**@brief
 	 * dump_memory
@@ -257,44 +294,6 @@ public:
 	{
 		m_dummymaster.Sentcustomtransaction(addr, data, data_length, cmd);
 	}
-
-
-private: // Private models
-	DummyMaster<32> m_dummymaster;
-	DummySlave<32> m_dummyslave;
-	BUS<APB> m_bus;
-	DMAC<32> m_dmac;
-	Target<32> m_target1;
-	Target<32> m_target2;
-	Target<32> m_target3;
-	Target<32> m_target4;
-	RAM<32> m_ram1;
-	wrapper_four_bit_adder<32> m_wrapper_four_bit_adder;
-	wrapper_counter<32> m_wrapper_counter;
-	wrapper_uart<32> m_wrapper_uart;
-
-private: // Define signals
-
-	sc_core::sc_clock m_sysclk;
-	sc_core::sc_signal<bool> m_sysrst;
-
-	/* DMAC */
-	sc_core::sc_signal<bool> dma_req[256];
-	sc_core::sc_signal<bool> dma_ack[256];
-	sc_core::sc_signal<bool> dma_int[256];
-
-	/* Counter */
-	sc_core::sc_signal<bool> counter_load;
-	sc_core::sc_signal<bool> counter_clear;
-	sc_core::sc_signal<bool> counter_start;
-
-	/* UART */
-	sc_core::sc_signal<bool>	uart_nrw;
-	sc_core::sc_signal<bool>	uart_cs;
-	sc_core::sc_signal<bool>	uart_sin;
-
-	sc_core::sc_signal<bool>	uart_int2;
-	sc_core::sc_signal<bool>	uart_sout;
 
 };
 #endif
